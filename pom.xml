@@ -10,8 +10,8 @@
     <relativePath/>
   </parent>
 
-	<groupId>dev.ebullientworks.dnd</groupId>
-	<artifactId>monster-combat</artifactId>
+  <groupId>dev.ebullientworks.dnd</groupId>
+  <artifactId>monster-combat</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
   <name>monster-combat</name>
@@ -30,10 +30,10 @@
       org.springframework.boot:spring-boot-starter-actuator
       org.springframework.boot:spring-boot-starter-test
      -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>

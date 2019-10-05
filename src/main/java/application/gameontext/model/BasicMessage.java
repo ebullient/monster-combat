@@ -13,32 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.gameontext.sample.model;
+package application.gameontext.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonView;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+public class BasicMessage {
 
-public class Event {
+    private String username = "";
 
-    @JsonProperty("type")
-    private final String type = "event";
-
+    @JsonView(Views.Outbound.class)
     private String bookmark = "";
 
-    @JsonProperty("content")
-    private final Map<String, String> content = new HashMap<>();
+    @JsonView(Views.Inbound.class)
+    private String userId = "";
 
-    public void addContent(String target, String text) {
-        if (target == null || text == null ) {
-            throw new IllegalArgumentException("target and content are required");
-        }
-        content.put(target, text);
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void removeContent(String target) {
-        content.remove(target);
+    public String getUserId() {
+        return userId;
+    }
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getBookmark() {
@@ -47,8 +47,4 @@ public class Event {
     public void setBookmark(String bookmark) {
         this.bookmark = bookmark;
     }
-
-	public void verify() {
-        assert(!content.isEmpty());
-	}
 }

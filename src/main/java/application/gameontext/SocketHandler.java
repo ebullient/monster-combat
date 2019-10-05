@@ -14,7 +14,7 @@
  * limitations under the License.
  *******************************************************************************/
 
-package org.gameontext.sample;
+package application.gameontext;
 
 import java.io.Closeable;
 import java.io.IOException;

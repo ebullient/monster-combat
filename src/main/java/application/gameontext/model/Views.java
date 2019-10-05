@@ -13,38 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.gameontext.sample.model;
+package application.gameontext.model;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-public class BasicMessage {
-
-    private String username = "";
-
-    @JsonView(Views.Outbound.class)
-    private String bookmark = "";
-
-    @JsonView(Views.Inbound.class)
-    private String userId = "";
-
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
+public class Views {
+    public static class Inbound {
     }
 
-    public String getUserId() {
-        return userId;
-    }
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getBookmark() {
-        return bookmark;
-    }
-    public void setBookmark(String bookmark) {
-        this.bookmark = bookmark;
+    public static class Outbound {
     }
 }

@@ -14,23 +14,21 @@
  * limitations under the License.
  *******************************************************************************/
 
-package org.gameontext.sample;
-
-import javax.websocket.DecodeException;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.RuntimeJsonMappingException;
-
-import org.gameontext.sample.model.Event;
-import org.gameontext.sample.model.RoomDescription;
-import org.gameontext.sample.model.Views;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package application.gameontext;
 
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicLong;
+
+import javax.websocket.DecodeException;
+
+import application.gameontext.model.Event;
+import application.gameontext.model.RoomDescription;
+import application.gameontext.model.Views;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class Message {
     private static final Logger logger = LoggerFactory.getLogger(Message.class);
@@ -77,8 +75,6 @@ public class Message {
      * Incrementing message id for bookmark
      */
     private static final AtomicLong bookmark = new AtomicLong(0);
-
-    private static final ObjectMapper mapper = new ObjectMapper(); // jackson's objectmapper
 
     /**
      * Target for the message

@@ -13,35 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.gameontext.sample.model;
+package application.gameontext.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Exit {
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class ChatCommandMessage extends BasicMessage {
 
     @JsonProperty("type")
-    private final String type = "exit";
+    private final String type = "chat";
 
     private String content;
-    private String exitId;
 
     public String getContent() {
         return content;
     }
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getExitId() {
-        return exitId;
-    }
-    public void setExitId(String exitId) {
-        this.exitId = exitId;
-    }
-
-    public void verify() {
-        assert(
-            content != null && !content.isEmpty() &&
-            exitId != null && !exitId.isEmpty());
     }
 }

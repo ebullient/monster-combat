@@ -14,14 +14,14 @@
  * limitations under the License.
  *******************************************************************************/
 
-package org.gameontext.sample;
+package application.gameontext;
 
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import org.gameontext.sample.model.RoomDescription;
+import application.gameontext.model.RoomDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
