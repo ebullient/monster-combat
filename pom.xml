@@ -4,41 +4,112 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent><!--required parent POM-->
-    <groupId>dev.appsody</groupId>
-    <artifactId>spring-boot2-stack</artifactId>
-    <version>[0.3, 0.4)</version>
-    <relativePath/>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.9.RELEASE</version>
   </parent>
 
   <groupId>dev.ebullientworks.dnd</groupId>
   <artifactId>monster-combat</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
 
   <name>monster-combat</name>
   <description>DnD 5e monster combat simulator</description>
   <packaging>jar</packaging>
 
-  <!-- versions will come from the parent pom (and included bom):
-    mvn dependency:tree
-    mvn dependency:display-ancestors
-    mvn help:effective-pom | grep '\.version>'
-    -->
+  <properties>
+    <imageName>ebullient/dnd-${project.artifactId}</imageName>
+    <jib-maven-plugin.version>1.6.1</jib-maven-plugin.version>
+  </properties>
 
   <dependencies>
-    <!-- From parent:
-      org.springframework.boot:spring-boot-starter
-      org.springframework.boot:spring-boot-starter-actuator
-      org.springframework.boot:spring-boot-starter-test
-     -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
     </dependency>
+
+    <!--Monitoring -->
     <dependency>
-			<groupId>io.projectreactor</groupId>
-			<artifactId>reactor-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
+
+    <!--Test -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-test</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>${jib-maven-plugin.version}</version>
+        <configuration>
+          <to>
+            <image>${imageName}</image>
+          </to>
+          <container>
+            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+            <labels>
+              <org.opencontainers.image.title>Monster Combat</org.opencontainers.image.title>
+              <org.opencontainers.image.created>${git.build.time}</org.opencontainers.image.created>
+              <org.opencontainers.image.url>https://github.com/ebullient/monster-combat</org.opencontainers.image.url>
+              <org.opencontainers.image.source>https://github.com/ebullient/monster-combat</org.opencontainers.image.source>
+              <org.opencontainers.image.version>${git.build.version}</org.opencontainers.image.version>
+              <org.opencontainers.image.revision>${git.commit.id.describe-short}</org.opencontainers.image.revision>
+              <org.opencontainers.image.licenses>	Apache-2.0</org.opencontainers.image.licenses>
+            </labels>
+          </container>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>dockerBuild</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
+        <version>2.2.5</version>
+        <executions>
+            <execution>
+                <id>get-the-git-infos</id>
+                <goals><goal>revision</goal></goals>
+                <phase>initialize</phase>
+            </execution>
+        </executions>
+        <configuration>
+          <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+          <generateGitPropertiesFile>true</generateGitPropertiesFile>
+          <generateGitPropertiesFilename>${project.basedir}/target/git.properties</generateGitPropertiesFilename>
+          <failOnNoGitDirectory>false</failOnNoGitDirectory>
+          <gitDescribe>
+            <dirty>-DEV</dirty>
+          </gitDescribe>
+          <verbose>false</verbose>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

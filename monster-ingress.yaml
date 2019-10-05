@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dnd-ingress
+  namespace: ebullientworks
+  annotations: {}
+spec:
+  rules:
+  - host: monsters.192.168.99.100.nip.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: combat
+          servicePort: 8080
+
+

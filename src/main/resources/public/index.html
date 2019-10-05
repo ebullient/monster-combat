@@ -1,5 +1,5 @@
 <!--
-  Copyright (c) 2017 IBM Corp.
+  Copyright (c) 2019 IBM Corp.
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -13,71 +13,26 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <!DOCTYPE html>
 <html>
-<head>
-    <style>
-    input:disabled { background-color: gray; }
-    .callout {
-      border: 1px solid silver;
-      margin: 1em;
-      padding: .5em;
-    }
-    #socketUrl {
-      color: blue;
-    }
-    </style>
-</head>
-<body style="width: 80%">
-
-<h1>Your room is running! </h1>
-
-<div class="callout">
-    <dl>
-        <li><b>WebSocket Endpoint: <span id="socketUrl"></span></b></li>
-        <li>Health Check (REST): <a href="/health"><span id="healthUrl"></span></a></li>
-    </dl>
-</div>
-
-<p>What next?</p>
-
-<ul>
-    <li>Use the bottom half of this page for the equivalent of poking your room with a stick</li>
-    <li>Use the <code>/listmyrooms</code> command in First Room to find your live room in the game</li>
-    <li>Add custom commands and items to your room (see org.gameontext.sample.RoomImplementation)</li>
-    <li>Scale your service -- does that change how you manage state?</li>
-    <li>Check out other <a href="https://book.gameontext.org/walkthroughs/createMore.html">Advanced Adventures</a>
-    <li>Learn about the game's <a href="https://book.gameontext.org/microservices/">Application architecture</a>
-</ul>
-
-<p> Go play! Game On!</p>
-
-<hr/>
-<h2>Test out your room... </h2>
-
-<p>If your room pays attention to the room id, update this to match the target id</p>
-<input type="text" id="roomId" size="50" value="TheGeneratedIdOfThisRoom"/>
-
-<button id="connectButton" onclick="connect()">connect</button>
-<button id="disconnectButton" onclick="disconnect()" disabled>disconnect</button>
-
-<h3>Protocol operations:</h3>
-<button id="helloButton" onclick="hello()" disabled>roomHello</button>
-<button id="goodbyeButton" onclick="goodbye()" disabled>roomGoodbye</button>
-<button id="joinButton" onclick="join()" disabled>roomJoin</button>
-<button id="partButton" onclick="part()" disabled>roomPart</button>
-
-<h3>User initiated commands:</h3>
-<form id="simpleForm">
-    <input type="text" id="inputmessage" size="50" placeholder="type something and press ENTER, type 'clear' to clear"
-           disabled/>
-</form>
-<h4>Activity:</h4>
-<div id="response"
-     style="width: 90%; margin: 0 auto; border: 1px solid gray; height: 20rem; max-height: 40rem; overflow-y: scroll"></div>
-
-<script type="text/javascript" src="app.js"></script>
-
-</body>
+  <head>
+    <title>Hello from Appsody!</title>
+  </head>
+  <body>
+    <h3>Hello from Appsody!</h3>
+    <p>Next steps with Spring Boot 2:
+      <ul>
+        <li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/">Spring Boot Reference Guide</a></li>
+        <li><a target="_blank" rel="noopener" href="https://spring.io/guides">Spring Guides</a></li>
+        <li><a target="_blank" rel="noopener" href="/actuator">Spring Boot Actuator endpoints</a>:
+          <ul>
+            <li><a target="_blank" rel="noopener" href="/actuator/health">Health</a></li>
+            <li><a target="_blank" rel="noopener" href="/actuator/liveness">Appsody Liveness</a></li>
+            <li><a target="_blank" rel="noopener" href="/actuator/metrics">Metrics</a></li>
+            <li><a target="_blank" rel="noopener" href="/actuator/prometheus">Prometheus</a></li>
+          </ul>
+        </li>
+      </ul>
+    </p>
+  </body>
 </html>

@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoring
+  annotations: {}
+
+spec:
+  rules:
+  - host: grafana.192.168.99.100.nip.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: grafana
+          servicePort: 3000
+

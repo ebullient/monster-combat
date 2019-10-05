@@ -1,6 +1,5 @@
 /target/*
 /src/main/resources/Bestiary*
-/kubernetes/
 
 .appsody-spring-trigger
 

@@ -13,33 +13,13 @@
  */
 package application;
 
-import java.io.IOException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import application.monsters.Beastiary;
-import application.monsters.BeastiaryParser;
 
 @SpringBootApplication
 public class Main {
-    static final Logger logger = LoggerFactory.getLogger(BeastiaryParser.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
 	}
-
-    @Bean
-    public Beastiary createBeastiary() {
-        Beastiary beastiary = new Beastiary();
-        try {
-            new BeastiaryParser().parse(beastiary);
-        } catch (IOException ioe) {
-            logger.error("Exception occurred filling the beastiary", ioe);
-        }
-        return beastiary;
-    }
 }
