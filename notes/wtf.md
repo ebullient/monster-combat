@@ -4,7 +4,7 @@
 
 ```
 minikube delete
-minikube start --kubernetes-version=v1.16.1 \
+minikube start --kubernetes-version=v1.14.7 \
   --cpus 4 --disk-size 40g \
   --memory 16384 --bootstrapper=kubeadm \
   --extra-config=kubelet.authentication-token-webhook=true \
@@ -34,6 +34,8 @@ docker-compose run --rm jsonnet jb update
 
 # Generate kube manifests
 ./build.sh monsters.jsonnet
+
+# Apply the things!
 kubectl apply -f manifests/
 
 # Wait until things are up
@@ -58,12 +60,6 @@ kubectl apply -f notes/lazy/
 
 kubectl apply -f deploy/
 ```
-
-Note: the ServiceMonitor only allows a path of /metrics right now. Path is listed as supported,
-so I'm going to assume that it is somewhere in the version train and I haven't met it yet.
-The ServiceMonitor in monster-combat.yaml defines the path attribute, but the code
-also does bad hackery to surface the prometheus endpoint at /metrics, too.
-
 
 ## Run stuff
 

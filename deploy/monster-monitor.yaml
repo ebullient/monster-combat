@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: spring-prometheus
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      prometheus: 'true'
+      type: spring-actuator
+  endpoints:
+  - port: spring-web
+    interval: 15s
+    path: '/actuator/prometheus'

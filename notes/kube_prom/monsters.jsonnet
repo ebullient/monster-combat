@@ -14,6 +14,7 @@ local kp =
       },
       prometheus+:: {
         replicas: 1,
+        // extend this prometheus instance to more namespaces
         namespaces+: ['gameon-system', 'ebullientworks', 'default'],
       },
     },
