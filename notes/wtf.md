@@ -49,24 +49,25 @@ kubectl apply -f manifests/
 Because I am lazy and hate remembering to proxy things. Also, I am lazy with namespaces
 
 ```
-cd notes
-kubectl apply dashboard-ingress.yaml
-kubectl apply grafana-ingress.yaml
-kubectl apply prometheus-ingress.yaml
-kubectl apply namespaces.yaml
+kubectl apply -f notes/lazy/
 ```
 
 ## Finally the yaml for deploying this to kube
 
 ```
-kubectl apply -f monster-combat.yaml
-kubectl apply -f monster-ingress.yaml
+
+kubectl apply -f deploy/
 ```
 
 Note: the ServiceMonitor only allows a path of /metrics right now. Path is listed as supported,
 so I'm going to assume that it is somewhere in the version train and I haven't met it yet.
 The ServiceMonitor in monster-combat.yaml defines the path attribute, but the code
 also does bad hackery to surface the prometheus endpoint at /metrics, too.
+
+
+## Run stuff
+
+./notes/runme.sh
 
 ## Tearing things down:
 

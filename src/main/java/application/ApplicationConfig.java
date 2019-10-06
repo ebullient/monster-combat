@@ -34,7 +34,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import application.monsters.Beastiary;
 import application.monsters.BeastiaryParser;
-import io.prometheus.client.exporter.common.TextFormat;
 
 @Configuration
 public class ApplicationConfig {
