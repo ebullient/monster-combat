@@ -1,0 +1,10 @@
+version: '2'
+services:
+  jsonnet:
+    image: "quay.io/coreos/jsonnet-ci"
+    container_name: "jb-update"
+    entrypoint: ""
+    working_dir: $PWD
+    volumes:
+      - "$PWD:$PWD"
+

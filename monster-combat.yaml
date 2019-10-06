@@ -3,19 +3,14 @@ kind: Service
 metadata:
   name: combat
   namespace: ebullientworks
-  annotations:
-    prometheus.io/scrape: 'true'
-    prometheus.io/scheme: http
-    prometheus.io/path: /actuator/prometheus
-    prometheus.io/port: "8080"
   labels:
     app: monster-combat
 spec:
   type: ClusterIP
   ports:
   - port: 8080
-    name: http
-    targetPort: metrics-http
+    name: web
+    targetPort: web
   selector:
     app: monster-combat
 ---
@@ -37,7 +32,7 @@ spec:
         image: ebullient/dnd-monster-combat:latest
         imagePullPolicy: IfNotPresent
         ports:
-        - name: metrics-http
+        - name: web
           containerPort: 8080
         readinessProbe:
           httpGet:
@@ -49,3 +44,19 @@ spec:
             path: /actuator/liveness
             port: 8080
           initialDelaySeconds: 40
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: combat-servicemonitor
+  namespace: monitoring
+  labels:
+    app: monster-combat
+spec:
+  selector:
+    matchLabels:
+      app: monster-combat
+  endpoints:
+  - port: web
+    interval: 15s
+    path: /actuator/prometheus

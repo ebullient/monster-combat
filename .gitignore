@@ -1,7 +1,8 @@
 /target/*
 /src/main/resources/Bestiary*
 
-.appsody-spring-trigger
+/notes/kube_prom/vendor
+
 
 ### STS ###
 .apt_generated
