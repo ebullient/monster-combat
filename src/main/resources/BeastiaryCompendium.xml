@@ -15904,7 +15904,7 @@
 		<description>Source: Mordenkainen's Tome of Foes</description>
 		<alignment>any alignment</alignment>
 		<ac>9</ac>
-		<hp>63 (18d8_18)</hp>
+		<hp>63 (18d8-18)</hp>
 		<speed>0 ft., fly 40 ft. (hover)</speed>
 		<str>7</str>
 		<dex>8</dex>
@@ -19565,7 +19565,7 @@
 		</action>
 		<action>
 			<name>Horrifying Visage</name>
-			<text>Each non-undead creature within 60 ft. of the ghost that can see it must succeed on a DC 13 Wisdom saving throw or be frightened for 1 minute. If the save fails by 5 or more, the target also ages 1d4 _ 10 years. A frightened target can repeat the saving throw at the end of each of its turns, ending the frightened condition on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to this ghost's Horrifying Visage for the next 24 hours. The aging effect can be reversed with a greater restoration spell, but only within 24 hours of it occurring.</text>
+			<text>Each non-undead creature within 60 ft. of the ghost that can see it must succeed on a DC 13 Wisdom saving throw or be frightened for 1 minute. If the save fails by 5 or more, the target also ages 1d4 - 10 years. A frightened target can repeat the saving throw at the end of each of its turns, ending the frightened condition on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to this ghost's Horrifying Visage for the next 24 hours. The aging effect can be reversed with a greater restoration spell, but only within 24 hours of it occurring.</text>
 		</action>
 		<action>
 			<name>Possession (Recharge 6)</name>
@@ -21804,7 +21804,7 @@
 		<trait>
 			<name>Spellcasting</name>
 			<text>The gloom weaver is a 12th-level spellcaster. Its spellcasting ability is Charisma (spell save DC 16, +8 to hit with spell attacks). It regains its expended spell slots when it finishes a short or long rest. It knows the following warlock spells:</text>
-			<text>Cantrips (at will): chill touch (3d8 damage), eldritch blast (3 beams, +4 bonus to each damage roll), minor illusion, prestidigitation 1st_</text>
+			<text>Cantrips (at will): chill touch (3d8 damage), eldritch blast (3 beams, +4 bonus to each damage roll), minor illusion, prestidigitation 1st-</text>
 			<text>5th level (3 5th-level slots): armor of Agathys, blight, darkness, dream, invisibility, fear, hypnotic pattern, major image, contact other plane, vampiric touch, witch bolt</text>
 		</trait>
 		<action>
@@ -44326,7 +44326,7 @@
 			<attack>Claw|7|1d8+4</attack>
 		</action>
 		<action>
-			<name>Flurry of Claws (Recharge 4_6)</name>
+			<name>Flurry of Claws (Recharge 4-6)</name>
 			<text>The mangler makes six claw attacks against one target. Either before or after these attacks, it can move up to its speed as a bonus action without provoking opportunity attacks.</text>
 		</action>
 		<spells />
@@ -47067,7 +47067,7 @@
 		<description>Source: Mordenkainen's Tome of Foes</description>
 		<alignment>neutral evil</alignment>
 		<ac>15 (natural armor)</ac>
-		<hp>10 (4d6_4)</hp>
+		<hp>10 (4d6-4)</hp>
 		<speed>40 ft.</speed>
 		<str>7</str>
 		<dex>12</dex>
