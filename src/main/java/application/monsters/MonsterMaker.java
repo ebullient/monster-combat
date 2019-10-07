@@ -172,21 +172,22 @@ public class MonsterMaker {
     }
 
     /** @return a random monster size */
-    int randomSize() {
-        return Dice.range(Monster.ALL_SIZES.length);
+    String randomSize() {
+        int index = Dice.range(Monster.ALL_SIZES.length);
+        return Monster.ALL_SIZES[index];
     }
 
     public MonsterMaker inventStats(String name) {
         ensureMonster();
         m.name = name;
-        m.type = randomType();
-        m.size = randomSize();
         m.averageHitPoints = Dice.range(300) + 10;
         m.dynamicHitPoints = "";
         m.armorClass = Dice.range(20) + 6;
 
         // Create strings to allow values to be parsed and set
         // with side-effects
+        setSize(randomSize());
+        setType(randomType());
         setStrength(abilityValue());
         setDexterity(abilityValue());
         setConstitution(abilityValue());

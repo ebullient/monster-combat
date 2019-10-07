@@ -28,7 +28,6 @@ public class BattleTests {
         Battle b = new Battle();
         b.addMonster(maker.make());
         b.addMonster(maker.make());
-        b.addMonster(maker.make());
         b.start().subscribe(i -> System.out.println(i));
     }
 
