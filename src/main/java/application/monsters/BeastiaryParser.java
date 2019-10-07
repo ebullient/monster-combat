@@ -85,9 +85,13 @@ public class BeastiaryParser extends DefaultHandler {
         switch(qName) {
             case "monster":
                 Monster m = maker.make();
-                beastiary.addMonster(m);
-                logger.debug("Added {}", m);
-                count++;
+                if ( m.isValid() ) {
+                    beastiary.addMonster(m);
+                    logger.debug("Added {}", m);
+                    count++;
+                } else {
+                    logger.debug("BAD MONSTER! {}", m.dumpStats());
+                }
                 break;
 
             default:

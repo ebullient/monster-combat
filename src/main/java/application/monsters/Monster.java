@@ -16,6 +16,9 @@ package application.monsters;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import application.mechanics.Dice;
 
 /**
@@ -28,6 +31,8 @@ import application.mechanics.Dice;
  * @see format for Bestiary from https://github.com/Cphrampus/DnDAppFiles
  */
 public class Monster {
+    static final Logger logger = LoggerFactory .getLogger(Monster.class);
+
     static final String[] ALL_SIZES = new String[] {
         "tiny", "small", "medium", "large", "huge", "gargantuan"
     };
@@ -70,6 +75,14 @@ public class Monster {
     Modifiers modifiers = new Modifiers();
     boolean multiattack = false;
     ArrayList<Attack> attacks = new ArrayList<>();
+
+	public boolean isValid() {
+        return armorClass > 0
+         && averageHitPoints > 0
+         && passivePerception > 0
+         && dynamicHitPoints != null
+         && attacks.size() > 0;
+	}
 
     public String getName() {
         return name;
@@ -118,7 +131,7 @@ public class Monster {
 
         if ( multiattack && max > 1 ) {
             list.add(attacks.get(0));
-            list.add(attacks.get(Dice.range(max-1)+1));
+            list.add(attacks.get(Dice.range(max)));
         } else {
             list.add(attacks.get(Dice.range(max)));
         }
