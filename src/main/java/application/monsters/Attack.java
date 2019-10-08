@@ -24,8 +24,14 @@ public class Attack {
     int abilityModifier;
     String damage;
 
-    public String getName() {
-        return name + " (" + damage + ")";
+    public Attack(String name, int abilityModifier, String damage) {
+        this.name = name;
+        this.abilityModifier = abilityModifier;
+        this.damage = damage;
+	}
+
+	public String getName() {
+        return name;
     }
 
     public int getAbilityModifier() {

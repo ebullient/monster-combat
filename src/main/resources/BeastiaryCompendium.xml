@@ -84,8 +84,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 2 (1d6-l) bludgeoning damage, or 3 (1d8-l) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff|3|1d6-l</attack>
-			<attack>Two Handed|3|1d8-1</attack>
+			<attack>Quarterstaff|3|1d8-1</attack>
 		</action>
 		<spells>Blade Ward, Dancing Lights, Mending, Message, Ray of Frost, Alarm, Mage Armor, Magic Missile, Shield, Arcane Lock, Invisibility, Counterspell, Dispel Magic, Fireball, Banishment, Stoneskin, Cone of Cold, Wall of Force, Flesh to Stone, Globe of Invulnerability, Symbol, Teleport</spells>
 		<slots>4,3,3,3,2,1,1,0,0</slots>
@@ -306,8 +305,8 @@
 		<action>
 			<name>Staff(+3 Quarterstaff)</name>
 			<text>Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 7 (1d6 + 4) bludgeoning damage plus 10 (3d6) necrotic damage, or 8 (1d8 + 4) bludgeoning damage plus 10 (3d6) necrotic damage when used with two hands.</text>
-			<attack>Staff (1H)|11|1d6+3d6</attack>
-			<attack>Staff (2H)|11|1d8+3d6</attack>
+			<attack>Staff|11|1d6+3d6</attack>
+			<attack>Staff|11|1d8+3d6</attack>
 		</action>
 		<action>
 			<name>Invoke Curse</name>
@@ -321,8 +320,8 @@
 			<name>Melee Attack</name>
 			<text>Acererak uses Paralyzing Touch or makes one melee attack with his staff.</text>
 			<attack>Paralyzing Touch|8|3d6</attack>
-			<attack>Staff (1H)|11|1d6+3d6</attack>
-			<attack>Staff (2H)|11|1d8+3d6</attack>
+			<attack>Staff|11|1d6+3d6</attack>
+			<attack>Staff|11|1d8+3d6</attack>
 		</legendary>
 		<legendary>
 			<name>Frightening Gaze (Costs 2 Actions)</name>
@@ -1318,8 +1317,7 @@
 		<action>
 			<name>Windvane</name>
 			<text>Melee or Ranged Weapon Attack: +9 to hit, reach 5 ft. or range 20 ft./60 ft., one target. Hit: 9 (1d6 + 6) piercing damage, or 10 (1d8 + 6) piercing damage if used with two hands to make a melee attack, plus 3 (1d6) lightning damage.</text>
-			<attack>One Handed|9|1d6+6+1d6</attack>
-			<attack>Two Handed|9|1d8+6+1d6</attack>
+			<attack>Windvane|9|1d8+6+1d6</attack>
 		</action>
 		<spells>Gust, Mage Hand, Message, Prestidigitation, Ray of Frost, Shocking Grasp, Charm Person, Feather Fall, Mage Armor, Thunderwave, Dust Devil, Gust of Wind, Invisibility, Fly, Gaseous Form, Lightning Bolt, Ice Storm, Storm Sphere, Cloudkill, Seeming, Chain Lightning</spells>
 		<slots>4,3,3,3,2,1,0,0,0</slots>
@@ -1851,8 +1849,8 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d6 - 1) bludgeoning damage, or 3 (1d8 - 1) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff (1H)|2|1d6-1</attack>
-			<attack>Quarterstaff (2H)|2|1d8-1</attack>
+			<attack>Quarterstaff|2|1d6-1</attack>
+			<attack>Quarterstaff|2|1d8-1</attack>
 		</action>
 	</monster>
 	<monster>
@@ -2017,8 +2015,8 @@
 		<action>
 			<name>Spiked Club</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage, or 7 (1d10 + 2) piercing damage if used with two hands.</text>
-			<attack>Spiked Club (1H)|4|1d8+2</attack>
-			<attack>Spiked Club (2H)|4|1d10+2</attack>
+			<attack>Spiked Club|4|1d8+2</attack>
+			<attack>Spiked Club|4|1d10+2</attack>
 		</action>
 	</monster>
 	<monster>
@@ -3693,7 +3691,7 @@
 		<trait>
 			<name>Sneak Attack (1/Turn)</name>
 			<text>The assassin deals an extra 13 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the assassin that isn't incapacitated and the assassin doesn't have disadvantage on the attack roll.</text>
-			<attack>Sneak Attack||4d6</attack>
+			<attack>Sneak||4d6</attack>
 		</trait>
 		<action>
 			<name>Multiattack</name>
@@ -3992,8 +3990,8 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +15 to hit, reach 5 ft., one target. Hit: 12 (1d8 + 8) slashing damage, or 13 (1d10 + 8) slashing damage when used with two hands, plus 27 (6d8) radiant damage.</text>
-			<attack>Longsword (1H)|15|1d8+8+6d8</attack>
-			<attack>Longsword (2H)|15|1d10+8+6d8</attack>
+			<attack>Longsword|15|1d8+8+6d8</attack>
+			<attack>Longsword|15|1d10+8+6d8</attack>
 		</action>
 		<action>
 			<name>Leadership</name>
@@ -4019,8 +4017,8 @@
 		<legendary>
 			<name>Longsword Attack (Costs 2 Actions)</name>
 			<text>Aurelia makes one longsword attack.</text>
-			<attack>Longsword (1H)|15|1d8+8+6d8</attack>
-			<attack>Longsword (2H)|15|1d10+8+6d8</attack>
+			<attack>Longsword|15|1d8+8+6d8</attack>
+			<attack>Longsword|15|1d10+8+6d8</attack>
 		</legendary>
 		<legendary>
 			<name>Frighten Foes (Costs 3 Actions)</name>
@@ -4421,8 +4419,8 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Spear (1H)|4|1d6+2</attack>
-			<attack>Spear (2H)|4|1d8+2</attack>
+			<attack>Spear|4|1d6+2</attack>
+			<attack>Spear|4|1d8+2</attack>
 		</action>
 		<action>
 			<name>Bite</name>
@@ -4492,8 +4490,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 7 (1d6+4) bludegoning damage, or 8 (1d8+4) bludgeoning damage if wielded with two hands.</text>
-			<attack>One Handed|8|1d6+4</attack>
-			<attack>Two Handed|8|1d8+4</attack>
+			<attack>Quarterstaff|8|1d8+4</attack>
 		</action>
 		<action>
 			<name>Summon Swarms of Insects (Recharges after a Short or Long Rest)</name>
@@ -4598,8 +4595,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 it, one target. Hit: 7 (1d6+4) piercing damage, or 8 (1d8+4) piercing damage when used with two hands to make a melee attack.</text>
-			<attack>One Handed|6|1d6+4</attack>
-			<attack>Two Handed|6|1d8+4</attack>
+			<attack>Spear|6|1d8+4</attack>
 		</action>
 		<action>
 			<name>Weakening Gaze</name>
@@ -4726,7 +4722,7 @@
 		<action>
 			<name>Hellish Morningstar</name>
 			<text>Melee Weapon Attack: +13 to hit, reach 20 ft., one target. Hit: 16 (2d8 + 7) piercing damage plus 13 (3d8) necrotic damage.</text>
-			<attack>Hellish Morningstar|13|2d8+7+3d8</attack>
+			<attack>morningstar|13|2d8+7+3d8</attack>
 		</action>
 		<action>
 			<name>Infernal Command</name>
@@ -5655,8 +5651,8 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands, plus 18 (4d8) radiant damage. If the target is within 5 feet of any of the angel's allies, the target takes an extra 2 (1d4) radiant damage.</text>
-			<attack>Longsword (1H)|6|1d8+3+4d8</attack>
-			<attack>Longsword (2H)|6|1d10+3+4d8</attack>
+			<attack>Longsword|6|1d8+3+4d8</attack>
+			<attack>Longsword|6|1d10+3+4d8</attack>
 		</action>
 		<action>
 			<name>Battlefield Inspiration</name>
@@ -8117,8 +8113,8 @@
 		<action>
 			<name>Royal Spear</name>
 			<text>Melee or Ranged Weapon Attack: +5 to hit, reach 10ft. or range 20/60 ft., one target. Hit: 10 (2d6+ 3) piercing damage, or 12 (2d8 + 3) piercing damage if used with two hands to make a melee attack. If the target is a Medium or smaller creature, it must succeed on a DC 13 Strength saving throw or be knocked prone.</text>
-			<attack>Royal Spear (1H)|5|2d6+3</attack>
-			<attack>Royal Spear (2H)|5|2d8+3</attack>
+			<attack>Royal Spear|5|2d6+3</attack>
+			<attack>Royal Spear|5|2d8+3</attack>
 		</action>
 		<action>
 			<name>Bite</name>
@@ -8160,8 +8156,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 7 (1d6 + 4) piercing damage, or 8 (1d8 + 4) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|6|1d6+4</attack>
-			<attack>Two Handed|6|1d8+4</attack>
+			<attack>Spear|6|1d8+4</attack>
 		</action>
 		<reaction>
 			<name>Unyielding</name>
@@ -8321,8 +8316,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 7 (1d6 + 4) piercing damage, or 8 (1d8 + 4) piercing damage if used with two hands to make a melee attack, plus 3 (1d6) fire damage.</text>
-			<attack>One Handed|7|1d6+4+1d6</attack>
-			<attack>Two Handed|7|1d8+4+1d6</attack>
+			<attack>Spear|7|1d8+4+1d6</attack>
 		</action>
 		<action>
 			<name>Fire Ray</name>
@@ -8475,8 +8469,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. or ranged 20 ft./60 ft., one target. Hit: 7 (1d6 + 4) piercing damage.</text>
-			<attack>One Handed|7|1d6+4</attack>
-			<attack>Two Handed|7|1d8+4</attack>
+			<attack>Spear|7|1d8+4</attack>
 		</action>
 	</monster>
 	<monster>
@@ -8625,7 +8618,7 @@
 		<description>Source: Guildmaster's Guide to Ravnica</description>
 		<alignment>unaligned</alignment>
 		<ac>15 (natural armor)</ac>
-		<hp>136 (16dl0 + 48)</hp>
+		<hp>136 (16d10 + 48)</hp>
 		<speed>40 ft.</speed>
 		<str>18</str>
 		<dex>14</dex>
@@ -9752,13 +9745,11 @@
 			<name>Morningstar</name>
 			<text>Melee Weapon Attack: +12 to hit, reach 10 ft., one target. Hit: 21 (3d8+8) bludgeoning damage. The attack deals an extra 14 (4d6) damage if the giant has advantage on the attack roll.</text>
 			<attack>Morningstar|12|3d8+8</attack>
-			<attack>With Advantage|12|3d8+8+4d6</attack>
 		</action>
 		<action>
 			<name>Rock</name>
 			<text>Ranged Weapon Attack: +12 to hit, range 60/240 ft., one target. Hit: 30 (4d10+8) bludgeoning damage. The attack deals an extra 14 (4d6) damage if the giant has advantage on the attack roll.</text>
 			<attack>Rock|12|4d10+8</attack>
-			<attack>With Advantage|12|4d10+8+4d6</attack>
 		</action>
 		<action>
 			<name>Change Shape</name>
@@ -9859,8 +9850,7 @@
 		<action>
 			<name>Warhammer</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) bludgeoning damage, or 7 (1d10 + 2) bludgeoning damage if used with two hands.</text>
-			<attack>Warhammer (1H)|4|1d8+2</attack>
-			<attack>Warhammer (1H)|4|1d10+2</attack>
+			<attack>Warhammer|4|1d10+2</attack>
 		</action>
 	</monster>
 	<monster>
@@ -10440,8 +10430,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) bludgeoning damage.</text>
-			<attack>One Handed|4|1d6+2</attack>
-			<attack>Two Handed|4|1d8+2</attack>
+			<attack>Quarterstaff|4|1d8+2</attack>
 		</action>
 		<spells>Chill Touch, Mage Hand, Minor Illusion, Prestidigitation, Ray of Frost, Expeditious Retreat, Ice Knife, Magic Missile, Shield, Blur, Hold Person, Sleet Storm</spells>
 		<slots>4,3,2,0,0,0,0,0,0</slots>
@@ -10468,8 +10457,7 @@
 		<action>
 			<name>Sharktoothed Longsword</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) slashing damage, or 7 (1d10 + 2) slashing damage if used with two hands. Against a target is wearing no armor, the reaver deals an extra die of damage with this sword.</text>
-			<attack>One Handed|4|1d8+2</attack>
-			<attack>Two Handed|4|1d10+2</attack>
+			<attack>Longsword|4|1d10+2</attack>
 		</action>
 		<action>
 			<name>Javelin</name>
@@ -10723,7 +10711,7 @@
 		<trait>
 			<name>Sneak Attack</name>
 			<text>The knight deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the knight that isn't incapacitated and the knight doesn't have disadvantage on the attack roll.</text>
-			<attack>Sneak Attack||2d6</attack>
+			<attack>Sneak||2d6</attack>
 		</trait>
 		<action>
 			<name>Multiattack</name>
@@ -10892,7 +10880,7 @@
 		<trait>
 			<name>Sneak Attack (1/turn)</name>
 			<text>Darz deals an extra 7 (2d6) damage when he hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of Darz that isn't incapacitated and Darz doesn't have disadvantage on the attack roll.</text>
-			<attack>Sneak Attack||2d6</attack>
+			<attack>Sneak||2d6</attack>
 		</trait>
 		<action>
 			<name>Shortsword</name>
@@ -10920,7 +10908,7 @@
 		<description>Source: Waterdeep: Dragon Heist</description>
 		<alignment>neutral</alignment>
 		<ac>15 (chain shirt)</ac>
-		<hp>82 (1Sd8 + 15)</hp>
+		<hp>82 (15d8 + 15)</hp>
 		<speed>30 ft.</speed>
 		<str>10</str>
 		<dex>14</dex>
@@ -11091,8 +11079,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 9 (1d8 + 5) slashing damage, or 10 (1d10 + 5) slashing damage if used with two hands, plus 18 (4d8) necrotic damage.</text>
-			<attack>One Handed|11|1d8+5+4d8</attack>
-			<attack>Two Handed|11|1d10+5+4d8</attack>
+			<attack>Longsword|11|1d10+5+4d8</attack>
 		</action>
 		<action>
 			<name>Hellfire Orb (1/day)</name>
@@ -11653,8 +11640,7 @@
 		<action>
 			<name>Battleaxe (Humanoid Form Only)</name>
 			<text>Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8+4) slashing damage, or 9 (1d10+4) slashing damage if used with two hands.</text>
-			<attack>One Handed|6|1d8+4</attack>
-			<attack>Two Handed|6|1d10+4</attack>
+			<attack>Battleaxe|6|1d10+4</attack>
 		</action>
 		<action>
 			<name>Bite (Hybrid Form Only)</name>
@@ -12417,8 +12403,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d6-1) bludgeoning damage, or 3 (1d8-1) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff|2|1d6-1</attack>
-			<attack>Two Handed|2|1d8-1</attack>
+			<attack>Quarterstaff|2|1d8-1</attack>
 		</action>
 		<spells>Fire Bolt, Light, Mage Hand, Message, True Strike, Detect Magic, Feather Fall, Mage Armor, Detect Thoughts, Locate Object, Scorching Ray, Clairvoyance, Fly, Fireball, Arcane Eye, Ice Storm, Stoneskin, Rary's Telepathic Bond, Seeming, Mass Suggestion, True Seeing, Delayed Blast Fireball, Teleport, Maze</spells>
 		<slots>4,3,3,3,2,1,1,1,0</slots>
@@ -12781,9 +12766,8 @@
 		<action>
 			<name>Holy Avenger (+3 longsword)</name>
 			<text>Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 9 (1d8 + 5) slashing damage, or 10 (1d10 + 5) slashing damage when used with two hands. If the target is a fiend or an undead, it takes an extra 11 (2d10) radiant damage.</text>
-			<attack>Holy Avenger (1H)|8|1d8+5</attack>
-			<attack>Holy Avenger (2H)|8|1d10+5</attack>
-			<attack>Fiend/Undead Dmg||2d10</attack>
+			<attack>Longsword|8|1d10+5</attack>
+			<attack>Undead||2d10</attack>
 		</action>
 		<action>
 			<name>Sense Alignment</name>
@@ -13030,8 +13014,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage.</text>
-			<attack>One Handed|6|1d8+4</attack>
-			<attack>Two Handed|6|1d10+4</attack>
+			<attack>Longsword|6|1d10+4</attack>
 		</action>
 		<action>
 			<name>Dagger</name>
@@ -13141,8 +13124,7 @@
 		<action>
 			<name>Battleaxe</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) slashing damage, or 7 (1d10 + 2) slashing damage if wielded with two hands.</text>
-			<attack>Battleaxe|4|1d8+2</attack>
-			<attack>Two Handed|4|1d10+2</attack>
+\			<attack>Battleaxe|4|1d10+2</attack>
 		</action>
 		<action>
 			<name>Javelin</name>
@@ -13247,8 +13229,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands.</text>
-			<attack>One Handed|6|1d8+3</attack>
-			<attack>Two Handed|6|1d10+3</attack>
+			<attack>Longsword|6|1d10+3</attack>
 		</action>
 		<action>
 			<name>Longbow</name>
@@ -13320,8 +13301,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands.</text>
-			<attack>One Handed|6|1d8+3</attack>
-			<attack>Two Handed|6|1d10+3</attack>
+			<attack>Longsword|6|1d10+3</attack>
 		</action>
 		<action>
 			<name>Longbow</name>
@@ -13943,8 +13923,7 @@
 		<action>
 			<name>Staff</name>
 			<text>Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d6-1) bludgeoning damage, or 3 (1d8-1) bludgeoning damage if used with two hands, plus 3 (1d6) poison damage.</text>
-			<attack>One Handed|2|1d6-1+1d6</attack>
-			<attack>Two Handed|2|1d8-1+1d6</attack>
+			<attack>Staff|2|1d8-1+1d6</attack>
 		</action>
 		<action>
 			<name>Summon Demon (1/Day)</name>
@@ -14541,8 +14520,8 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d6) bludgeoning damage, or 4 (1d8) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff (1H)|3|1d6</attack>
-			<attack>Quarterstaff (2H)|3|1d8</attack>
+			<attack>Quarterstaff|3|1d6</attack>
+			<attack>Quarterstaff|3|1d8</attack>
 		</action>
 	</monster>
 	<monster>
@@ -16272,7 +16251,7 @@
 		<action>
 			<name>Dagger +1</name>
 			<text>Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d4 + 3) piercing damage.</text>
-			<attack>Dagger +1|6|1d4+3</attack>
+			<attack>Dagger|6|1d4+3</attack>
 		</action>
 		<spells>Druidcraft, Guidance, Poison Spray, Produce Flame, Animal Friendship, Faerie Fire, Healing Word, Jump, Thunderwave, Flame Blade, Spike Growth, Dispel Magic, Stinking Cloud, Blight, Wall of Fire</spells>
 		<slots>4,3,3,2,0,0,0,0,0</slots>
@@ -16413,8 +16392,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d6-1) bludgeoning damage, or 3 (1d8-1) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff|2|1d6-1</attack>
-			<attack>Two Handed|2|1d8-1</attack>
+			<attack>Quarterstaff|2|1d8-1</attack>
 		</action>
 		<reaction>
 			<name>Instinctive Charm (Recharges after the Enchanter Casts an Enchantment Spell of 1st level or Higher)</name>
@@ -16462,8 +16440,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage, or 9 (1d10 + 4) slashing damage if used with two hands, plus 13 (3d8) poison damage.</text>
-			<attack>One Handed|8|1d8+4+3d8</attack>
-			<attack>Two Handed|8|1d10+4+3d8</attack>
+			<attack>Longsword|8|1d10+4+3d8</attack>
 		</action>
 		<action>
 			<name>Longbow</name>
@@ -16511,8 +16488,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) slashing damage.</text>
-			<attack>One Handed|4|1d8+2</attack>
-			<attack>Two Handed|4|1d10+2</attack>
+			<attack>Longsword|4|1d10+2</attack>
 		</action>
 		<action>
 			<name>Heavy Crossbow</name>
@@ -16684,8 +16660,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +1 to hit, reach 5 ft., one target.  Hit: 3 (1d8-1) bludgeoning damage.</text>
-			<attack>One Handed|1|1d6-1</attack>
-			<attack>Two Handed|1|1d8-1</attack>
+			<attack>Quarterstaff|1|1d8-1</attack>
 		</action>
 		<spells>Light, Mage Hand, Shocking Grasp, Charm Person, Magic Missile, Hold Person, Misty Step</spells>
 		<slots>4,3,0,0,0,0,0,0,0</slots>
@@ -16734,8 +16709,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 2 (1d6-1) bludgeoning damage, or 3 (1d8-1) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff|3|1d6-1</attack>
-			<attack>Two Handed|3|1d8-1</attack>
+			<attack>Quarterstaff|3|1d8-1</attack>
 		</action>
 		<spells>Fire Bolt, Light, Prestidigitation, Ray of Frost, Burning Hands, Mage Armor, Magic Missile, Mirror Image, Misty Step, Shatter, Counterspell, Fireball, Lightning Bolt, Ice Storm, Stoneskin, Bigby's Hand, Cone of Cold, Chain Lightning, Wall of Ice</spells>
 		<slots>4,3,3,3,2,1,0,0,0</slots>
@@ -17289,8 +17263,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8+2) slashing damage or 7 (1d10 + 2) slashing damage if used with two hands</text>
-			<attack>Longsword (1H)|4|1d8+2</attack>
-			<attack>Longsword (2H)|4|1d10+2</attack>
+			<attack>Longsword|4|1d10+2</attack>
 		</action>
 		<action>
 			<name>Longbow</name>
@@ -17378,14 +17351,12 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) slashing damage, or 7 (1d10 + 2) slashing damage if used with two hands.</text>
-			<attack>One Handed|4|1d8+2</attack>
-			<attack>Two Handed|4|1d10+2</attack>
+			<attack>Longsword|4|1d10+2</attack>
 		</action>
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|4|1d6+2</attack>
-			<attack>Two Handed|4|1d8+2</attack>
+			<attack>Spear|4|1d8+2</attack>
 		</action>
 		<spells>Gust, Light, Message, Ray of Frost, Expeditious Retreat, Feather Fall</spells>
 		<slots>2,0,0,0,0,0,0,0,0</slots>
@@ -17819,8 +17790,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +10 to hit, reach S ft., one target. Hit: 10 (1d8 + 6) slashing damage, or 11 (1d10 + 6) slashing damage if used with two hands, plus 22 (Sd8) fire or radiant damage (angel's choice).</text>
-			<attack>Longsword (1H)|10|1d8+6+5d8</attack>
-			<attack>Longsword (2H)|10|1d10+6+5d8</attack>
+			<attack>Longsword|10|1d10+6+5d8</attack>
 		</action>
 		<spells>Compelled Duel, Guiding Bolt, Daylight, Fireball</spells>
 	</monster>
@@ -18654,8 +18624,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +4 to hit, reach S ft. or range 20/60 ft., one target. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Spear (1H)|4|1d6+2</attack>
-			<attack>Spear (2H)|4|1d8+2</attack>
+			<attack>Spear|4|1d8+2</attack>
 		</action>
 	</monster>
 	<monster>
@@ -18938,8 +18907,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 3 (1d6) piercing damage, or 4 (1d8) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Spear (1H)|3|1d6</attack>
-			<attack>Spear (2H)|3|1d8</attack>
+			<attack>Spear|3|1d8</attack>
 		</action>
 	</monster>
 	<monster>
@@ -19035,8 +19003,7 @@
 		<action>
 			<name>Drown</name>
 			<text>Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 6 (1d6 + 3) piercing damage plus 4 (1d8) cold damage.</text>
-			<attack>One Handed|7|1d6+3+1d8</attack>
-			<attack>Two Handed|7|1d8+3+1d8</attack>
+			<attack>Drown|7|1d8+3+1d8</attack>
 		</action>
 		<spells>Mending, Resistance, Shape Water, Create or Destroy Water, Cure Wounds, Fog Cloud, Thunderwave, Darkvision, Hold Person, Protection from Poison, Call Lightning, Sleet Storm, Tidal Wave, Control Water, Ice Storm, Scrying</spells>
 		<slots>4,3,3,3,1,0,0,0,0</slots>
@@ -19462,7 +19429,7 @@
 		<trait>
 			<name>Sneak Attack</name>
 			<text>Ghald deals an extra 14 (4d6) damage when he hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of Ghald's that isn't incapacitated and Ghald doesn't have disadvantage on the attack roll.</text>
-			<attack>Sneak Attack||4d6</attack>
+			<attack>Sneak||4d6</attack>
 		</trait>
 		<action>
 			<name>Multiattack</name>
@@ -21328,7 +21295,7 @@
 		<action>
 			<name>Silver Greatsword</name>
 			<text>Melee Weapon Attack: +12 to hit, reach 5 ft., one target. Hit: 14 (2d6 + 7) slashing damage plus 17 (5d6) psychic damage. On a critical hit against a target in an astral body (as with the astral projection spell), the githyanki can cut the silvery cord that tethers the target to its material body, instead of dealing damage.</text>
-			<attack>Silver Greatsword|12|2d6+7+5d6</attack>
+			<attack>Greatsword|12|2d6+7+5d6</attack>
 		</action>
 		<reaction>
 			<name>Parry</name>
@@ -21697,8 +21664,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. and range 20/60 ft., one target. Hit: 11 (2d6 + 4) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|7|2d6+4</attack>
-			<attack>Two Handed|7|2d8+4</attack>
+			<attack>Spear|7|2d8+4</attack>
 		</action>
 		<action>
 			<name>Shield Bash</name>
@@ -21992,8 +21958,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d6+2) piercing damage, or 6 (1d8+2) piercing damage when used with two hands to make a melee attack.</text>
-			<attack>Spear|4|1d6+2</attack>
-			<attack>Two Handed|4|1d8+2</attack>
+			<attack>Spear|4|1d8+2</attack>
 		</action>
 		<action>
 			<name>Longbow</name>
@@ -22291,8 +22256,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage, or 6 (1d8 + 2) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff (1H)|4|1d6+2</attack>
-			<attack>Quarterstaff (2H)|4|1d8+2</attack>
+]			<attack>Quarterstaff|4|1d8+2</attack>
 		</action>
 		<action>
 			<name>Fungal Rot</name>
@@ -23370,7 +23334,7 @@
 		<action>
 			<name>+1 Flail</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) bludgeoning damage</text>
-			<attack>+1 Flail|5|1d8+3</attack>
+			<attack>Flail|5|1d8+3</attack>
 		</action>
 		<spells>Guidance, Light, Sacred Flame, Thaumaturgy, Cure Wounds, Divine Favor, Inflict Wounds, Protection from Evil and Good, Shield of Faith, Continual Flame, Hold Person, Magic Weapon, Spiritual Weapon, Bestow Curse, Dispel Magic, Spirit Guardians</spells>
 		<slots>4,3,3,0,0,0,0,0,0</slots>
@@ -23643,8 +23607,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|3|1d6+1</attack>
-			<attack>Two Handed|3|1d8+1</attack>
+			<attack>Spear|3|1d8+1</attack>
 		</action>
 	</monster>
 	<monster>
@@ -23723,8 +23686,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +10 to hit, reach 10 ft. or range 60/240 ft., one target. Hit: 17 (3d6 + 7) piercing damage, or 20 (3d8 + 7) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Spear (1H)|10|3d6+7</attack>
-			<attack>Spear (2H)|10|3d8+7</attack>
+			<attack>Spear|10|3d8+7</attack>
 		</action>
 		<reaction>
 			<name>Protection</name>
@@ -24019,8 +23981,7 @@
 		<action>
 			<name>Battleaxe</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 12 (2d8 + 3) slashing damage, or 14 (2d10 + 3) slashing damage if used with two hands.</text>
-			<attack>One Handed|5|2d8+3</attack>
-			<attack>Two Handed|5|2d10+3</attack>
+			<attack>Battleaxe|5|2d10+3</attack>
 		</action>
 		<action>
 			<name>Javelin</name>
@@ -24057,8 +24018,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands.</text>
-			<attack>One Handed|5|1d8+3</attack>
-			<attack>Two Handed|5|1d10+3</attack>
+			<attack>Longsword|5|1d10+3</attack>
 		</action>
 		<action>
 			<name>Shortsword</name>
@@ -24758,8 +24718,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 5 ft, one target. Hit: 4 (1d6+1) bludgeoning damage, or 5 (1d8+1) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff|3|1d6+1</attack>
-			<attack>Two Handed|3|1d8+1</attack>
+			<attack>Quarterstaff|3|1d8+1</attack>
 		</action>
 		<spells>Acid Splash, Fire Bolt, Ray of Frost, Shocking Grasp, Fog Cloud, Magic Missile, Thunderwave, Gust of Wind, Melf's Acid Arrow, Scorching Ray, Fireball, Fly, Lightning Bolt, Ice Storm</spells>
 		<slots>4,3,3,1,0,0,0,0,0</slots>
@@ -24852,8 +24811,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands.</text>
-			<attack>One Handed|9|1d8+3</attack>
-			<attack>Two Handed|9|1d10+3</attack>
+			<attack>Longsword|9|1d10+3</attack>
 		</action>
 		<action>
 			<name>Shield Bash</name>
@@ -25017,8 +24975,7 @@
 		<action>
 			<name>Staff</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 5ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) bludgeoning damage if used with two hands.</text>
-			<attack>Staff (1H)|3|1d6+1</attack>
-			<attack>Staff (2H)|3|1d8+1</attack>
+			<attack>Staff|3|1d8+1</attack>
 		</action>
 		<action>
 			<name>One with the Worldsoul</name>
@@ -26194,8 +26151,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 2 (1d6-1) bludgeoning damage, or 3 (1d8-1) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff|1|1d6-1</attack>
-			<attack>Two Handed|1|1d8-1</attack>
+			<attack>Quarterstaff|1|1d8-1</attack>
 		</action>
 		<spells>Dancing Lights, Mage Hand, Minor Illusion, Poison Spray, Color Spray, Disguise Self, Mage Armor, Magic Missile, Invisibility, Mirror Image, Phantasmal Force, Major Image, Phantom Steed, Phantasmal Killer</spells>
 		<slots>4,3,3,1,0,0,0,0,0</slots>
@@ -26943,8 +26899,7 @@
 		<action>
 			<name>Battleaxe</name>
 			<text>Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8+4) slashing damage, or 15 (2d10+4) when used with two hands.</text>
-			<attack>One Handed|7|2d8+4</attack>
-			<attack>Two Handed|7|2d10+4</attack>
+			<attack>Battleaxe|7|2d10+4</attack>
 		</action>
 		<action>
 			<name>Hurl Flame</name>
@@ -27073,7 +27028,7 @@
 		<action>
 			<name>Spring</name>
 			<text>The jaculi springs up to 30 feet in a straight line and makes a bite attack against a target within its reach. This attack has advantage if the jaculi springs at least 10 feet. If the attack hits, the bite deals an extra 7 (2d6) piercing damage.</text>
-			<attack>Extra Dmg||2d6</attack>
+			<attack>Spring||2d6</attack>
 		</action>
 	</monster>
 	<monster>
@@ -27116,8 +27071,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) slashing damage. or 7 (1d10 + 2) slashing damage when used with two hands.</text>
-			<attack>Longsword (1H)|4|1d8+2</attack>
-			<attack>Longsword (2H)|4|1d10+2</attack>
+			<attack>Longsword|4|1d10+2</attack>
 		</action>
 		<action>
 			<name>Dagger</name>
@@ -27327,7 +27281,7 @@
 		<trait>
 			<name>Sneak Attack (1/Turn)</name>
 			<text>Jarlaxle deals an extra 24 (7d6) damage when he hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of Jarlaxle's that isn't incapacitated and Jarlaxle doesn't have disadvantage on the attack roll.</text>
-			<roll>7d6</roll>
+			<roll>Sneak||7d6</roll>
 		</trait>
 		<trait>
 			<name>Suave Defense</name>
@@ -27457,7 +27411,7 @@
 		<description>Source: Ghosts of Saltmarsh</description>
 		<alignment>chaotic evil</alignment>
 		<ac>16 (natural armor)</ac>
-		<hp>207 (18dl2 + 90)</hp>
+		<hp>207 (18d12 + 90)</hp>
 		<speed>20 ft., swim 50 ft.</speed>
 		<str>24</str>
 		<dex>11</dex>
@@ -27941,8 +27895,7 @@
 		<action>
 			<name>Trident</name>
 			<text>Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Trident (1H)|3|1d6+1</attack>
-			<attack>Trident (2H)|3|1d8+1</attack>
+			<attack>Trident|3|1d8+1</attack>
 		</action>
 	</monster>
 	<monster>
@@ -27986,8 +27939,7 @@
 		<action>
 			<name>Trident</name>
 			<text>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit:5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Trident (1H)|4|1d6+2</attack>
-			<attack>Trident (2H)|4|1d8+2</attack>
+			<attack>Trident|4|1d8+2</attack>
 		</action>
 		<action>
 			<name>Hooked Net</name>
@@ -28085,8 +28037,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 it, one target. Hit: 4 (ld6+l) piercing damage, or 5 (ld8+l) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Spear|3|ld6+l</attack>
-			<attack>Two Handed|2|1d8+1</attack>
+\			<attack>Spear|2|1d8+1</attack>
 		</action>
 		<spells />
 	</monster>
@@ -28443,8 +28394,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) bludgeoning damage, or 7 (1d8 + 3) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff (1H)|5|1d6+3</attack>
-			<attack>Quarterstaff (2H)|5|1d8+3</attack>
+			<attack>Quarterstaff|5|1d8+3</attack>
 		</action>
 	</monster>
 	<monster>
@@ -28486,8 +28436,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/ 60 ft., one target. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Spear (1H)|4|1d6+2</attack>
-			<attack>Spear (2H)|4|1d8+2</attack>
+			<attack>Spear|4|1d8+2</attack>
 		</action>
 	</monster>
 	<monster>
@@ -28592,8 +28541,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|3|1d6+1</attack>
-			<attack>Two Handed|3|1d8+1</attack>
+			<attack>Spear|3|1d8+1</attack>
 		</action>
 		<action>
 			<name>Net</name>
@@ -28827,8 +28775,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Spear (1H)|4|1d6+2</attack>
-			<attack>Spear (2H)|4|1d8+2</attack>
+			<attack>Spear|4|1d8+2</attack>
 		</action>
 	</monster>
 	<monster>
@@ -28893,8 +28840,7 @@
 		<action>
 			<name>Flame Tongue</name>
 			<text>Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 5 (1d8+1) slashing damage plus 7 (2d6) fire damage, or 6 (1d10 + 1) slashing damage plus 7 (2d6) fire damage when used with two hands.</text>
-			<attack>Flame Tongue (1H)|7|1d8+1+2d6</attack>
-			<attack>Flame Tongue (2H)|7|1d10+1+2d6</attack>
+			<attack>Flame Tongue|7|1d10+1+2d6</attack>
 		</action>
 		<action>
 			<name>Spellfire (Recharges after a Long Rest)</name>
@@ -28999,8 +28945,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or ranged 20/60 ft., one target. Hit: 7 (1d6 + 4) piercing damage.</text>
-			<attack>One Handed|6|1d6+4</attack>
-			<attack>Two Handed|6|1d8+4</attack>
+			<attack>Spear|6|1d8+4</attack>
 		</action>
 		<action>
 			<name>Lightning Breath (Recharge 5-6)</name>
@@ -29092,8 +29037,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) bludgeoning damage, or 5 (1d8 + 1) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff (1H)|4|1d6+1</attack>
-			<attack>Quarterstaff (2H)|4|1d8+1</attack>
+			<attack>Quarterstaff|4|1d8+1</attack>
 		</action>
 	</monster>
 	<monster>
@@ -29382,8 +29326,7 @@
 		<action>
 			<name>Battleaxe</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage when used with two hands.</text>
-			<attack>Battleaxe (1H)|5|1d8+3</attack>
-			<attack>Battleaxe (2H)|5|1d10+3</attack>
+			<attack>Battleaxe|5|1d10+3</attack>
 		</action>
 		<action>
 			<name>Heavy Crossbow</name>
@@ -29743,8 +29686,7 @@
 		<action>
 			<name>Trident</name>
 			<text>Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 6 (1d6 + 3) piercing damage, or 7 (1d8 + 3) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|5|1d6+3</attack>
-			<attack>Two Handed|5|1d8+3</attack>
+			<attack>Trident|5|1d8+3</attack>
 		</action>
 	</monster>
 	<monster>
@@ -30043,8 +29985,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Spear (1H)|3|1d6+1</attack>
-			<attack>Spear (2H)|3|1d8+1</attack>
+			<attack>Spear|3|1d8+1</attack>
 		</action>
 	</monster>
 	<monster>
@@ -30568,8 +30509,7 @@
 		<action>
 			<name>Staff of Power</name>
 			<text>Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage, or 6 (1d8 + 2) bludgeoning damage when used with two hands. Manshoon can expend 1 of the staff's charges to deal an extra 3 (1d6) force damage on a hit.</text>
-			<attack>Staff of Power (1H)|7|1d6+2</attack>
-			<attack>Staff of Power (2H)|7|1d8+2</attack>
+			<attack>Staff of Power|7|1d8+2</attack>
 		</action>
 	</monster>
 	<monster>
@@ -30706,8 +30646,7 @@
 		<action>
 			<name>Trident</name>
 			<text>Melee or Ranged Weapon Attack: +10 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 13 (2d6 + 6) piercing damage, or 15 (2d8 + 6) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|10|2d6+6</attack>
-			<attack>Two Handed|10|2d8+6</attack>
+			<attack>Trident|10|2d8+6</attack>
 		</action>
 		<action>
 			<name>Water Jet</name>
@@ -31036,7 +30975,7 @@
 		<trait>
 			<name>Sneak Attack (1/Turn)</name>
 			<text>The thief deals an extra 14 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the thief that isn't incapacitated and the thief doesn't have disadvantage on the attack roll.</text>
-			<attack>Sneak Attack| |4d6</attack>
+			<attack>Sneak| |4d6</attack>
 		</trait>
 		<action>
 			<name>Multiattack</name>
@@ -31110,8 +31049,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +8 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 11 (2d6 + 4) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack, plus 13 (3d8) psychic damage.</text>
-			<attack>Spear (1H)|8|2d6+4+3d8</attack>
-			<attack>Spear (2H)|8|2d8+4+3d8</attack>
+			<attack>Spear|8|2d8+4+3d8</attack>
 		</action>
 		<action>
 			<name>Captivating Presence (Recharge 6)</name>
@@ -31794,8 +31732,7 @@
 		<action>
 			<name>Trident</name>
 			<text>Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 7 (1d6 + 4) piercing damage, or 8 (1d8 + 4) piercing damage when held with two claws and used to make a melee attack.</text>
-			<attack>One Handed|7|1d6+4</attack>
-			<attack>Two Handed|7|1d8+4</attack>
+			<attack>Trident|7|1d8+4</attack>
 		</action>
 		<action>
 			<name>Teleport</name>
@@ -32070,7 +32007,7 @@
 		</trait>
 		<action>
 			<name>Tentacles</name>
-			<text>Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 15 (2dl0+4) psychic damage. If the target is Medium or smaller, it is grappled (escape DC 15) and must succeed on a DC 15 Intelligence saving throw or be stunned until this grapple ends.</text>
+			<text>Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 15 (2d10+4) psychic damage. If the target is Medium or smaller, it is grappled (escape DC 15) and must succeed on a DC 15 Intelligence saving throw or be stunned until this grapple ends.</text>
 			<attack>Tentacles|7|2d10+4</attack>
 		</action>
 		<action>
@@ -32365,8 +32302,7 @@
 		<action>
 			<name>Staff</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) bludgeoning damage, or 5 (1d8 + 1) bludgeoning damage when used with two hands.</text>
-			<attack>One Handed|4|1d6+1</attack>
-			<attack>Two Handed|4|1d8+1</attack>
+			<attack>Staff|4|1d8+1</attack>
 		</action>
 		<spells>Pass without Trace, Acid Splash, Blade Ward, Friends, Light, Message, Mold Earth, Chromatic Orb, Mage Armor, Magic Missile, Maximilian's Earthen Grasp, Shatter, Suggestion, Counterspell, Erupting Earth, Polymorph, Stoneskin, Wall of Stone, Move Earth</spells>
 		<slots>4,3,3,3,2,1,0,0,0</slots>
@@ -32463,14 +32399,12 @@
 		<action>
 			<name>+1 Longsword</name>
 			<text>Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) slashing damage, or 16 (2d10 + 5) slashing damage when used with two hands.</text>
-			<attack>+1 Longsword (1H)|9|2d8+5</attack>
-			<attack>+1 Longsword (2H)|9|2d10+5</attack>
+			<attack>Longsword|9|2d10+5</attack>
 		</action>
 		<action>
 			<name>+1 Dagger</name>
 			<text>Melee or Ranged Weapon Attack: +9 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 10 (2d4 + 5) piercing damage when used as a melee weapon, or 7 (1d4 + 5) piercing damage when used as a ranged weapon.</text>
-			<attack>+1 Dagger|9|2d4+5</attack>
-			<attack>+1 Dagger (ranged)|9|1d4+5</attack>
+			<attack>Dagger|9|2d4+5</attack>
 		</action>
 	</monster>
 	<monster>
@@ -32627,7 +32561,7 @@
 		<action>
 			<name>Wolf Bite</name>
 			<text>Melee Weapon Attack: +16 to hit, reach 10 ft., one target. Hit: 16 (2d6 + 9) piercing damage.</text>
-			<attack>Wolf Bite|16|2d6+9</attack>
+			<attack>Bite|16|2d6+9</attack>
 		</action>
 		<action>
 			<name>Snakebite</name>
@@ -33152,14 +33086,12 @@
 		<legendary>
 			<name>Lunging Attack (Costs 2 Actions)</name>
 			<text>Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage, or 15 (2d10 + 4) slashing damage if used with two hands.</text>
-			<attack>Lunging Attack (1H)|9|2d8+4</attack>
-			<attack>Lunging Attack (2H)|9|2d10+4</attack>
+			<attack>Lunging Attack|9|2d10+4</attack>
 		</legendary>
 		<legendary>
 			<name>Retreating Strike (Costs 3 Actions)</name>
 			<text>Muiral moves up to his speed without provoking opportunity attacks. Before the move, he can make one longsword attack.</text>
-			<attack>Retreating Strike (1H)|9|2d8+4</attack>
-			<attack>Retreating Strike (2H)|9|2d10+4</attack>
+			<attack>Retreating Strike|9|2d10+4</attack>
 		</legendary>
 	</monster>
 	<monster>
@@ -33639,8 +33571,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 9 (1d8 + 5) slashing damage, or 10 (1d10 + 5) if used with two hands, plus 10 (3d6) necrotic damage.</text>
-			<attack>One Handed|9|1d8+5+3d6</attack>
-			<attack>Two Handed|9|1d10+5+3d6</attack>
+			<attack>Longsword|9|1d10+5+3d6</attack>
 		</action>
 		<action>
 			<name>Longbow</name>
@@ -34429,8 +34360,7 @@
 		<action>
 			<name>Spider Staff</name>
 			<text>Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 2 (1d6-1) bludgeoning damage plus 3 (1d6) poison damage.</text>
-			<attack>One Handed|1|1d6-1+1d6</attack>
-			<attack>Two Handed|1|1d8-1+1d6</attack>
+			<attack>Staff|1|1d8-1+1d6</attack>
 		</action>
 		<spells>Dancing Lights, Darkness, Faerie Fire, Mage Hand, Ray of Frost, Shocking Grasp, Mage Armor, Magic Missile, Shield, Invisibility, Suggestion</spells>
 		<slots>4,3,0,0,0,0,0,0,0</slots>
@@ -35305,8 +35235,7 @@
 		<action>
 			<name>Trident</name>
 			<text>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Trident (1H)|4|1d6+2</attack>
-			<attack>Trident (2H)|4|1d8+2</attack>
+			<attack>Trident|4|1d8+2</attack>
 		</action>
 		<action>
 			<name>Light Crossbow</name>
@@ -36136,8 +36065,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 12 (2d8+3) slashing damage, or 14 (2d10+3) slashing damage when used with two hands.</text>
-			<attack>Longsword|5|2d8+3</attack>
-			<attack>Two Handed|5|2d10+3</attack>
+			<attack>Longsword|5|2d10+3</attack>
 		</action>
 		<action>
 			<name>Javelin</name>
@@ -36241,8 +36169,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 11 (1d6 + 3 plus 1d8) piercing damage, or 12 (2d8 + 3) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|5|1d6+3+1d8</attack>
-			<attack>Two Handed|5|2d8+3</attack>
+			<attack>Spear|5|2d8+3</attack>
 		</action>
 		<spells>Guidance, Resistance, Thaumaturgy, Bless, Command, Augury, Spiritual Weapon</spells>
 		<slots>4,2,0,0,0,0,0,0,0</slots>
@@ -36446,8 +36373,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 12 (1d6 + 4 plus 1d8) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|6|1d6+4+1d8</attack>
-			<attack>Two Handed|6|2d8+4</attack>
+			<attack>Spear|6|2d8+4</attack>
 		</action>
 		<action>
 			<name>Battle Cry (1/Day)</name>
@@ -37220,8 +37146,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +5 to hit. reach 5 ft. or ranged 20 ft./60 ft., one target. Hit: 5 (1d6 + 2) piercing damage.</text>
-			<attack>One Handed|5|1d6+2</attack>
-			<attack>Two Handed|5|1d8+2</attack>
+			<attack>Spear|5|1d8+2</attack>
 		</action>
 		<spells>Druidcraft, Guidance, Poison Spray, Cure Wounds, Entangle, Healing Word, Thunderwave, Barkskin, Beast Sense, Spike Growth, Plant Growth, Water Walk</spells>
 		<slots>4,3,3,0,0,0,0,0,0</slots>
@@ -37510,8 +37435,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 9 (1d8 + 5) slashing damage, or 10 (1d10 + 5) slashing damage if used with two hands.</text>
-			<attack>Longsword (1H)|5|1d8+5</attack>
-			<attack>Longsword (2H)|5|1d10+5</attack>
+			<attack>Longsword|5|1d10+5</attack>
 		</action>
 		<reaction>
 			<name>Shape Up, Ye Dog (2/day)</name>
@@ -37599,8 +37523,8 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) slashing damage, or 7 (1d10 + 2) slashing damage if used with two hands. If the target is a creature, the first mate can choose to deal no damage with the attack to disarm the target. The target must succeed on a DC 14 Strength saving throw or drop one item it is holding on the ground.</text>
-			<attack>Longsword (1H)|4|1d8+2</attack>
-			<attack>Longsword (2H)|4|1d10+2</attack>
+			<attack>Longsword|4|1d8+2</attack>
+			<attack>Longsword|4|1d10+2</attack>
 		</action>
 	</monster>
 	<monster>
@@ -37957,8 +37881,8 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 2 (1d6 - 1) bludgeoning damage, or 3 (1d8 - 1) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff (1H)|1|1d6-1</attack>
-			<attack>Quarterstaff (2H)|1|1d8-1</attack>
+			<attack>Quarterstaff|1|1d6-1</attack>
+			<attack>Quarterstaff|1|1d8-1</attack>
 		</action>
 		<action>
 			<name>Glimpse the Temporal Flood (Recharge 5-6)</name>
@@ -38170,7 +38094,7 @@
 		<action>
 			<name>Tail Stinger</name>
 			<text>Melee Weapon Attack: +9 to hit, reach 10 ft., one creature. Hit: 19 (3d6 + 9) piercing damage, and the target must make a DC 19 Constitution saving throw, taking 42 (12d6) poison damage on a failed save, or half as much damage on a successful one.</text>
-			<attack>Tail Stinger|9|3d6+9</attack>
+			<attack>stinger|9|3d6+9</attack>
 		</action>
 	</monster>
 	<monster>
@@ -38204,7 +38128,7 @@
 		<action>
 			<name>Tail Stinger</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 5 (1d4 + 3) piercing damage, and the target must make a DC 13 Constitution saving throw, taking 10 (3d6) poison damage on a failed save, or half as much damage on a successful one.</text>
-			<attack>Tail Stinger|5|1d4+3</attack>
+			<attack>stinger|5|1d4+3</attack>
 		</action>
 	</monster>
 	<monster>
@@ -38910,8 +38834,8 @@
 		<action>
 			<name>Flame Tongue Longsword (Yuan-ti Form Only)</name>
 			<text>Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage when used with two hands, plus 7 (2d6) fire damage.</text>
-			<attack>Flame Tongue Longsword (1H)|6|1d8+3+2d6</attack>
-			<attack>Flame Tongue Longsword (2H)|6|1d10+3+2d6</attack>
+			<attack>Flame Tongue Longsword|6|1d8+3+2d6</attack>
+			<attack>Flame Tongue Longsword|6|1d10+3+2d6</attack>
 		</action>
 	</monster>
 	<monster>
@@ -38980,8 +38904,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d8) bludgeoning damage.</text>
-			<attack>One Handed|4|1d6</attack>
-			<attack>Two Handed|4|1d8</attack>
+			<attack>Quarterstaff|4|1d8</attack>
 		</action>
 		<reaction>
 			<name>Illusory Self (Recharges on a Short or Long Rest)</name>
@@ -39054,8 +38977,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 6 (1d6 + 3) piercing damage, or 7 (1d8 + 3) piercing damage if used with two hands to make a melee attack, plus 3 (1d6) fire damage.</text>
-			<attack>One Handed|6|1d6+3+1d6</attack>
-			<attack>Two Handed|6|1d8+3+1d6</attack>
+			<attack>Spear|6|1d8+3+1d6</attack>
 		</action>
 	</monster>
 	<monster>
@@ -39101,8 +39023,8 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands.</text>
-			<attack>Longsword (1H)|5|1d8+3</attack>
-			<attack>Longsword (2H)|5|1d10+3</attack>
+			<attack>Longsword|5|1d8+3</attack>
+			<attack>Longsword|5|1d10+3</attack>
 		</action>
 		<reaction>
 			<name>Lightning Backlash (Recharge 5-6)</name>
@@ -40445,8 +40367,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|3|1d6+1</attack>
-			<attack>Two Handed|3|1d8+1</attack>
+			<attack>Spear|3|1d8+1</attack>
 		</action>
 	</monster>
 	<monster>
@@ -40499,8 +40420,7 @@
 		<action>
 			<name>Trident</name>
 			<text>Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 11 (2d6 + 4) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|7|2d6+4</attack>
-			<attack>Two Handed|7|2d8+4</attack>
+			<attack>Trident|7|2d8+4</attack>
 		</action>
 	</monster>
 	<monster>
@@ -40604,8 +40524,8 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 6 (1d6 + 3) piercing damage, or 7 (1d8 + 3) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Spear (1H)|5|1d6+3</attack>
-			<attack>Spear (2H)|5|1d8+3</attack>
+			<attack>Spear|5|1d6+3</attack>
+			<attack>Spear|5|1d8+3</attack>
 		</action>
 		<action>
 			<name>Bite</name>
@@ -40793,7 +40713,7 @@
 			<name>Bites</name>
 			<text>Melee Weapon Attack: +6 to hit, reach 0 ft., one creature in the swarm's space. Hit: 14 (4d6) piercing damage, or 7 (2d6) piercing damage ifthe swarm has half of its hit points or fewer.</text>
 			<attack>Bites|6|4d6</attack>
-			<attack>Bites (under 1/2hp)|6|2d6</attack>
+			<attack>Bites|6|2d6</attack>
 		</action>
 	</monster>
 	<monster>
@@ -41027,8 +40947,8 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. or range 20 ft./60 ft., one target. Hit: 11 (2d6 + 4) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack, plus 3 (1d6) fire damage.</text>
-			<attack>Spear 1H|7|2d6+4+1d6</attack>
-			<attack>Spear 2H|7|2d8+4+1d6</attack>
+			<attack>Spear|7|2d6+4+1d6</attack>
+			<attack>Spear|7|2d8+4+1d6</attack>
 		</action>
 		<action>
 			<name>Tail</name>
@@ -41571,7 +41491,7 @@
 		</legendary>
 		<legendary>
 			<name>Fiery Teleport (Costs 2 Actions)</name>
-			<text>Severin, along with any objects he is wearing or carrying, teleports up to 60 feet to an unoccupied space he can see. Each creature within 5 feet of Severin before he teleports takes 5 (1dlO) fire damage.</text>
+			<text>Severin, along with any objects he is wearing or carrying, teleports up to 60 feet to an unoccupied space he can see. Each creature within 5 feet of Severin before he teleports takes 5 (1d1O) fire damage.</text>
 			<attack>Fiery Teleport||1d10</attack>
 		</legendary>
 		<legendary>
@@ -41783,7 +41703,6 @@
 			<name>Claws</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 10 (2d6 + 3) psychic damage or, if the demon had advantage on the attack roll, 17 (4d6 + 3) psychic damage.</text>
 			<attack>Claws|5|2d6+3</attack>
-			<attack>with Advantage|5|4d6+3</attack>
 		</action>
 	</monster>
 	<monster>
@@ -41918,7 +41837,7 @@
 		<trait>
 			<name>Sneak Attack (1/turn)</name>
 			<text>Shalvus deals an extra 7 (2d6) damage when he hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of Shalvus that isn't incapacitated and Shalvus doesn't have disadvantage on the attack roll.</text>
-			<attack>Sneak Attack||2d6</attack>
+			<attack>Sneak||2d6</attack>
 		</trait>
 		<action>
 			<name>Quarterstaff</name>
@@ -42216,7 +42135,7 @@
 		<action>
 			<name>Tail Stinger</name>
 			<text>Melee Weapon Attack: +7 to hit, reach 15 ft, one creature. Hit: 13 (2d8+4) piercing damage, and the target must succeed on a DC 14 Constitution saving throw or become poisoned. While poisoned, the target is also paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</text>
-			<attack>Tail Stinger|7|2d8+4</attack>
+			<attack>stinger|7|2d8+4</attack>
 		</action>
 		<spells />
 	</monster>
@@ -42412,8 +42331,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) slashing damage.</text>
-			<attack>One Handed|3|1d8+1</attack>
-			<attack>Two Handed|3|1d10+1</attack>
+			<attack>Longsword|3|1d10+1</attack>
 		</action>
 		<action>
 			<name>Heavy Crossbow</name>
@@ -42545,9 +42463,8 @@
 		</trait>
 		<action>
 			<name>Longsword</name>
-			<text>Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage, or 9 (1dlO + 4) slashing damage if used with two hands.</text>
-			<attack>Longsword|6|1d8+4</attack>
-			<attack>Two Handed|6|1d10+4</attack>
+			<text>Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage, or 9 (1d1O + 4) slashing damage if used with two hands.</text>
+			<attack>Longsword|6|1d10+4</attack>
 		</action>
 		<reaction>
 			<name>Protection</name>
@@ -42887,7 +42804,7 @@
 			<name>Slash</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 0 ft., one target in the swarm's space. Hit: 11 (2d8 + 2) slashing damage, or 6 (1d8 + 2) slashing damage if the swarm has half of its hit points or fewer.</text>
 			<attack>Slash|4|2d8+2</attack>
-			<attack>Slash (under 1/2hp)|4|1d8+2</attack>
+			<attack>Slash|4|1d8+2</attack>
 		</action>
 	</monster>
 	<monster>
@@ -43549,8 +43466,8 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) slashing damage, or 7 (1d10 + 2) slashing damage if used with two hands.</text>
-			<attack>Longsword (1H)|3|1d8+2</attack>
-			<attack>Longsword (2H)|3|1d10+2</attack>
+			<attack>Longsword|3|1d8+2</attack>
+			<attack>Longsword|3|1d10+2</attack>
 		</action>
 	</monster>
 	<monster>
@@ -44086,7 +44003,7 @@
 		<trait>
 			<name>Sneak Attack (1/Turn)</name>
 			<text>The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll.</text>
-			<attack>Sneak Attack||2d6</attack>
+			<attack>Sneak||2d6</attack>
 		</trait>
 		<action>
 			<name>Multiattack</name>
@@ -45702,7 +45619,6 @@
 			<name>Slam</name>
 			<text>Melee Weapon Attack: +10 to hit, reach 15 ft., one target. Hit: 24 (4d8 + 6) bludgeoning damage.</text>
 			<attack>Slam|10|4d8+6</attack>
-			<attack>Extra Dmg||4d8</attack>
 		</action>
 		<action>
 			<name>Rock</name>
@@ -45745,8 +45661,7 @@
 		<action>
 			<name>Bites</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 0 ft., one creature in the swarm's space. Hit: 5 (2d4) piercing damage, or 2 (1d4) piercing damage if the swarm has half of its hit points or fewer.</text>
-			<attack>Full|4|2d4</attack>
-			<attack>Half|4|1d4</attack>
+			<attack>Bite|4|2d4</attack>
 		</action>
 	</monster>
 	<monster>
@@ -45776,8 +45691,7 @@
 		<action>
 			<name>Bites</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.</text>
-			<attack>Full|3|4d4</attack>
-			<attack>Half|3|2d4</attack>
+			<attack>Bite|3|4d4</attack>
 		</action>
 	</monster>
 	<monster>
@@ -45808,8 +45722,7 @@
 			<name>Bites</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.</text>
 			<text>A creature reduced to 0 hit points by a swarm of centipedes is stable but poisoned for 1 hour, even after regaining hit points, and paralyzed while poisoned in this way.</text>
-			<attack>Full|3|4d4</attack>
-			<attack>Half|3|2d4</attack>
+			<attack>Bite|3|4d4</attack>
 		</action>
 	</monster>
 	<monster>
@@ -45858,8 +45771,7 @@
 		<action>
 			<name>Bites</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 0 ft., one target in the swarm's space. Hit: 14 (4d6) piercing damage, or 7 (2d6) piercing damage if the swarm has half of its hit points or fewer.</text>
-			<attack>Bites|5|4d6</attack>
-			<attack>Half Hit Points|5|2d6</attack>
+			<attack>Bite|5|4d6</attack>
 		</action>
 		<spells>Command, Comprehend Languages, Detect Thoughts, Confusion, Dominate Monster</spells>
 	</monster>
@@ -45890,8 +45802,7 @@
 		<action>
 			<name>Bites</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.</text>
-			<attack>Full|3|4d4</attack>
-			<attack>Half|3|2d4</attack>
+			<attack>Bite|3|4d4</attack>
 		</action>
 	</monster>
 	<monster>
@@ -45921,8 +45832,7 @@
 		<action>
 			<name>Bites</name>
 			<text>Melee Weapon Attack: +6 to hit, reach 0 ft., one creature in the swarm's space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer. The target must make a DC 10 Constitution saving throw, taking 14 (4d6) poison damage on a failed save, or half as much damage on a successful one.</text>
-			<attack>Full|6|2d6</attack>
-			<attack>Half|6|1d6</attack>
+			<attack>Bite|6|2d6</attack>
 		</action>
 	</monster>
 	<monster>
@@ -45960,8 +45870,7 @@
 		<action>
 			<name>Bites</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 0 ft., one creature in the swarm's space. Hit: 14 (4d6) piercing damage, or 7 (2d6) piercing damage if the swarm has half of its hit points or fewer.</text>
-			<attack>Full|5|4d6</attack>
-			<attack>Half|5|2d6</attack>
+			<attack>Bite|5|4d6</attack>
 		</action>
 	</monster>
 	<monster>
@@ -45995,8 +45904,7 @@
 		<action>
 			<name>Bites</name>
 			<text>Melee Weapon Attack: +2 to hit, reach 0 ft., one target in the swarm's space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer.</text>
-			<attack>Full|2|2d6</attack>
-			<attack>Half|2|1d6</attack>
+			<attack>Bite|2|2d6</attack>
 		</action>
 	</monster>
 	<monster>
@@ -46025,8 +45933,7 @@
 		<action>
 			<name>Beaks</name>
 			<text>Melee Weapon Attack: +4 to hit, reach 5 ft., one target in the swarm's space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer.</text>
-			<attack>Full|4|2d6</attack>
-			<attack>Half|4|1d6</attack>
+			<attack>Bite|4|2d6</attack>
 		</action>
 	</monster>
 	<monster>
@@ -46104,8 +46011,7 @@
 		<action>
 			<name>Bites</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.</text>
-			<attack>Full|3|4d4</attack>
-			<attack>Half|3|2d4</attack>
+			<attack>Bite|3|4d4</attack>
 		</action>
 	</monster>
 	<monster>
@@ -46135,8 +46041,7 @@
 		<action>
 			<name>Bites</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.</text>
-			<attack>Full|3|4d4</attack>
-			<attack>Half|3|2d4</attack>
+			<attack>Bite|3|4d4</attack>
 		</action>
 	</monster>
 	<monster>
@@ -46436,8 +46341,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or ranged 20 ft./60 ft., one target. Hit: 6 (1d6 + 2) piercing damage.</text>
-			<attack>One Handed|5|1d6+2</attack>
-			<attack>Two Handed|5|1d8+2</attack>
+			<attack>Spear|5|1d8+2</attack>
 		</action>
 		<spells>Guidance, Resistance, Thaumaturgy, Command, Cure Wounds, Healing Word, Inflict Wounds, Blindness/Deafness, Lesser Restoration, Spiritual Weapon, Dispel Magic, Mass Healing Word, Sending, Death Ward, Freedom of Movement, Insect Plague</spells>
 		<slots>4,3,3,3,1,0,0,0,0</slots>
@@ -46760,9 +46664,8 @@
 		</action>
 		<action>
 			<name>Longsword</name>
-			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1dlO + 3) slashing damage if used with two hands.</text>
-			<attack>Longsword|5|1d8+3</attack>
-			<attack>Two Handed|5|1d10+3</attack>
+			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d1O + 3) slashing damage if used with two hands.</text>
+			<attack>Longsword|5|1d10+3</attack>
 		</action>
 		<action>
 			<name>Javelin</name>
@@ -48004,8 +47907,7 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d6-1) bludgeoning damage, or 3 (1d8-1) bludgeoning damage if used with two hands.</text>
-			<attack>Quarterstaff|2|1d6-1</attack>
-			<attack>Two Handed|2|1d8-1</attack>
+			<attack>Quarterstaff|2|1d8-1</attack>
 		</action>
 		<spells>Light, Mending, Prestidigitation, Ray of Frost, Chromatic Orb, Expeditious Retreat, Mage Armor, Alter Self, Hold Person, Knock, Blink, Fireball, Slow, Polymorph, Stoneskin, Telekinesis</spells>
 		<slots>4,3,3,3,1,0,0,0,0</slots>
@@ -48257,8 +48159,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One Handed|3|1d6+1</attack>
-			<attack>Two Handed|3|1d8+1</attack>
+			<attack>Spear|3|1d8+1</attack>
 		</action>
 	</monster>
 	<monster>
@@ -48807,8 +48708,7 @@
 		<action>
 			<name>Longsword</name>
 			<text>Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands.</text>
-			<attack>One Handed|8|1d8+3</attack>
-			<attack>Two Handed|8|1d10+3</attack>
+			<attack>Longsword|8|1d10+3</attack>
 		</action>
 		<action>
 			<name>Hypnotic Gaze</name>
@@ -49067,7 +48967,7 @@
 		<cr>13</cr>
 		<trait>
 			<name>Special Equipment</name>
-			<text>Vajra wields the Blackstaff(see appendix A), accounted for in her statistics. Roll 2dl0 to determine how many charges the staff has remaining.</text>
+			<text>Vajra wields the Blackstaff(see appendix A), accounted for in her statistics. Roll 2d10 to determine how many charges the staff has remaining.</text>
 			<roll>2d10</roll>
 		</trait>
 		<trait>
@@ -49094,8 +48994,8 @@
 		<action>
 			<name>Blackstaff</name>
 			<text>Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage, or 6 (1d8 + 2) bludgeoning damage when used with two hands. Vajra can expend 1 of the staff's charges to deal an extra 3 (1d6) force damage on a hit.</text>
-			<attack>Blackstaff (1H)|7|1d6+2</attack>
-			<attack>Blackstaff (2H)|7|1d8+2</attack>
+			<attack>Blackstaff|7|1d6+2</attack>
+			<attack>Blackstaff|7|1d8+2</attack>
 			<attack>Force damage||1d6</attack>
 		</action>
 	</monster>
@@ -49775,8 +49675,7 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d6+2) piercing damage, or 6 (id8+2) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Spear|4|1d6+2</attack>
-			<attack>Two Handed|4|1d8+2</attack>
+\			<attack>Spear|4|1d8+2</attack>
 		</action>
 		<action>
 			<name>Spores (1/Day)</name>
@@ -51216,8 +51115,7 @@
 		<action>
 			<name>Spear (Humanoid Form Only)</name>
 			<text>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one creature. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>One-Handed|4|1d6+2</attack>
-			<attack>Two-Handed|4|1d8+2</attack>
+			<attack>Spear|4|1d8+2</attack>
 		</action>
 	</monster>
 	<monster>
@@ -51741,8 +51639,8 @@
 		<action>
 			<name>Spear</name>
 			<text>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/ 60 ft., one target. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.</text>
-			<attack>Spear (1H)|4|1d6+2</attack>
-			<attack>Spear (2H)|4|1d8+2</attack>
+			<attack>Spear|4|1d6+2</attack>
+			<attack>Spear|4|1d8+2</attack>
 		</action>
 	</monster>
 	<monster>
@@ -52093,7 +51991,7 @@
 			<attack>Bite|12|5d6+7</attack>
 		</action>
 	</monster>
-	
+
 	<monster>
 		<name>Wyvern</name>
 		<size>L</size>
@@ -52178,8 +52076,8 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d6) bludgeoningdamage, or 4(1d8) bludgeoning damage when used with two hands.</text>
-			<attack>Quarterstaff (1H)|3|1d6</attack>
-			<attack>Quarterstaff (2H)|3|1d8</attack>
+			<attack>Quarterstaff|3|1d6</attack>
+			<attack>Quarterstaff|3|1d8</attack>
 		</action>
 	</monster>
 	<monster>
@@ -52486,7 +52384,7 @@
 		<spells>Light, Mending, Sacred Flame, Thaumaturgy, Bane, Command, Cure Wounds, Sanctuary, Augury, Hold Person, Spiritual Weapon, Bestow Curse, Protection from Energy, Sending, Banishment</spells>
 		<slots>4,3,3,1,0,0,0,0,0</slots>
 	</monster>
-	
+
 	<monster>
 		<name>Yakfolk Warrior</name>
 		<size>L</size>
@@ -54807,8 +54705,8 @@
 		<action>
 			<name>Quarterstaff</name>
 			<text>Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage, or 6 (1d8 + 2) bludgeoning damage when used with two hands.</text>
-			<attack>Quarterstaff (1H)|5|1d6+2</attack>
-			<attack>Quarterstaff (2H)|5|1d8+2</attack>
+			<attack>Quarterstaff|5|1d6+2</attack>
+			<attack>Quarterstaff|5|1d8+2</attack>
 		</action>
 		<action>
 			<name>Breath Weapon (Recharge 5-6)</name>
@@ -54937,9 +54835,9 @@
 			<text>The zorbo magically absorbs the natural strength of its surroundings, adjusting its Armor Class based on the material it is standing or climbing on: AC 15 for wood or bone, AC 17 for earth or stone, or AC 19 for metal. If the zorbo isn't in contact with any ofthese substances, its AC is 10.</text>
 		</trait>
 		<action>
-			<name>Destructive Claws</name>
+			<name>claws</name>
 			<text>Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 8 (2d6 + 1) slashing damage, and if the target is a creature wearing armor, carrying a shield, or in possession of a magic item that improves its AC, it must make a DC 11 Dexterity saving throw. On a failed save, one such item worn or carried by the creature (the target's choice) magically deteriorates, taking a permanent and cumulative -1 penalty to the AC it offers, and the zorbo gains a +1 bonus to AC until the start of its next turn. Armor reduced to an AC of 10 or a shield or magic item that drops to a 0 AC increase is destroyed.</text>
-			<attack>Destructive Claws|3|2d6+1</attack>
+			<attack>claws|3|2d6+1</attack>
 		</action>
 	</monster>
 <monster>

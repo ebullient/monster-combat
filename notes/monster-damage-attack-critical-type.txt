@@ -1,0 +1,248 @@
+# HELP monster_attack_damage_total
+# TYPE monster_attack_damage_total counter
+monster_attack_damage_total{attack="demon staff",critical="false",type="humanoid",} 191.0
+monster_attack_damage_total{attack="whip",critical="false",type="humanoid",} 20.0
+monster_attack_damage_total{attack="death fangs",critical="false",type="monstrosity",} 12.0
+monster_attack_damage_total{attack="whirl",critical="false",type="construct",} 25.0
+monster_attack_damage_total{attack="clawed gauntlet",critical="false",type="humanoid",} 7.0
+monster_attack_damage_total{attack="gore",critical="true",type="monstrosity",} 85.0
+monster_attack_damage_total{attack="clawed gauntlet",critical="true",type="humanoid",} 0.0
+monster_attack_damage_total{attack="wooden cane",critical="false",type="humanoid",} 10.0
+monster_attack_damage_total{attack="longbow",critical="true",type="fey",} 44.0
+monster_attack_damage_total{attack="maul",critical="true",type="humanoid",} 22.0
+monster_attack_damage_total{attack="gore",critical="false",type="monstrosity",} 30.0
+monster_attack_damage_total{attack="javelin",critical="false",type="humanoid",} 12.0
+monster_attack_damage_total{attack="longsword",critical="false",type="fiend",} 134.0
+monster_attack_damage_total{attack="tentacle rod",critical="false",type="humanoid",} 19.0
+monster_attack_damage_total{attack="chilling mist",critical="false",type="humanoid",} 3.0
+monster_attack_damage_total{attack="longsword",critical="false",type="humanoid",} 16.0
+monster_attack_damage_total{attack="tentacles",critical="false",type="aberration",} 82.0
+monster_attack_damage_total{attack="longsword",critical="true",type="celestial",} 46.0
+monster_attack_damage_total{attack="half",critical="true",type="swarm of tiny beasts",} 8.0
+monster_attack_damage_total{attack="charge",critical="true",type="monstrosity",} 23.0
+monster_attack_damage_total{attack="slam",critical="true",type="elemental",} 26.0
+monster_attack_damage_total{attack="tentacle rod",critical="true",type="humanoid",} 8.0
+monster_attack_damage_total{attack="dagger",critical="false",type="monstrosity",} 4.0
+monster_attack_damage_total{attack="longsword",critical="true",type="humanoid",} 14.0
+monster_attack_damage_total{attack="spiked chain",critical="false",type="monstrosity",} 0.0
+monster_attack_damage_total{attack="halberd",critical="false",type="fiend",} 9.0
+monster_attack_damage_total{attack="claws",critical="false",type="monstrosity",} 81.0
+monster_attack_damage_total{attack="longsword",critical="false",type="celestial",} 96.0
+monster_attack_damage_total{attack="heated body",critical="false",type="monstrosity",} 9.0
+monster_attack_damage_total{attack="dagger",critical="true",type="monstrosity",} 8.0
+monster_attack_damage_total{attack="silver greatsword",critical="false",type="humanoid",} 117.0
+monster_attack_damage_total{attack="fire form",critical="true",type="elemental",} 0.0
+monster_attack_damage_total{attack="slam",critical="false",type="elemental",} 157.0
+monster_attack_damage_total{attack="rapier",critical="false",type="construct",} 23.0
+monster_attack_damage_total{attack="life drain",critical="true",type="undead",} 40.0
+monster_attack_damage_total{attack="life drain",critical="false",type="undead",} 24.0
+monster_attack_damage_total{attack="greataxe",critical="false",type="humanoid",} 130.0
+monster_attack_damage_total{attack="longsword",critical="false",type="fey",} 1.0
+monster_attack_damage_total{attack="nightmare",critical="false",type="monstrosity",} 8.0
+monster_attack_damage_total{attack="fire form",critical="false",type="elemental",} 0.0
+monster_attack_damage_total{attack="black earth rod",critical="false",type="humanoid",} 12.0
+monster_attack_damage_total{attack="greataxe",critical="true",type="humanoid",} 16.0
+monster_attack_damage_total{attack="disrupt life",critical="true",type="undead",} 0.0
+monster_attack_damage_total{attack="tentacle",critical="false",type="monstrosity",} 13.0
+monster_attack_damage_total{attack="poison damage",critical="false",type="plant",} 23.0
+monster_attack_damage_total{attack="chatkcha",critical="false",type="humanoid",} 8.0
+monster_attack_damage_total{attack="greataxe",critical="true",type="giant",} 12.0
+monster_attack_damage_total{attack="fire breath",critical="false",type="dragon",} 59.0
+monster_attack_damage_total{attack="demon staff",critical="true",type="humanoid",} 12.0
+monster_attack_damage_total{attack="rapier",critical="false",type="humanoid",} 68.0
+monster_attack_damage_total{attack="dagger",critical="false",type="humanoid",} 124.0
+monster_attack_damage_total{attack="bite",critical="true",type="monstrosity",} 7.0
+monster_attack_damage_total{attack="staff",critical="true",type="undead",} 0.0
+monster_attack_damage_total{attack="rapier",critical="true",type="humanoid",} 18.0
+monster_attack_damage_total{attack="greataxe",critical="false",type="giant",} 24.0
+monster_attack_damage_total{attack="handaxe",critical="false",type="humanoid",} 18.0
+monster_attack_damage_total{attack="hook",critical="false",type="monstrosity",} 45.0
+monster_attack_damage_total{attack="arm spike",critical="false",type="monstrosity",} 33.0
+monster_attack_damage_total{attack="claws",critical="false",type="aberration",} 51.0
+monster_attack_damage_total{attack="barbed hide",critical="false",type="fiend",} 18.0
+monster_attack_damage_total{attack="root",critical="false",type="construct",} 181.0
+monster_attack_damage_total{attack="handaxe",critical="true",type="humanoid",} 11.0
+monster_attack_damage_total{attack="staff",critical="false",type="undead",} 46.0
+monster_attack_damage_total{attack="bite",critical="false",type="monstrosity",} 303.0
+monster_attack_damage_total{attack="claw",critical="false",type="monstrosity",} 41.0
+monster_attack_damage_total{attack="shortbow",critical="false",type="fey",} 8.0
+monster_attack_damage_total{attack="club",critical="false",type="humanoid",} 6.0
+monster_attack_damage_total{attack="hoof",critical="false",type="celestial",} 27.0
+monster_attack_damage_total{attack="longsword.",critical="false",type="monstrosity",} 27.0
+monster_attack_damage_total{attack="claws",critical="false",type="celestial",} 0.0
+monster_attack_damage_total{attack="mace",critical="false",type="fiend",} 29.0
+monster_attack_damage_total{attack="slam",critical="false",type="construct",} 36.0
+monster_attack_damage_total{attack="dive attack",critical="false",type="beast",} 17.0
+monster_attack_damage_total{attack="spear",critical="false",type="humanoid",} 92.0
+monster_attack_damage_total{attack="lance",critical="false",type="humanoid",} 0.0
+monster_attack_damage_total{attack="arm spike",critical="true",type="monstrosity",} 27.0
+monster_attack_damage_total{attack="lance",critical="true",type="humanoid",} 6.0
+monster_attack_damage_total{attack="vampiric bite",critical="false",type="aberration",} 15.0
+monster_attack_damage_total{attack="claws",critical="false",type="humanoid",} 83.0
+monster_attack_damage_total{attack="spear",critical="true",type="humanoid",} 16.0
+monster_attack_damage_total{attack="slam",critical="true",type="construct",} 0.0
+monster_attack_damage_total{attack="psychic ray",critical="false",type="aberration",} 28.0
+monster_attack_damage_total{attack="dagger",critical="true",type="humanoid",} 12.0
+monster_attack_damage_total{attack="hooves",critical="false",type="beast",} 17.0
+monster_attack_damage_total{attack="gythka",critical="false",type="humanoid",} 20.0
+monster_attack_damage_total{attack="eye of corruption",critical="true",type="aberration",} 102.0
+monster_attack_damage_total{attack="wavecutter blade",critical="false",type="humanoid",} 10.0
+monster_attack_damage_total{attack="rock",critical="false",type="construct",} 21.0
+monster_attack_damage_total{attack="full",critical="false",type="swarm of tiny beasts",} 10.0
+monster_attack_damage_total{attack="beak",critical="false",type="aberration",} 0.0
+monster_attack_damage_total{attack="fiery strikes",critical="false",type="elemental",} 19.0
+monster_attack_damage_total{attack="greatsword",critical="false",type="aberration",} 18.0
+monster_attack_damage_total{attack="paralyzing touch",critical="false",type="undead",} 23.0
+monster_attack_damage_total{attack="flaming weapon",critical="false",type="humanoid",} 0.0
+monster_attack_damage_total{attack="maul",critical="false",type="humanoid",} 38.0
+monster_attack_damage_total{attack="flaming weapon",critical="true",type="humanoid",} 11.0
+monster_attack_damage_total{attack="morningstar",critical="false",type="humanoid",} 9.0
+monster_attack_damage_total{attack="barbed tail",critical="true",type="fiend",} 20.0
+monster_attack_damage_total{attack="tentacle",critical="false",type="aberration",} 18.0
+monster_attack_damage_total{attack="hook",critical="true",type="monstrosity",} 12.0
+monster_attack_damage_total{attack="deathly choir",critical="false",type="humanoid",} 0.0
+monster_attack_damage_total{attack="fist",critical="false",type="undead",} 55.0
+monster_attack_damage_total{attack="longbow",critical="false",type="monstrosity",} 0.0
+monster_attack_damage_total{attack="fist",critical="true",type="undead",} 0.0
+monster_attack_damage_total{attack="wavecutter blade",critical="true",type="humanoid",} 17.0
+monster_attack_damage_total{attack="bite",critical="false",type="fey",} 12.0
+monster_attack_damage_total{attack="barbed tail",critical="false",type="fiend",} 10.0
+monster_attack_damage_total{attack="greatsword",critical="false",type="celestial",} 81.0
+monster_attack_damage_total{attack="greatsword",critical="true",type="celestial",} 0.0
+monster_attack_damage_total{attack="claw",critical="false",type="fiend",} 96.0
+monster_attack_damage_total{attack="tusk",critical="true",type="humanoid",} 0.0
+monster_attack_damage_total{attack="pseudopod",critical="false",type="undead",} 46.0
+monster_attack_damage_total{attack="bite",critical="true",type="humanoid",} 0.0
+monster_attack_damage_total{attack="tinderstrike",critical="false",type="humanoid",} 14.0
+monster_attack_damage_total{attack="psychic orb",critical="false",type="aberration",} 114.0
+monster_attack_damage_total{attack="bite",critical="true",type="aberration",} 87.0
+monster_attack_damage_total{attack="pike",critical="false",type="monstrosity",} 0.0
+monster_attack_damage_total{attack="greatsword",critical="false",type="fiend",} 8.0
+monster_attack_damage_total{attack="two handed",critical="true",type="humanoid",} 5.0
+monster_attack_damage_total{attack="scimitar",critical="false",type="elemental",} 88.0
+monster_attack_damage_total{attack="beak",critical="false",type="elemental",} 35.0
+monster_attack_damage_total{attack="grasping root",critical="false",type="plant",} 10.0
+monster_attack_damage_total{attack="morningstar",critical="false",type="giant",} 59.0
+monster_attack_damage_total{attack="fist",critical="false",type="elemental",} 44.0
+monster_attack_damage_total{attack="two handed",critical="false",type="humanoid",} 24.0
+monster_attack_damage_total{attack="tusk",critical="false",type="humanoid",} 6.0
+monster_attack_damage_total{attack="bite",critical="false",type="humanoid",} 115.0
+monster_attack_damage_total{attack="scimitar",critical="false",type="fiend",} 0.0
+monster_attack_damage_total{attack="battleaxe",critical="false",type="undead",} 19.0
+monster_attack_damage_total{attack="longbow",critical="false",type="undead",} 0.0
+monster_attack_damage_total{attack="scimitar",critical="true",type="fiend",} 18.0
+monster_attack_damage_total{attack="sticky leg",critical="true",type="humanoid",} 0.0
+monster_attack_damage_total{attack="death throes",critical="false",type="fiend",} 132.0
+monster_attack_damage_total{attack="claw",critical="false",type="aberration",} 30.0
+monster_attack_damage_total{attack="psychic damage",critical="false",type="humanoid",} 0.0
+monster_attack_damage_total{attack="bite",critical="false",type="aberration",} 244.0
+monster_attack_damage_total{attack="fiery talons",critical="false",type="elemental",} 30.0
+monster_attack_damage_total{attack="sneak attack",critical="false",type="humanoid",} 0.0
+monster_attack_damage_total{attack="rock",critical="true",type="giant",} 0.0
+monster_attack_damage_total{attack="comet staff",critical="false",type="aberration",} 38.0
+monster_attack_damage_total{attack="sticky leg",critical="false",type="humanoid",} 48.0
+monster_attack_damage_total{attack="war pick",critical="false",type="humanoid",} 0.0
+monster_attack_damage_total{attack="dagger",critical="false",type="construct",} 16.0
+monster_attack_damage_total{attack="comet staff",critical="true",type="aberration",} 0.0
+monster_attack_damage_total{attack="barbed tail",critical="false",type="aberration",} 16.0
+monster_attack_damage_total{attack="talons",critical="false",type="beast",} 20.0
+monster_attack_damage_total{attack="sneak attack",critical="true",type="humanoid",} 0.0
+monster_attack_damage_total{attack="glaive",critical="false",type="humanoid",} 49.0
+monster_attack_damage_total{attack="scimitar",critical="false",type="humanoid",} 303.0
+monster_attack_damage_total{attack="longsword",critical="false",type="undead",} 19.0
+monster_attack_damage_total{attack="staff",critical="false",type="humanoid",} 26.0
+monster_attack_damage_total{attack="bite",critical="false",type="celestial",} 17.0
+monster_attack_damage_total{attack="fire aura",critical="false",type="fiend",} 15.0
+monster_attack_damage_total{attack="beak",critical="false",type="monstrosity",} 58.0
+monster_attack_damage_total{attack="fist",critical="false",type="fiend",} 10.0
+monster_attack_damage_total{attack="beak",critical="false",type="beast",} 8.0
+monster_attack_damage_total{attack="bite",critical="false",type="dragon",} 157.0
+monster_attack_damage_total{attack="claws",critical="false",type="undead",} 16.0
+monster_attack_damage_total{attack="staff",critical="true",type="humanoid",} 9.0
+monster_attack_damage_total{attack="bite",critical="false",type="fiend",} 204.0
+monster_attack_damage_total{attack="wand of orcus",critical="false",type="fiend",} 22.0
+monster_attack_damage_total{attack="constrict",critical="false",type="monstrosity",} 14.0
+monster_attack_damage_total{attack="with advantage",critical="false",type="fiend",} 21.0
+monster_attack_damage_total{attack="claws",critical="true",type="undead",} 48.0
+monster_attack_damage_total{attack="glaive",critical="true",type="humanoid",} 24.0
+monster_attack_damage_total{attack="bite",critical="true",type="fiend",} 19.0
+monster_attack_damage_total{attack="hand crossbow",critical="false",type="humanoid",} 56.0
+monster_attack_damage_total{attack="greatsword",critical="false",type="monstrosity",} 57.0
+monster_attack_damage_total{attack="shortsword",critical="false",type="humanoid",} 29.0
+monster_attack_damage_total{attack="spectral longsword",critical="false",type="undead",} 7.0
+monster_attack_damage_total{attack="scimitar",critical="true",type="humanoid",} 0.0
+monster_attack_damage_total{attack="bite",critical="true",type="dragon",} 39.0
+monster_attack_damage_total{attack="heavy crossbow",critical="false",type="humanoid",} 12.0
+monster_attack_damage_total{attack="hand crossbow",critical="true",type="humanoid",} 12.0
+monster_attack_damage_total{attack="mind blast",critical="false",type="aberration",} 5.0
+monster_attack_damage_total{attack="claws",critical="false",type="fiend",} 257.0
+monster_attack_damage_total{attack="horn",critical="false",type="celestial",} 17.0
+monster_attack_damage_total{attack="electrified touch",critical="false",type="fiend",} 54.0
+monster_attack_damage_total{attack="sword cane",critical="false",type="humanoid",} 7.0
+monster_attack_damage_total{attack="bite",critical="true",type="beast",} 19.0
+monster_attack_damage_total{attack="claw",critical="false",type="dragon",} 21.0
+monster_attack_damage_total{attack="greatclub",critical="false",type="giant",} 172.0
+monster_attack_damage_total{attack="shortsword",critical="false",type="fey",} 4.0
+monster_attack_damage_total{attack="shillelagh",critical="false",type="humanoid",} 9.0
+monster_attack_damage_total{attack="maul",critical="false",type="elemental",} 45.0
+monster_attack_damage_total{attack="burn damage",critical="false",type="elemental",} 5.0
+monster_attack_damage_total{attack="bite",critical="false",type="beast",} 78.0
+monster_attack_damage_total{attack="rake",critical="false",type="plant",} 2.0
+monster_attack_damage_total{attack="wicked sickle",critical="false",type="fey",} 0.0
+monster_attack_damage_total{attack="surprise attack",critical="false",type="humanoid",} 4.0
+monster_attack_damage_total{attack="rapier",critical="true",type="aberration",} 38.0
+monster_attack_damage_total{attack="slam/bite",critical="true",type="fiend",} 44.0
+monster_attack_damage_total{attack="tail stinger",critical="false",type="monstrosity",} 19.0
+monster_attack_damage_total{attack="bite",critical="false",type="undead",} 89.0
+monster_attack_damage_total{attack="claw",critical="false",type="beast",} 29.0
+monster_attack_damage_total{attack="tentacles",critical="false",type="monstrosity",} 106.0
+monster_attack_damage_total{attack="death burst",critical="false",type="elemental",} 0.0
+monster_attack_damage_total{attack="death burst",critical="true",type="elemental",} 14.0
+monster_attack_damage_total{attack="charge",critical="true",type="humanoid",} 8.0
+monster_attack_damage_total{attack="greatclub",critical="true",type="giant",} 47.0
+monster_attack_damage_total{attack="claw",critical="true",type="beast",} 0.0
+monster_attack_damage_total{attack="slam",critical="false",type="giant",} 116.0
+monster_attack_damage_total{attack="slam/bite",critical="false",type="fiend",} 50.0
+monster_attack_damage_total{attack="flame",critical="false",type="fiend",} 7.0
+monster_attack_damage_total{attack="avalanche of bones",critical="false",type="undead",} 21.0
+monster_attack_damage_total{attack="poison",critical="false",type="humanoid",} 8.0
+monster_attack_damage_total{attack="spear",critical="false",type="fiend",} 12.0
+monster_attack_damage_total{attack="hand axe",critical="false",type="humanoid",} 6.0
+monster_attack_damage_total{attack="fire breath",critical="false",type="humanoid",} 0.0
+monster_attack_damage_total{attack="tusks",critical="false",type="humanoid",} 0.0
+monster_attack_damage_total{attack="tail",critical="false",type="fiend",} 78.0
+monster_attack_damage_total{attack="touch",critical="false",type="elemental",} 0.0
+monster_attack_damage_total{attack="rock",critical="false",type="giant",} 110.0
+monster_attack_damage_total{attack="bite",critical="false",type="plant",} 17.0
+monster_attack_damage_total{attack="tentacles",critical="true",type="monstrosity",} 66.0
+monster_attack_damage_total{attack="mace",critical="false",type="humanoid",} 14.0
+monster_attack_damage_total{attack="lancing bolt",critical="false",type="construct",} 0.0
+monster_attack_damage_total{attack="bite",critical="false",type="elemental",} 11.0
+monster_attack_damage_total{attack="tail",critical="false",type="dragon",} 9.0
+monster_attack_damage_total{attack="melee",critical="false",type="humanoid",} 27.0
+monster_attack_damage_total{attack="pseudopod",critical="false",type="ooze",} 29.0
+monster_attack_damage_total{attack="mace",critical="true",type="humanoid",} 27.0
+monster_attack_damage_total{attack="soul rend",critical="false",type="fiend",} 0.0
+monster_attack_damage_total{attack="ram",critical="false",type="fey",} 5.0
+monster_attack_damage_total{attack="kick",critical="false",type="fey",} 0.0
+monster_attack_damage_total{attack="half",critical="false",type="swarm of tiny beasts",} 5.0
+monster_attack_damage_total{attack="enlarged",critical="false",type="humanoid",} 13.0
+monster_attack_damage_total{attack="tail",critical="true",type="dragon",} 18.0
+monster_attack_damage_total{attack="tusks",critical="true",type="humanoid",} 20.0
+monster_attack_damage_total{attack="hammer",critical="false",type="construct",} 7.0
+monster_attack_damage_total{attack="blade",critical="false",type="construct",} 46.0
+monster_attack_damage_total{attack="sting",critical="false",type="monstrosity",} 17.0
+monster_attack_damage_total{attack="blade",critical="true",type="construct",} 23.0
+monster_attack_damage_total{attack="unarmed strike",critical="false",type="humanoid",} 152.0
+monster_attack_damage_total{attack="tail",critical="false",type="beast",} 25.0
+monster_attack_damage_total{attack="greataxe",critical="false",type="fiend",} 5.0
+monster_attack_damage_total{attack="quarterstaff",critical="false",type="humanoid",} 19.0
+monster_attack_damage_total{attack="poison",critical="true",type="humanoid",} 0.0
+monster_attack_damage_total{attack="javelin",critical="false",type="giant",} 11.0
+monster_attack_damage_total{attack="hammer",critical="true",type="construct",} 20.0
+monster_attack_damage_total{attack="flame",critical="false",type="elemental",} 22.0
+monster_attack_damage_total{attack="claws",critical="true",type="fiend",} 67.0
+monster_attack_damage_total{attack="two handed",critical="false",type="undead",} 10.0
+monster_attack_damage_total{attack="talons",critical="false",type="monstrosity",} 20.0
+monster_attack_damage_total{attack="quarterstaff",critical="true",type="humanoid",} 0.0
+monster_attack_damage_total{attack="psychic crush",critical="false",type="monstrosity",} 0.0

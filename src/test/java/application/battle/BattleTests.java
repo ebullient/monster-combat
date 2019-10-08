@@ -13,30 +13,25 @@
  */
 package application.battle;
 
-import application.monsters.MonsterMaker;
-
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import application.monsters.MonsterMaker;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 
 public class BattleTests {
 
     MonsterMaker maker = new MonsterMaker();
 
+    BattleMetrics metrics = new BattleMetrics(new SimpleMeterRegistry());
+
     @Test
     public void testFaceOffBattle() throws Exception {
         // Randomized content: this should run without failing
-        Battle b = new Battle();
+        Battle b = new Battle(metrics);
         b.addMonster(maker.make());
         b.addMonster(maker.make());
         b.start().subscribe(i -> System.out.println(i));
-    }
-
-    @Test
-    public void hitPointPercentages() throws Exception {
-        Participant p = new Participant(maker.make());
-        int hitpoints = p.getHitPoints();
-        int half = hitpoints / 2;
-        p.hit(half);
-        Assert.assertEquals("A hit removing half of available hitpoints should result in 50% health", 50, p.heathPercentage);
     }
 }

@@ -13,28 +13,46 @@
  */
 package application.battle;
 
+import org.reactivestreams.Publisher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.reactivestreams.Publisher;
 
 import application.mechanics.Dice;
 import application.monsters.Beastiary;
+import io.micrometer.core.annotation.Timed;
 
 @RestController
 @RequestMapping("/battle")
 public class BattleController {
+    static final Logger logger = LoggerFactory.getLogger(BattleController.class);
 
     private Beastiary beastiary;
+    private BattleMetrics metrics;
 
-    public BattleController(Beastiary beastiary) {
+    public BattleController(Beastiary beastiary, BattleMetrics metrics) {
         this.beastiary = beastiary;
+        this.metrics = metrics;
+        logger.debug("Battle controller initialized bestiary={}, metrics={}", this.beastiary, this.metrics);
     }
 
+    @Timed
     @GetMapping(path = "/faceoff", produces = "application/json")
     private Publisher<Round> faceoff() {
+        Battle battle = new Battle(metrics);
+        battle.addMonster(beastiary.getRandomMonster());
+        battle.addMonster(beastiary.getRandomMonster());
+
+        return battle.start();
+    }
+
+    @Timed
+    @GetMapping(path = "/melee", produces = "application/json")
+    private Publisher<Round> melee() {
         int n = Dice.range(3) + 2;
-        Battle battle = new Battle();
+        Battle battle = new Battle(metrics);
         for ( int i = 0; i < n; i++) {
             battle.addMonster(beastiary.getRandomMonster());
         }

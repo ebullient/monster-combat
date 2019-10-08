@@ -1,0 +1,246 @@
+# HELP monster_attack_damage_total
+# TYPE monster_attack_damage_total counter
+monster_attack_damage_total{attack="fireshield",monster="giant",} 104.0
+monster_attack_damage_total{attack="bite",monster="beast",} 342.0
+monster_attack_damage_total{attack="cold breath",monster="dragon",} 145.0
+monster_attack_damage_total{attack="bite",monster="monstrosity",} 546.0
+monster_attack_damage_total{attack="fist",monster="giant",} 25.0
+monster_attack_damage_total{attack="fire breath",monster="fiend",} 0.0
+monster_attack_damage_total{attack="unarmed strike",monster="humanoid",} 11.0
+monster_attack_damage_total{attack="scimitar",monster="elemental",} 19.0
+monster_attack_damage_total{attack="martial advantage",monster="humanoid",} 31.0
+monster_attack_damage_total{attack="gore",monster="beast",} 26.0
+monster_attack_damage_total{attack="enlarged",monster="humanoid",} 23.0
+monster_attack_damage_total{attack="demon staff",monster="humanoid",} 76.0
+monster_attack_damage_total{attack="bone staff",monster="undead",} 142.0
+monster_attack_damage_total{attack="red blossom",monster="plant",} 3.0
+monster_attack_damage_total{attack="spring",monster="beast",} 0.0
+monster_attack_damage_total{attack="spear",monster="fiend",} 30.0
+monster_attack_damage_total{attack="javelin",monster="humanoid",} 0.0
+monster_attack_damage_total{attack="dive attack",monster="beast",} 0.0
+monster_attack_damage_total{attack="snakes",monster="monstrosity",} 7.0
+monster_attack_damage_total{attack="flail",monster="humanoid",} 35.0
+monster_attack_damage_total{attack="tail",monster="dragon",} 42.0
+monster_attack_damage_total{attack="wooden cane",monster="humanoid",} 4.0
+monster_attack_damage_total{attack="horn",monster="celestial",} 61.0
+monster_attack_damage_total{attack="greatsword",monster="humanoid",} 173.0
+monster_attack_damage_total{attack="spiked chain",monster="humanoid",} 68.0
+monster_attack_damage_total{attack="beak",monster="beast",} 28.0
+monster_attack_damage_total{attack="whirl",monster="construct",} 0.0
+monster_attack_damage_total{attack="talons",monster="monstrosity",} 18.0
+monster_attack_damage_total{attack="heavy club",monster="humanoid",} 7.0
+monster_attack_damage_total{attack="scimitar",monster="monstrosity",} 14.0
+monster_attack_damage_total{attack="bite",monster="celestial",} 81.0
+monster_attack_damage_total{attack="claws",monster="dragon",} 17.0
+monster_attack_damage_total{attack="melee",monster="humanoid",} 0.0
+monster_attack_damage_total{attack="flail tentacle",monster="elemental",} 0.0
+monster_attack_damage_total{attack="hooves",monster="undead",} 0.0
+monster_attack_damage_total{attack="shortsword",monster="humanoid",} 184.0
+monster_attack_damage_total{attack="arc lightning",monster="elemental",} 0.0
+monster_attack_damage_total{attack="hook",monster="humanoid",} 6.0
+monster_attack_damage_total{attack="spear",monster="humanoid",} 141.0
+monster_attack_damage_total{attack="nightmare",monster="monstrosity",} 16.0
+monster_attack_damage_total{attack="scimitar",monster="humanoid",} 204.0
+monster_attack_damage_total{attack="shortbow",monster="humanoid",} 101.0
+monster_attack_damage_total{attack="acid breath",monster="dragon",} 0.0
+monster_attack_damage_total{attack="dark advantage",monster="humanoid",} 6.0
+monster_attack_damage_total{attack="piercing claw",monster="undead",} 37.0
+monster_attack_damage_total{attack="longsword",monster="monstrosity",} 13.0
+monster_attack_damage_total{attack="shadow sword",monster="humanoid",} 105.0
+monster_attack_damage_total{attack="extract brain",monster="aberration",} 51.0
+monster_attack_damage_total{attack="fist",monster="beast",} 49.0
+monster_attack_damage_total{attack="greataxe",monster="undead",} 8.0
+monster_attack_damage_total{attack="bite",monster="fiend",} 280.0
+monster_attack_damage_total{attack="rapier",monster="construct",} 6.0
+monster_attack_damage_total{attack="shortbow",monster="fey",} 5.0
+monster_attack_damage_total{attack="touch",monster="plant",} 0.0
+monster_attack_damage_total{attack="acid breath",monster="aberration",} 0.0
+monster_attack_damage_total{attack="rapier",monster="humanoid",} 150.0
+monster_attack_damage_total{attack="electrified touch",monster="fiend",} 55.0
+monster_attack_damage_total{attack="serrated tail",monster="fiend",} 0.0
+monster_attack_damage_total{attack="infernal crossbow",monster="fiend",} 31.0
+monster_attack_damage_total{attack="dart",monster="humanoid",} 41.0
+monster_attack_damage_total{attack="heated body",monster="elemental",} 1.0
+monster_attack_damage_total{attack="dagger",monster="monstrosity",} 114.0
+monster_attack_damage_total{attack="fire breath",monster="dragon",} 54.0
+monster_attack_damage_total{attack="hoof",monster="celestial",} 79.0
+monster_attack_damage_total{attack="acid damage",monster="aberration",} 78.0
+monster_attack_damage_total{attack="horn",monster="beast",} 0.0
+monster_attack_damage_total{attack="pike",monster="monstrosity",} 12.0
+monster_attack_damage_total{attack="constrict",monster="monstrosity",} 7.0
+monster_attack_damage_total{attack="warhammer",monster="humanoid",} 45.0
+monster_attack_damage_total{attack="claws",monster="humanoid",} 11.0
+monster_attack_damage_total{attack="fist",monster="fiend",} 14.0
+monster_attack_damage_total{attack="curtain-call scythe",monster="fiend",} 77.0
+monster_attack_damage_total{attack="morningstar",monster="undead",} 0.0
+monster_attack_damage_total{attack="grappled",monster="elemental",} 0.0
+monster_attack_damage_total{attack="slam",monster="construct",} 31.0
+monster_attack_damage_total{attack="scepter",monster="humanoid",} 43.0
+monster_attack_damage_total{attack="bite",monster="humanoid",} 66.0
+monster_attack_damage_total{attack="rock",monster="giant",} 103.0
+monster_attack_damage_total{attack="claw",monster="monstrosity",} 45.0
+monster_attack_damage_total{attack="hooves",monster="beast",} 19.0
+monster_attack_damage_total{attack="pseudopod",monster="fiend",} 21.0
+monster_attack_damage_total{attack="hand crossbow",monster="humanoid",} 33.0
+monster_attack_damage_total{attack="tentacle",monster="fiend",} 81.0
+monster_attack_damage_total{attack="club",monster="humanoid",} 5.0
+monster_attack_damage_total{attack="shillelagh",monster="humanoid",} 19.0
+monster_attack_damage_total{attack="bladed chain",monster="humanoid",} 4.0
+monster_attack_damage_total{attack="rotting fist",monster="undead",} 37.0
+monster_attack_damage_total{attack="blade",monster="construct",} 34.0
+monster_attack_damage_total{attack="poisonous touch",monster="humanoid",} 141.0
+monster_attack_damage_total{attack="tail",monster="elemental",} 7.0
+monster_attack_damage_total{attack="critical",monster="monstrosity",} 0.0
+monster_attack_damage_total{attack="longsword",monster="fiend",} 121.0
+monster_attack_damage_total{attack="club",monster="fey",} 1.0
+monster_attack_damage_total{attack="two handed",monster="humanoid",} 0.0
+monster_attack_damage_total{attack="barbed tail",monster="aberration",} 0.0
+monster_attack_damage_total{attack="disrupt life",monster="undead",} 0.0
+monster_attack_damage_total{attack="acid damage",monster="monstrosity",} 45.0
+monster_attack_damage_total{attack="blackstaff",monster="humanoid",} 6.0
+monster_attack_damage_total{attack="spike",monster="monstrosity",} 10.0
+monster_attack_damage_total{attack="eye of corruption",monster="aberration",} 77.0
+monster_attack_damage_total{attack="greataxe",monster="giant",} 42.0
+monster_attack_damage_total{attack="constrict",monster="celestial",} 60.0
+monster_attack_damage_total{attack="fire lancek",monster="humanoid",} 27.0
+monster_attack_damage_total{attack="shadow spear",monster="humanoid",} 36.0
+monster_attack_damage_total{attack="talons",monster="beast",} 37.0
+monster_attack_damage_total{attack="heavy crossbow",monster="humanoid",} 11.0
+monster_attack_damage_total{attack="longbow",monster="fiend",} 0.0
+monster_attack_damage_total{attack="beak",monster="humanoid",} 2.0
+monster_attack_damage_total{attack="shortsword",monster="undead",} 6.0
+monster_attack_damage_total{attack="freezing strikes",monster="elemental",} 0.0
+monster_attack_damage_total{attack="trident",monster="humanoid",} 33.0
+monster_attack_damage_total{attack="mind-poison dagger",monster="humanoid",} 18.0
+monster_attack_damage_total{attack="silver sword",monster="fiend",} 21.0
+monster_attack_damage_total{attack="talons",monster="fiend",} 0.0
+monster_attack_damage_total{attack="double crossbow",monster="humanoid",} 19.0
+monster_attack_damage_total{attack="oversized longbow",monster="humanoid",} 42.0
+monster_attack_damage_total{attack="lance",monster="humanoid",} 5.0
+monster_attack_damage_total{attack="beak",monster="monstrosity",} 52.0
+monster_attack_damage_total{attack="slam",monster="undead",} 65.0
+monster_attack_damage_total{attack="tail",monster="beast",} 34.0
+monster_attack_damage_total{attack="claws",monster="fey",} 109.0
+monster_attack_damage_total{attack="tail",monster="fiend",} 188.0
+monster_attack_damage_total{attack="bite",monster="fey",} 21.0
+monster_attack_damage_total{attack="pseudopod",monster="ooze",} 101.0
+monster_attack_damage_total{attack="chain",monster="fiend",} 20.0
+monster_attack_damage_total{attack="bite",monster="giant",} 12.0
+monster_attack_damage_total{attack="claws",monster="giant",} 21.0
+monster_attack_damage_total{attack="cold breath",monster="monstrosity",} 20.0
+monster_attack_damage_total{attack="lightning flail",monster="construct",} 221.0
+monster_attack_damage_total{attack="greataxe",monster="humanoid",} 53.0
+monster_attack_damage_total{attack="tentacle",monster="monstrosity",} 198.0
+monster_attack_damage_total{attack="hooves",monster="fiend",} 34.0
+monster_attack_damage_total{attack="claw",monster="aberration",} 22.0
+monster_attack_damage_total{attack="claw",monster="fiend",} 243.0
+monster_attack_damage_total{attack="claws",monster="beast",} 14.0
+monster_attack_damage_total{attack="claws",monster="monstrosity",} 191.0
+monster_attack_damage_total{attack="sneak attack",monster="humanoid",} 0.0
+monster_attack_damage_total{attack="infernal dagger",monster="fiend",} 35.0
+monster_attack_damage_total{attack="longsword",monster="humanoid",} 112.0
+monster_attack_damage_total{attack="rolling rock",monster="giant",} 60.0
+monster_attack_damage_total{attack="full",monster="swarm of tiny beasts",} 52.0
+monster_attack_damage_total{attack="fist",monster="construct",} 34.0
+monster_attack_damage_total{attack="maul",monster="humanoid",} 11.0
+monster_attack_damage_total{attack="club",monster="construct",} 22.0
+monster_attack_damage_total{attack="longbow",monster="monstrosity",} 31.0
+monster_attack_damage_total{attack="longbow",monster="fey",} 6.0
+monster_attack_damage_total{attack="orb of dragon's breath",monster="humanoid",} 25.0
+monster_attack_damage_total{attack="grave bolt",monster="undead",} 15.0
+monster_attack_damage_total{attack="glaive",monster="humanoid",} 46.0
+monster_attack_damage_total{attack="hooked polearm",monster="fiend",} 12.0
+monster_attack_damage_total{attack="chain smash",monster="giant",} 26.0
+monster_attack_damage_total{attack="shortbow",monster="undead",} 43.0
+monster_attack_damage_total{attack="sting",monster="beast",} 13.0
+monster_attack_damage_total{attack="flail of madness",monster="humanoid",} 21.0
+monster_attack_damage_total{attack="bite",monster="undead",} 294.0
+monster_attack_damage_total{attack="divine eminence",monster="humanoid",} 0.0
+monster_attack_damage_total{attack="claws",monster="celestial",} 0.0
+monster_attack_damage_total{attack="charge",monster="beast",} 0.0
+monster_attack_damage_total{attack="maul",monster="celestial",} 65.0
+monster_attack_damage_total{attack="barbed hide",monster="fiend",} 0.0
+monster_attack_damage_total{attack="surprise attack",monster="humanoid",} 13.0
+monster_attack_damage_total{attack="longsword",monster="construct",} 18.0
+monster_attack_damage_total{attack="acid spray",monster="monstrosity",} 0.0
+monster_attack_damage_total{attack="charge",monster="monstrosity",} 13.0
+monster_attack_damage_total{attack="claw",monster="elemental",} 18.0
+monster_attack_damage_total{attack="morningstar",monster="humanoid",} 14.0
+monster_attack_damage_total{attack="staff",monster="humanoid",} 10.0
+monster_attack_damage_total{attack="tail smash",monster="monstrosity",} 11.0
+monster_attack_damage_total{attack="mind siphon",monster="undead",} 28.0
+monster_attack_damage_total{attack="claws",monster="fiend",} 46.0
+monster_attack_damage_total{attack="claw",monster="humanoid",} 15.0
+monster_attack_damage_total{attack="slam",monster="elemental",} 502.0
+monster_attack_damage_total{attack="mind blast",monster="aberration",} 0.0
+monster_attack_damage_total{attack="spew flame",monster="humanoid",} 0.0
+monster_attack_damage_total{attack="dagger",monster="construct",} 16.0
+monster_attack_damage_total{attack="claw/bite",monster="fiend",} 0.0
+monster_attack_damage_total{attack="poison",monster="monstrosity",} 47.0
+monster_attack_damage_total{attack="longsword",monster="fey",} 11.0
+monster_attack_damage_total{attack="smother",monster="monstrosity",} 47.0
+monster_attack_damage_total{attack="death ray",monster="monstrosity",} 37.0
+monster_attack_damage_total{attack="dart",monster="construct",} 9.0
+monster_attack_damage_total{attack="bite",monster="dragon",} 471.0
+monster_attack_damage_total{attack="windvane",monster="humanoid",} 27.0
+monster_attack_damage_total{attack="dagger",monster="humanoid",} 193.0
+monster_attack_damage_total{attack="rock",monster="construct",} 0.0
+monster_attack_damage_total{attack="wicked sickle",monster="fey",} 16.0
+monster_attack_damage_total{attack="light hammer",monster="humanoid",} 30.0
+monster_attack_damage_total{attack="spectral longsword",monster="undead",} 70.0
+monster_attack_damage_total{attack="lashing shadows",monster="aberration",} 0.0
+monster_attack_damage_total{attack="beak",monster="fiend",} 25.0
+monster_attack_damage_total{attack="prone failed save",monster="giant",} 0.0
+monster_attack_damage_total{attack="life drain",monster="undead",} 9.0
+monster_attack_damage_total{attack="greatsword",monster="undead",} 67.0
+monster_attack_damage_total{attack="tentacles",monster="aberration",} 92.0
+monster_attack_damage_total{attack="tentacle rod",monster="humanoid",} 9.0
+monster_attack_damage_total{attack="silver greatsword",monster="humanoid",} 111.0
+monster_attack_damage_total{attack="hooves",monster="monstrosity",} 35.0
+monster_attack_damage_total{attack="bite",monster="aberration",} 243.0
+monster_attack_damage_total{attack="withering touch",monster="undead",} 56.0
+monster_attack_damage_total{attack="claws",monster="aberration",} 81.0
+monster_attack_damage_total{attack="hurl flame",monster="aberration",} 8.0
+monster_attack_damage_total{attack="tail",monster="undead",} 18.0
+monster_attack_damage_total{attack="claw",monster="beast",} 5.0
+monster_attack_damage_total{attack="fanatic advantage",monster="humanoid",} 64.0
+monster_attack_damage_total{attack="greatsword",monster="celestial",} 86.0
+monster_attack_damage_total{attack="frightened target",monster="fey",} 27.0
+monster_attack_damage_total{attack="cold breath",monster="fiend",} 157.0
+monster_attack_damage_total{attack="shortsword",monster="fey",} 6.0
+monster_attack_damage_total{attack="spiked shield",monster="humanoid",} 6.0
+monster_attack_damage_total{attack="longbow",monster="humanoid",} 9.0
+monster_attack_damage_total{attack="longsword",monster="undead",} 37.0
+monster_attack_damage_total{attack="tail",monster="monstrosity",} 26.0
+monster_attack_damage_total{attack="pike",monster="undead",} 51.0
+monster_attack_damage_total{attack="stinger",monster="dragon",} 13.0
+monster_attack_damage_total{attack="fire burst",monster="monstrosity",} 0.0
+monster_attack_damage_total{attack="kick",monster="fey",} 21.0
+monster_attack_damage_total{attack="bites",monster="aberration",} 12.0
+monster_attack_damage_total{attack="quarterstaff",monster="humanoid",} 22.0
+monster_attack_damage_total{attack="half",monster="swarm of tiny beasts",} 7.0
+monster_attack_damage_total{attack="warhammer",monster="elemental",} 27.0
+monster_attack_damage_total{attack="grimvault",monster="humanoid",} 7.0
+monster_attack_damage_total{attack="wounded fury",monster="humanoid",} 22.0
+monster_attack_damage_total{attack="claws",monster="construct",} 0.0
+monster_attack_damage_total{attack="bite",monster="construct",} 23.0
+monster_attack_damage_total{attack="claws",monster="elemental",} 56.0
+monster_attack_damage_total{attack="fork",monster="fiend",} 42.0
+monster_attack_damage_total{attack="barbed tail",monster="fiend",} 2.0
+monster_attack_damage_total{attack="war pick",monster="humanoid",} 9.0
+monster_attack_damage_total{attack="flame",monster="fiend",} 20.0
+monster_attack_damage_total{attack="water jet",monster="elemental",} 44.0
+monster_attack_damage_total{attack="drop",monster="monstrosity",} 2.0
+monster_attack_damage_total{attack="bite",monster="elemental",} 84.0
+monster_attack_damage_total{attack="ranged",monster="humanoid",} 10.0
+monster_attack_damage_total{attack="unarmed strike",monster="undead",} 147.0
+monster_attack_damage_total{attack="fist",monster="undead",} 182.0
+monster_attack_damage_total{attack="paralyzing touch",monster="undead",} 32.0
+monster_attack_damage_total{attack="claw",monster="dragon",} 83.0
+monster_attack_damage_total{attack="staff",monster="undead",} 130.0
+monster_attack_damage_total{attack="vine staff",monster="fey",} 5.0
+monster_attack_damage_total{attack="trident",monster="elemental",} 18.0
+monster_attack_damage_total{attack="charge",monster="undead",} 0.0
+monster_attack_damage_total{attack="stab",monster="monstrosity",} 13.0
+monster_attack_damage_total{attack="rapier",monster="aberration",} 41.0
+monster_attack_damage_total{attack="lancing bolt",monster="construct",} 22.0

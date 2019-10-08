@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import application.mechanics.Dice;
 import application.monsters.Attack;
+import io.micrometer.core.instrument.Timer.Sample;
 
 /**
  * Record the result of attacks between monsters.
@@ -33,13 +34,21 @@ public class Round {
     final int number;
     final ArrayList<Result> attackResults = new ArrayList<>();
     final ArrayList<String> outcome = new ArrayList<>();
+    final BattleMetrics metrics;
+
+    Participant victor;
+
+    @JsonIgnore
+    Sample start;
 
     @JsonIgnore
     final HashSet<Participant> participants = new HashSet<>();
 
-    public Round(String id, int number) {
+    public Round(String id, int number, BattleMetrics metrics) {
         this.id = id;
         this.number = number;
+        this.metrics = metrics;
+        this.start = metrics.startRound(this);
     }
 
     /**
@@ -61,6 +70,9 @@ public class Round {
 
     public List<String> getOutcome() {
         return outcome;
+    }
+	public Participant getVictor() {
+		return victor;
     }
 
     public void attack(Participant attacker, Participant target) {
@@ -107,6 +119,7 @@ public class Round {
         }
 
         // save results
+        metrics.attackDamage(attacker, target, r);
         attackResults.add(r);
     }
 
@@ -116,8 +129,13 @@ public class Round {
             outcome.add(p.toString());
             if ( p.getHitPoints() > 0 ) {
                 alive++;
+                if ( victor != null && p.getHitPoints() > victor.getHitPoints() ) {
+                    victor = p;
+                }
+                p.incrementSurvived();
             }
         }
+        metrics.finishRound(start, this);
         return alive > 1; // highlander. ;)
     }
 
@@ -153,6 +171,9 @@ public class Round {
             }
         }
 
+        public boolean isCritical() {
+            return critical;
+        }
         public boolean isHit() {
             return hit;
         }
@@ -193,4 +214,5 @@ public class Round {
             this.damage = damage;
         }
     }
+
 }

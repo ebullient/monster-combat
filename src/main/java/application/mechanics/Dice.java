@@ -140,6 +140,11 @@ public class Dice {
             sum.reset(pattern);
         }
 
-        return Integer.parseInt(pattern);
+        try {
+            return Integer.parseInt(pattern);
+        } catch (NumberFormatException nfe) {
+            System.err.println("Error parsing " + pattern + ": " +nfe.getMessage() );
+            throw nfe;
+        }
     }
 }

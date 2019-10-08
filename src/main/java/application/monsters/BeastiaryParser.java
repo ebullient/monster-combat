@@ -13,8 +13,8 @@
  */
 package application.monsters;
 
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Stack;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -27,24 +27,21 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import io.micrometer.core.instrument.MeterRegistry;
+
 public class BeastiaryParser extends DefaultHandler {
     static final ClassLoader source = BeastiaryParser.class.getClassLoader();
     static final Logger logger = LoggerFactory.getLogger(BeastiaryParser.class);
-
-    private class Element {
-        String name;
-        StringBuilder text;
-
-        Element(String qName) {
-            this.name = qName;
-            this.text = new StringBuilder();
-        }
-    }
 
     private MonsterMaker maker = new MonsterMaker();
     private Stack<Element> elements = new Stack<>();
     private int count = 0;
     private Beastiary beastiary;
+    private MeterRegistry registry;
+
+    public BeastiaryParser(MeterRegistry registry) {
+        this.registry = registry;
+    }
 
     public void parse(Beastiary beastiary) throws IOException {
         try {
@@ -88,9 +85,11 @@ public class BeastiaryParser extends DefaultHandler {
                 if ( m.isValid() ) {
                     beastiary.addMonster(m);
                     logger.debug("Added {}", m);
+                    registry.counter("monsters.parsed", "success", "true").increment();
                     count++;
                 } else {
                     logger.debug("BAD MONSTER! {}", m.dumpStats());
+                    registry.counter("monsters.parsed", "success", "false").increment();
                 }
                 break;
 
@@ -160,6 +159,16 @@ public class BeastiaryParser extends DefaultHandler {
         if ( ! maker.isEmpty() && elements.size() > 0) {
             Element e = elements.peek();
             e.text.append(new String(ch, start, length).trim());
+        }
+    }
+
+    private class Element {
+        String name;
+        StringBuilder text;
+
+        Element(String qName) {
+            this.name = qName;
+            this.text = new StringBuilder();
         }
     }
 }

@@ -51,25 +51,35 @@ public class MonsterMaker {
         }
         return this;
     }
+
     public MonsterMaker addAttack(String text) {
         ensureMonster();
         String parts[] = text.split("\\|");
         // only keep attacks with appliable damage
-        if ( parts.length < 3 || parts[2].trim().isEmpty()) {
+        if ( parts.length < 3 ) {
+            return this;
+        }
+        String damage = parts[2].trim();
+        if ( damage.isEmpty() || !damage.matches("[d 0-9+\\-]+") ) {
             return this;
         }
 
-        Attack a = new Attack();
-        a.name = parts[0];
-        if ( parts[1].trim().isEmpty() ) {
-            a.abilityModifier = 0;
-        } else {
-            a.abilityModifier = Integer.parseInt(parts[1]);
+        // Attack name (Trim off parenthetical tags)
+        String name = parts[0].trim();
+        int pos = name.indexOf('(');
+        if ( pos > 0 ) {
+            name = name.substring(0, pos).trim();
         }
-        a.damage = parts[2];
+
+        int abilityModifier = 0;
+        if ( parts[1].trim().length() > 0 ) {
+            abilityModifier = Integer.parseInt(parts[1]);
+        }
+        Attack a = new Attack(name.toLowerCase(), abilityModifier, damage);
         m.attacks.add(a);
         return this;
     }
+
     public MonsterMaker setCharisma(String text) {
         ensureMonster();
         m.abilities.charisma = Integer.parseInt(text);
@@ -92,6 +102,7 @@ public class MonsterMaker {
         // "27" or "285 (30d8 + 150)"
         final Pattern HP = Pattern.compile("(\\d+)\\s*(\\((.*)\\))?");
         ensureMonster();
+
         Matcher hp = HP.matcher(text);
         if ( hp.matches() ) {
             m.averageHitPoints = Integer.parseInt(hp.group(1));
@@ -144,7 +155,13 @@ public class MonsterMaker {
     }
     public MonsterMaker setType(String text) {
         ensureMonster();
-        m.type = text.toLowerCase();
+        // Trim off parenthetical
+        String s = text;
+        int pos = s.indexOf('(');
+        if ( pos > 0 ) {
+            s = s.substring(0, pos).trim();
+        }
+        m.type = s.toLowerCase();
         m.fullType = Monster.ALL_SIZES[m.size] + " " + m.type;
         return this;
     }

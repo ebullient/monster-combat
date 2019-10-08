@@ -20,9 +20,7 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.actuate.metrics.export.prometheus.PrometheusScrapeEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -34,19 +32,17 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import application.monsters.Beastiary;
 import application.monsters.BeastiaryParser;
+import io.micrometer.core.instrument.MeterRegistry;
 
 @Configuration
 public class ApplicationConfig {
     static final Logger logger = LoggerFactory.getLogger(ApplicationConfig.class);
 
-    @Autowired
-    PrometheusScrapeEndpoint prometheusScrapeEndpoint;
-
     @Bean
-    public Beastiary createBeastiary() {
+    public Beastiary createBeastiary(MeterRegistry registry) {
         Beastiary beastiary = new Beastiary();
         try {
-            new BeastiaryParser().parse(beastiary);
+            new BeastiaryParser(registry).parse(beastiary);
         } catch (IOException ioe) {
             logger.error("Exception occurred filling the beastiary", ioe);
         }
@@ -74,16 +70,5 @@ public class ApplicationConfig {
     @Bean
     public RouterFunction<ServerResponse> staticRouter() {
         return RouterFunctions.resources("/**", new ClassPathResource("public/"));
-    }
-
-    @Bean
-    public RouterFunction<ServerResponse> metricsHack() {
-        // The index.html resource is passed as a parameter.
-        // This generates a routing function that returns the index.html resource when '/' is matched
-        return RouterFunctions.route(
-            GET("/metrics"),
-            request-> ok()
-                .syncBody(prometheusScrapeEndpoint.scrape())
-        );
     }
 }

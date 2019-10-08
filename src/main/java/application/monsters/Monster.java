@@ -87,6 +87,12 @@ public class Monster {
     public String getName() {
         return name;
     }
+    public String getSize() {
+		return Monster.ALL_SIZES[size];
+	}
+    public String getType() {
+        return type;
+    }
     public String getFullType() {
         return fullType;
     }

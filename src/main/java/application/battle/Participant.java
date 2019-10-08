@@ -11,15 +11,11 @@ import application.monsters.Monster;
 
 
 class Participant {
-    // String name;
-    // String type;
     int initiative;
-    // int armorClass;
     int hitPoints;
-    // int dexterity;
-    // int perception;
     int heathPercentage;
-    // String hitPointStats;
+    int roundsSurvived;
+    boolean surprised = false;
 
     @JsonIgnore
     Monster m;
@@ -34,13 +30,10 @@ class Participant {
 
     Participant(Monster m) {
         this.m = m;
-        // name = m.getName();
-        // type = m.getFullType();
-        // dexterity = m.getDexterity();
-        // hitPointStats = m.getHitPointStats();
         initiative = Dice.d20() + m.getDexterityModifier(); // roll 20
         maxHitPoints = hitPoints = m.getHitPoints();
         heathPercentage = 100;
+        roundsSurvived = 0;
     }
 
     public String toString() {
@@ -63,15 +56,33 @@ class Participant {
     public int getHeathPercentage() {
         return this.heathPercentage;
     }
+    public boolean isAlive() {
+        return this.hitPoints > 0;
+    }
+    public int getRoundsSurvived() {
+        return this.roundsSurvived;
+    }
+    public void incrementSurvived() {
+        this.roundsSurvived++;
+    }
     public int getInitiative() {
         return initiative;
     }
     public String getName() {
         return m.getName();
     }
-    public String getType() {
-        return m.getFullType();
+    public boolean isSurprised() {
+        return surprised;
     }
+    public void setSurprised(boolean surprised) {
+        this.surprised = surprised;
+    }
+    public String getType() {
+        return m.getType();
+    }
+    public String getSize() {
+		return m.getSize();
+	}
     public int getArmorClass() {
         return m.getArmorClass();
     }
