@@ -13,6 +13,7 @@
  */
 package application.battle;
 
+import java.time.Duration;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
@@ -39,6 +40,9 @@ class BattleMetrics {
     DistributionSummary numberOfFaceOffRounds;
     DistributionSummary numberOfMeleeRounds;
 
+    Timer faceoffDuration;
+    Timer meleeDuration;
+    Timer roundDuration;
 
     public BattleMetrics(MeterRegistry registry) {
         this.registry = registry;
@@ -58,6 +62,21 @@ class BattleMetrics {
             .tag("type", "melee")
             .register(registry);
 
+        roundDuration = Timer.builder("battle.rounds.duration")
+            .minimumExpectedValue(Duration.ofMillis(1))
+            .maximumExpectedValue(Duration.ofSeconds(1))
+            .register(registry);
+        faceoffDuration = Timer.builder("battles.duration")
+            .tags("type", "faceoff")
+            .minimumExpectedValue(Duration.ofMillis(1))
+            .maximumExpectedValue(Duration.ofSeconds(30))
+            .register(registry);
+        meleeDuration = Timer.builder("battles.duration")
+            .tags("type", "melee")
+            .minimumExpectedValue(Duration.ofMillis(1))
+            .maximumExpectedValue(Duration.ofSeconds(30))
+            .register(registry);
+
         logger.debug("Battle metrics initialized, registry={}", this.registry);
     }
 
@@ -72,12 +91,12 @@ class BattleMetrics {
 
     public void finishBattle(Sample sample, Battle b, Round finalRound) {
         if ( b.participants.size() == 2 ) {
-            sample.stop(registry.timer("battles.duration", "type", "faceoff"));
+            sample.stop(faceoffDuration);
             registry.counter("battles.completed", "type", "faceoff").increment();
             activeFaceOffGauge.decrementAndGet();
             numberOfFaceOffRounds.record((double) finalRound.getNumber());
         } else {
-            sample.stop(registry.timer("battles.duration", "type", "melee"));
+            sample.stop(meleeDuration);
             registry.counter("battles.completed", "type", "melee").increment();
             activeMeleeGauge.decrementAndGet();
             numberOfMeleeRounds.record((double) finalRound.getNumber());
@@ -103,20 +122,20 @@ class BattleMetrics {
                 "size", attacker.getSize())
             .record((double) r.getDamage());
 
-        registry.summary("battle.attack.damage",
-                    "type", r.getAttackName())
-                .record((double) r.getDamage());
+        registry.summary("weapon.attack.damage",
+                "type", r.getAttackName())
+            .record((double) r.getDamage());
     }
 
     public void finishRound(Sample sample, Round r) {
         activeRoundsGauge.decrementAndGet();
 
         // There may not be any surprised monsters
-        if ( r.participants.size() > 0 ) {
+        if ( r.participants.size() < 0 ) {
             return;
         }
 
-        sample.stop(registry.timer("battle.rounds.duration"));
+        sample.stop(roundDuration);
 
         for(Participant p : r.participants ) {
             if ( p.isAlive() ) {
@@ -124,22 +143,32 @@ class BattleMetrics {
                         "type", p.getType(),
                         "size", p.getSize())
                     .increment();
-            } else {
+                registry.counter("monster.rounds.survived.individual",
+                        "name", p.getName())
+                    .increment();
+        } else {
                 engagedMonsters.decrementAndGet();
             }
 
             if ( p == r.getVictor() ) {
                 registry.counter("monster.rounds.won",
-                    "type", p.getType(),
-                    "size", p.getSize())
-                .increment();
+                        "type", p.getType(),
+                        "size", p.getSize())
+                    .increment();
+
+                registry.counter("monster.rounds.won.individual",
+                        "name", p.getName())
+                    .increment();
             }
 
             if ( p.isSurprised() ) {
                 registry.counter("monster.surprised",
-                    "type", p.getType(),
-                    "size", p.getSize())
-                .increment();
+                        "type", p.getType(),
+                        "size", p.getSize())
+                    .increment();
+                registry.counter("monster.surprised.individual",
+                        "name", p.getName())
+                    .increment();
             }
         }
     }
