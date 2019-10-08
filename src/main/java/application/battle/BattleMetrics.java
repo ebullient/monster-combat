@@ -102,9 +102,7 @@ class BattleMetrics {
             activeMeleeGauge.decrementAndGet();
             numberOfMeleeRounds.record((double) finalRound.getNumber());
         }
-
-        // disengage the last monster
-        engagedMonsters.decrementAndGet();
+        engagedMonsters.addAndGet(-1*b.participants.size());
     }
 
     public Sample startRound(Round r) {
@@ -147,8 +145,6 @@ class BattleMetrics {
                 registry.counter("monster.rounds.survived.individual",
                         "name", p.getName())
                     .increment();
-        } else {
-                engagedMonsters.decrementAndGet();
             }
 
             if ( p == r.getVictor() ) {
