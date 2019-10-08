@@ -131,7 +131,7 @@ class BattleMetrics {
         activeRoundsGauge.decrementAndGet();
 
         // There may not be any surprised monsters
-        if ( r.participants.size() < 0 ) {
+        if ( r.participants.size() <= 0 ) {
             return;
         }
 
