@@ -35,7 +35,6 @@ class BattleMetrics {
     AtomicInteger activeRoundsGauge = new AtomicInteger(0);
     AtomicInteger activeMeleeGauge = new AtomicInteger(0);
     AtomicInteger activeFaceOffGauge = new AtomicInteger(0);
-    AtomicInteger engagedMonsters = new AtomicInteger(0);
 
     DistributionSummary numberOfFaceOffRounds;
     DistributionSummary numberOfMeleeRounds;
@@ -48,24 +47,21 @@ class BattleMetrics {
         this.registry = registry;
 
         registry.gauge("battle.rounds.active", activeRoundsGauge);
-        registry.gauge("battles.melee.active", activeMeleeGauge);
-        registry.gauge("battles.faceoff.active", activeFaceOffGauge);
-        registry.gauge("monsters.engaged", engagedMonsters);
-
-        numberOfFaceOffRounds = DistributionSummary.builder("battles.rounds")
+        numberOfFaceOffRounds = DistributionSummary.builder("battle.rounds")
             .tag("type", "faceoff")
             .description("Number of rounds in faceoff battles")
             .register(registry);
-
-        numberOfMeleeRounds = DistributionSummary.builder("battles.rounds")
+        numberOfMeleeRounds = DistributionSummary.builder("battle.rounds")
             .description("Number of rounds in melee battles")
             .tag("type", "melee")
             .register(registry);
-
         roundDuration = Timer.builder("battle.rounds.duration")
             .minimumExpectedValue(Duration.ofMillis(1))
             .maximumExpectedValue(Duration.ofSeconds(1))
             .register(registry);
+
+        registry.gauge("battles.melee.active", activeMeleeGauge);
+        registry.gauge("battles.faceoff.active", activeFaceOffGauge);
         faceoffDuration = Timer.builder("battles.duration")
             .tags("type", "faceoff")
             .minimumExpectedValue(Duration.ofMillis(1))
@@ -86,7 +82,6 @@ class BattleMetrics {
         } else {
             activeMeleeGauge.incrementAndGet();
         }
-        engagedMonsters.addAndGet(b.participants.size());
         return Timer.start();
     }
 
@@ -102,7 +97,6 @@ class BattleMetrics {
             activeMeleeGauge.decrementAndGet();
             numberOfMeleeRounds.record((double) finalRound.getNumber());
         }
-        engagedMonsters.addAndGet(-1*b.participants.size());
     }
 
     public Sample startRound(Round r) {
@@ -115,7 +109,6 @@ class BattleMetrics {
                     "type", r.isHit() ? "hit" : "miss",
                     "critical", Boolean.toString(r.isCritical()))
             .increment();
-
         registry.summary("monster.attack.damage",
                 "type", attacker.getType(),
                 "size", attacker.getSize())
