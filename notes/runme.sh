@@ -8,5 +8,5 @@ fi
 while :
 do
   curl $URL
-  sleep 3
+  sleep 30
 done

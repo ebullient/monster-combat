@@ -8,6 +8,11 @@ spec:
     matchLabels:
       prometheus: 'true'
       type: spring-actuator
+  namespaceSelector:
+    matchNames:
+    - ebullientworks
+    - default
+    - gameon-system
   endpoints:
   - port: spring-web
     interval: 15s
