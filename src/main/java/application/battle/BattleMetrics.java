@@ -86,6 +86,7 @@ class BattleMetrics {
         } else {
             activeMeleeGauge.incrementAndGet();
         }
+        engagedMonsters.addAndGet(b.participants.size());
         return Timer.start();
     }
 
