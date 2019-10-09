@@ -19,6 +19,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import application.mechanics.Dice;
 import application.monsters.Attack;
 import io.micrometer.core.instrument.Timer.Sample;
@@ -30,6 +33,8 @@ import io.micrometer.core.instrument.Timer.Sample;
  * of the attack, and will record the outcome.
  */
 public class Round {
+    static final Logger logger = LoggerFactory.getLogger(Round.class);
+
     final String id;
     final int number;
     final ArrayList<Result> attackResults = new ArrayList<>();
@@ -129,11 +134,14 @@ public class Round {
             outcome.add(p.toString());
             if ( p.getHitPoints() > 0 ) {
                 alive++;
-                if ( victor != null && p.getHitPoints() > victor.getHitPoints() ) {
+                p.incrementSurvived();
+                if ( victor == null || victor.getHitPoints() < p.getHitPoints() ) {
                     victor = p;
                 }
-                p.incrementSurvived();
             }
+        }
+        if ( victor != null ) {
+            logger.debug("Victor: {}", victor.m.dumpStats());
         }
         metrics.finishRound(start, this);
         return alive > 1; // highlander. ;)
@@ -176,6 +184,13 @@ public class Round {
         }
         public boolean isHit() {
             return hit;
+        }
+
+        public String critical() {
+            return Boolean.toString(critical);
+        }
+        public String hitOrMiss() {
+            return hit ? "hit" : "miss";
         }
 
         public void setHit(boolean hit) {

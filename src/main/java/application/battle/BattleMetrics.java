@@ -32,12 +32,14 @@ class BattleMetrics {
     static final Logger logger = LoggerFactory.getLogger(BattleMetrics.class);
 
     MeterRegistry registry;
+
     AtomicInteger activeRoundsGauge = new AtomicInteger(0);
     AtomicInteger activeMeleeGauge = new AtomicInteger(0);
     AtomicInteger activeFaceOffGauge = new AtomicInteger(0);
 
     DistributionSummary numberOfFaceOffRounds;
     DistributionSummary numberOfMeleeRounds;
+    DistributionSummary hitDamage;
 
     Timer faceoffDuration;
     Timer meleeDuration;
@@ -46,22 +48,24 @@ class BattleMetrics {
     public BattleMetrics(MeterRegistry registry) {
         this.registry = registry;
 
-        registry.gauge("battle.rounds.active", activeRoundsGauge);
+        registry.gauge("battles.active.rounds", activeRoundsGauge);
         numberOfFaceOffRounds = DistributionSummary.builder("battle.rounds")
             .tag("type", "faceoff")
-            .description("Number of rounds in faceoff battles")
+            .minimumExpectedValue((long) 1)
+            .maximumExpectedValue((long) 15)
             .register(registry);
         numberOfMeleeRounds = DistributionSummary.builder("battle.rounds")
-            .description("Number of rounds in melee battles")
             .tag("type", "melee")
+            .minimumExpectedValue((long) 1)
+            .maximumExpectedValue((long) 15)
             .register(registry);
         roundDuration = Timer.builder("battle.rounds.duration")
             .minimumExpectedValue(Duration.ofMillis(1))
-            .maximumExpectedValue(Duration.ofSeconds(1))
+            .maximumExpectedValue(Duration.ofSeconds(3))
             .register(registry);
 
-        registry.gauge("battles.melee.active", activeMeleeGauge);
-        registry.gauge("battles.faceoff.active", activeFaceOffGauge);
+        registry.gauge("battles.active.melee", activeMeleeGauge);
+        registry.gauge("battles.active.faceoff", activeFaceOffGauge);
         faceoffDuration = Timer.builder("battles.duration")
             .tags("type", "faceoff")
             .minimumExpectedValue(Duration.ofMillis(1))
@@ -71,6 +75,12 @@ class BattleMetrics {
             .tags("type", "melee")
             .minimumExpectedValue(Duration.ofMillis(1))
             .maximumExpectedValue(Duration.ofSeconds(30))
+            .register(registry);
+
+        hitDamage = DistributionSummary.builder("battles.hitDamage")
+            .publishPercentileHistogram()
+            .minimumExpectedValue((long) 1)
+            .maximumExpectedValue((long) 300)
             .register(registry);
 
         logger.debug("Battle metrics initialized, registry={}", this.registry);
@@ -106,9 +116,10 @@ class BattleMetrics {
 
     public void attackDamage(Participant attacker, Participant target, Result r) {
         registry.counter("monster.attacks",
-                    "type", r.isHit() ? "hit" : "miss",
-                    "critical", Boolean.toString(r.isCritical()))
+                    "type", r.hitOrMiss(),
+                    "critical", r.critical())
             .increment();
+
         registry.summary("monster.attack.damage",
                 "type", attacker.getType(),
                 "size", attacker.getSize())
@@ -117,6 +128,8 @@ class BattleMetrics {
         registry.summary("weapon.attack.damage",
                 "type", r.getAttackName())
             .record((double) r.getDamage());
+
+        hitDamage.record((double) r.getDamage());
     }
 
     public void finishRound(Sample sample, Round r) {
