@@ -1,0 +1,501 @@
+# HELP battles_duration_seconds
+# TYPE battles_duration_seconds summary
+battles_duration_seconds_count{type="faceoff",} 9.0
+battles_duration_seconds_sum{type="faceoff",} 0.019226991
+battles_duration_seconds_count{type="melee",} 7.0
+battles_duration_seconds_sum{type="melee",} 0.048390172
+# HELP battles_duration_seconds_max
+# TYPE battles_duration_seconds_max gauge
+battles_duration_seconds_max{type="faceoff",} 0.003564569
+battles_duration_seconds_max{type="melee",} 0.008114372
+# HELP process_files_max_files The maximum file descriptor count
+# TYPE process_files_max_files gauge
+process_files_max_files 1048576.0
+# HELP battle_rounds_max Number of rounds in faceoff battles
+# TYPE battle_rounds_max gauge
+battle_rounds_max{type="faceoff",} 4.0
+battle_rounds_max{type="melee",} 5.0
+# HELP battle_rounds Number of rounds in faceoff battles
+# TYPE battle_rounds summary
+battle_rounds_count{type="faceoff",} 9.0
+battle_rounds_sum{type="faceoff",} 32.0
+battle_rounds_count{type="melee",} 7.0
+battle_rounds_sum{type="melee",} 45.0
+# HELP monster_attack_damage_max
+# TYPE monster_attack_damage_max gauge
+monster_attack_damage_max{size="huge",type="construct",} 0.0
+monster_attack_damage_max{size="large",type="elemental",} 52.0
+monster_attack_damage_max{size="small",type="elemental",} 0.0
+monster_attack_damage_max{size="medium",type="fiend",} 0.0
+monster_attack_damage_max{size="tiny",type="undead",} 0.0
+monster_attack_damage_max{size="large",type="aberration",} 0.0
+monster_attack_damage_max{size="huge",type="undead",} 39.0
+monster_attack_damage_max{size="large",type="monstrosity",} 8.0
+monster_attack_damage_max{size="tiny",type="beast",} 7.0
+monster_attack_damage_max{size="large",type="beast",} 13.0
+monster_attack_damage_max{size="gargantuan",type="ooze",} 0.0
+monster_attack_damage_max{size="medium",type="construct",} 0.0
+monster_attack_damage_max{size="medium",type="beast",} 0.0
+monster_attack_damage_max{size="medium",type="aberration",} 2.0
+monster_attack_damage_max{size="huge",type="beast",} 16.0
+monster_attack_damage_max{size="medium",type="monstrosity",} 17.0
+monster_attack_damage_max{size="small",type="construct",} 0.0
+monster_attack_damage_max{size="medium",type="humanoid",} 5.0
+monster_attack_damage_max{size="large",type="fiend",} 0.0
+monster_attack_damage_max{size="small",type="humanoid",} 0.0
+monster_attack_damage_max{size="medium",type="undead",} 22.0
+monster_attack_damage_max{size="large",type="giant",} 0.0
+monster_attack_damage_max{size="tiny",type="aberration",} 5.0
+# HELP monster_attack_damage
+# TYPE monster_attack_damage summary
+monster_attack_damage_count{size="huge",type="construct",} 16.0
+monster_attack_damage_sum{size="huge",type="construct",} 133.0
+monster_attack_damage_count{size="large",type="elemental",} 10.0
+monster_attack_damage_sum{size="large",type="elemental",} 125.0
+monster_attack_damage_count{size="small",type="elemental",} 10.0
+monster_attack_damage_sum{size="small",type="elemental",} 28.0
+monster_attack_damage_count{size="medium",type="fiend",} 29.0
+monster_attack_damage_sum{size="medium",type="fiend",} 180.0
+monster_attack_damage_count{size="tiny",type="undead",} 1.0
+monster_attack_damage_sum{size="tiny",type="undead",} 2.0
+monster_attack_damage_count{size="large",type="aberration",} 20.0
+monster_attack_damage_sum{size="large",type="aberration",} 92.0
+monster_attack_damage_count{size="huge",type="undead",} 10.0
+monster_attack_damage_sum{size="huge",type="undead",} 132.0
+monster_attack_damage_count{size="large",type="monstrosity",} 10.0
+monster_attack_damage_sum{size="large",type="monstrosity",} 24.0
+monster_attack_damage_count{size="tiny",type="beast",} 8.0
+monster_attack_damage_sum{size="tiny",type="beast",} 21.0
+monster_attack_damage_count{size="large",type="beast",} 4.0
+monster_attack_damage_sum{size="large",type="beast",} 23.0
+monster_attack_damage_count{size="gargantuan",type="ooze",} 6.0
+monster_attack_damage_sum{size="gargantuan",type="ooze",} 126.0
+monster_attack_damage_count{size="medium",type="construct",} 11.0
+monster_attack_damage_sum{size="medium",type="construct",} 105.0
+monster_attack_damage_count{size="medium",type="beast",} 6.0
+monster_attack_damage_sum{size="medium",type="beast",} 28.0
+monster_attack_damage_count{size="medium",type="aberration",} 6.0
+monster_attack_damage_sum{size="medium",type="aberration",} 2.0
+monster_attack_damage_count{size="huge",type="beast",} 10.0
+monster_attack_damage_sum{size="huge",type="beast",} 85.0
+monster_attack_damage_count{size="medium",type="monstrosity",} 18.0
+monster_attack_damage_sum{size="medium",type="monstrosity",} 101.0
+monster_attack_damage_count{size="small",type="construct",} 2.0
+monster_attack_damage_sum{size="small",type="construct",} 0.0
+monster_attack_damage_count{size="medium",type="humanoid",} 42.0
+monster_attack_damage_sum{size="medium",type="humanoid",} 364.0
+monster_attack_damage_count{size="large",type="fiend",} 22.0
+monster_attack_damage_sum{size="large",type="fiend",} 144.0
+monster_attack_damage_count{size="small",type="humanoid",} 17.0
+monster_attack_damage_sum{size="small",type="humanoid",} 17.0
+monster_attack_damage_count{size="medium",type="undead",} 30.0
+monster_attack_damage_sum{size="medium",type="undead",} 236.0
+monster_attack_damage_count{size="large",type="giant",} 9.0
+monster_attack_damage_sum{size="large",type="giant",} 92.0
+monster_attack_damage_count{size="tiny",type="aberration",} 4.0
+monster_attack_damage_sum{size="tiny",type="aberration",} 10.0
+# HELP jvm_buffer_memory_used_bytes An estimate of the memory that the Java virtual machine is using for this buffer pool
+# TYPE jvm_buffer_memory_used_bytes gauge
+jvm_buffer_memory_used_bytes{id="direct",} 270337.0
+jvm_buffer_memory_used_bytes{id="mapped",} 0.0
+# HELP process_start_time_seconds Start time of the process since unix epoch.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.570560276253E9
+# HELP monsters_parsed_total
+# TYPE monsters_parsed_total counter
+monsters_parsed_total{success="false",} 21.0
+monsters_parsed_total{success="true",} 1063.0
+# HELP jvm_memory_max_bytes The maximum amount of memory in bytes that can be used for memory management
+# TYPE jvm_memory_max_bytes gauge
+jvm_memory_max_bytes{area="heap",id="Tenured Gen",} 2.803236864E9
+jvm_memory_max_bytes{area="heap",id="Eden Space",} 1.12132096E9
+jvm_memory_max_bytes{area="nonheap",id="Metaspace",} -1.0
+jvm_memory_max_bytes{area="nonheap",id="Code Cache",} 2.5165824E8
+jvm_memory_max_bytes{area="heap",id="Survivor Space",} 1.40115968E8
+jvm_memory_max_bytes{area="nonheap",id="Compressed Class Space",} 1.073741824E9
+# HELP process_files_open_files The open file descriptor count
+# TYPE process_files_open_files gauge
+process_files_open_files 99.0
+# HELP battles_completed_total
+# TYPE battles_completed_total counter
+battles_completed_total{type="faceoff",} 9.0
+battles_completed_total{type="melee",} 7.0
+# HELP jvm_classes_unloaded_classes_total The total number of classes unloaded since the Java virtual machine has started execution
+# TYPE jvm_classes_unloaded_classes_total counter
+jvm_classes_unloaded_classes_total 1.0
+# HELP jvm_threads_live_threads The current number of live threads including both daemon and non-daemon threads
+# TYPE jvm_threads_live_threads gauge
+jvm_threads_live_threads 12.0
+# HELP system_cpu_count The number of processors available to the Java virtual machine
+# TYPE system_cpu_count gauge
+system_cpu_count 1.0
+# HELP jvm_gc_pause_seconds Time spent in GC pause
+# TYPE jvm_gc_pause_seconds summary
+jvm_gc_pause_seconds_count{action="end of major GC",cause="Metadata GC Threshold",} 1.0
+jvm_gc_pause_seconds_sum{action="end of major GC",cause="Metadata GC Threshold",} 0.034
+jvm_gc_pause_seconds_count{action="end of minor GC",cause="Allocation Failure",} 3.0
+jvm_gc_pause_seconds_sum{action="end of minor GC",cause="Allocation Failure",} 0.041
+# HELP jvm_gc_pause_seconds_max Time spent in GC pause
+# TYPE jvm_gc_pause_seconds_max gauge
+jvm_gc_pause_seconds_max{action="end of major GC",cause="Metadata GC Threshold",} 0.0
+jvm_gc_pause_seconds_max{action="end of minor GC",cause="Allocation Failure",} 0.011
+# HELP jvm_classes_loaded_classes The number of classes that are currently loaded in the Java virtual machine
+# TYPE jvm_classes_loaded_classes gauge
+jvm_classes_loaded_classes 8137.0
+# HELP jvm_gc_memory_allocated_bytes_total Incremented for an increase in the size of the young generation memory pool after one GC to before the next
+# TYPE jvm_gc_memory_allocated_bytes_total counter
+jvm_gc_memory_allocated_bytes_total 2.18939456E8
+# HELP system_cpu_usage The "recent cpu usage" for the whole system
+# TYPE system_cpu_usage gauge
+system_cpu_usage 0.10483321987746766
+# HELP jvm_buffer_total_capacity_bytes An estimate of the total capacity of the buffers in this pool
+# TYPE jvm_buffer_total_capacity_bytes gauge
+jvm_buffer_total_capacity_bytes{id="direct",} 270336.0
+jvm_buffer_total_capacity_bytes{id="mapped",} 0.0
+# HELP jvm_buffer_count_buffers An estimate of the number of buffers in the pool
+# TYPE jvm_buffer_count_buffers gauge
+jvm_buffer_count_buffers{id="direct",} 10.0
+jvm_buffer_count_buffers{id="mapped",} 0.0
+# HELP logback_events_total Number of error level events that made it to the logs
+# TYPE logback_events_total counter
+logback_events_total{level="warn",} 0.0
+logback_events_total{level="debug",} 1146.0
+logback_events_total{level="error",} 1.0
+logback_events_total{level="trace",} 0.0
+logback_events_total{level="info",} 5.0
+# HELP system_load_average_1m The sum of the number of runnable entities queued to available processors and the number of runnable entities running on the available processors averaged over a period of time
+# TYPE system_load_average_1m gauge
+system_load_average_1m 1.16
+# HELP process_cpu_usage The "recent cpu usage" for the Java Virtual Machine process
+# TYPE process_cpu_usage gauge
+process_cpu_usage 0.0024960290447016108
+# HELP battle_rounds_active
+# TYPE battle_rounds_active gauge
+battle_rounds_active 0.0
+# HELP monster_attacks_total
+# TYPE monster_attacks_total counter
+monster_attacks_total{critical="false",type="miss",} 111.0
+monster_attacks_total{critical="true",type="miss",} 12.0
+monster_attacks_total{critical="false",type="hit",} 164.0
+monster_attacks_total{critical="true",type="hit",} 14.0
+# HELP battles_faceoff_active
+# TYPE battles_faceoff_active gauge
+battles_faceoff_active 4.0
+# HELP jvm_gc_memory_promoted_bytes_total Count of positive increases in the size of the old generation memory pool before GC to after GC
+# TYPE jvm_gc_memory_promoted_bytes_total counter
+jvm_gc_memory_promoted_bytes_total 9837848.0
+# HELP jvm_gc_max_data_size_bytes Max size of old generation memory pool
+# TYPE jvm_gc_max_data_size_bytes gauge
+jvm_gc_max_data_size_bytes 2.803236864E9
+# HELP weapon_attack_damage_max
+# TYPE weapon_attack_damage_max gauge
+weapon_attack_damage_max{type="empowered slam",} 0.0
+weapon_attack_damage_max{type="trident",} 5.0
+weapon_attack_damage_max{type="dagger",} 0.0
+weapon_attack_damage_max{type="javelin",} 0.0
+weapon_attack_damage_max{type="swallow",} 15.0
+weapon_attack_damage_max{type="ray of frost",} 0.0
+weapon_attack_damage_max{type="chain",} 0.0
+weapon_attack_damage_max{type="charge",} 5.0
+weapon_attack_damage_max{type="magic missile",} 0.0
+weapon_attack_damage_max{type="greataxe",} 0.0
+weapon_attack_damage_max{type="unarmed strike",} 0.0
+weapon_attack_damage_max{type="touch",} 13.0
+weapon_attack_damage_max{type="sting",} 0.0
+weapon_attack_damage_max{type="poison",} 0.0
+weapon_attack_damage_max{type="tusk",} 13.0
+weapon_attack_damage_max{type="claw",} 15.0
+weapon_attack_damage_max{type="slam",} 0.0
+weapon_attack_damage_max{type="shortsword",} 5.0
+weapon_attack_damage_max{type="hurl flame",} 0.0
+weapon_attack_damage_max{type="withering touch",} 22.0
+weapon_attack_damage_max{type="enervating focus",} 39.0
+weapon_attack_damage_max{type="tail",} 25.0
+weapon_attack_damage_max{type="slam/bite",} 0.0
+weapon_attack_damage_max{type="longsword",} 0.0
+weapon_attack_damage_max{type="life drain",} 0.0
+weapon_attack_damage_max{type="light crossbow",} 0.0
+weapon_attack_damage_max{type="hand crossbow",} 3.0
+weapon_attack_damage_max{type="fist",} 15.0
+weapon_attack_damage_max{type="pseudopod",} 0.0
+weapon_attack_damage_max{type="spear",} 0.0
+weapon_attack_damage_max{type="rock",} 0.0
+weapon_attack_damage_max{type="burn damage",} 8.0
+weapon_attack_damage_max{type="staff",} 0.0
+weapon_attack_damage_max{type="claws",} 17.0
+weapon_attack_damage_max{type="strength drain",} 7.0
+weapon_attack_damage_max{type="greatsword",} 0.0
+weapon_attack_damage_max{type="shortbow",} 7.0
+weapon_attack_damage_max{type="bite",} 18.0
+weapon_attack_damage_max{type="chain smash",} 0.0
+weapon_attack_damage_max{type="fire form",} 52.0
+# HELP weapon_attack_damage
+# TYPE weapon_attack_damage summary
+weapon_attack_damage_count{type="empowered slam",} 6.0
+weapon_attack_damage_sum{type="empowered slam",} 47.0
+weapon_attack_damage_count{type="trident",} 3.0
+weapon_attack_damage_sum{type="trident",} 5.0
+weapon_attack_damage_count{type="dagger",} 3.0
+weapon_attack_damage_sum{type="dagger",} 3.0
+weapon_attack_damage_count{type="javelin",} 2.0
+weapon_attack_damage_sum{type="javelin",} 0.0
+weapon_attack_damage_count{type="swallow",} 1.0
+weapon_attack_damage_sum{type="swallow",} 15.0
+weapon_attack_damage_count{type="ray of frost",} 4.0
+weapon_attack_damage_sum{type="ray of frost",} 6.0
+weapon_attack_damage_count{type="chain",} 2.0
+weapon_attack_damage_sum{type="chain",} 13.0
+weapon_attack_damage_count{type="charge",} 3.0
+weapon_attack_damage_sum{type="charge",} 10.0
+weapon_attack_damage_count{type="magic missile",} 2.0
+weapon_attack_damage_sum{type="magic missile",} 0.0
+weapon_attack_damage_count{type="greataxe",} 6.0
+weapon_attack_damage_sum{type="greataxe",} 25.0
+weapon_attack_damage_count{type="unarmed strike",} 4.0
+weapon_attack_damage_sum{type="unarmed strike",} 23.0
+weapon_attack_damage_count{type="touch",} 2.0
+weapon_attack_damage_sum{type="touch",} 13.0
+weapon_attack_damage_count{type="sting",} 4.0
+weapon_attack_damage_sum{type="sting",} 93.0
+weapon_attack_damage_count{type="poison",} 9.0
+weapon_attack_damage_sum{type="poison",} 8.0
+weapon_attack_damage_count{type="tusk",} 1.0
+weapon_attack_damage_sum{type="tusk",} 13.0
+weapon_attack_damage_count{type="claw",} 38.0
+weapon_attack_damage_sum{type="claw",} 196.0
+weapon_attack_damage_count{type="slam",} 7.0
+weapon_attack_damage_sum{type="slam",} 73.0
+weapon_attack_damage_count{type="shortsword",} 1.0
+weapon_attack_damage_sum{type="shortsword",} 5.0
+weapon_attack_damage_count{type="hurl flame",} 5.0
+weapon_attack_damage_sum{type="hurl flame",} 0.0
+weapon_attack_damage_count{type="withering touch",} 4.0
+weapon_attack_damage_sum{type="withering touch",} 78.0
+weapon_attack_damage_count{type="enervating focus",} 2.0
+weapon_attack_damage_sum{type="enervating focus",} 58.0
+weapon_attack_damage_count{type="tail",} 1.0
+weapon_attack_damage_sum{type="tail",} 25.0
+weapon_attack_damage_count{type="slam/bite",} 5.0
+weapon_attack_damage_sum{type="slam/bite",} 62.0
+weapon_attack_damage_count{type="longsword",} 21.0
+weapon_attack_damage_sum{type="longsword",} 102.0
+weapon_attack_damage_count{type="life drain",} 6.0
+weapon_attack_damage_sum{type="life drain",} 43.0
+weapon_attack_damage_count{type="light crossbow",} 9.0
+weapon_attack_damage_sum{type="light crossbow",} 63.0
+weapon_attack_damage_count{type="hand crossbow",} 2.0
+weapon_attack_damage_sum{type="hand crossbow",} 3.0
+weapon_attack_damage_count{type="fist",} 8.0
+weapon_attack_damage_sum{type="fist",} 58.0
+weapon_attack_damage_count{type="pseudopod",} 6.0
+weapon_attack_damage_sum{type="pseudopod",} 126.0
+weapon_attack_damage_count{type="spear",} 9.0
+weapon_attack_damage_sum{type="spear",} 65.0
+weapon_attack_damage_count{type="rock",} 1.0
+weapon_attack_damage_sum{type="rock",} 0.0
+weapon_attack_damage_count{type="burn damage",} 2.0
+weapon_attack_damage_sum{type="burn damage",} 9.0
+weapon_attack_damage_count{type="staff",} 1.0
+weapon_attack_damage_sum{type="staff",} 0.0
+weapon_attack_damage_count{type="claws",} 17.0
+weapon_attack_damage_sum{type="claws",} 67.0
+weapon_attack_damage_count{type="strength drain",} 4.0
+weapon_attack_damage_sum{type="strength drain",} 13.0
+weapon_attack_damage_count{type="greatsword",} 13.0
+weapon_attack_damage_sum{type="greatsword",} 205.0
+weapon_attack_damage_count{type="shortbow",} 2.0
+weapon_attack_damage_sum{type="shortbow",} 7.0
+weapon_attack_damage_count{type="bite",} 76.0
+weapon_attack_damage_sum{type="bite",} 386.0
+weapon_attack_damage_count{type="chain smash",} 3.0
+weapon_attack_damage_sum{type="chain smash",} 49.0
+weapon_attack_damage_count{type="fire form",} 6.0
+weapon_attack_damage_sum{type="fire form",} 103.0
+# HELP jvm_memory_committed_bytes The amount of memory in bytes that is committed for the Java virtual machine to use
+# TYPE jvm_memory_committed_bytes gauge
+jvm_memory_committed_bytes{area="heap",id="Tenured Gen",} 1.76160768E8
+jvm_memory_committed_bytes{area="heap",id="Eden Space",} 7.0582272E7
+jvm_memory_committed_bytes{area="nonheap",id="Metaspace",} 4.4302336E7
+jvm_memory_committed_bytes{area="nonheap",id="Code Cache",} 1.3697024E7
+jvm_memory_committed_bytes{area="heap",id="Survivor Space",} 8781824.0
+jvm_memory_committed_bytes{area="nonheap",id="Compressed Class Space",} 6029312.0
+# HELP battles_melee_active
+# TYPE battles_melee_active gauge
+battles_melee_active 0.0
+# HELP jvm_gc_live_data_size_bytes Size of old generation memory pool after a full GC
+# TYPE jvm_gc_live_data_size_bytes gauge
+jvm_gc_live_data_size_bytes 1.5656328E7
+# HELP jvm_threads_peak_threads The peak live thread count since the Java virtual machine started or peak was reset
+# TYPE jvm_threads_peak_threads gauge
+jvm_threads_peak_threads 12.0
+# HELP process_uptime_seconds The uptime of the Java virtual machine
+# TYPE process_uptime_seconds gauge
+process_uptime_seconds 316.974
+# HELP jvm_memory_used_bytes The amount of used memory
+# TYPE jvm_memory_used_bytes gauge
+jvm_memory_used_bytes{area="heap",id="Tenured Gen",} 1.5656328E7
+jvm_memory_used_bytes{area="heap",id="Eden Space",} 1.190188E7
+jvm_memory_used_bytes{area="nonheap",id="Metaspace",} 4.1549928E7
+jvm_memory_used_bytes{area="nonheap",id="Code Cache",} 1.3590784E7
+jvm_memory_used_bytes{area="heap",id="Survivor Space",} 7535024.0
+jvm_memory_used_bytes{area="nonheap",id="Compressed Class Space",} 5431248.0
+# HELP jvm_threads_states_threads The current number of threads having NEW state
+# TYPE jvm_threads_states_threads gauge
+jvm_threads_states_threads{state="runnable",} 7.0
+jvm_threads_states_threads{state="blocked",} 0.0
+jvm_threads_states_threads{state="waiting",} 4.0
+jvm_threads_states_threads{state="timed-waiting",} 1.0
+jvm_threads_states_threads{state="new",} 0.0
+jvm_threads_states_threads{state="terminated",} 0.0
+# HELP monster_rounds_survived_total
+# TYPE monster_rounds_survived_total counter
+monster_rounds_survived_total{size="huge",type="construct",} 9.0
+monster_rounds_survived_total{size="small",type="plant",} 1.0
+monster_rounds_survived_total{size="small",type="elemental",} 8.0
+monster_rounds_survived_total{size="medium",type="fiend",} 17.0
+monster_rounds_survived_total{size="tiny",type="undead",} 1.0
+monster_rounds_survived_total{size="tiny",type="beast",} 3.0
+monster_rounds_survived_total{size="gargantuan",type="ooze",} 7.0
+monster_rounds_survived_total{size="huge",type="beast",} 6.0
+monster_rounds_survived_total{size="medium",type="undead",} 32.0
+monster_rounds_survived_total{size="large",type="giant",} 10.0
+monster_rounds_survived_total{size="tiny",type="aberration",} 3.0
+monster_rounds_survived_total{size="large",type="elemental",} 4.0
+monster_rounds_survived_total{size="large",type="aberration",} 8.0
+monster_rounds_survived_total{size="huge",type="undead",} 7.0
+monster_rounds_survived_total{size="large",type="monstrosity",} 5.0
+monster_rounds_survived_total{size="large",type="beast",} 4.0
+monster_rounds_survived_total{size="medium",type="construct",} 10.0
+monster_rounds_survived_total{size="medium",type="beast",} 4.0
+monster_rounds_survived_total{size="medium",type="aberration",} 4.0
+monster_rounds_survived_total{size="medium",type="monstrosity",} 16.0
+monster_rounds_survived_total{size="small",type="construct",} 3.0
+monster_rounds_survived_total{size="medium",type="humanoid",} 30.0
+monster_rounds_survived_total{size="large",type="fiend",} 11.0
+monster_rounds_survived_total{size="small",type="humanoid",} 17.0
+# HELP monster_surprised_total
+# TYPE monster_surprised_total counter
+monster_surprised_total{size="huge",type="construct",} 9.0
+monster_surprised_total{size="small",type="plant",} 2.0
+monster_surprised_total{size="large",type="plant",} 1.0
+monster_surprised_total{size="medium",type="fiend",} 21.0
+monster_surprised_total{size="large",type="aberration",} 9.0
+monster_surprised_total{size="large",type="monstrosity",} 6.0
+monster_surprised_total{size="huge",type="undead",} 5.0
+monster_surprised_total{size="tiny",type="beast",} 6.0
+monster_surprised_total{size="large",type="beast",} 5.0
+monster_surprised_total{size="gargantuan",type="ooze",} 7.0
+monster_surprised_total{size="medium",type="construct",} 16.0
+monster_surprised_total{size="huge",type="beast",} 6.0
+monster_surprised_total{size="medium",type="monstrosity",} 4.0
+monster_surprised_total{size="small",type="construct",} 4.0
+monster_surprised_total{size="medium",type="humanoid",} 29.0
+monster_surprised_total{size="small",type="humanoid",} 9.0
+monster_surprised_total{size="medium",type="undead",} 15.0
+monster_surprised_total{size="large",type="giant",} 16.0
+# HELP monster_surprised_individual_total
+# TYPE monster_surprised_individual_total counter
+monster_surprised_individual_total{name="Green Slaad",} 9.0
+monster_surprised_individual_total{name="Velociraptor",} 6.0
+monster_surprised_individual_total{name="Spawn of Kyuss",} 4.0
+monster_surprised_individual_total{name="Awakened Shrub",} 2.0
+monster_surprised_individual_total{name="Koalinth",} 5.0
+monster_surprised_individual_total{name="White Abishai",} 12.0
+monster_surprised_individual_total{name="Death Dog",} 4.0
+monster_surprised_individual_total{name="Azbara Jos",} 9.0
+monster_surprised_individual_total{name="Flying Sword",} 4.0
+monster_surprised_individual_total{name="Pirate Captain",} 2.0
+monster_surprised_individual_total{name="Pterafolk",} 6.0
+monster_surprised_individual_total{name="Giant Boar",} 5.0
+monster_surprised_individual_total{name="Bloodfray Giant",} 9.0
+monster_surprised_individual_total{name="Burrowshark",} 9.0
+monster_surprised_individual_total{name="Gas Spore",} 1.0
+monster_surprised_individual_total{name="Giant Subterranean Lizard",} 6.0
+monster_surprised_individual_total{name="Ogre Chain Brute",} 7.0
+monster_surprised_individual_total{name="White Maw",} 7.0
+monster_surprised_individual_total{name="Bronze Scout",} 4.0
+monster_surprised_individual_total{name="Flesh Golem",} 12.0
+monster_surprised_individual_total{name="Yochlol",} 9.0
+monster_surprised_individual_total{name="Tyrannosaurus Zombie",} 5.0
+monster_surprised_individual_total{name="Rock Gnome Recluse",} 9.0
+monster_surprised_individual_total{name="Greater Zombie",} 7.0
+monster_surprised_individual_total{name="Gnoll",} 4.0
+monster_surprised_individual_total{name="Skeleton",} 4.0
+monster_surprised_individual_total{name="Scaladar",} 9.0
+# HELP jvm_threads_daemon_threads The current number of live daemon threads
+# TYPE jvm_threads_daemon_threads gauge
+jvm_threads_daemon_threads 10.0
+# HELP monster_rounds_survived_individual_total
+# TYPE monster_rounds_survived_individual_total counter
+monster_rounds_survived_individual_total{name="Harpy Matriarch",} 4.0
+monster_rounds_survived_individual_total{name="Green Slaad",} 8.0
+monster_rounds_survived_individual_total{name="Slaad Tadpole",} 3.0
+monster_rounds_survived_individual_total{name="Velociraptor",} 3.0
+monster_rounds_survived_individual_total{name="Spawn of Kyuss",} 3.0
+monster_rounds_survived_individual_total{name="Dust Mephit",} 8.0
+monster_rounds_survived_individual_total{name="Revenant",} 5.0
+monster_rounds_survived_individual_total{name="Awakened Shrub",} 1.0
+monster_rounds_survived_individual_total{name="Koalinth",} 4.0
+monster_rounds_survived_individual_total{name="White Abishai",} 12.0
+monster_rounds_survived_individual_total{name="Death Dog",} 2.0
+monster_rounds_survived_individual_total{name="Amphisbaena",} 2.0
+monster_rounds_survived_individual_total{name="Flying Sword",} 3.0
+monster_rounds_survived_individual_total{name="Shadow",} 3.0
+monster_rounds_survived_individual_total{name="Ghost",} 4.0
+monster_rounds_survived_individual_total{name="Pirate Captain",} 1.0
+monster_rounds_survived_individual_total{name="Pterafolk",} 5.0
+monster_rounds_survived_individual_total{name="Champion",} 9.0
+monster_rounds_survived_individual_total{name="Crawling Claw",} 1.0
+monster_rounds_survived_individual_total{name="Giant Boar",} 4.0
+monster_rounds_survived_individual_total{name="Bloodfray Giant",} 4.0
+monster_rounds_survived_individual_total{name="Burrowshark",} 9.0
+monster_rounds_survived_individual_total{name="Giant Subterranean Lizard",} 6.0
+monster_rounds_survived_individual_total{name="Spectator",} 4.0
+monster_rounds_survived_individual_total{name="Hellenrae",} 4.0
+monster_rounds_survived_individual_total{name="Fire Elemental",} 4.0
+monster_rounds_survived_individual_total{name="Ogre Chain Brute",} 6.0
+monster_rounds_survived_individual_total{name="White Maw",} 7.0
+monster_rounds_survived_individual_total{name="Nightwalker",} 2.0
+monster_rounds_survived_individual_total{name="Bronze Scout",} 3.0
+monster_rounds_survived_individual_total{name="Flesh Golem",} 7.0
+monster_rounds_survived_individual_total{name="Yochlol",} 5.0
+monster_rounds_survived_individual_total{name="Tyrannosaurus Zombie",} 5.0
+monster_rounds_survived_individual_total{name="Rock Gnome Recluse",} 7.0
+monster_rounds_survived_individual_total{name="Nycaloth",} 11.0
+monster_rounds_survived_individual_total{name="Giant Frog",} 4.0
+monster_rounds_survived_individual_total{name="Greater Zombie",} 7.0
+monster_rounds_survived_individual_total{name="Gnoll",} 3.0
+monster_rounds_survived_individual_total{name="Skeleton",} 4.0
+monster_rounds_survived_individual_total{name="Grung",} 10.0
+monster_rounds_survived_individual_total{name="Mormesk the Wraith",} 6.0
+monster_rounds_survived_individual_total{name="Scaladar",} 9.0
+monster_rounds_survived_individual_total{name="Yuan-ti Malison Type 2",} 8.0
+# HELP battle_rounds_duration_seconds_max
+# TYPE battle_rounds_duration_seconds_max gauge
+battle_rounds_duration_seconds_max 0.001845524
+# HELP battle_rounds_duration_seconds
+# TYPE battle_rounds_duration_seconds summary
+battle_rounds_duration_seconds_count 94.0
+battle_rounds_duration_seconds_sum 0.042463524
+# HELP http_server_requests_seconds
+# TYPE http_server_requests_seconds summary
+http_server_requests_seconds_count{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/actuator/liveness",} 26.0
+http_server_requests_seconds_sum{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/actuator/liveness",} 0.142285963
+http_server_requests_seconds_count{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/actuator/prometheus",} 43.0
+http_server_requests_seconds_sum{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/actuator/prometheus",} 0.65756595
+http_server_requests_seconds_count{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/actuator/health",} 29.0
+http_server_requests_seconds_sum{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/actuator/health",} 0.319207631
+http_server_requests_seconds_count{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/battle/faceoff",} 10.0
+http_server_requests_seconds_sum{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/battle/faceoff",} 0.113607412
+http_server_requests_seconds_count{exception="InternalNettyException",method="GET",outcome="SUCCESS",status="200",uri="/actuator/prometheus",} 1.0
+http_server_requests_seconds_sum{exception="InternalNettyException",method="GET",outcome="SUCCESS",status="200",uri="/actuator/prometheus",} 0.022428783
+http_server_requests_seconds_count{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/battle/melee",} 10.0
+http_server_requests_seconds_sum{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/battle/melee",} 0.104968017
+# HELP http_server_requests_seconds_max
+# TYPE http_server_requests_seconds_max gauge
+http_server_requests_seconds_max{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/actuator/liveness",} 0.009079899
+http_server_requests_seconds_max{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/actuator/prometheus",} 0.032730471
+http_server_requests_seconds_max{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/actuator/health",} 0.009594546
+http_server_requests_seconds_max{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/battle/faceoff",} 0.010884976
+http_server_requests_seconds_max{exception="InternalNettyException",method="GET",outcome="SUCCESS",status="200",uri="/actuator/prometheus",} 0.022428783
+http_server_requests_seconds_max{exception="None",method="GET",outcome="SUCCESS",status="200",uri="/battle/melee",} 0.015774998
