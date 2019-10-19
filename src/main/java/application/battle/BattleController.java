@@ -51,7 +51,7 @@ public class BattleController {
     @Timed
     @GetMapping(path = "/melee", produces = "application/json")
     private Publisher<Round> melee() {
-        int n = Dice.range(3) + 2;
+        int n = Dice.range(3) + 3;
         Battle battle = new Battle(metrics);
         for ( int i = 0; i < n; i++) {
             battle.addMonster(beastiary.getRandomMonster());

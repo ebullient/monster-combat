@@ -14,7 +14,6 @@ class Participant {
     int initiative;
     int hitPoints;
     int heathPercentage;
-    int roundsSurvived;
     boolean surprised = false;
 
     @JsonIgnore
@@ -33,7 +32,6 @@ class Participant {
         initiative = Dice.d20() + m.getDexterityModifier(); // roll 20
         maxHitPoints = hitPoints = m.getHitPoints();
         heathPercentage = 100;
-        roundsSurvived = 0;
     }
 
     public String toString() {
@@ -58,12 +56,6 @@ class Participant {
     }
     public boolean isAlive() {
         return this.hitPoints > 0;
-    }
-    public int getRoundsSurvived() {
-        return this.roundsSurvived;
-    }
-    public void incrementSurvived() {
-        this.roundsSurvived++;
     }
     public int getInitiative() {
         return initiative;

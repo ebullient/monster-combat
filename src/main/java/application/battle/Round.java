@@ -134,7 +134,6 @@ public class Round {
             outcome.add(p.toString());
             if ( p.getHitPoints() > 0 ) {
                 alive++;
-                p.incrementSurvived();
                 if ( victor == null || victor.getHitPoints() < p.getHitPoints() ) {
                     victor = p;
                 }
