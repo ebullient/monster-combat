@@ -140,9 +140,7 @@ public class Round {
                 }
             }
         }
-        if ( victor != null ) {
-            logger.debug("Victor: {}", victor.m.dumpStats());
-        }
+
         metrics.finishRound(start, this);
         return alive > 1; // highlander. ;)
     }

@@ -141,6 +141,7 @@ class BattleMetrics {
         }
 
         sample.stop(roundDuration);
+        logger.debug(r.toString());
 
         for(Participant p : r.participants ) {
             if ( p.isAlive() ) {
@@ -162,6 +163,8 @@ class BattleMetrics {
                 registry.counter("monster.rounds.won.individual",
                         "name", p.getName())
                     .increment();
+
+                logger.debug("Victor: {}", p.m.dumpStats());
             }
 
             if ( p.isSurprised() ) {
