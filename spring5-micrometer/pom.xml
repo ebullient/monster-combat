@@ -9,8 +9,8 @@
     <version>2.1.9.RELEASE</version>
   </parent>
 
-  <groupId>dev.ebullientworks.dnd</groupId>
-  <artifactId>monster-combat</artifactId>
+  <groupId>dev.ebullient.dnd</groupId>
+  <artifactId>spring5-micrometer</artifactId>
   <version>0.0.1</version>
 
   <name>monster-combat</name>
@@ -18,7 +18,7 @@
   <packaging>jar</packaging>
 
   <properties>
-    <imageName>ebullient/dnd-${project.artifactId}</imageName>
+    <imageName>ebullient/dnd-mc-${project.artifactId}</imageName>
     <jib-maven-plugin.version>1.6.1</jib-maven-plugin.version>
   </properties>
 

@@ -1,6 +1,7 @@
-/target/*
+target
 
 /notes/kube_prom/vendor
+/notes/docker_prom
 
 
 ### STS ###
@@ -17,14 +18,6 @@
 *.iws
 *.iml
 *.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-/build/
 
 ### VS Code ###
 .vscode/
