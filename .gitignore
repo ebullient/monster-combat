@@ -1,7 +1,8 @@
 target
+logs
 
 /notes/kube_prom/vendor
-/notes/docker_prom
+/notes/docker_prom/data
 
 
 ### STS ###

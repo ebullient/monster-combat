@@ -3,7 +3,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent><!--required parent POM-->
+  <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.1.9.RELEASE</version>
@@ -11,7 +11,7 @@
 
   <groupId>dev.ebullient.dnd</groupId>
   <artifactId>spring5-micrometer</artifactId>
-  <version>0.0.1</version>
+  <version>0.1-SNAPSHOT</version>
 
   <name>monster-combat</name>
   <description>DnD 5e monster combat simulator</description>

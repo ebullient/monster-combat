@@ -33,49 +33,35 @@ export MONSTER_DIR=${PWD}          # for future reference
 
 1. [Create or retrieve credentials for your cluster](#set-up-a-kubernetes-cluster)
 
-2. Set up [kube-prometheus](https://github.com/coreos/kube-prometheus)
-
-    Use Docker Compose to quickly wrap jsonnet in a container so there is less setup overall:
+2. Set up custom namespaces (`gameontext` and `ebullientworks`)
 
     ```bash
-    cd ${MONSTER_DIR}/deploy/kube-prometheus
-
-    # Done once to initialize jsonnet vendor data
-    docker-compose run --rm jsonnet jb init
-    docker-compose run --rm jsonnet jb install github.com/coreos/kube-prometheus/jsonnet/kube-prometheus@release-0.1
-
-    # Make sure dependencies are up to date
-    docker-compose run --rm jsonnet jb update
-
-    # Generate kube manifests (docker-compose wrapped)
-    ./build.sh monsters.jsonnet
-
-    # Apply the things!
-    kubectl apply -f manifests/
-
-    # Wait until things are up
-    until kubectl get customresourcedefinitions servicemonitors.monitoring.coreos.com ; do date; sleep 1; echo ""; done
-    until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
-
-    # Make sure it applies cleanly
-    kubectl apply -f manifests/
-    cd ${MONSTER_DIR}
+    kubectl apply -f deploy/k8s/namespaces.yaml
     ```
 
-    Note there are customizations happening in this step:
+3. Set up [kube-prometheus](https://github.com/coreos/kube-prometheus)
+
+    This script wraps all kinds of jsonnet goodness in a container so there is less setup overall:
+
+    ```bash
+    ./deploy/k8s/kube-prometheus/build.sh prep     # Once. setup kube-prometheus jsonnet
+    # At least one time. Repeat if you change the monsters.jsonnet file
+    ./deploy/k8s/kube-prometheus/build.sh generate # Create manifests
+    ./deploy/k8s/kube-prometheus/build.sh apply    # Apply configuration to cluster
+    ```
+
+    Note there are customizations happening in this step (in `./deploy/k8s/kube-prometheus/monsters.jsonnet`):
 
     1. We reduce prometheus and alertmanager to single replicas. This is definitely a "fit on a tinier system" move that goes away from resilience.
     2. We instruct prometheus to monitor three additional namespaces: `gameon-system`, `ebullientworks` and `default`. The first is for services from https://gameontext.org, the second is used by this project, and the third is for your own experiments.
 
-3. Once the kube-prometheus manifests have applied cleanly, set up a Prometheus `ServiceMonitor` for Spring applications:
+4. Once the kube-prometheus manifests have applied cleanly, set up a Prometheus `ServiceMonitor` for Spring applications:
 
     ```bash
-    kubectl apply -f deploy/spring-prometheus/
+    kubectl apply -f deploy/k8s/spring-prometheus/
     ```
 
     If you delete/re-apply kube-prometheus metadata, you'll need to reapply this, too, as it is deployed into the `monitoring` namespace. For best results, ensure this is applied, and [spring-prometheus is included in the list of Prometheus targets]() before moving on to the next step.
-
-    This step also sets up the ebullientworks and gameon-system namespaces.
 
 4. Finally (!!), build and install the application:
 
@@ -85,16 +71,17 @@ export MONSTER_DIR=${PWD}          # for future reference
     # OR
     eval $(minishift docker-env)
 
-    # This uses dockerBuild from the jib plugin to create an image
+    # Run through all of the sub-projects and build them
+    This uses dockerBuild from the jib plugin to create an image
     # in the local docker registry. Feel free to change that up.
-    ./mvnw package
+    ./buildme.sh
 
     # Depending on your choices, you may have to do a docker push
-    # at this stage, to put that fresh image wherever it needs to go.
+    # at this stage, to put fresh images wherever they need to go.
 
-    # Now deploy the application (service, deployment, ingress)
+    # Now deploy application metadata (service, deployment, ingress)
     # Verify that the ingress definition will work for your kubernetes cluster
-    kubectl apply -f deploy/monsters/
+    kubectl apply -f deploy/k8s/monsters/
     ```
 
 So, after all of that, you should be able to do the following and get something interesting in return:

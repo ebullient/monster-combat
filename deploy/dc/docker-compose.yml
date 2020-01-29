@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+
+  prom:
+    container_name: prometheus
+    image: prom/prometheus
+    command:
+      - "--config.file=/config/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+    ports:
+      - "9090:9090"
+    user: "1000:1000"
+    volumes:
+      - './config:/config'
+      - './target/data/prometheus:/prometheus'
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_PATHS_CONFIG=/config/grafana.ini
+    user: "1000:1000"
+    volumes:
+      - './config:/config'
+      - './target/data/grafana:/var/lib/grafana'
+      - './target/logs/grafana:/var/log/grafana'
+
+  spring5:
+    container_name: spring5-micrometer
+    image: ebullient/dnd-mc-spring5-micrometer
+    ports:
+      - "8080:8080"
+
