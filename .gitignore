@@ -1,10 +1,6 @@
 target
 logs
 
-/notes/kube_prom/vendor
-/notes/docker_prom/data
-
-
 ### STS ###
 .apt_generated
 .classpath

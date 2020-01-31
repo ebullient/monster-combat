@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 IBM Corp. All rights reserved.
+ * Copyright © 2020 IBM Corp. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -11,28 +11,40 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package application.monsters;
+package dev.ebullient.dnd.beastiary;
 
-import java.util.ArrayList;
-
-import application.mechanics.Dice;
 
 public class Beastiary {
-    private ArrayList<Monster> monsters = new ArrayList<>();
 
-    public void addMonster(Monster monster) {
-        monsters.add(monster);
+    long totalCount;
+
+    /**
+     * Add one beast to the Beastiary
+     */
+    public Beast save(Beast b) {
+        return b;
     }
 
-    public Monster getRandomMonster() {
-        return monsters.get(Dice.range(monsters.size()));
+    /**
+     * @return a random monster
+     */
+    public Beast findOne() {
+        return null;
     }
+
+    /**
+     * @return a random beast with the requested challenge rating
+     */
+    public Beast findOneByChallengeRating(String cr) {
+        return null;
+    }
+
 
     public String toString() {
         return new StringBuilder()
-            .append("Monster bestiary containing ")
-            .append(monsters.size())
-            .append(" monsters")
+            .append("Beastiary contains ")
+            .append(totalCount)
+            .append(" beasts")
             .toString();
     }
 }

@@ -11,7 +11,7 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package application.mechanics;
+package dev.ebullient.dnd.mechanics;
 
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -34,6 +34,8 @@ public class Dice {
     public static final int d4() {
         return random.nextInt(4) + 1;
     }
+
+    /** @return the value of n 1d4 rolls */
     public static final int d4(int n) {
         int total = 0;
         for (int i = 0; i < n; i++ ) {
@@ -46,6 +48,8 @@ public class Dice {
     public static final int d6() {
         return random.nextInt(6) + 1;
     }
+
+    /** @return the value of n 1d6 rolls */
     public static final int d6(int n) {
         int total = 0;
         for (int i = 0; i < n; i++ ) {
@@ -58,6 +62,8 @@ public class Dice {
     public static final int d8() {
         return random.nextInt(8) + 1;
     }
+
+    /** @return the value of n 1d8 rolls */
     public static final int d8(int n) {
         int total = 0;
         for (int i = 0; i < n; i++ ) {
@@ -70,6 +76,8 @@ public class Dice {
     public static final int d10() {
         return random.nextInt(10) + 1;
     }
+
+    /** @return the value of n 1d10 rolls */
     public static final int d10(int n) {
         int total = 0;
         for (int i = 0; i < n; i++ ) {
@@ -82,6 +90,8 @@ public class Dice {
     public static final int d20() {
         return random.nextInt(20) + 1;
     }
+
+    /** @return the value of n 1d20 rolls */
     public static final int d20(int n) {
         int total = 0;
         for (int i = 0; i < n; i++ ) {
