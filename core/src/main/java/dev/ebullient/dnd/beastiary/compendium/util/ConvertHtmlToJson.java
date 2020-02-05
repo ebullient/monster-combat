@@ -18,8 +18,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -34,7 +36,12 @@ import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 import dev.ebullient.dnd.beastiary.Beast;
+import dev.ebullient.dnd.beastiary.Beast.Statistic;
 import dev.ebullient.dnd.beastiary.compendium.Attack;
 import dev.ebullient.dnd.beastiary.compendium.Monster;
 import dev.ebullient.dnd.beastiary.compendium.Multiattack;
@@ -48,30 +55,44 @@ import dev.ebullient.dnd.mechanics.HitPoints;
  */
 public class ConvertHtmlToJson {
 
+    final Pattern HIT = Pattern.compile("(\\d+\\s*[-+d()0-9 ]*)\\s*(\\w+)\\s*damage");
+    final Pattern ATTACK = Pattern.compile(".*Attack: ([-+0-9]+) .*");
+    final Pattern DC = Pattern.compile("a DC (\\d+) (\\w+) saving throw");
+
+    Map<String, String> sanitizedAttacks = new HashMap<>();
+    Map<String, String> pluralSingular = new HashMap<>();
+
     public static void main(String[] args) throws Exception {
         ConvertHtmlToJson converter = new ConvertHtmlToJson();
         Map<String, Monster> compendium = new HashMap<>();
 
         Path basePath = FileSystems.getDefault().getPath("./monsters/");
 
-        converter.createMonster(basePath.resolve("5e_SRD:Clay_Golem").toFile());
+        // converter.createMonster(basePath.resolve("5e_SRD:Kraken").toFile());
+        // System.exit(1);
 
         try (BufferedReader br = new BufferedReader(new FileReader(basePath.resolve("list.txt").toFile()))) {
             br.lines().forEach(line -> {
-                if ( line.contains("Deck_of_Many_Things") ) {
+                if (line.contains("Deck_of_Many_Things")) {
                     return;
                 }
                 File f = basePath.resolve(line).toFile();
                 try {
-                    log(f.getAbsolutePath());
+                    // log(f.getAbsolutePath());
                     Monster m = converter.createMonster(f);
-                    compendium.put(m.getName().toLowerCase(Locale.ROOT), m);
+                    compendium.put(toLower(m.getName()), m);
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.exit(1); // fail fast
                 }
             });
         }
+
+        log(compendium.size());
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+
+        writer.writeValue(Paths.get("./src/main/resources/compendium.json").toFile(), compendium);
     }
 
     public Monster createMonster(File f) throws Exception {
@@ -87,14 +108,14 @@ public class ConvertHtmlToJson {
 
         // table
         Element outerTable = beginning.nextElementSibling();
-        if ( ! "table".equals(outerTable.tagName())) {
+        if (!"table".equals(outerTable.tagName())) {
             throw new IllegalArgumentException("Unexpected document structure, can't find table");
         }
-        Element data = outerTable.children().first()    // tbody
-                        .children().first()             // tr
-                        .children().first();            // td
+        Element data = outerTable.children().first() // tbody
+                .children().first() // tr
+                .children().first(); // td
 
-        if ( !data.text().contains("Armor Class") ) {
+        if (!data.text().contains("Armor Class")) {
             throw new IllegalArgumentException("Data doesn't match (no Armor Class)\n" + data.text());
         }
 
@@ -104,11 +125,11 @@ public class ConvertHtmlToJson {
         List<Element> reactions = new ArrayList<>();
         int section = 0;
         Element next = data.children().first();
-        while ( next != null ) {
-            if ( "hr".equals(next.tagName())) {
+        while (next != null) {
+            if ("hr".equals(next.tagName())) {
                 section++;
             } else if ("h4".equals(next.tagName())) {
-                switch(next.text()) {
+                switch (next.text()) {
                     case "ACTIONS":
                         section = 50;
                         break;
@@ -122,33 +143,34 @@ public class ConvertHtmlToJson {
                         throw new IllegalArgumentException("Unknown section" + next.text());
                 }
             } else {
-                switch(section) {
-                    case 0 :
+                switch (section) {
+                    case 0:
                         getSizeAndType(monster, next, description);
                         break;
-                    case 1 :
+                    case 1:
                         getBasicStats(monster, next, description);
                         break;
-                    case 2 :
+                    case 2:
                         getScoresAndModifiers(monster, next, description);
                         break;
-                    case 3 :
+                    case 3:
                         getSavingThrows(monster, next, description);
                         break;
-                    case 4 :
+                    case 4:
                         notes.add(next);
                         break;
-                    case 50 :
+                    case 50:
                         actions.add(next);
                         break;
-                    case 60 :
+                    case 60:
                         legend.add(next);
                         break;
-                    case 70 :
+                    case 70:
                         reactions.add(next);
                         break;
-                    default :
-                        throw new IllegalArgumentException("Data doesn't match (unexpected number of sections)\n" + next.text());
+                    default:
+                        throw new IllegalArgumentException(
+                                "Data doesn't match (unexpected number of sections)\n" + next.text());
                 }
             }
             next = next.nextElementSibling();
@@ -158,32 +180,42 @@ public class ConvertHtmlToJson {
 
         // Look for additional background information
         next = data.nextElementSibling();
-        if ( "td".equals(next.tagName())) {
+        if ("td".equals(next.tagName())) {
             noteText.clear();
-            for (Node n : next.childNodes() ) {
-                noteText.add(getNodeText(n));
+            for (Node n : next.childNodes()) {
+                String text = getNodeText(n);
+                if (!text.isEmpty()) {
+                    noteText.add(getNodeText(n));
+                }
             }
-            description.put("Background", String.join("\n", noteText));
+            if (!noteText.isEmpty()) {
+                description.put("Background", String.join("\n", noteText));
+            }
         }
 
         // Gather together notes from above, with any additional notes that follow
-        noteText.clear();
-        for(Element e : notes) {
-            noteText.add(e.text());
+        if (!notes.isEmpty()) {
+            noteText.clear();
+            for (Element e : notes) {
+                noteText.add(e.text());
+            }
+            description.put("Notes", String.join("\n", noteText));
         }
-        description.put("Notes", String.join("\n", noteText));
 
         // Gether together legendary actions (for use)
-        noteText.clear();
-        for(Element e : legend) {
-            noteText.add(e.text());
+        if (!legend.isEmpty()) {
+            noteText.clear();
+            for (Element e : legend) {
+                noteText.add(e.text());
+            }
+            description.put("Legendary Actions", String.join("\n", noteText));
         }
-        description.put("Legendary Actions", String.join("\n", noteText));
 
         parseActions(monster, actions, description);
         parseReactions(monster, reactions, description);
 
         monster.setDescription(description);
+
         return monster;
     }
 
@@ -191,27 +223,26 @@ public class ConvertHtmlToJson {
     }
 
     void parseActions(Monster monster, List<Element> elements, Map<String, String> description) {
-        final Pattern HIT = Pattern.compile("(\\d+\\s*[-+d()0-9 ]*)\\s*(\\w+)\\s*damage");
-        final Pattern ATTACK = Pattern.compile(".*Attack: ([-+0-9]+) .*");
-        final Pattern DC = Pattern.compile("a DC (\\d+) (\\w+) saving throw");
-
         List<String> noteText = new ArrayList<>();
         Map<String, Attack> attacks = new HashMap<>();
         String multiattack = null;
 
-        nextelement:
-        for(Element e : elements ) {
+        nextelement: for (Element e : elements) {
             String all = e.text().trim();
             noteText.add(all);
 
+            if (all.contains("one of the following")) {
+                continue;
+            }
+
             String[] segments = all.replaceAll("ft\\.", "ft").split("\\.\\s*");
-            if ( "Multiattack".equalsIgnoreCase(segments[0]) ) {
-                if  ( segments.length < 2 ) {
+            if ("Multiattack".equalsIgnoreCase(segments[0])) {
+                if (segments.length < 2) {
                     throw new IllegalArgumentException("Unexpected Multiattack definition: " + all);
                 }
                 List<String> slice = Arrays.asList(segments).subList(1, segments.length);
                 multiattack = String.join(". ", slice);
-            } else if ( all.contains("Attack") ) {
+            } else if (all.contains("Attack")) {
                 String name = segments[0];
 
                 Attack a = new Attack();
@@ -220,59 +251,371 @@ public class ConvertHtmlToJson {
                 List<Attack.Damage> damage = new ArrayList<>();
                 List<String> slice = Arrays.asList(segments).subList(1, segments.length);
 
-                for ( String s : slice ) {
-                    if ( s.startsWith("Hit") ) {
+                for (String s : slice) {
+                    if (s.startsWith("Hit")) {
                         Matcher m = HIT.matcher(s);
-                        if ( m.find() ) {
+                        if (m.find()) {
                             Attack.Damage d = new Attack.Damage();
-                            d.setAmount(m.group(1).replaceAll("\\s+",""));
+                            d.setAmount(m.group(1).replaceAll("\\s+", ""));
                             d.setType(m.group(2).trim());
+                            damage.add(d);
+                        } else if (s.contains("cursed")) {
+                            Attack.Damage d = new Attack.Damage();
+                            d.setType("curse");
+                            d.setAmount("0");
+                            d.setDisadvantage(getDisadvantage(toLower(s)));
                             damage.add(d);
                         } else {
                             log("Unexpected Hit definition: " + s);
                             break nextelement;
                         }
                     } else if (s.contains("Attack:")) {
+                        a.setMelee(s.contains("Melee"));
                         Matcher m = ATTACK.matcher(s);
-                        if ( m.matches()) {
+                        if (m.matches()) {
                             a.setAttackModifier(Integer.parseInt(m.group(1)));
                         } else {
                             throw new IllegalArgumentException("Unexpected Attack definition: " + s);
                         }
-                    } else if ( s.contains(" DC ") && s.contains("damage") ) {
-                        Attack.Damage d = new Attack.Damage();
-                        Matcher m1 = DC.matcher(s);
-                        if ( m1.find() ) {
-                            d.setSavingThrow(m1.group(1) + " " + Beast.Statistic.convert(m1.group(2)));
-                            Matcher m2 = HIT.matcher(s);
-                            if ( m2.find() ) {
-                                d.setAmount(m2.group(1).replaceAll("\\s+",""));
-                                d.setType(m2.group(2).trim());
-                                damage.add(d);
-                            } else {
-                                log("Unexpected DC damage definition: " + s);
-                            }
-                        } else {
-                            log("Different kind of DC check: " + s);
-                        }
                     }
                 }
 
-                if ( damage.size() == 0 ) {
+                if (damage.size() > 1) {
                     throw new IllegalArgumentException("Missing hit damage for attack: " + all);
                 }
-                a.setDamage(damage);
-                attacks.put(name.toLowerCase(Locale.ROOT), a);
+                a.setDamage(damage.get(0));
+                attacks.put(sanitizeAttack(name), a);
+            } else if (all.contains("Recharge")) {
+                String name = segments[0];
+
+                Attack a = new Attack();
+                a.setName(name);
+
+                if (all.contains(" DC ") && all.contains("damage")) {
+                    a.setDamage(parseDamage(all));
+                } else {
+                    Attack.Damage d = new Attack.Damage();
+                    d.setAmount("0");
+                    a.setDamage(d);
+                }
+
+                attacks.put(sanitizeAttack(name), a);
             }
         }
 
-        if ( multiattack != null ) {
-            Multiattack m = new Multiattack();
-            monster.setMultiattack(m);
+        if (multiattack != null) {
+            monster.setMultiattack(parseMultiattack(multiattack, attacks));
         }
-
         monster.setActions(attacks);
         description.put("Attacks", String.join("\n", noteText));
+    }
+
+    private Attack.Damage parseDamage(String s) {
+        Attack.Damage d = new Attack.Damage();
+        Matcher m1 = DC.matcher(s);
+        if (m1.find()) {
+            d.setSavingThrow(Beast.Statistic.convert(m1.group(2)) + "(" + m1.group(1) + ")");
+            Matcher m2 = HIT.matcher(s);
+            if (m2.find()) {
+                d.setAmount(m2.group(1).replaceAll("\\s+", ""));
+                d.setType(m2.group(2).trim());
+                return d;
+            } else {
+                log("Unexpected DC damage definition: " + s);
+            }
+        } else {
+            log("Different kind of DC check: " + s);
+        }
+        return null;
+    }
+
+    private List<Statistic> getDisadvantage(String s) {
+        if (s.contains("disadvantage")) {
+            List<Beast.Statistic> list = new ArrayList<>();
+            if (s.contains("strength")) {
+                list.add(Statistic.STR);
+            }
+            if (s.contains("dexterity")) {
+                list.add(Statistic.DEX);
+            }
+            if (s.contains("constitution")) {
+                list.add(Statistic.CON);
+            }
+            if (s.contains("intelligence")) {
+                list.add(Statistic.INT);
+            }
+            if (s.contains("wisdom")) {
+                list.add(Statistic.WIS);
+            }
+            if (s.contains("charisma")) {
+                list.add(Statistic.CHA);
+            }
+        }
+        return Collections.emptyList();
+    }
+
+    public Multiattack parseMultiattack(String multiattack, Map<String, Attack> attacks) {
+        final Pattern LIST_ATTACKS = Pattern.compile("([-a-z]+)(?: melee)? attacks(?:\\:|,)\\s+(.*)");
+        final Pattern EITHER_ATTACK = Pattern.compile("\\beither (with its [-a-z]+) or (its [-a-z]+)(?:\\b|\\.)");
+        final Pattern REPEAT_WITH_ATTACK = Pattern.compile("\\b([-a-z]+) attacks? with its ([-a-z]+)(?:\\b|\\.)");
+        final Pattern WITH_ATTACK = Pattern.compile("\\b([-a-z]+) with its ([-a-z]+)(?:\\b|\\.)");
+        final Pattern REPEAT_ATTACK = Pattern.compile("\\b([-a-z]+) ([-a-z]+) attacks?(?:\\b|\\.)");
+        final Pattern VARIABLE_ATTACK = Pattern.compile("\\b([d0-9]+) ([-a-z]+) attacks?(?:\\b|\\.)");
+        final Pattern USES_ATTACK = Pattern.compile("\\buses its ([-a-z]+)(?: ([-a-z]+))?");
+        final Pattern MULTIATTACK_STR = Pattern.compile("[d0-9]+\\*([-a-z]+)");
+
+        // dump completely unparsable alternatives. Maybe someday
+        // drop "The whatever makes .. " prefix
+        // drop "when .. ", "while .. ", and "if .. " clauses
+        String lower = toLower(multiattack)
+                .replaceFirst("alternat(?:iv)?ely,.*$", "")
+                .replaceFirst("^.* makes ", "")
+                .replaceAll("\\. when .*$", "")
+                .replaceAll("\\. while .*$", "")
+                .replaceAll("\\. if .*$", "")
+                .replaceAll(". in hybrid form.*$", "")
+                .replaceAll(", if it can,", "")
+                .replaceAll("only one of which can be a bite attack", "only-one-bite")
+                .replaceAll("ranged ", "")
+                .trim();
+
+        // deal with multi-word attack names
+        for (Map.Entry<String, String> attack : sanitizedAttacks.entrySet()) {
+            lower = lower.replaceAll(attack.getKey(), attack.getValue());
+        }
+        //log("*: " + lower);
+
+        int total = 0;
+        Matcher m;
+        String clause = "";
+
+        int pos = lower.indexOf(".");
+        if (pos > 0) {
+            clause = lower.substring(pos);
+            lower = lower.substring(0, pos + 1);
+        }
+
+        // blech, clauses suck.
+        if (lower.contains("as many ")) {
+            log("INDETERMINATE: " + lower);
+            return null;
+        }
+
+        // x attacks: ...
+        m = LIST_ATTACKS.matcher(lower);
+        if (m.matches()) {
+            total = wordToInt(m.group(1));
+            lower = m.group(2);
+        }
+        // log("   1: " + lower);
+
+        StringBuffer sb = new StringBuffer();
+
+        // Either/or phrasing --> one with its  .. or one with its ..
+        if (lower.contains("either")) {
+            m = EITHER_ATTACK.matcher(lower);
+            sb = new StringBuffer();
+            while (m.find()) {
+                m.appendReplacement(sb, "one " + m.group(1) + " or one with " + m.group(2));
+            }
+            m.appendTail(sb);
+            lower = sb.toString();
+            // log("   -: " + lower);
+        }
+
+        // uses its ...
+        if (lower.contains("uses")) {
+            m = USES_ATTACK.matcher(lower);
+            sb = new StringBuffer();
+            while (m.find()) {
+                String wordNum = m.group(2);
+                if (wordNum == null) {
+                    wordNum = "once";
+                }
+                m.appendReplacement(sb, wordToInt(wordNum) + "*" + m.group(1));
+            }
+            m.appendTail(sb);
+            lower = sb.toString();
+            // log("   -: " + lower);
+        }
+
+        if (lower.contains("with its")) {
+            m = REPEAT_WITH_ATTACK.matcher(lower);
+            sb = new StringBuffer();
+            while (m.find()) {
+                m.appendReplacement(sb, wordToInt(m.group(1)) + "*" + m.group(2));
+            }
+            m.appendTail(sb);
+            lower = sb.toString();
+            // log("   2: " + lower);
+
+            m = WITH_ATTACK.matcher(lower);
+            sb = new StringBuffer();
+            while (m.find()) {
+                m.appendReplacement(sb, wordToInt(m.group(1)) + "*" + m.group(2));
+            }
+            m.appendTail(sb);
+            lower = sb.toString();
+            // log("   3: " + lower);
+        }
+
+        m = VARIABLE_ATTACK.matcher(lower);
+        sb = new StringBuffer();
+        while (m.find()) {
+            m.appendReplacement(sb, m.group(1) + "*" + m.group(2));
+        }
+        m.appendTail(sb);
+        lower = sb.toString();
+
+        m = REPEAT_ATTACK.matcher(lower);
+        sb = new StringBuffer();
+        while (m.find()) {
+            m.appendReplacement(sb, wordToInt(m.group(1)) + "*" + m.group(2));
+        }
+        m.appendTail(sb);
+        lower = sb.toString();
+        //log("   4: " + lower);
+
+        // hangers on
+        lower = lower.replace("three attacks", "3*melee")
+                .replace("one to constrict", "1*constrict")
+                .replaceAll("\\s+", " ")
+                .replaceAll("\\.", "")
+                .trim();
+
+        // Down to choices now..
+        List<String> combinations = new ArrayList<>();
+
+        // HACK HACK HACK. But seriously, I'm done with this.
+        if (clause.contains("it can make one tail attack in place of its two claw attacks")) { // dragon turtle
+            combinations.add("1*bite 2*claws");
+            combinations.add("1*bite 1*tail");
+        } else if (clause.contains("it can replace one of those attacks with a bite attack")) { // drider
+            combinations.add("3*longsword");
+            combinations.add("3*longbow");
+            combinations.add("1*bite 2*longsword");
+        } else if (clause.contains("it can use hurl-flame in place of any melee attack")) {
+            combinations.add("2*fork 1*tail");
+            combinations.add("2*fork 1*hurl-flame");
+            combinations.add("1*fork 1*hurl-flame 1*tail");
+            // } else if ( clause.contains("it can use its swallow instead of its bite") ) {
+            //     combinations.add("1*bite 2*claws 1*horns 1*tail");
+            //     combinations.add("1*swallow 2*claws 1*horns 1*tail");
+        } else if (clause.contains("it can use its life-drain in place of one longsword attack")) {
+            combinations.add("2*longsword");
+            combinations.add("1*longsword 1*life-drain");
+            combinations.add("2*longbow");
+        } else if ("1*pike and 1*hooves or 2*longbow".equals(lower)) {
+            combinations.add("1*pike and 1*hooves");
+            combinations.add("2*longbow");
+        } else if ("2*scimitar or 2*hurl-flame".equals(lower)) {
+            combinations.add("2*scimitar");
+            combinations.add("2*hurl-flame");
+        } else if ("1*claws and 1*dagger or intoxicating-touch".equals(lower)) {
+            combinations.add("1*claws 1*dagger");
+            combinations.add("1*claws 1*intoxicating-touch");
+        } else if ("1*bite and 2*claws or 3*tail-spikes".equals(lower)) {
+            combinations.add("1*bite 2*claws");
+            combinations.add("3*tail-spikes");
+        } else if ("either 3*melee — 1*snake-hair and 2*shortsword — or 2*longbow".equals(lower)) {
+            combinations.add("1*snake-hair 2*shortsword");
+            combinations.add("2*longbow");
+        } else if ("1*bite and 1*claws or harpoon".equals(lower)) {
+            combinations.add("1*bite 1*claws");
+            combinations.add("1*bite 1*harpoon");
+        } else if ("1*claws or 1*glaive".equals(lower)) {
+            combinations.add("1*claws");
+            combinations.add("1*glaive");
+        } else if ("1*bite and 1*claws or spear".equals(lower)) {
+            combinations.add("1*bite 1*claws");
+            combinations.add("1*bite 1*spear");
+        } else if ("1*longsword or 1*longbow".equals(lower)) {
+            combinations.add("1*longsword");
+            combinations.add("1*longbow");
+        } else if (lower.contains("either") || lower.contains(" or ")) {
+            log("Should handle this: " + lower + " with clause " + clause);
+        } else {
+            lower = lower.replaceAll("and", "")
+                    .replaceAll(",", "")
+                    .replaceAll("\\.", "")
+                    .trim();
+            // only one choice!
+            combinations.add(lower);
+        }
+
+        if (combinations.isEmpty()) {
+            log("WOOPS: " + lower);
+            // } else if ( !clause.isEmpty() ) {
+            //     log("CHECK: " + lower + " -- " + clause);
+        }
+
+        for (String s : combinations) {
+            m = MULTIATTACK_STR.matcher(s);
+            sb = new StringBuffer();
+            while (m.find()) {
+                m.appendReplacement(sb, checkExists(m.group(1), attacks));
+            }
+            m.appendTail(sb);
+            lower = sb.toString();
+        }
+
+        Multiattack attack = new Multiattack();
+        attack.setCombinations(combinations);
+        return attack;
+    }
+
+    private String checkExists(String name, Map<String, Attack> attacks) {
+        if ("melee".equals(name)) {
+            return name;
+        }
+
+        if (attacks.get(name) != null) {
+            return name;
+        }
+
+        if (name.endsWith("s")) {
+            String single = name.substring(0, name.length() - 1);
+            if (attacks.get(single) != null) {
+                return single;
+            }
+        } else if (name.endsWith("er")) {
+            String sting = name.substring(0, name.length() - 2);
+            if (attacks.get(sting) != null) {
+                return sting;
+            }
+        } else {
+            String plural = name + "s";
+            if (attacks.get(plural) != null) {
+                return plural;
+            }
+        }
+
+        throw new IllegalStateException(name + " not found in " + attacks.keySet());
+    }
+
+    public int wordToInt(String number) {
+        switch (toLower(number)) {
+            case "one":
+                return 1;
+            case "once":
+                return 1;
+            case "two":
+                return 2;
+            case "twice":
+                return 2;
+            case "three":
+                return 3;
+            case "four":
+                return 4;
+            case "five":
+                return 5;
+            case "six":
+                return 6;
+            case "seven":
+                return 7;
+            default:
+                throw new IllegalArgumentException("Should understand this number: " + number);
+        }
     }
 
     void getSavingThrows(Monster monster, Element parent, Map<String, String> description) {
@@ -284,36 +627,36 @@ public class ConvertHtmlToJson {
         for (String s : segments) {
             String body = Jsoup.parseBodyFragment(s).body().text().trim();
             String[] chunks = body.split("\\s+");
-            switch(chunks[0]) {
-                case "Saving" :
+            switch (chunks[0]) {
+                case "Saving":
                     slice = Arrays.asList(chunks).subList(2, chunks.length);
                     if ((slice.size() % 2) != 0) {
                         throw new IllegalArgumentException("uneven number of elements" + slice);
                     }
                     StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < slice.size(); i = i+2) {
+                    for (int i = 0; i < slice.size(); i = i + 2) {
                         sb.append(slice.get(i).toUpperCase(Locale.ROOT))
-                          .append("(")
-                          .append(slice.get(i+1).replace(",",""))
-                          .append(")");
-                        if ( i+2 < slice.size() ) {
+                                .append("(")
+                                .append(slice.get(i + 1).replace(",", ""))
+                                .append(")");
+                        if (i + 2 < slice.size()) {
                             sb.append(",");
                         }
                     }
                     description.put("Saving Throws", sb.toString());
                     monster.setSavingThrows(sb.toString());
                     break;
-                case "Skills" :
+                case "Skills":
                     slice = Arrays.asList(chunks).subList(1, chunks.length);
                     description.put("Skills", String.join(" ", slice));
                     break;
-                case "Senses" :
+                case "Senses":
                     slice = Arrays.asList(chunks).subList(1, chunks.length);
                     String value = String.join(" ", slice);
                     description.put("Senses", value);
                     // passive perception
                     Matcher m = perception.matcher(value);
-                    if ( m.find() ) {
+                    if (m.find()) {
                         monster.setPassivePerception(Integer.parseInt(m.group(1)));
                     }
                     break;
@@ -327,18 +670,18 @@ public class ConvertHtmlToJson {
                     monster.setChallengeRating(slice.get(0));
                     break;
                 case "Damage":
-                    if ( body.contains("Resist") ) {
+                    if (body.contains("Resist")) {
                         description.put("Damage Resistance", body);
-                    } else if ( body.contains("Vulner") ) {
+                    } else if (body.contains("Vulner")) {
                         description.put("Damage Vulnerability", body);
-                    } else if ( body.contains("Immun") ) {
+                    } else if (body.contains("Immun")) {
                         description.put("Damage Immunity", body);
                     } else {
                         throw new IllegalArgumentException("Unknown Damage resistance or vulnerability: " + body);
                     }
                     break;
                 case "Condition":
-                    if ( body.contains("Immun") ) {
+                    if (body.contains("Immun")) {
                         description.put("Condition Immunity", body);
                     } else {
                         throw new IllegalArgumentException("Unkonwn Condition resistence or vulnerability: " + body);
@@ -357,8 +700,9 @@ public class ConvertHtmlToJson {
         Element statsRow = parent.getElementsByTag("tr").last();
         String[] elements = statsRow.text().trim().split("\\s+");
 
-        if ( elements.length != 12) {
-            throw new IllegalArgumentException("Data doesn't match expected description of scores/modifiers\n" + statsRow.text());
+        if (elements.length != 12) {
+            throw new IllegalArgumentException(
+                    "Data doesn't match expected description of scores/modifiers\n" + statsRow.text());
         }
         StringBuilder sb = new StringBuilder();
 
@@ -396,21 +740,21 @@ public class ConvertHtmlToJson {
         final String SPEED = "Speed";
 
         String[] lines = parent.html().split("\\s*<br[^>]*>\\s*");
-        if ( lines.length != 3 ) {
+        if (lines.length != 3) {
             throw new IllegalArgumentException("Unexpected statistics string: " + parent.html());
         }
 
         String acString = Jsoup.parseBodyFragment(lines[0]).body().text().trim();
         description.put("Armor Class", acString.replace("Armor Class ", ""));
         Matcher m1 = AC.matcher(acString);
-        if ( m1.matches() ) {
+        if (m1.matches()) {
             monster.setArmorClass(Integer.parseInt(m1.group(1)));
         } else {
             throw new IllegalArgumentException("Unexpected armor class definition: " + acString);
         }
 
         String hpString = Jsoup.parseBodyFragment(lines[1]).body().text().trim();
-        description.put(HP, acString.replace("Hit Points ", ""));
+        description.put(HP, hpString.replace("Hit Points ", ""));
         monster.setHitPoints(HitPoints.validate(hpString.substring(HP.length()).trim()));
 
         String speedString = Jsoup.parseBodyFragment(lines[2]).body().text().trim();
@@ -434,13 +778,24 @@ public class ConvertHtmlToJson {
     }
 
     String getNodeText(Node n) {
-        if ( n instanceof TextNode ) {
+        if (n instanceof TextNode) {
             return ((TextNode) n).text().trim();
-        } else if ( n instanceof Element ) {
+        } else if (n instanceof Element) {
             return ((Element) n).text().trim();
         }
 
         throw new IllegalArgumentException("Unexpected node type " + n.getClass());
+    }
+
+    String sanitizeAttack(String s) {
+        // Trim any parenthical stuff, we end up ignoring it later anyway
+        String key = toLower(s).replaceAll("\\(.*\\)", "").trim();
+        // replace any spaces with dashes (to keep/preserve two-word attacks, e.g. rotting touch or dreadful glare)
+        String value = key.replaceAll(" ", "-");
+        if (!key.equals(value)) {
+            sanitizedAttacks.put(key, value);
+        }
+        return value;
     }
 
     static void log(String msg, String... vals) {
@@ -449,5 +804,13 @@ public class ConvertHtmlToJson {
 
     static void log(Object o) {
         System.out.println(o.toString());
+    }
+
+    static String toLower(String s) {
+        return s.toLowerCase(Locale.ROOT);
+    }
+
+    static String toUpper(String s) {
+        return s.toUpperCase(Locale.ROOT);
     }
 }

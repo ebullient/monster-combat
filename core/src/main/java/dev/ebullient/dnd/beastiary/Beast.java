@@ -55,13 +55,19 @@ public interface Beast {
         CHA;
 
         public static Statistic convert(String score) {
-            switch(score.toLowerCase(Locale.ROOT)) {
-                case "strength": return STR;
-                case "dexterity": return DEX;
-                case "constitution": return CON;
-                case "intelligence": return INT;
-                case "wisdom": return WIS;
-                case "charisma": return CHA;
+            switch (score.toLowerCase(Locale.ROOT)) {
+                case "strength":
+                    return STR;
+                case "dexterity":
+                    return DEX;
+                case "constitution":
+                    return CON;
+                case "intelligence":
+                    return INT;
+                case "wisdom":
+                    return WIS;
+                case "charisma":
+                    return CHA;
             }
             return null;
         }
@@ -69,34 +75,47 @@ public interface Beast {
 
     interface Damage {
         public String getType();
+
         public String getAmount();
+
         public String getSavingThrow();
     }
 
     interface Attack {
         String getName();
-        List<? extends Damage> getDamage();
+
+        Damage getDamage();
+
         int getAttackModifier();
     }
 
     interface Participant {
         String getName();
+
         String getDescription();
 
         int getInitiative();
+
         int getArmorClass();
+
         int getPassivePerception();
+
         int getModifier(Statistic s);
+
         int getAbility(Statistic s);
+
         int getSavingThrow(Statistic s);
 
-        int getHitPoints();
         boolean isAlive();
 
+        int getRelativeHealth();
+
         List<Attack> getAttacks();
+
         void takeDamage(int damage);
     }
 
-    public float getCR();
+    public String getChallengeRating();
+
     public Participant createParticipant();
 }

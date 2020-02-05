@@ -13,29 +13,18 @@
  */
 package dev.ebullient.dnd.beastiary.compendium;
 
-import java.util.List;
+import java.io.IOException;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.junit.jupiter.api.Test;
 
-import dev.ebullient.dnd.mechanics.Dice;
+import dev.ebullient.dnd.beastiary.Beastiary;
 
-public class Multiattack {
+public class CompendiumReaderTest {
 
-    List<String> combinations;
-
-    public List<String> getCombinations() {
-        return combinations;
-    }
-
-    public void setCombinations(List<String> combinations) {
-        this.combinations = combinations;
-    }
-
-    @JsonIgnore
-    public String randomCombination() {
-        if (combinations.size() == 1) {
-            return combinations.get(0);
-        }
-        return combinations.get(Dice.range(combinations.size()));
+    @Test
+    public void testReadCompendium() throws IOException {
+        Beastiary beastiary = new Beastiary();
+        CompendiumReader.addToBeastiary(beastiary);
+        System.out.println(beastiary);
     }
 }

@@ -28,7 +28,7 @@ public class HitPoints {
 
     public static String validate(String text) {
         Matcher hp = HP.matcher(text);
-        if ( hp.matches() ) {
+        if (hp.matches()) {
             return text.replace(" ", ""); // compress
         } else {
             throw new IllegalArgumentException("Invalid string: " + text);

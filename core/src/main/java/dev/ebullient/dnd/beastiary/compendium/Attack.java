@@ -23,6 +23,7 @@ public class Attack implements Beast.Attack {
         String type;
         String amount;
         String savingThrow;
+        List<Beast.Statistic> disadvantage;
 
         public String getType() {
             return type;
@@ -50,13 +51,22 @@ public class Attack implements Beast.Attack {
 
         public String toString() {
             return amount + type
-               + (savingThrow == null ? "" : ("[" + savingThrow + "]"));
+                    + (savingThrow == null ? "" : ("[" + savingThrow + "]"));
+        }
+
+        public List<Beast.Statistic> getDisadvantage() {
+            return disadvantage;
+        }
+
+        public void setDisadvantage(List<Beast.Statistic> disadvantage) {
+            this.disadvantage = disadvantage;
         }
     }
 
     String name;
+    boolean melee;
     int attackModifier;
-    List<Damage> damage;
+    Damage damage;
 
     public String getName() {
         return name;
@@ -74,16 +84,23 @@ public class Attack implements Beast.Attack {
         this.attackModifier = attackModifier;
     }
 
-    public List<Damage> getDamage() {
+    public Damage getDamage() {
         return damage;
     }
 
-    public void setDamage(List<Damage> damage) {
+    public void setDamage(Damage damage) {
         this.damage = damage;
     }
 
     public String toString() {
-        return name + ":" + attackModifier + "hit|"
-            + (damage.size() == 1 ? damage.get(0) : damage.toString().replaceAll("\\s+",""));
+        return name + ":" + attackModifier + "hit|" + damage.toString().replaceAll("\\s+", "");
+    }
+
+    public boolean isMelee() {
+        return melee;
+    }
+
+    public void setMelee(boolean melee) {
+        this.melee = melee;
     }
 }

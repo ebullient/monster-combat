@@ -13,23 +13,41 @@
  */
 package dev.ebullient.dnd.beastiary.compendium;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import dev.ebullient.dnd.beastiary.Beast;
+import dev.ebullient.dnd.mechanics.Dice;
 
 /**
  * POJO for monsters read from compendium
  */
 public class Monster {
+    final static Pattern AVG_ROLL_MOD = Pattern.compile("(\\d+)(?:\\(([-+d0-9]+)\\))?");
+    final static Pattern SAVE = Pattern.compile("([A-Z]+)\\(([-+0-9]+)\\)");
+    final static Pattern ATTACK_SEQ = Pattern.compile("\\b(\\d+)\\*([-a-z]+)\\b");
+
+    static class Stats {
+        int strength;
+        int dexterity;
+        int constitution;
+        int intelligence;
+        int wisdom;
+        int charisma;
+    }
 
     String name;
     String alignment;
     String hitPoints;
     String strength;
     String dexterity;
-    String intelligence;
     String constitution;
+    String intelligence;
     String wisdom;
     String charisma;
     String savingThrows;
@@ -43,43 +61,30 @@ public class Monster {
     Beast.Size size;
     Beast.Type type;
 
+    @JsonIgnore
+    Stats abilities = new Stats();
+
+    @JsonIgnore
+    Stats modifiers = new Stats();
+
+    @JsonIgnore
+    Stats saveThrows = new Stats();
+
     public String toString() {
         return name
-            + "[" + size + " " + type
-            + ", ac="+ armorClass
-            + ", hp="+hitPoints
-            + ", str=" + strength
-            + ", dex=" + dexterity
-            + ", con=" + constitution
-            + ", int=" + intelligence
-            + ", wis=" + wisdom
-            + ", cha=" + charisma
-            + ", save=[" + savingThrows + "]"
-            + ", cr="+challengeRating
-            + ", pp="+passivePerception
-            + "]";
-    }
-
-    public boolean isValid() {
-        return name != null
-            && hitPoints != null
-            && strength != null
-            && dexterity != null
-            && constitution != null
-            && intelligence != null
-            && wisdom != null
-            && charisma != null
-            && challengeRating != null
-            && armorClass >= 0;
-    }
-
-    static float convertToFloat(String s) {
-        switch(s) {
-            case "1/8": return .125f;
-            case "1/4": return .25f;
-            case "1/2": return .5f;
-            default: return Float.parseFloat(s);
-        }
+                + "[" + size + " " + type
+                + ", ac=" + armorClass
+                + ", hp=" + hitPoints
+                + ", str=" + strength
+                + ", dex=" + dexterity
+                + ", con=" + constitution
+                + ", int=" + intelligence
+                + ", wis=" + wisdom
+                + ", cha=" + charisma
+                + ", save=[" + savingThrows + "]"
+                + ", cr=" + challengeRating
+                + ", pp=" + passivePerception
+                + "]";
     }
 
     public void setName(String name) {
@@ -134,48 +139,90 @@ public class Monster {
         return strength;
     }
 
-    public void setStrength(String strength) {
-        this.strength = strength;
+    public void setStrength(String s) {
+        Matcher m = AVG_ROLL_MOD.matcher(s);
+        if (m.matches()) {
+            abilities.strength = Integer.parseInt(m.group(1));
+            modifiers.strength = Integer.parseInt(m.group(2));
+            this.strength = s;
+        } else {
+            throw new IllegalArgumentException(name + " has unparseable statistics " + s);
+        }
     }
 
     public String getDexterity() {
         return dexterity;
     }
 
-    public void setDexterity(String dexterity) {
-        this.dexterity = dexterity;
+    public void setDexterity(String s) {
+        Matcher m = AVG_ROLL_MOD.matcher(s);
+        if (m.matches()) {
+            abilities.dexterity = Integer.parseInt(m.group(1));
+            modifiers.dexterity = Integer.parseInt(m.group(2));
+            this.dexterity = s;
+        } else {
+            throw new IllegalArgumentException(name + " has unparseable statistics " + s);
+        }
     }
 
     public String getIntelligence() {
         return intelligence;
     }
 
-    public void setIntelligence(String intelligence) {
-        this.intelligence = intelligence;
+    public void setIntelligence(String s) {
+        Matcher m = AVG_ROLL_MOD.matcher(s);
+        if (m.matches()) {
+            abilities.intelligence = Integer.parseInt(m.group(1));
+            modifiers.intelligence = Integer.parseInt(m.group(2));
+            this.intelligence = s;
+        } else {
+            throw new IllegalArgumentException(name + " has unparseable statistics " + s);
+        }
     }
 
     public String getConstitution() {
         return constitution;
     }
 
-    public void setConstitution(String constitution) {
-        this.constitution = constitution;
+    public void setConstitution(String s) {
+        Matcher m = AVG_ROLL_MOD.matcher(s);
+        if (m.matches()) {
+            abilities.constitution = Integer.parseInt(m.group(1));
+            modifiers.constitution = Integer.parseInt(m.group(2));
+            this.constitution = s;
+        } else {
+            throw new IllegalArgumentException(name + " has unparseable statistics " + s);
+        }
     }
 
     public String getWisdom() {
         return wisdom;
     }
 
-    public void setWisdom(String wisdom) {
-        this.wisdom = wisdom;
+    public void setWisdom(String s) {
+        Matcher m = AVG_ROLL_MOD.matcher(s);
+        if (m.matches()) {
+            abilities.wisdom = Integer.parseInt(m.group(1));
+            modifiers.wisdom = Integer.parseInt(m.group(2));
+            this.wisdom = s;
+        } else {
+            throw new IllegalArgumentException(name + " has unparseable statistics " + s);
+        }
     }
 
     public String getCharisma() {
         return charisma;
     }
 
-    public void setCharisma(String charisma) {
-        this.charisma = charisma;
+    public void setCharisma(String s) {
+        Matcher m = AVG_ROLL_MOD.matcher(s);
+        if (m.matches()) {
+            abilities.charisma = Integer.parseInt(m.group(1));
+            modifiers.charisma = Integer.parseInt(m.group(2));
+            this.charisma = s;
+        } else {
+            throw new IllegalArgumentException(name + " has unparseable statistics " + s);
+        }
     }
 
     public String getSavingThrows() {
@@ -183,6 +230,32 @@ public class Monster {
     }
 
     public void setSavingThrows(String savingThrows) {
+        if (savingThrows != null) {
+            Matcher m = SAVE.matcher(savingThrows);
+            while (m.find()) {
+                switch (m.group(1)) {
+                    case "STR":
+                        saveThrows.strength = Integer.parseInt(m.group(2));
+                        break;
+                    case "DEX":
+                        saveThrows.dexterity = Integer.parseInt(m.group(2));
+                        break;
+                    case "CON":
+                        saveThrows.constitution = Integer.parseInt(m.group(2));
+                        break;
+                    case "INT":
+                        saveThrows.intelligence = Integer.parseInt(m.group(2));
+                        break;
+                    case "WIS":
+                        saveThrows.wisdom = Integer.parseInt(m.group(2));
+                        break;
+                    case "CHA":
+                        saveThrows.charisma = Integer.parseInt(m.group(2));
+                        break;
+                }
+            }
+        }
+
         this.savingThrows = savingThrows;
     }
 
@@ -224,5 +297,165 @@ public class Monster {
 
     public void setMultiattack(Multiattack multiattack) {
         this.multiattack = multiattack;
+    }
+
+    private int startingHitPoints() {
+        if (hitPoints != null) {
+            Matcher m = AVG_ROLL_MOD.matcher(hitPoints);
+            if (m.matches()) {
+                return m.group(2) == null ? Integer.parseInt(m.group(1)) : Dice.roll(m.group(2));
+            }
+        }
+        throw new IllegalArgumentException("Bad hitpoints string [" + hitPoints + "] or perma-dead creature " + name);
+    }
+
+    @JsonIgnore
+    public Beast asBeast() {
+        final Monster m = this;
+
+        return new Beast() {
+            @Override
+            public String getChallengeRating() {
+                return m.getChallengeRating();
+            }
+
+            @Override
+            public Beast.Participant createParticipant() {
+                return new Monster.Participant(m);
+
+            }
+        }; // new Beast
+    }
+
+    static class Participant implements Beast.Participant {
+
+        final Monster my;
+        final double maxHitPoints;
+        int hitPoints;
+
+        Participant(Monster m) {
+            my = m;
+            hitPoints = my.startingHitPoints();
+            maxHitPoints = (double) hitPoints;
+        }
+
+        @Override
+        public String getName() {
+            return my.name;
+        }
+
+        @Override
+        public String getDescription() {
+            final String description = my.name + ", " + my.description.get("General");
+            return description;
+        }
+
+        @Override
+        public int getInitiative() {
+            final int initiative = Dice.d20() + getModifier(Beast.Statistic.DEX);
+            return initiative;
+        }
+
+        @Override
+        public int getPassivePerception() {
+            return my.passivePerception;
+        }
+
+        @Override
+        public int getArmorClass() {
+            return my.armorClass;
+        }
+
+        @Override
+        public void takeDamage(int damage) {
+            this.hitPoints -= damage;
+            if (this.hitPoints < 0) {
+                this.hitPoints = 0;
+            }
+        }
+
+        @Override
+        public boolean isAlive() {
+            return hitPoints > 0;
+        }
+
+        @Override
+        public int getRelativeHealth() {
+            return (int) ((hitPoints / maxHitPoints) * 100);
+        }
+
+        @Override
+        public List<Beast.Attack> getAttacks() {
+            List<Beast.Attack> list = new ArrayList<>();
+            if (my.multiattack != null) {
+                String sequence = my.multiattack.randomCombination();
+                Matcher m = ATTACK_SEQ.matcher(sequence);
+                while (m.find()) {
+                    for (int i = 0; i < Integer.parseInt(m.group(1)); i++) {
+                        list.add(my.actions.get(m.group(2)));
+                    }
+                }
+            } else {
+                list.add(my.actions.values().iterator().next());
+            }
+            return list;
+        }
+
+        @Override
+        public int getSavingThrow(Beast.Statistic s) {
+            switch (s) {
+                case STR:
+                    return my.saveThrows.strength;
+                case DEX:
+                    return my.saveThrows.dexterity;
+                case CON:
+                    return my.saveThrows.constitution;
+                case INT:
+                    return my.saveThrows.intelligence;
+                case WIS:
+                    return my.saveThrows.wisdom;
+                case CHA:
+                    return my.saveThrows.charisma;
+            }
+            return 0;
+        }
+
+        @Override
+        public int getModifier(Beast.Statistic s) {
+            switch (s) {
+                case STR:
+                    return my.modifiers.strength;
+                case DEX:
+                    return my.modifiers.dexterity;
+                case CON:
+                    return my.modifiers.constitution;
+                case INT:
+                    return my.modifiers.intelligence;
+                case WIS:
+                    return my.modifiers.wisdom;
+                case CHA:
+                    return my.modifiers.charisma;
+            }
+            return 0;
+        }
+
+        @Override
+        public int getAbility(Beast.Statistic s) {
+            switch (s) {
+                case STR:
+                    return my.abilities.strength;
+                case DEX:
+                    return my.abilities.dexterity;
+                case CON:
+                    return my.abilities.constitution;
+                case INT:
+                    return my.abilities.intelligence;
+                case WIS:
+                    return my.abilities.wisdom;
+                case CHA:
+                    return my.abilities.charisma;
+            }
+            return 0;
+        }
     }
 }

@@ -38,7 +38,7 @@ public class Dice {
     /** @return the value of n 1d4 rolls */
     public static final int d4(int n) {
         int total = 0;
-        for (int i = 0; i < n; i++ ) {
+        for (int i = 0; i < n; i++) {
             total += d4();
         }
         return total;
@@ -52,7 +52,7 @@ public class Dice {
     /** @return the value of n 1d6 rolls */
     public static final int d6(int n) {
         int total = 0;
-        for (int i = 0; i < n; i++ ) {
+        for (int i = 0; i < n; i++) {
             total += d6();
         }
         return total;
@@ -66,7 +66,7 @@ public class Dice {
     /** @return the value of n 1d8 rolls */
     public static final int d8(int n) {
         int total = 0;
-        for (int i = 0; i < n; i++ ) {
+        for (int i = 0; i < n; i++) {
             total += d8();
         }
         return total;
@@ -80,7 +80,7 @@ public class Dice {
     /** @return the value of n 1d10 rolls */
     public static final int d10(int n) {
         int total = 0;
-        for (int i = 0; i < n; i++ ) {
+        for (int i = 0; i < n; i++) {
             total += d10();
         }
         return total;
@@ -94,37 +94,37 @@ public class Dice {
     /** @return the value of n 1d20 rolls */
     public static final int d20(int n) {
         int total = 0;
-        for (int i = 0; i < n; i++ ) {
+        for (int i = 0; i < n; i++) {
             total += d20();
         }
         return total;
     }
 
     /** @return the result of a specified roll: 1d6+2 or 5d10+9+1d10 or 1d6-1 */
-	public static int roll(String pattern) {
+    public static int roll(String pattern) {
         final Pattern dice = Pattern.compile("(\\d+)d(\\d+)"); // x rolls of x-sided die
         final Pattern add = Pattern.compile("(\\d+)\\s*(\\+|-)\\s*(\\d+)");
 
         Matcher rolls = dice.matcher(pattern);
         StringBuffer str = new StringBuffer();
 
-        while(rolls.find()) {
+        while (rolls.find()) {
             int n = Integer.parseInt(rolls.group(1));
             int result = 0;
-            switch(rolls.group(2)) {
-                case "4" :
+            switch (rolls.group(2)) {
+                case "4":
                     result = d4(n);
                     break;
-                case "6" :
+                case "6":
                     result = d6(n);
                     break;
-                case "8" :
+                case "8":
                     result = d8(n);
                     break;
-                case "10" :
+                case "10":
                     result = d10(n);
                     break;
-                case "20" :
+                case "20":
                     result = d20(n);
                     break;
             }
@@ -136,15 +136,15 @@ public class Dice {
 
         // We're down to simple math now: 1+20-12
         Matcher sum = add.matcher(pattern);
-        while(sum.find()) {
+        while (sum.find()) {
             int x = Integer.parseInt(sum.group(1));
             int y = Integer.parseInt(sum.group(3));
-            switch(sum.group(2)) {
+            switch (sum.group(2)) {
                 case "+":
-                    pattern = sum.replaceFirst(Integer.toString(x+y));
+                    pattern = sum.replaceFirst(Integer.toString(x + y));
                     break;
                 case "-":
-                    pattern = sum.replaceFirst(Integer.toString(x-y));
+                    pattern = sum.replaceFirst(Integer.toString(x - y));
                     break;
             }
             sum.reset(pattern);
@@ -153,7 +153,7 @@ public class Dice {
         try {
             return Integer.parseInt(pattern);
         } catch (NumberFormatException nfe) {
-            System.err.println("Error parsing " + pattern + ": " +nfe.getMessage() );
+            System.err.println("Error parsing " + pattern + ": " + nfe.getMessage());
             throw nfe;
         }
     }

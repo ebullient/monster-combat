@@ -13,15 +13,31 @@
  */
 package dev.ebullient.dnd.beastiary;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import dev.ebullient.dnd.mechanics.Dice;
 
 public class Beastiary {
 
-    long totalCount;
+    int totalCount;
+    List<Beast> allBeasts = new ArrayList<>(500);
+    Map<String, List<Beast>> beastsByChallengeRating = new HashMap<>(500);
 
     /**
      * Add one beast to the Beastiary
      */
     public Beast save(Beast b) {
+        allBeasts.add(b);
+
+        String cr = b.getChallengeRating();
+        beastsByChallengeRating
+                .computeIfAbsent(cr, k -> new ArrayList<>())
+                .add(b);
+
+        totalCount++;
         return b;
     }
 
@@ -29,22 +45,28 @@ public class Beastiary {
      * @return a random monster
      */
     public Beast findOne() {
-        return null;
+        if (allBeasts.isEmpty()) {
+            return null;
+        }
+        return allBeasts.get(Dice.range(allBeasts.size()));
     }
 
     /**
      * @return a random beast with the requested challenge rating
      */
     public Beast findOneByChallengeRating(String cr) {
-        return null;
+        List<Beast> beasts = beastsByChallengeRating.get(cr);
+        if (beasts.isEmpty()) {
+            return null;
+        }
+        return beasts.get(Dice.range(beasts.size()));
     }
-
 
     public String toString() {
         return new StringBuilder()
-            .append("Beastiary contains ")
-            .append(totalCount)
-            .append(" beasts")
-            .toString();
+                .append("Beastiary contains ~")
+                .append(totalCount)
+                .append(" beasts")
+                .toString();
     }
 }
