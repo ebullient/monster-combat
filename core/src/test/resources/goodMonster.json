@@ -9,7 +9,7 @@
         "intelligence": "3(-4)",
         "wisdom": "12(+1)",
         "charisma": "7(-2)",
-        "savingThrows": null,
+        "savingThrows": "INT(2)",
         "challengeRating": "3",
         "multiattack": {
             "combinations": [
@@ -21,10 +21,10 @@
                 "name": "Claws",
                 "melee": true,
                 "attackModifier": 7,
+                "savingThrow": null,
                 "damage": {
                     "type": "slashing",
                     "amount": "14(2d8+5)",
-                    "savingThrow": null,
                     "disadvantage": null
                 }
             },
@@ -32,10 +32,10 @@
                 "name": "Beak",
                 "melee": true,
                 "attackModifier": 7,
+                "savingThrow": null,
                 "damage": {
                     "type": "piercing",
                     "amount": "10(1d10+5)",
-                    "savingThrow": null,
                     "disadvantage": null
                 }
             }

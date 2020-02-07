@@ -1,0 +1,63 @@
+{
+    "erinyes" : {
+        "name" : "Erinyes",
+        "alignment" : "lawful evil",
+        "hitPoints" : "153(18d8+72)",
+        "strength" : "18(+4)",
+        "dexterity" : "16(+3)",
+        "constitution" : "18(+4)",
+        "intelligence" : "14(+2)",
+        "wisdom" : "14(+2)",
+        "charisma" : "18(+4)",
+        "savingThrows" : "DEX(+7),CON(+8),WIS(+6),CHA(+8)",
+        "challengeRating" : "12",
+        "multiattack" : {
+          "combinations" : [ "3*melee" ]
+        },
+        "actions" : {
+          "longbow" : {
+            "name" : "Longbow",
+            "melee" : false,
+            "attackModifier" : 7,
+            "savingThrow" : null,
+            "damage" : {
+              "type" : "piercing",
+              "amount" : "7(1d8+3)",
+              "disadvantage" : null
+            }
+          },
+          "longsword" : {
+            "name" : "Longsword",
+            "melee" : true,
+            "attackModifier" : 8,
+            "savingThrow" : null,
+            "damage" : {
+              "type" : "slashing",
+              "amount" : "8(1d8+4)",
+              "disadvantage" : null
+            }
+          }
+        },
+        "description" : {
+          "Senses" : "truesight 120 ft., passive Perception 12",
+          "Speed" : "30 ft., fly 60 ft.",
+          "Condition Immunity" : "Condition Immunities poisoned",
+          "Background" : "The most beautiful and striking of all lesser and greater devils, the erinyes are fierce and disciplined warriors. Sweeping down from the skies, they bring swift death to creatures that have wronged their masters or defied the edicts of Asmodeus. The erinyes appear as male or female humanoids with statuesque builds and large feathery wings. Most wear stylized armor and horned helms, and carry exquisite swords and bows. A few also use ropes of entanglement to ensnare powerful foes. Legends tell that the first erinyes were angels that fell from the Upper Planes because of temptation or misdeed. Erinyes are always willing to take advantage of being mistaken for celestials in their missions of conquest and corruption.",
+          "Damage Immunity" : "Damage Immunities fire, poison",
+          "Scores" : "STR=18(+4), DEX=16(+3), CON=18(+4), INT=14(+2), WIS=14(+2), CHA=18(+4)",
+          "Hit Points" : "153 (18d8 + 72)",
+          "Languages" : "Infernal, telepathy 120 ft.",
+          "Damage Resistance" : "Damage Resistances cold; bludgeoning, piercing, and slashing from nonmagical attacks not made with silvered weapons",
+          "Challenge" : "12 (8,400 XP)",
+          "Saving Throws" : "DEX(+7),CON(+8),WIS(+6),CHA(+8)",
+          "Armor Class" : "18 (plate)",
+          "General" : "Medium fiend (devil), lawful evil",
+          "Attacks" : "Multiattack. The erinyes makes three attacks.\nLongsword. Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage, or 9 (1d10 + 4) slashing damage if used with two hands, plus 13 (3d8) poison damage.\nLongbow. Ranged Weapon Attack: +7 to hit, range 150/600 ft., one target. Hit: 7 (1d8 + 3) piercing damage plus 13 (3d8) poison damage, and the target must succeed on a DC 14 Constitution saving throw or be poisoned. The poison lasts until it is removed by the lesser restoration spell or similar magic.",
+          "Notes" : "Hellish Weapons. The erinyes's weapon attacks are magical and deal an extra 13 (3d8) poison damage on a hit (included in the attacks).\nMagic Resistance. The erinyes has advantage on saving throws against spells and other magical effects."
+        },
+        "passivePerception" : 12,
+        "armorClass" : 8,
+        "size" : "MEDIUM",
+        "type" : "FIEND"
+      }
+}

@@ -18,7 +18,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Dice {
-    final static Random random = new Random();
+    public static final Pattern AVG_ROLL_MOD = Pattern.compile("(\\d+)(?:\\(([-+d0-9]+)\\))?");
+
+    public enum Method {
+        USE_AVERAGE,
+        ROLL
+    }
+
+    static final Random random = new Random();
 
     /** @return a value in a range including 0: [0, bound) */
     public static final int range(int bound) {
@@ -28,6 +35,28 @@ public class Dice {
     /** @return the value of a custom die roll: [1, bound] */
     public static final int customDie(int bound) {
         return random.nextInt(bound) + 1;
+    }
+
+    /**
+     * @return average roll per sides
+     */
+    public static final double averageRoll(int sides) {
+        switch (sides) {
+            case 4:
+                return 2.5;
+            case 6:
+                return 3.5;
+            case 8:
+                return 4.5;
+            case 10:
+                return 5.5;
+            case 12:
+                return 6.5;
+            case 20:
+                return 10.5;
+            default:
+                return (sides / 2) + .5;
+        }
     }
 
     /** @return the value of a 1d4 roll: [1,4] */
@@ -86,6 +115,20 @@ public class Dice {
         return total;
     }
 
+    /** @return the value of a 1d12 roll: [1,12] */
+    public static final int d12() {
+        return random.nextInt(12) + 1;
+    }
+
+    /** @return the value of n 1d12 rolls */
+    public static final int d12(int n) {
+        int total = 0;
+        for (int i = 0; i < n; i++) {
+            total += d12();
+        }
+        return total;
+    }
+
     /** @return the value of a 1d20 roll: [1,20] */
     public static final int d20() {
         return random.nextInt(20) + 1;
@@ -98,6 +141,19 @@ public class Dice {
             total += d20();
         }
         return total;
+    }
+
+    public static int roll(String pattern, Method method) {
+        if (pattern != null) {
+            Matcher m = AVG_ROLL_MOD.matcher(pattern);
+            if (m.matches()) {
+                if (method == Method.USE_AVERAGE || m.group(2) == null) {
+                    return Integer.parseInt(m.group(1));
+                }
+                return Dice.roll(m.group(2));
+            }
+        }
+        throw new IllegalArgumentException("Bad roll pattern: " + pattern);
     }
 
     /** @return the result of a specified roll: 1d6+2 or 5d10+9+1d10 or 1d6-1 */

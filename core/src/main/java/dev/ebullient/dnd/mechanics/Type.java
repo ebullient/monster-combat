@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 IBM Corp. All rights reserved.
+ * Copyright © 2019 IBM Corp. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -11,14 +11,28 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary;
+package dev.ebullient.dnd.mechanics;
 
-import dev.ebullient.dnd.combat.Combatant;
-import dev.ebullient.dnd.mechanics.Dice;
+public enum Type {
+    PLANT,
+    SWARM,
+    FEY,
+    CONSTRUCT,
+    BEAST,
+    HUMANOID,
+    UNDEAD,
+    OOZE,
+    ABERRATION,
+    CELESTIAL,
+    MONSTROSITY,
+    DRAGON,
+    FIEND,
+    GIANT,
+    ELEMENTAL;
 
-public interface Beast {
+    static final Type[] arr = values();
 
-    public String getChallengeRating();
-
-    public Combatant createCombatant(Dice.Method method);
+    public static Type getOne() {
+        return arr[Dice.range(arr.length)];
+    }
 }

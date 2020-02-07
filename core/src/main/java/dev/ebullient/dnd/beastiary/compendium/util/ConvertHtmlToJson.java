@@ -40,12 +40,14 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
-import dev.ebullient.dnd.beastiary.Beast;
-import dev.ebullient.dnd.beastiary.Beast.Statistic;
-import dev.ebullient.dnd.beastiary.compendium.Attack;
 import dev.ebullient.dnd.beastiary.compendium.Monster;
+import dev.ebullient.dnd.beastiary.compendium.MonsterAttack;
+import dev.ebullient.dnd.beastiary.compendium.MonsterDamage;
 import dev.ebullient.dnd.beastiary.compendium.Multiattack;
+import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.HitPoints;
+import dev.ebullient.dnd.mechanics.Size;
+import dev.ebullient.dnd.mechanics.Type;
 
 /**
  * One time conversion of a heaping pile of HTML into a tidy JSON compendium.
@@ -224,7 +226,7 @@ public class ConvertHtmlToJson {
 
     void parseActions(Monster monster, List<Element> elements, Map<String, String> description) {
         List<String> noteText = new ArrayList<>();
-        Map<String, Attack> attacks = new HashMap<>();
+        Map<String, MonsterAttack> attacks = new HashMap<>();
         String multiattack = null;
 
         nextelement: for (Element e : elements) {
@@ -245,22 +247,22 @@ public class ConvertHtmlToJson {
             } else if (all.contains("Attack")) {
                 String name = segments[0];
 
-                Attack a = new Attack();
+                MonsterAttack a = new MonsterAttack();
                 a.setName(name);
 
-                List<Attack.Damage> damage = new ArrayList<>();
+                List<MonsterDamage> damage = new ArrayList<>();
                 List<String> slice = Arrays.asList(segments).subList(1, segments.length);
 
                 for (String s : slice) {
                     if (s.startsWith("Hit")) {
                         Matcher m = HIT.matcher(s);
                         if (m.find()) {
-                            Attack.Damage d = new Attack.Damage();
+                            MonsterDamage d = new MonsterDamage();
                             d.setAmount(m.group(1).replaceAll("\\s+", ""));
                             d.setType(m.group(2).trim());
                             damage.add(d);
                         } else if (s.contains("cursed")) {
-                            Attack.Damage d = new Attack.Damage();
+                            MonsterDamage d = new MonsterDamage();
                             d.setType("curse");
                             d.setAmount("0");
                             d.setDisadvantage(getDisadvantage(toLower(s)));
@@ -288,13 +290,13 @@ public class ConvertHtmlToJson {
             } else if (all.contains("Recharge")) {
                 String name = segments[0];
 
-                Attack a = new Attack();
+                MonsterAttack a = new MonsterAttack();
                 a.setName(name);
 
                 if (all.contains(" DC ") && all.contains("damage")) {
-                    a.setDamage(parseDamage(all));
+                    a.setDamage(parseDamage(all, a));
                 } else {
-                    Attack.Damage d = new Attack.Damage();
+                    MonsterDamage d = new MonsterDamage();
                     d.setAmount("0");
                     a.setDamage(d);
                 }
@@ -310,11 +312,11 @@ public class ConvertHtmlToJson {
         description.put("Attacks", String.join("\n", noteText));
     }
 
-    private Attack.Damage parseDamage(String s) {
-        Attack.Damage d = new Attack.Damage();
+    private MonsterDamage parseDamage(String s, MonsterAttack a) {
+        MonsterDamage d = new MonsterDamage();
         Matcher m1 = DC.matcher(s);
         if (m1.find()) {
-            d.setSavingThrow(Beast.Statistic.convert(m1.group(2)) + "(" + m1.group(1) + ")");
+            a.setSavingThrow(Ability.convert(m1.group(2)) + "(" + m1.group(1) + ")");
             Matcher m2 = HIT.matcher(s);
             if (m2.find()) {
                 d.setAmount(m2.group(1).replaceAll("\\s+", ""));
@@ -329,32 +331,32 @@ public class ConvertHtmlToJson {
         return null;
     }
 
-    private List<Statistic> getDisadvantage(String s) {
+    private List<Ability> getDisadvantage(String s) {
         if (s.contains("disadvantage")) {
-            List<Beast.Statistic> list = new ArrayList<>();
+            List<Ability> list = new ArrayList<>();
             if (s.contains("strength")) {
-                list.add(Statistic.STR);
+                list.add(Ability.STR);
             }
             if (s.contains("dexterity")) {
-                list.add(Statistic.DEX);
+                list.add(Ability.DEX);
             }
             if (s.contains("constitution")) {
-                list.add(Statistic.CON);
+                list.add(Ability.CON);
             }
             if (s.contains("intelligence")) {
-                list.add(Statistic.INT);
+                list.add(Ability.INT);
             }
             if (s.contains("wisdom")) {
-                list.add(Statistic.WIS);
+                list.add(Ability.WIS);
             }
             if (s.contains("charisma")) {
-                list.add(Statistic.CHA);
+                list.add(Ability.CHA);
             }
         }
         return Collections.emptyList();
     }
 
-    public Multiattack parseMultiattack(String multiattack, Map<String, Attack> attacks) {
+    public Multiattack parseMultiattack(String multiattack, Map<String, MonsterAttack> attacks) {
         final Pattern LIST_ATTACKS = Pattern.compile("([-a-z]+)(?: melee)? attacks(?:\\:|,)\\s+(.*)");
         final Pattern EITHER_ATTACK = Pattern.compile("\\beither (with its [-a-z]+) or (its [-a-z]+)(?:\\b|\\.)");
         final Pattern REPEAT_WITH_ATTACK = Pattern.compile("\\b([-a-z]+) attacks? with its ([-a-z]+)(?:\\b|\\.)");
@@ -564,7 +566,7 @@ public class ConvertHtmlToJson {
         return attack;
     }
 
-    private String checkExists(String name, Map<String, Attack> attacks) {
+    private String checkExists(String name, Map<String, MonsterAttack> attacks) {
         if ("melee".equals(name)) {
             return name;
         }
@@ -766,8 +768,8 @@ public class ConvertHtmlToJson {
 
         Matcher m = sizeTypeAlign.matcher(parent.text().trim());
         if (m.matches()) {
-            monster.setSize(Beast.Size.valueOf(m.group(1).toUpperCase(Locale.ROOT)));
-            monster.setType(Beast.Type.valueOf(m.group(2).toUpperCase(Locale.ROOT)));
+            monster.setSize(Size.valueOf(m.group(1).toUpperCase(Locale.ROOT)));
+            monster.setType(Type.valueOf(m.group(2).toUpperCase(Locale.ROOT)));
             monster.setAlignment(m.group(3));
         } else {
             throw new IllegalArgumentException("Bad size/type string: " + parent.text());

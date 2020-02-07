@@ -22,24 +22,23 @@ import java.util.regex.Pattern;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import dev.ebullient.dnd.beastiary.Beast;
+import dev.ebullient.dnd.combat.Attack;
+import dev.ebullient.dnd.combat.Combatant;
+import dev.ebullient.dnd.mechanics.Ability;
+import dev.ebullient.dnd.mechanics.ChallengeRating;
 import dev.ebullient.dnd.mechanics.Dice;
+import dev.ebullient.dnd.mechanics.HitPoints;
+import dev.ebullient.dnd.mechanics.Size;
+import dev.ebullient.dnd.mechanics.Type;
 
 /**
- * POJO for monsters read from compendium
+ * Monsters read from the compendium
+ * Defines two
+ *
+ * @see CompendiumReader
  */
 public class Monster {
-    final static Pattern AVG_ROLL_MOD = Pattern.compile("(\\d+)(?:\\(([-+d0-9]+)\\))?");
-    final static Pattern SAVE = Pattern.compile("([A-Z]+)\\(([-+0-9]+)\\)");
-    final static Pattern ATTACK_SEQ = Pattern.compile("\\b(\\d+)\\*([-a-z]+)\\b");
-
-    static class Stats {
-        int strength;
-        int dexterity;
-        int constitution;
-        int intelligence;
-        int wisdom;
-        int charisma;
-    }
+    static final Pattern ATTACK_SEQ = Pattern.compile("\\b(\\d+)\\*([-a-z]+)\\b");
 
     String name;
     String alignment;
@@ -53,22 +52,25 @@ public class Monster {
     String savingThrows;
     String challengeRating;
     Multiattack multiattack;
-    Map<String, Attack> actions;
+    Map<String, MonsterAttack> actions;
     Map<String, String> description;
     int passivePerception;
 
     int armorClass;
-    Beast.Size size;
-    Beast.Type type;
+    Size size;
+    Type type;
 
     @JsonIgnore
-    Stats abilities = new Stats();
+    final Ability.All abilities = new Ability.All();
 
     @JsonIgnore
-    Stats modifiers = new Stats();
+    final Ability.All modifiers = new Ability.All();
 
     @JsonIgnore
-    Stats saveThrows = new Stats();
+    final Ability.All saveThrows = new Ability.All();
+
+    @JsonIgnore
+    List<String> keySet = null;
 
     public String toString() {
         return name
@@ -103,19 +105,19 @@ public class Monster {
         this.alignment = alignment.trim();
     }
 
-    public Beast.Size getSize() {
+    public Size getSize() {
         return size;
     }
 
-    public void setSize(Beast.Size size) {
+    public void setSize(Size size) {
         this.size = size;
     }
 
-    public Beast.Type getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(Beast.Type type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -140,7 +142,7 @@ public class Monster {
     }
 
     public void setStrength(String s) {
-        Matcher m = AVG_ROLL_MOD.matcher(s);
+        Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
             abilities.strength = Integer.parseInt(m.group(1));
             modifiers.strength = Integer.parseInt(m.group(2));
@@ -155,7 +157,7 @@ public class Monster {
     }
 
     public void setDexterity(String s) {
-        Matcher m = AVG_ROLL_MOD.matcher(s);
+        Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
             abilities.dexterity = Integer.parseInt(m.group(1));
             modifiers.dexterity = Integer.parseInt(m.group(2));
@@ -170,7 +172,7 @@ public class Monster {
     }
 
     public void setIntelligence(String s) {
-        Matcher m = AVG_ROLL_MOD.matcher(s);
+        Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
             abilities.intelligence = Integer.parseInt(m.group(1));
             modifiers.intelligence = Integer.parseInt(m.group(2));
@@ -185,7 +187,7 @@ public class Monster {
     }
 
     public void setConstitution(String s) {
-        Matcher m = AVG_ROLL_MOD.matcher(s);
+        Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
             abilities.constitution = Integer.parseInt(m.group(1));
             modifiers.constitution = Integer.parseInt(m.group(2));
@@ -200,7 +202,7 @@ public class Monster {
     }
 
     public void setWisdom(String s) {
-        Matcher m = AVG_ROLL_MOD.matcher(s);
+        Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
             abilities.wisdom = Integer.parseInt(m.group(1));
             modifiers.wisdom = Integer.parseInt(m.group(2));
@@ -215,7 +217,7 @@ public class Monster {
     }
 
     public void setCharisma(String s) {
-        Matcher m = AVG_ROLL_MOD.matcher(s);
+        Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
             abilities.charisma = Integer.parseInt(m.group(1));
             modifiers.charisma = Integer.parseInt(m.group(2));
@@ -231,7 +233,7 @@ public class Monster {
 
     public void setSavingThrows(String savingThrows) {
         if (savingThrows != null) {
-            Matcher m = SAVE.matcher(savingThrows);
+            Matcher m = Attack.SAVE.matcher(savingThrows);
             while (m.find()) {
                 switch (m.group(1)) {
                     case "STR":
@@ -283,12 +285,13 @@ public class Monster {
         this.description = description;
     }
 
-    public Map<String, Attack> getActions() {
+    public Map<String, MonsterAttack> getActions() {
         return actions;
     }
 
-    public void setActions(Map<String, Attack> actions) {
+    public void setActions(Map<String, MonsterAttack> actions) {
         this.actions = actions;
+        this.keySet = new ArrayList<>(actions.keySet());
     }
 
     public Multiattack getMultiattack() {
@@ -297,16 +300,6 @@ public class Monster {
 
     public void setMultiattack(Multiattack multiattack) {
         this.multiattack = multiattack;
-    }
-
-    private int startingHitPoints() {
-        if (hitPoints != null) {
-            Matcher m = AVG_ROLL_MOD.matcher(hitPoints);
-            if (m.matches()) {
-                return m.group(2) == null ? Integer.parseInt(m.group(1)) : Dice.roll(m.group(2));
-            }
-        }
-        throw new IllegalArgumentException("Bad hitpoints string [" + hitPoints + "] or perma-dead creature " + name);
     }
 
     @JsonIgnore
@@ -320,23 +313,30 @@ public class Monster {
             }
 
             @Override
-            public Beast.Participant createParticipant() {
-                return new Monster.Participant(m);
+            public Combatant createCombatant(Dice.Method method) {
+                return new Monster.CombatantView(m, method);
 
             }
         }; // new Beast
     }
 
-    static class Participant implements Beast.Participant {
+    static class CombatantView implements Combatant {
 
         final Monster my;
         final double maxHitPoints;
+        final Dice.Method method;
+        final int initiative;
+        final int cr;
+
         int hitPoints;
 
-        Participant(Monster m) {
-            my = m;
-            hitPoints = my.startingHitPoints();
-            maxHitPoints = (double) hitPoints;
+        CombatantView(Monster m, Dice.Method method) {
+            this.my = m;
+            this.method = method;
+            this.initiative = Dice.d20() + my.modifiers.dexterity;
+            this.hitPoints = HitPoints.startingHitPoints(my.name, my.hitPoints, method);
+            this.maxHitPoints = (double) hitPoints;
+            this.cr = ChallengeRating.stringToCr(my.challengeRating);
         }
 
         @Override
@@ -351,8 +351,12 @@ public class Monster {
         }
 
         @Override
+        public int getCR() {
+            return cr;
+        }
+
+        @Override
         public int getInitiative() {
-            final int initiative = Dice.d20() + getModifier(Beast.Statistic.DEX);
             return initiative;
         }
 
@@ -385,43 +389,59 @@ public class Monster {
         }
 
         @Override
-        public List<Beast.Attack> getAttacks() {
-            List<Beast.Attack> list = new ArrayList<>();
+        public int getMaxHitPoints() {
+            return (int) maxHitPoints;
+        }
+
+        @Override
+        public List<Attack> getAttacks() {
+            List<Attack> list = new ArrayList<>();
             if (my.multiattack != null) {
                 String sequence = my.multiattack.randomCombination();
                 Matcher m = ATTACK_SEQ.matcher(sequence);
                 while (m.find()) {
                     for (int i = 0; i < Integer.parseInt(m.group(1)); i++) {
-                        list.add(my.actions.get(m.group(2)));
+                        if ("melee".equals(m.group(2))) {
+                            list.add(my.actions.get(getRandomAttack()));
+                        } else {
+                            list.add(my.actions.get(m.group(2)));
+                        }
                     }
                 }
             } else {
-                list.add(my.actions.values().iterator().next());
+                list.add(my.actions.get(getRandomAttack()));
             }
             return list;
         }
 
         @Override
-        public int getSavingThrow(Beast.Statistic s) {
+        public int getSavingThrow(Ability s) {
+            int save;
             switch (s) {
                 case STR:
-                    return my.saveThrows.strength;
+                    save = my.saveThrows.strength;
+                    return save == 0 ? my.modifiers.strength : save;
                 case DEX:
-                    return my.saveThrows.dexterity;
+                    save = my.saveThrows.dexterity;
+                    return save == 0 ? my.modifiers.dexterity : save;
                 case CON:
-                    return my.saveThrows.constitution;
+                    save = my.saveThrows.constitution;
+                    return save == 0 ? my.modifiers.constitution : save;
                 case INT:
-                    return my.saveThrows.intelligence;
+                    save = my.saveThrows.intelligence;
+                    return save == 0 ? my.modifiers.intelligence : save;
                 case WIS:
-                    return my.saveThrows.wisdom;
+                    save = my.saveThrows.wisdom;
+                    return save == 0 ? my.modifiers.wisdom : save;
                 case CHA:
-                    return my.saveThrows.charisma;
+                    save = my.saveThrows.charisma;
+                    return save == 0 ? my.modifiers.charisma : save;
             }
             return 0;
         }
 
         @Override
-        public int getModifier(Beast.Statistic s) {
+        public int getAbilityModifier(Ability s) {
             switch (s) {
                 case STR:
                     return my.modifiers.strength;
@@ -439,23 +459,9 @@ public class Monster {
             return 0;
         }
 
-        @Override
-        public int getAbility(Beast.Statistic s) {
-            switch (s) {
-                case STR:
-                    return my.abilities.strength;
-                case DEX:
-                    return my.abilities.dexterity;
-                case CON:
-                    return my.abilities.constitution;
-                case INT:
-                    return my.abilities.intelligence;
-                case WIS:
-                    return my.abilities.wisdom;
-                case CHA:
-                    return my.abilities.charisma;
-            }
-            return 0;
+        String getRandomAttack() {
+            int random = Dice.range(my.actions.size());
+            return my.keySet.get(random);
         }
     }
 }

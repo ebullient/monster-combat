@@ -19,42 +19,63 @@ import org.junit.Test;
 public class DiceTests {
 
     @Test
-    public void singleRollDamage() {
+    public void testSingleRollDamage() {
         String roll = "1d20";
         int result = Dice.roll(roll);
         Assert.assertTrue("result should be greater than 0: " + result,
-            result > 0);
+                result > 0);
         Assert.assertTrue("result should be less than 21: " + result,
-            result < 21);
+                result < 21);
     }
 
     @Test
-    public void nSingleRollDamage() {
+    public void testMultipleRollDamage() {
         String roll = "2d20";
         int result = Dice.roll(roll);
         Assert.assertTrue("result should be greater than 0: " + result,
-            result > 0);
+                result > 0);
         Assert.assertTrue("result should be less than 41: " + result,
-            result < 41);
+                result < 41);
     }
 
     @Test
-    public void singleRollMath() {
+    public void testSingleRollMath() {
         String roll = "1d20+6";
         int result = Dice.roll(roll);
         Assert.assertTrue("result should be greater than 6: " + result,
-            result > 6);
+                result > 6);
         Assert.assertTrue("result should be less than 27: " + result,
-            result < 27);
+                result < 27);
     }
 
     @Test
-    public void multiDamage() {
+    public void testCompoundDamage() {
         String roll = "2d20+2d6";
         int result = Dice.roll(roll);
         Assert.assertTrue("result should be greater than 4: " + result,
-            result > 4);
+                result > 4);
         Assert.assertTrue("result should be less than 53: " + result,
-            result < 53);
+                result < 53);
+    }
+
+    @Test
+    public void testAverageRoll() {
+        String roll = "15(2d20+2d6)";
+        int result = Dice.roll(roll, Dice.Method.USE_AVERAGE);
+        Assert.assertEquals(roll + " should return average", 15, result);
+    }
+
+    @Test
+    public void testVariableRollWithAverage() {
+        String roll = "15(2d20+2d6)";
+        int result = Dice.roll(roll, Dice.Method.ROLL);
+        Assert.assertNotEquals(roll + " should not return average", 15, result);
+    }
+
+    @Test
+    public void testOnlyAverageRoll() {
+        String roll = "15";
+        int result = Dice.roll(roll, Dice.Method.ROLL);
+        Assert.assertEquals(roll + " should return average", 15, result);
     }
 }

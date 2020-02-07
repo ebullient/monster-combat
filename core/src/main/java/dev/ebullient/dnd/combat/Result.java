@@ -11,14 +11,8 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary;
+package dev.ebullient.dnd.combat;
 
-import dev.ebullient.dnd.combat.Combatant;
-import dev.ebullient.dnd.mechanics.Dice;
+public interface Result {
 
-public interface Beast {
-
-    public String getChallengeRating();
-
-    public Combatant createCombatant(Dice.Method method);
 }

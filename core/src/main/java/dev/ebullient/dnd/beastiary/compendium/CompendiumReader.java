@@ -26,8 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.ebullient.dnd.beastiary.Beastiary;
 
 public class CompendiumReader {
-    final static ObjectMapper mapper = new ObjectMapper();
-    final static TypeReference<Map<String, Monster>> typeRef = new TypeReference<Map<String, Monster>>() {
+    static final ObjectMapper mapper = new ObjectMapper();
+    static final TypeReference<Map<String, Monster>> typeRef = new TypeReference<Map<String, Monster>>() {
     };
 
     public static void addToBeastiary(Beastiary beastiary) throws IOException {

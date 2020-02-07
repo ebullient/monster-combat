@@ -11,14 +11,31 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary;
+package dev.ebullient.dnd;
 
-import dev.ebullient.dnd.combat.Combatant;
-import dev.ebullient.dnd.mechanics.Dice;
+import dev.ebullient.dnd.combat.Attack;
 
-public interface Beast {
+public class MockDamage implements Attack.Damage {
 
-    public String getChallengeRating();
+    public String type;
+    public String amount;
 
-    public Combatant createCombatant(Dice.Method method);
+    public MockDamage(String type, String amount) {
+        this.type = type;
+        this.amount = amount;
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public String getAmount() {
+        return amount;
+    }
+
+    public String toString() {
+        return amount + type;
+    }
 }

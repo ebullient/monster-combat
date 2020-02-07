@@ -24,7 +24,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
 import dev.ebullient.dnd.beastiary.Beast;
-import dev.ebullient.dnd.beastiary.Beast.Statistic;
+import dev.ebullient.dnd.combat.Attack;
+import dev.ebullient.dnd.combat.Combatant;
+import dev.ebullient.dnd.mechanics.Ability;
+import dev.ebullient.dnd.mechanics.Dice;
+import dev.ebullient.dnd.mechanics.Size;
+import dev.ebullient.dnd.mechanics.Type;
 
 /**
  * POJO for monsters read from compendium
@@ -68,51 +73,86 @@ public class MonsterTest {
         // snag our single parsed value
         Monster m = compendium.values().iterator().next();
         Assert.assertNotNull(m);
-        Assert.assertEquals(Beast.Type.MONSTROSITY, m.getType());
-        Assert.assertEquals(Beast.Size.LARGE, m.getSize());
+        Assert.assertEquals(Type.MONSTROSITY, m.getType());
+        Assert.assertEquals(Size.LARGE, m.getSize());
+
+        // preset to predictable value ahead of participant creation
+        m.hitPoints = "40";
 
         // See the Monster as a Beast
         Beast b = m.asBeast();
 
         // Make sure ability scores / modifiers were parsed properly through participant view
-        Beast.Participant p = b.createParticipant();
-        Monster.Participant mp = (Monster.Participant) p;
+        Combatant c = b.createCombatant(Dice.Method.USE_AVERAGE);
+        Monster.CombatantView mc = (Monster.CombatantView) c;
 
-        Assert.assertEquals(3, p.getArmorClass());
-        Assert.assertEquals(13, p.getPassivePerception());
+        Assert.assertEquals(3, c.getArmorClass());
+        Assert.assertEquals(13, c.getPassivePerception());
 
-        Assert.assertEquals(20, p.getAbility(Statistic.STR));
-        Assert.assertEquals(12, p.getAbility(Statistic.DEX));
-        Assert.assertEquals(17, p.getAbility(Statistic.CON));
-        Assert.assertEquals(3, p.getAbility(Statistic.INT));
-        Assert.assertEquals(12, p.getAbility(Statistic.WIS));
-        Assert.assertEquals(7, p.getAbility(Statistic.CHA));
-
-        Assert.assertEquals(5, p.getModifier(Statistic.STR));
-        Assert.assertEquals(1, p.getModifier(Statistic.DEX));
-        Assert.assertEquals(3, p.getModifier(Statistic.CON));
-        Assert.assertEquals(-4, p.getModifier(Statistic.INT));
-        Assert.assertEquals(1, p.getModifier(Statistic.WIS));
-        Assert.assertEquals(-2, p.getModifier(Statistic.CHA));
-        Assert.assertEquals(3, p.getArmorClass());
-        Assert.assertEquals(13, p.getPassivePerception());
+        Assert.assertEquals(5, c.getAbilityModifier(Ability.STR));
+        Assert.assertEquals(1, c.getAbilityModifier(Ability.DEX));
+        Assert.assertEquals(3, c.getAbilityModifier(Ability.CON));
+        Assert.assertEquals(-4, c.getAbilityModifier(Ability.INT));
+        Assert.assertEquals(1, c.getAbilityModifier(Ability.WIS));
+        Assert.assertEquals(-2, c.getAbilityModifier(Ability.CHA));
 
         // Poke on some participant behavior
-        Assert.assertEquals(100, p.getRelativeHealth());
+        Assert.assertEquals(100, c.getRelativeHealth());
 
         // 1/2 health
-        p.takeDamage(mp.hitPoints / 2);
-        Assert.assertEquals(50, p.getRelativeHealth());
+        int startingHP = mc.hitPoints;
+        Assert.assertEquals("Preset value for max health", 40, startingHP);
+
+        int halfDamage = startingHP / 2;
+        c.takeDamage(halfDamage);
+        Assert.assertEquals("starting=" + startingHP + ", half damage=" + halfDamage + ", expect relative health of 50",
+                50, c.getRelativeHealth());
 
         // 1/4 health
-        p.takeDamage(mp.hitPoints / 2);
-        Assert.assertEquals(25, p.getRelativeHealth());
+        startingHP = mc.hitPoints;
+        halfDamage = startingHP / 2;
+        c.takeDamage(halfDamage);
+        Assert.assertEquals("starting=" + startingHP + ", half damage=" + halfDamage + ", expect relative health of 25",
+                25, c.getRelativeHealth());
 
         Assert.assertNotNull(m.getMultiattack());
 
-        List<Beast.Attack> attacks = p.getAttacks();
+        List<Attack> attacks = c.getAttacks();
         Assert.assertNotNull(attacks);
         Assert.assertEquals(2, attacks.size());
+
+        Assert.assertEquals("Known modifier should be used when no saving throw is specified",
+                5, c.getSavingThrow(Ability.STR));
+        Assert.assertEquals("Specified saving throw should be used",
+                2, c.getSavingThrow(Ability.INT));
     }
 
+    @Test
+    public void testMeleeMonster() throws Exception {
+        ClassPathResource resource = new ClassPathResource("meleeMonster.json");
+        Map<String, Monster> compendium;
+
+        try (InputStream fileStream = new FileInputStream(resource.getFile())) {
+            compendium = CompendiumReader.mapper.readValue(fileStream, CompendiumReader.typeRef);
+            Assert.assertEquals(1, compendium.size());
+        }
+
+        // snag our single parsed value
+        Monster m = compendium.values().iterator().next();
+        Assert.assertNotNull(m);
+        Assert.assertEquals(Type.FIEND, m.getType());
+        Assert.assertEquals(Size.MEDIUM, m.getSize());
+
+        // This should be multiattack w/ melee string to match
+        Assert.assertNotNull(m.multiattack);
+        Assert.assertEquals("Has one combined multiattack", 1, m.multiattack.combinations.size());
+        Assert.assertTrue("Multiattack string contains a melee weapon", m.multiattack.combinations.get(0).contains("melee"));
+
+        Combatant c = m.asBeast().createCombatant(Dice.Method.USE_AVERAGE);
+        List<Attack> attacks = c.getAttacks();
+        Assert.assertNotNull(attacks);
+        Assert.assertEquals(3, attacks.size());
+        Assert.assertFalse("List of attacks should not contain 'melee'", attacks.toString().contains("melee"));
+
+    }
 }

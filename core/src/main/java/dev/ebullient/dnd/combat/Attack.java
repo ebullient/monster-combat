@@ -11,14 +11,24 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary;
+package dev.ebullient.dnd.combat;
 
-import dev.ebullient.dnd.combat.Combatant;
-import dev.ebullient.dnd.mechanics.Dice;
+import java.util.regex.Pattern;
 
-public interface Beast {
+public interface Attack {
+    public Pattern SAVE = Pattern.compile("([A-Z]+)\\(([-+0-9]+)\\)");
 
-    public String getChallengeRating();
+    public interface Damage {
+        String getAmount();
 
-    public Combatant createCombatant(Dice.Method method);
+        String getType();
+    }
+
+    String getName();
+
+    Damage getDamage();
+
+    int getAttackModifier();
+
+    String getSavingThrow();
 }

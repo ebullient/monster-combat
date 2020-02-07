@@ -13,12 +13,18 @@
  */
 package dev.ebullient.dnd.beastiary;
 
-import dev.ebullient.dnd.combat.Combatant;
-import dev.ebullient.dnd.mechanics.Dice;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
-public interface Beast {
+public class GeneratedBeastTest {
 
-    public String getChallengeRating();
+    @Test
+    public void testCalculateAC() {
+        // Fixd formula, but this gives an idea of what is returned
+        Assert.assertEquals(10, GeneratedBeast.calculateAC(8, -3));
+        Assert.assertEquals(11, GeneratedBeast.calculateAC(10, -3));
+        Assert.assertEquals(15, GeneratedBeast.calculateAC(10, 8));
+        Assert.assertEquals(18, GeneratedBeast.calculateAC(8, 20));
+    }
 
-    public Combatant createCombatant(Dice.Method method);
 }
