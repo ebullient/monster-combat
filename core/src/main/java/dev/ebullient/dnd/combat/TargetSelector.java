@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dev.ebullient.dnd.mechanics.Comparators;
+import dev.ebullient.dnd.mechanics.Dice;
 
 /**
  * For combat rounds, we're dealing with very small lists (< 10)
@@ -25,52 +26,66 @@ public interface TargetSelector {
 
     public Combatant chooseTarget(Combatant p, List<Combatant> list);
 
-    static class SelectByHighestRelativeHealth implements TargetSelector {
+    public static final TargetSelector SelectByHighestRelativeHealth = new TargetSelector() {
 
         public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
                 return null;
+            } else if ( targets.size() == 1 ) {
+                return targets.get(0);
             }
 
             targets.sort(Comparators.RelativeHealthOrder);
             return targets.get(0);
         }
-    }
+    };
 
-    static class SelectByLowestRelativeHealth implements TargetSelector {
-
-        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
-            List<Combatant> targets = new ArrayList<>(initiativeOrder);
-            targets.remove(p);
-            if (targets.isEmpty()) {
-                return null;
-            }
-
-            targets.sort(Comparators.RelativeHealthOrder);
-            return targets.get(targets.size() - 1);
-        }
-    }
-
-    static class SelectByChallengeRating implements TargetSelector {
+    public static final TargetSelector SelectByLowestRelativeHealth = new TargetSelector() {
 
         public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
                 return null;
+            } else if ( targets.size() == 1 ) {
+                return targets.get(0);
             }
 
             targets.sort(Comparators.RelativeHealthOrder);
             return targets.get(targets.size() - 1);
         }
-    }
+    };
 
-    static class SelectAtRandom implements TargetSelector {
+    public static final TargetSelector SelectByChallengeRating = new TargetSelector() {
 
         public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
-            return null;
+            List<Combatant> targets = new ArrayList<>(initiativeOrder);
+            targets.remove(p);
+            if (targets.isEmpty()) {
+                return null;
+            } else if ( targets.size() == 1 ) {
+                return targets.get(0);
+            }
+
+            targets.sort(Comparators.RelativeHealthOrder);
+            return targets.get(targets.size() - 1);
         }
-    }
+    };
+
+    public static final TargetSelector SelectAtRandom  = new TargetSelector() {
+
+        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
+            List<Combatant> targets = new ArrayList<>(initiativeOrder);
+            targets.remove(p);
+            if (targets.isEmpty()) {
+                return null;
+            } else if ( targets.size() == 1 ) {
+                return targets.get(0);
+            }
+
+            return targets.get(Dice.range(targets.size()));
+        }
+    };
 }

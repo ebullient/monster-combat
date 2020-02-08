@@ -14,6 +14,7 @@
 package dev.ebullient.dnd.combat;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import dev.ebullient.dnd.MockAttack;
 import dev.ebullient.dnd.MockCombatant;
 import dev.ebullient.dnd.MockDamage;
+import dev.ebullient.dnd.combat.Encounter.RoundResult;
 import dev.ebullient.dnd.mechanics.Dice;
 
 public class RoundTest {
@@ -36,7 +38,7 @@ public class RoundTest {
         attack.attackModifier = 2;
         attack.damage = new MockDamage("bludgeoning", "14(2d8+5)");
 
-        Round.AttackResult result = new Round.AttackResult(mcs[0], mcs[1], attack, Dice.Method.USE_AVERAGE);
+        Encounter.AttackResult result = new Encounter.AttackResult(mcs[0], mcs[1], attack, Dice.Method.USE_AVERAGE);
         System.out.println(result);
         if (result.hit) {
             Assert.assertFalse("Combatant should be dead (14 damage vs. 10 hit points)", mcs[1].isAlive());
@@ -57,7 +59,7 @@ public class RoundTest {
         attack.savingThrow = "CON(22)";
         attack.damage = new MockDamage("poison", "14(2d8+5)");
 
-        Round.AttackResult result = new Round.AttackResult(mcs[0], mcs[1], attack, Dice.Method.USE_AVERAGE);
+        Encounter.AttackResult result = new Encounter.AttackResult(mcs[0], mcs[1], attack, Dice.Method.USE_AVERAGE);
         System.out.println(result);
         if (result.hit) {
             Assert.assertFalse("Combatant should be dead (14 damage vs. 10 hit points)", mcs[1].isAlive());
@@ -74,18 +76,29 @@ public class RoundTest {
                 new MockCombatant("1", 30),
         };
 
-        MockAttack[] mas = new MockAttack[] {
-                new MockAttack("testMeleeAttack"),
+        MockAttack[] mks = new MockAttack[] {
                 new MockAttack("testDCAttack")
         };
 
-        mas[0].attackModifier = 2;
-        mas[0].damage = new MockDamage("bludgeoning", "10");
+        mks[0].savingThrow = "CON(30)";
+        mks[0].damage = new MockDamage("poison", "10");
 
-        mas[1].savingThrow = "CON(1)";
-        mas[1].damage = new MockDamage("poison", "10");
+        // Both monsters have the same attack. A DC attack
+        // with a save of 30 means it will always hit for full
+        // damage (10)
+        mcs[0].attacks = Arrays.asList(mks);
+        mcs[1].attacks = Arrays.asList(mks);
 
-        mcs[0].attacks = Arrays.asList(mas);
-        mcs[1].attacks = Arrays.asList(mas);
+        Encounter r = new Encounter(TargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
+
+        int i = 0;
+        List<Combatant> survivors = Arrays.asList(mcs);
+        while ( survivors.size() > 1 ) {
+            i++;
+            RoundResult result = r.takeTurns(survivors);
+            survivors = result.getSurvivors();
+            Assert.assertTrue("Should not get to 6 rounds", i <= 6);
+        }
+        Assert.assertEquals("Should take 3 rounds", 3, i);
     }
 }

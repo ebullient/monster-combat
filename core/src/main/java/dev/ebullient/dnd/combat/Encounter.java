@@ -14,28 +14,25 @@
 package dev.ebullient.dnd.combat;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Dice;
 
-public class Round {
+public class Encounter {
 
-    final List<Combatant> initiativeOrder;
     final TargetSelector selector;
-    final List<AttackResult> whatHappened = new ArrayList<>();
     final Dice.Method method;
 
-    public Round(List<Combatant> initiativeOrder, TargetSelector selector, Dice.Method method) {
-        this.initiativeOrder = initiativeOrder;
+    public Encounter(TargetSelector selector, Dice.Method method) {
         this.selector = selector;
         this.method = method;
     }
 
-    public List<Combatant> takeTurns() {
-        List<Combatant> survivors = new ArrayList<>(initiativeOrder);
+    public RoundResult takeTurns(List<Combatant> initiativeOrder) {
+        RoundResult result = new RoundResult(initiativeOrder);
         for (Combatant p : initiativeOrder) {
             if (p.isAlive()) {
                 // TODO: multiple targets, not just multiple attacks
@@ -45,24 +42,40 @@ public class Round {
                 List<Attack> attacks = p.getAttacks();
                 for (Attack a : attacks) {
                     if (target.isAlive()) {
-                        whatHappened.add(new AttackResult(p, target, a, method));
+                        AttackResult r = new AttackResult(p, target, a, method).attack();
+                        result.events.add(r);
                     }
                 }
 
                 // Highlander
                 if (!target.isAlive()) {
-                    survivors.remove(p);
+                    result.survivors.remove(p);
                 }
             }
         }
-        return survivors;
+        return result;
     }
 
-    public List<Result> getWhatHappened() {
-        return Collections.unmodifiableList(whatHappened);
+    public static class RoundResult {
+        List<Combatant> survivors;
+        List<AttackResult> events;
+
+        RoundResult(List<Combatant> initiativeOrder) {
+            survivors = new ArrayList<>(initiativeOrder);
+            events = new ArrayList<>();
+        }
+
+        public List<AttackResult> getEvents() {
+            return events;
+        }
+
+        public List<Combatant> getSurvivors() {
+            return survivors;
+        }
     }
 
-    static class AttackResult implements Result {
+
+    public static class AttackResult {
         final Combatant attacker;
         final Combatant target;
         final Attack a;
@@ -78,11 +91,9 @@ public class Round {
             this.target = target;
             this.a = a;
             this.method = method;
-
-            attack();
         }
 
-        Result attack() {
+        AttackResult attack() {
             if (a.getAttackModifier() != 0) {
                 attemptAttack();
             } else if (a.getSavingThrow() != null) {
@@ -144,13 +155,36 @@ public class Round {
         }
 
         public String toString() {
-            if (hit) {
-                return String.format("%s%s attacked %s for %d damage (%s)",
-                        attacker.getName(), critical ? " critically" : "", target.getName(), damage, a.toString());
-            } else {
-                return String.format("%s attacked %s, but%s missed (%s)",
-                        attacker.getName(), target.getName(), critical ? " critically" : "", a.toString());
+            String success = hit ? "hit>" : "miss:";
+            success = critical ? success.toUpperCase(Locale.ROOT) : success;
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(success).append(" ")
+                .append(attacker.getName()).append("(").append(attacker.getRelativeHealth()).append(")")
+                .append(" -> ")
+                .append(target.getName()).append("(").append(target.getRelativeHealth()).append(")");
+
+            if ( damage != 0 ) {
+                sb.append(" for ").append(damage).append(" damage using ").append(a);
             }
+
+            return sb.toString();
+        }
+
+        public boolean wasCritical() {
+            return critical;
+        }
+
+        public boolean wasHit() {
+            return hit;
+        }
+
+        public boolean wasSaved() {
+            return saved;
+        }
+
+        public int getDamage() {
+            return damage;
         }
     }
 }

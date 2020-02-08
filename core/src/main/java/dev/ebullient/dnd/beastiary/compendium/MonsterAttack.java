@@ -62,14 +62,17 @@ public class MonsterAttack implements Attack {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(name).append(":");
+        sb.append(name).append("[");
         if (attackModifier != 0) {
-            sb.append(attackModifier).append("hit|");
+            sb.append(attackModifier).append("hit,");
         }
         if (savingThrow != null) {
-            sb.append(savingThrow).append("|");
+            sb.append(savingThrow).append(",");
         }
-        return sb.toString() + damage.toString().replaceAll("\\s+", "");
+
+        sb.append(damage.toString().replaceAll("\\s+", ""))
+            .append("]");
+        return sb.toString();
     }
 
     public boolean isMelee() {
