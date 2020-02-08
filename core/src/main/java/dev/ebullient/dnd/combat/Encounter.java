@@ -13,15 +13,24 @@
  */
 package dev.ebullient.dnd.combat;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Dice;
 
 public class Encounter {
+    static final Logger logger = LoggerFactory.getLogger(Encounter.class);
+    final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmm");
+
+    final String id = LocalDateTime.now().format(formatter) + "-" + Integer.toHexString(this.hashCode());
 
     final TargetSelector selector;
     final Dice.Method method;
@@ -32,6 +41,8 @@ public class Encounter {
     }
 
     public RoundResult takeTurns(List<Combatant> initiativeOrder) {
+        logger.debug("take turns: {}", initiativeOrder);
+
         RoundResult result = new RoundResult(initiativeOrder);
         for (Combatant p : initiativeOrder) {
             if (p.isAlive()) {
@@ -41,9 +52,13 @@ public class Encounter {
                 // Single or many attacks
                 List<Attack> attacks = p.getAttacks();
                 for (Attack a : attacks) {
+                    if (a == null) {
+                        throw new IllegalStateException("Attack should not be null " + attacks);
+                    }
                     if (target.isAlive()) {
-                        AttackResult r = new AttackResult(p, target, a, method).attack();
+                        AttackResult r = new AttackResult(p, target, a, method, id).attack();
                         result.events.add(r);
+                        logger.debug("take turns: {}", r);
                     }
                 }
 
@@ -53,6 +68,8 @@ public class Encounter {
                 }
             }
         }
+
+        logger.debug("take turns: survivors {}", result.survivors);
         return result;
     }
 
@@ -74,11 +91,11 @@ public class Encounter {
         }
     }
 
-
     public static class AttackResult {
         final Combatant attacker;
         final Combatant target;
         final Attack a;
+        final String encounterId;
 
         boolean hit;
         boolean critical;
@@ -86,11 +103,13 @@ public class Encounter {
         Dice.Method method;
         int damage;
 
-        AttackResult(Combatant attacker, Combatant target, Attack a, Dice.Method method) {
+        AttackResult(Combatant attacker, Combatant target,
+                Attack a, Dice.Method method, String encounterId) {
             this.attacker = attacker;
             this.target = target;
             this.a = a;
             this.method = method;
+            this.encounterId = encounterId;
         }
 
         AttackResult attack() {
@@ -160,11 +179,11 @@ public class Encounter {
 
             StringBuilder sb = new StringBuilder();
             sb.append(success).append(" ")
-                .append(attacker.getName()).append("(").append(attacker.getRelativeHealth()).append(")")
-                .append(" -> ")
-                .append(target.getName()).append("(").append(target.getRelativeHealth()).append(")");
+                    .append(attacker.getName()).append("(").append(attacker.getRelativeHealth()).append(")")
+                    .append(" -> ")
+                    .append(target.getName()).append("(").append(target.getRelativeHealth()).append(")");
 
-            if ( damage != 0 ) {
+            if (damage != 0) {
                 sb.append(" for ").append(damage).append(" damage using ").append(a);
             }
 

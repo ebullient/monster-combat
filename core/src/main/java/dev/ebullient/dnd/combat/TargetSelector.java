@@ -33,7 +33,7 @@ public interface TargetSelector {
             targets.remove(p);
             if (targets.isEmpty()) {
                 return null;
-            } else if ( targets.size() == 1 ) {
+            } else if (targets.size() == 1) {
                 return targets.get(0);
             }
 
@@ -49,7 +49,7 @@ public interface TargetSelector {
             targets.remove(p);
             if (targets.isEmpty()) {
                 return null;
-            } else if ( targets.size() == 1 ) {
+            } else if (targets.size() == 1) {
                 return targets.get(0);
             }
 
@@ -65,7 +65,7 @@ public interface TargetSelector {
             targets.remove(p);
             if (targets.isEmpty()) {
                 return null;
-            } else if ( targets.size() == 1 ) {
+            } else if (targets.size() == 1) {
                 return targets.get(0);
             }
 
@@ -74,14 +74,14 @@ public interface TargetSelector {
         }
     };
 
-    public static final TargetSelector SelectAtRandom  = new TargetSelector() {
+    public static final TargetSelector SelectAtRandom = new TargetSelector() {
 
         public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
                 return null;
-            } else if ( targets.size() == 1 ) {
+            } else if (targets.size() == 1) {
                 return targets.get(0);
             }
 

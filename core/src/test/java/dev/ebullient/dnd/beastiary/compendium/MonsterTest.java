@@ -13,7 +13,6 @@
  */
 package dev.ebullient.dnd.beastiary.compendium;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,6 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import dev.ebullient.dnd.beastiary.Beast;
 import dev.ebullient.dnd.combat.Attack;
@@ -62,11 +60,10 @@ public class MonsterTest {
 
     @Test
     public void testMonster() throws Exception {
-        ClassPathResource resource = new ClassPathResource("goodMonster.json");
         Map<String, Monster> compendium;
 
-        try (InputStream fileStream = new FileInputStream(resource.getFile())) {
-            compendium = CompendiumReader.mapper.readValue(fileStream, CompendiumReader.typeRef);
+        try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/goodMonster.json")) {
+            compendium = CompendiumReader.mapper.readValue(jsonInput, CompendiumReader.typeRef);
             Assert.assertEquals(1, compendium.size());
         }
 
@@ -76,8 +73,10 @@ public class MonsterTest {
         Assert.assertEquals(Type.MONSTROSITY, m.getType());
         Assert.assertEquals(Size.LARGE, m.getSize());
 
-        // preset to predictable value ahead of participant creation
+        // preset to predictable values ahead of participant creation
         m.hitPoints = "40";
+        m.savingThrows = "INT(2)";
+        m.saveThrows.intelligence = 2;
 
         // See the Monster as a Beast
         Beast b = m.asBeast();
@@ -121,19 +120,18 @@ public class MonsterTest {
         Assert.assertNotNull(attacks);
         Assert.assertEquals(2, attacks.size());
 
-        Assert.assertEquals("Known modifier should be used when no saving throw is specified",
+        Assert.assertEquals("Known modifier should be used when no saving throw is specified: " + m,
                 5, c.getSavingThrow(Ability.STR));
-        Assert.assertEquals("Specified saving throw should be used",
+        Assert.assertEquals("Specified saving throw should be used: " + m,
                 2, c.getSavingThrow(Ability.INT));
     }
 
     @Test
     public void testMeleeMonster() throws Exception {
-        ClassPathResource resource = new ClassPathResource("meleeMonster.json");
         Map<String, Monster> compendium;
 
-        try (InputStream fileStream = new FileInputStream(resource.getFile())) {
-            compendium = CompendiumReader.mapper.readValue(fileStream, CompendiumReader.typeRef);
+        try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/meleeMonster.json")) {
+            compendium = CompendiumReader.mapper.readValue(jsonInput, CompendiumReader.typeRef);
             Assert.assertEquals(1, compendium.size());
         }
 
@@ -153,6 +151,31 @@ public class MonsterTest {
         Assert.assertNotNull(attacks);
         Assert.assertEquals(3, attacks.size());
         Assert.assertFalse("List of attacks should not contain 'melee'", attacks.toString().contains("melee"));
+    }
 
+    @Test
+    public void testDragonAttacks() throws Exception {
+        Map<String, Monster> compendium;
+
+        try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/dragon.json")) {
+            compendium = CompendiumReader.mapper.readValue(jsonInput, CompendiumReader.typeRef);
+            Assert.assertEquals(1, compendium.size());
+        }
+
+        // snag our single parsed value
+        Monster m = compendium.values().iterator().next();
+        Assert.assertNotNull(m);
+        Assert.assertEquals(Type.DRAGON, m.getType());
+        Assert.assertEquals(Size.LARGE, m.getSize());
+
+        System.out.println(m.actions);
+        System.out.println(m.multiattack.combinations);
+
+        Combatant c = m.asBeast().createCombatant(Dice.Method.USE_AVERAGE);
+        List<Attack> attacks = c.getAttacks();
+        System.out.println(attacks);
+
+        // this is the lazy way to check this
+        Assert.assertFalse("No attack list elements should be null", attacks.toString().contains("null"));
     }
 }

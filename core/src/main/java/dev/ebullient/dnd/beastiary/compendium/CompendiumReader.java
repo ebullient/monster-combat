@@ -13,12 +13,9 @@
  */
 package dev.ebullient.dnd.beastiary.compendium;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
-
-import org.springframework.core.io.ClassPathResource;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,10 +28,8 @@ public class CompendiumReader {
     };
 
     public static void addToBeastiary(Beastiary beastiary) throws IOException {
-        ClassPathResource resource = new ClassPathResource("compendium.json");
-
-        try (InputStream fileStream = new FileInputStream(resource.getFile())) {
-            Map<String, Monster> compendium = mapper.readValue(fileStream, typeRef);
+        try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/compendium.json")) {
+            Map<String, Monster> compendium = mapper.readValue(jsonInput, typeRef);
             for (Monster m : compendium.values()) {
                 beastiary.save(m.asBeast());
             }

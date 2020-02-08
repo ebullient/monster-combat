@@ -58,7 +58,7 @@ public class MockAttack implements Attack {
         }
 
         sb.append(damage.toString().replaceAll("\\s+", ""))
-            .append("]");
+                .append("]");
         return sb.toString();
     }
 }

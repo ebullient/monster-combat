@@ -71,7 +71,7 @@ public class MonsterAttack implements Attack {
         }
 
         sb.append(damage.toString().replaceAll("\\s+", ""))
-            .append("]");
+                .append("]");
         return sb.toString();
     }
 

@@ -95,6 +95,18 @@ public class ConvertHtmlToJson {
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 
         writer.writeValue(Paths.get("./src/main/resources/compendium.json").toFile(), compendium);
+
+        Map<String, Monster> single = new HashMap<>();
+        single.put("owlbear", compendium.get("owlbear"));
+        writer.writeValue(Paths.get("./src/test/resources/goodMonster.json").toFile(), single);
+
+        single.clear();
+        single.put("young red dragon", compendium.get("young red dragon"));
+        writer.writeValue(Paths.get("./src/test/resources/dragon.json").toFile(), single);
+
+        single.clear();
+        single.put("erinyes", compendium.get("erinyes"));
+        writer.writeValue(Paths.get("./src/test/resources/meleeMonster.json").toFile(), single);
     }
 
     public Monster createMonster(File f) throws Exception {
@@ -364,7 +376,7 @@ public class ConvertHtmlToJson {
         final Pattern REPEAT_ATTACK = Pattern.compile("\\b([-a-z]+) ([-a-z]+) attacks?(?:\\b|\\.)");
         final Pattern VARIABLE_ATTACK = Pattern.compile("\\b([d0-9]+) ([-a-z]+) attacks?(?:\\b|\\.)");
         final Pattern USES_ATTACK = Pattern.compile("\\buses its ([-a-z]+)(?: ([-a-z]+))?");
-        final Pattern MULTIATTACK_STR = Pattern.compile("[d0-9]+\\*([-a-z]+)");
+        final Pattern MULTIATTACK_STR = Pattern.compile("([d0-9]+\\*)([-a-z]+)");
 
         // dump completely unparsable alternatives. Maybe someday
         // drop "The whatever makes .. " prefix
@@ -381,9 +393,9 @@ public class ConvertHtmlToJson {
                 .replaceAll("ranged ", "")
                 .trim();
 
-        // deal with multi-word attack names
+        // deal with multi-word attack names, matching word boundary
         for (Map.Entry<String, String> attack : sanitizedAttacks.entrySet()) {
-            lower = lower.replaceAll(attack.getKey(), attack.getValue());
+            lower = lower.replaceAll(attack.getKey() + "\\b", attack.getValue());
         }
         //log("*: " + lower);
 
@@ -551,14 +563,17 @@ public class ConvertHtmlToJson {
             //     log("CHECK: " + lower + " -- " + clause);
         }
 
-        for (String s : combinations) {
+        for (int i = 0; i < combinations.size(); i++) {
+            String s = combinations.get(i);
             m = MULTIATTACK_STR.matcher(s);
             sb = new StringBuffer();
             while (m.find()) {
-                m.appendReplacement(sb, checkExists(m.group(1), attacks));
+                String key = sanitizeAttack(m.group(2));
+                m.appendReplacement(sb, m.group(1) + checkExists(key, attacks));
             }
             m.appendTail(sb);
             lower = sb.toString();
+            combinations.set(i, lower);
         }
 
         Multiattack attack = new Multiattack();
@@ -575,20 +590,10 @@ public class ConvertHtmlToJson {
             return name;
         }
 
-        if (name.endsWith("s")) {
-            String single = name.substring(0, name.length() - 1);
-            if (attacks.get(single) != null) {
-                return single;
-            }
-        } else if (name.endsWith("er")) {
+        if (name.endsWith("er")) {
             String sting = name.substring(0, name.length() - 2);
             if (attacks.get(sting) != null) {
                 return sting;
-            }
-        } else {
-            String plural = name + "s";
-            if (attacks.get(plural) != null) {
-                return plural;
             }
         }
 
@@ -792,8 +797,12 @@ public class ConvertHtmlToJson {
     String sanitizeAttack(String s) {
         // Trim any parenthical stuff, we end up ignoring it later anyway
         String key = toLower(s).replaceAll("\\(.*\\)", "").trim();
+
         // replace any spaces with dashes (to keep/preserve two-word attacks, e.g. rotting touch or dreadful glare)
-        String value = key.replaceAll(" ", "-");
+        // use some keys consistently
+        String value = key.replaceAll(" ", "-")
+                .replaceAll("(.*)s\\b", "$1");
+
         if (!key.equals(value)) {
             sanitizedAttacks.put(key, value);
         }

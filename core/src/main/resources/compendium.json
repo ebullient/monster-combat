@@ -13,7 +13,7 @@
     "challengeRating" : "1/4",
     "multiattack" : null,
     "actions" : {
-      "bites" : {
+      "bite" : {
         "name" : "Bites",
         "melee" : true,
         "attackModifier" : 2,
@@ -113,10 +113,10 @@
     "savingThrows" : null,
     "challengeRating" : "2",
     "multiattack" : {
-      "combinations" : [ "1*bite 1*claws", "1*bite 1*harpoon" ]
+      "combinations" : [ ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 6,
@@ -181,7 +181,7 @@
     "savingThrows" : "DEX(+8),CON(+14),WIS(+10),CHA(+11)",
     "challengeRating" : "22",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -326,7 +326,7 @@
           "disadvantage" : null
         }
       },
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 3,
@@ -374,7 +374,7 @@
     "challengeRating" : "1/2",
     "multiattack" : null,
     "actions" : {
-      "hooves" : {
+      "hoove" : {
         "name" : "Hooves",
         "melee" : true,
         "attackModifier" : 6,
@@ -419,7 +419,7 @@
     "savingThrows" : null,
     "challengeRating" : "6",
     "multiattack" : {
-      "combinations" : [ "1*bite 1*horns  1*claws" ]
+      "combinations" : [ "1*bite 1*horn  1*claw" ]
     },
     "actions" : {
       "fire-breath" : {
@@ -433,7 +433,7 @@
           "disadvantage" : null
         }
       },
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
@@ -441,6 +441,17 @@
         "damage" : {
           "type" : "slashing",
           "amount" : "11(2d6+4)",
+          "disadvantage" : null
+        }
+      },
+      "horn" : {
+        "name" : "Horns",
+        "melee" : true,
+        "attackModifier" : 7,
+        "savingThrow" : null,
+        "damage" : {
+          "type" : "bludgeoning",
+          "amount" : "10(1d12+4)",
           "disadvantage" : null
         }
       },
@@ -452,17 +463,6 @@
         "damage" : {
           "type" : "piercing",
           "amount" : "11(2d6+4)",
-          "disadvantage" : null
-        }
-      },
-      "horns" : {
-        "name" : "Horns",
-        "melee" : true,
-        "attackModifier" : 7,
-        "savingThrow" : null,
-        "damage" : {
-          "type" : "bludgeoning",
-          "amount" : "10(1d12+4)",
           "disadvantage" : null
         }
       }
@@ -579,7 +579,7 @@
     "challengeRating" : "2",
     "multiattack" : null,
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 5,
@@ -623,7 +623,7 @@
     "challengeRating" : "1/4",
     "multiattack" : null,
     "actions" : {
-      "bites" : {
+      "bite" : {
         "name" : "Bites",
         "melee" : true,
         "attackModifier" : 4,
@@ -777,7 +777,7 @@
     "challengeRating" : "1/4",
     "multiattack" : null,
     "actions" : {
-      "hooves" : {
+      "hoove" : {
         "name" : "Hooves",
         "melee" : true,
         "attackModifier" : 5,
@@ -818,9 +818,20 @@
     "savingThrows" : null,
     "challengeRating" : "2",
     "multiattack" : {
-      "combinations" : [ "1*tentacles" ]
+      "combinations" : [ "1*tentacle" ]
     },
     "actions" : {
+      "tentacle" : {
+        "name" : "Tentacles",
+        "melee" : true,
+        "attackModifier" : 4,
+        "savingThrow" : null,
+        "damage" : {
+          "type" : "slashing",
+          "amount" : "9(2d6+2)",
+          "disadvantage" : null
+        }
+      },
       "beak" : {
         "name" : "Beak",
         "melee" : true,
@@ -829,17 +840,6 @@
         "damage" : {
           "type" : "piercing",
           "amount" : "5(1d6+2)",
-          "disadvantage" : null
-        }
-      },
-      "tentacles" : {
-        "name" : "Tentacles",
-        "melee" : true,
-        "attackModifier" : 4,
-        "savingThrow" : null,
-        "damage" : {
-          "type" : "slashing",
-          "amount" : "9(2d6+2)",
           "disadvantage" : null
         }
       }
@@ -1033,7 +1033,7 @@
     "savingThrows" : "INT(+5),WIS(+6),CHA(+7)",
     "challengeRating" : "9",
     "multiattack" : {
-      "combinations" : [ "2*claws  1*sting" ]
+      "combinations" : [ "2*claw  1*sting" ]
     },
     "actions" : {
       "claw" : {
@@ -1095,7 +1095,7 @@
     "savingThrows" : "DEX(+4),CON(+9),WIS(+4),CHA(+8)",
     "challengeRating" : "9",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -1337,7 +1337,7 @@
     "savingThrows" : "DEX(+8),CON(+13),WIS(+8),CHA(+13)",
     "challengeRating" : "17",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -1409,10 +1409,10 @@
     "savingThrows" : null,
     "challengeRating" : "3",
     "multiattack" : {
-      "combinations" : [ "1*beak  1*claws" ]
+      "combinations" : [ "1*beak  1*claw" ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
@@ -2107,7 +2107,7 @@
     "savingThrows" : "DEX(+7),CON(+16),WIS(+9),CHA(+13)",
     "challengeRating" : "23",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -2224,7 +2224,7 @@
     "savingThrows" : "DEX(+5),CON(+11),WIS(+7),CHA(+9)",
     "challengeRating" : "15",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -2296,10 +2296,10 @@
     "savingThrows" : null,
     "challengeRating" : "2",
     "multiattack" : {
-      "combinations" : [ "1*bite  1*claws" ]
+      "combinations" : [ "1*bite  1*claw" ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 4,
@@ -2450,7 +2450,7 @@
     "savingThrows" : "CON(+7)",
     "challengeRating" : "5",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*tentacles" ]
+      "combinations" : [ "1*bite  2*tentacle" ]
     },
     "actions" : {
       "tentacle" : {
@@ -2508,10 +2508,10 @@
     "savingThrows" : null,
     "challengeRating" : "5",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
@@ -2566,7 +2566,7 @@
     "savingThrows" : "DEX(+3),CON(+6),WIS(+4),CHA(+5)",
     "challengeRating" : "7",
     "multiattack" : {
-      "combinations" : [ "1*claws", "1*glaive" ]
+      "combinations" : [ ]
     },
     "actions" : {
       "claw" : {
@@ -2628,7 +2628,7 @@
       "combinations" : [ "only-one-bite" ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 6,
@@ -2685,7 +2685,7 @@
     "savingThrows" : "DEX(+5),WIS(+4),CHA(+2)",
     "challengeRating" : "6",
     "multiattack" : {
-      "combinations" : [ "1*beak  1*talons" ]
+      "combinations" : [ "1*beak  1*talon" ]
     },
     "actions" : {
       "beak" : {
@@ -2699,7 +2699,7 @@
           "disadvantage" : null
         }
       },
-      "spores" : {
+      "spore" : {
         "name" : "Spores (Recharge 6)",
         "melee" : false,
         "attackModifier" : 0,
@@ -2710,7 +2710,7 @@
           "disadvantage" : null
         }
       },
-      "talons" : {
+      "talon" : {
         "name" : "Talons",
         "melee" : true,
         "attackModifier" : 6,
@@ -2828,7 +2828,7 @@
     "challengeRating" : "1",
     "multiattack" : null,
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws (Bite in Beast Form)",
         "melee" : true,
         "attackModifier" : 4,
@@ -2922,7 +2922,7 @@
     "savingThrows" : "DEX(+5),CON(+8),WIS(+5),CHA(+7)",
     "challengeRating" : "6",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -3051,7 +3051,7 @@
     "savingThrows" : "DEX(+5),CON(+11),WIS(+7),CHA(+9)",
     "challengeRating" : "16",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -3217,7 +3217,7 @@
     "savingThrows" : null,
     "challengeRating" : "5",
     "multiattack" : {
-      "combinations" : [ "1*hooves  1*horn" ]
+      "combinations" : [ "1*hoove  1*horn" ]
     },
     "actions" : {
       "horn" : {
@@ -3231,7 +3231,7 @@
           "disadvantage" : null
         }
       },
-      "hooves" : {
+      "hoove" : {
         "name" : "Hooves",
         "melee" : true,
         "attackModifier" : 7,
@@ -3335,7 +3335,7 @@
     "savingThrows" : "DEX(+5),CON(+11),WIS(+6),CHA(+6)",
     "challengeRating" : "13",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -3418,7 +3418,7 @@
     "savingThrows" : "DEX(+8),CON(+14),WIS(+10),CHA(+11)",
     "challengeRating" : "21",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -3596,7 +3596,7 @@
     "savingThrows" : "DEX(+3),CON(+7),WIS(+3),CHA(+4)",
     "challengeRating" : "6",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -3668,7 +3668,7 @@
     "challengeRating" : "2",
     "multiattack" : null,
     "actions" : {
-      "hooves" : {
+      "hoove" : {
         "name" : "Hooves",
         "melee" : true,
         "attackModifier" : 6,
@@ -3712,7 +3712,7 @@
     "savingThrows" : "DEX(+9),CON(+13),WIS(+8),CHA(+10)",
     "challengeRating" : "20",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -3891,7 +3891,7 @@
     "savingThrows" : "DEX(+6),CON(+13),WIS(+7),CHA(+11)",
     "challengeRating" : "17",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "fire-breath" : {
@@ -4340,7 +4340,7 @@
     "savingThrows" : "DEX(+9),CON(+14),WIS(+9),CHA(+11)",
     "challengeRating" : "21",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -4423,7 +4423,7 @@
     "savingThrows" : "DEX(+5),CON(+10),WIS(+6),CHA(+8)",
     "challengeRating" : "13",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -4529,7 +4529,7 @@
     "savingThrows" : "DEX(+7),CON(+15),WIS(+10),CHA(+12)",
     "challengeRating" : "22",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -4601,7 +4601,7 @@
     "savingThrows" : "STR(+9),CON(+9),WIS(+7),CHA(+7)",
     "challengeRating" : "9",
     "multiattack" : {
-      "combinations" : [ "2*pincers  2*fists" ]
+      "combinations" : [ "2*pincer  2*fist" ]
     },
     "actions" : {
       "pincer" : {
@@ -4662,10 +4662,10 @@
     "savingThrows" : null,
     "challengeRating" : "4",
     "multiattack" : {
-      "combinations" : [ "1*claws 1*dagger", "1*claws 1*intoxicating-touch" ]
+      "combinations" : [ ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 5,
@@ -4776,7 +4776,7 @@
     "savingThrows" : "DEX(+5),CON(+6),WIS(+3),CHA(+5)",
     "challengeRating" : "7",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -5284,7 +5284,7 @@
     "savingThrows" : "DEX(+4),CON(+6),WIS(+4),CHA(+5)",
     "challengeRating" : "8",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -5356,10 +5356,10 @@
     "savingThrows" : null,
     "challengeRating" : "2",
     "multiattack" : {
-      "combinations" : [ "1*bite  1*claws" ]
+      "combinations" : [ "1*bite  1*claw" ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 4,
@@ -5531,7 +5531,7 @@
     "savingThrows" : "DEX(+4),CON(+9),WIS(+4),CHA(+8)",
     "challengeRating" : "10",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "fire-breath" : {
@@ -5601,7 +5601,7 @@
     "savingThrows" : "DEX(+4),CON(+6),WIS(+4),CHA(+5)",
     "challengeRating" : "7",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -5811,7 +5811,7 @@
     "savingThrows" : "STR(+7),CON(+8),WIS(+4)",
     "challengeRating" : "8",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -5961,7 +5961,7 @@
     "challengeRating" : "1/4",
     "multiattack" : null,
     "actions" : {
-      "talons" : {
+      "talon" : {
         "name" : "Talons",
         "melee" : true,
         "attackModifier" : 3,
@@ -6314,7 +6314,7 @@
     "challengeRating" : "3",
     "multiattack" : null,
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 6,
@@ -6472,17 +6472,6 @@
     "challengeRating" : "4",
     "multiattack" : null,
     "actions" : {
-      "tusks" : {
-        "name" : "Tusks (Boar or Hybrid Form Only)",
-        "melee" : true,
-        "attackModifier" : 5,
-        "savingThrow" : null,
-        "damage" : {
-          "type" : "slashing",
-          "amount" : "10(2d6+3)",
-          "disadvantage" : null
-        }
-      },
       "maul" : {
         "name" : "Maul (Humanoid or Hybrid Form Only)",
         "melee" : true,
@@ -6490,6 +6479,17 @@
         "savingThrow" : null,
         "damage" : {
           "type" : "bludgeoning",
+          "amount" : "10(2d6+3)",
+          "disadvantage" : null
+        }
+      },
+      "tusk" : {
+        "name" : "Tusks (Boar or Hybrid Form Only)",
+        "melee" : true,
+        "attackModifier" : 5,
+        "savingThrow" : null,
+        "damage" : {
+          "type" : "slashing",
           "amount" : "10(2d6+3)",
           "disadvantage" : null
         }
@@ -6528,7 +6528,7 @@
     "savingThrows" : "DEX(+6),CON(+14),WIS(+7),CHA(+8)",
     "challengeRating" : "20",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -6611,7 +6611,7 @@
     "savingThrows" : "DEX(+7),CON(+16),WIS(+9),CHA(+13)",
     "challengeRating" : "24",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "fire-breath" : {
@@ -6694,10 +6694,10 @@
     "savingThrows" : null,
     "challengeRating" : "6",
     "multiattack" : {
-      "combinations" : [ "1*bite  1*stinger" ]
+      "combinations" : [ "1*bite  1*sting" ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
@@ -6856,7 +6856,7 @@
     "challengeRating" : "1/2",
     "multiattack" : null,
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 3,
@@ -7073,20 +7073,9 @@
     "savingThrows" : "CON(+7),WIS(+4),CHA(+5)",
     "challengeRating" : "8",
     "multiattack" : {
-      "combinations" : [ "2*chains" ]
+      "combinations" : [ "2*chain" ]
     },
     "actions" : {
-      "animate-chains" : {
-        "name" : "Animate Chains (Recharges after a Short or Long Rest)",
-        "melee" : false,
-        "attackModifier" : 0,
-        "savingThrow" : null,
-        "damage" : {
-          "type" : null,
-          "amount" : "0",
-          "disadvantage" : null
-        }
-      },
       "chain" : {
         "name" : "Chain",
         "melee" : true,
@@ -7095,6 +7084,17 @@
         "damage" : {
           "type" : "slashing",
           "amount" : "11(2d6+4)",
+          "disadvantage" : null
+        }
+      },
+      "animate-chain" : {
+        "name" : "Animate Chains (Recharges after a Short or Long Rest)",
+        "melee" : false,
+        "attackModifier" : 0,
+        "savingThrow" : null,
+        "damage" : {
+          "type" : null,
+          "amount" : "0",
           "disadvantage" : null
         }
       }
@@ -7286,7 +7286,7 @@
     "challengeRating" : "1",
     "multiattack" : null,
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 4,
@@ -7399,7 +7399,7 @@
     "savingThrows" : "DEX(+4),CON(+8),WIS(+5),CHA(+7)",
     "challengeRating" : "9",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -7602,7 +7602,7 @@
     "savingThrows" : null,
     "challengeRating" : "3",
     "multiattack" : {
-      "combinations" : [ "1*bite 2*claws", "3*tail-spikes" ]
+      "combinations" : [ ]
     },
     "actions" : {
       "claw" : {
@@ -7822,7 +7822,7 @@
     "savingThrows" : "DEX(+3),CON(+7),WIS(+4),CHA(+6)",
     "challengeRating" : "8",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -7933,6 +7933,17 @@
       "combinations" : [ "1*bite  1*blinding-spittle" ]
     },
     "actions" : {
+      "bite" : {
+        "name" : "Bites",
+        "melee" : true,
+        "attackModifier" : 2,
+        "savingThrow" : null,
+        "damage" : {
+          "type" : "piercing",
+          "amount" : "17(5d6)",
+          "disadvantage" : null
+        }
+      },
       "blinding-spittle" : {
         "name" : "Blinding Spittle (Recharge 5-6)",
         "melee" : false,
@@ -7941,17 +7952,6 @@
         "damage" : {
           "type" : null,
           "amount" : "0",
-          "disadvantage" : null
-        }
-      },
-      "bites" : {
-        "name" : "Bites",
-        "melee" : true,
-        "attackModifier" : 2,
-        "savingThrow" : null,
-        "damage" : {
-          "type" : "piercing",
-          "amount" : "17(5d6)",
           "disadvantage" : null
         }
       }
@@ -7988,7 +7988,7 @@
     "savingThrows" : "STR(+6),CON(+7),WIS(+5),CHA(+5)",
     "challengeRating" : "5",
     "multiattack" : {
-      "combinations" : [ "1*tail  2*claws" ]
+      "combinations" : [ "1*tail  2*claw" ]
     },
     "actions" : {
       "hurl-flame" : {
@@ -8235,7 +8235,7 @@
     "challengeRating" : "1/4",
     "multiattack" : null,
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 2,
@@ -8449,7 +8449,7 @@
     "savingThrows" : "DEX(+6),CON(+9),WIS(+5),CHA(+9)",
     "challengeRating" : "10",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -8624,10 +8624,10 @@
     "savingThrows" : null,
     "challengeRating" : "2",
     "multiattack" : {
-      "combinations" : [ "1*beak  1*claws" ]
+      "combinations" : [ "1*beak  1*claw" ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 6,
@@ -8682,10 +8682,10 @@
     "savingThrows" : null,
     "challengeRating" : "1/2",
     "multiattack" : {
-      "combinations" : [ "1*bite 1*claws", "1*bite 1*spear" ]
+      "combinations" : [ ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 3,
@@ -8808,7 +8808,7 @@
     "savingThrows" : "STR(+9),CON(+10),WIS(+8),CHA(+10)",
     "challengeRating" : "16",
     "multiattack" : {
-      "combinations" : [ "6*longswords  1*tail" ]
+      "combinations" : [ "6*longsword  1*tail" ]
     },
     "actions" : {
       "tail" : {
@@ -8869,10 +8869,10 @@
     "savingThrows" : "DEX(+7),CON(+9),WIS(+7),CHA(+9)",
     "challengeRating" : "14",
     "multiattack" : {
-      "combinations" : [ "1*bite 1*claws  1*tail" ]
+      "combinations" : [ "1*bite 1*claw  1*tail" ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 10,
@@ -9209,7 +9209,7 @@
     "savingThrows" : "DEX(+7),CON(+10),WIS(+6),CHA(+8)",
     "challengeRating" : "14",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -9380,10 +9380,10 @@
     "savingThrows" : null,
     "challengeRating" : "1",
     "multiattack" : {
-      "combinations" : [ "1*beak  1*claws" ]
+      "combinations" : [ "1*beak  1*claw" ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 5,
@@ -9439,7 +9439,7 @@
     "challengeRating" : "3",
     "multiattack" : null,
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws (Hybrid Form Only)",
         "melee" : true,
         "attackModifier" : 4,
@@ -9552,10 +9552,10 @@
     "savingThrows" : null,
     "challengeRating" : "1",
     "multiattack" : {
-      "combinations" : [ "1*claws  1*club" ]
+      "combinations" : [ "1*claw  1*club" ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 3,
@@ -9608,7 +9608,7 @@
     "savingThrows" : "DEX(+7),CON(+15),WIS(+10),CHA(+12)",
     "challengeRating" : "23",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -10028,7 +10028,7 @@
     "savingThrows" : "CON(+11),INT(+9),WIS(+6),CHA(+7)",
     "challengeRating" : "13",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -10053,7 +10053,7 @@
           "disadvantage" : null
         }
       },
-      "horror-nimbus" : {
+      "horror-nimbu" : {
         "name" : "Horror Nimbus (Recharge 5-6)",
         "melee" : false,
         "attackModifier" : 0,
@@ -10193,7 +10193,7 @@
     "savingThrows" : "DEX(+6),CON(+11),WIS(+7)",
     "challengeRating" : "17",
     "multiattack" : {
-      "combinations" : [ "1*bite 2*claws", "1*bite 1*tail" ]
+      "combinations" : [ "1*bite 2*claw", "1*bite 1*tail" ]
     },
     "actions" : {
       "claw" : {
@@ -10389,7 +10389,7 @@
           "disadvantage" : null
         }
       },
-      "hooves" : {
+      "hoove" : {
         "name" : "Hooves",
         "melee" : true,
         "attackModifier" : 8,
@@ -10500,7 +10500,7 @@
     "challengeRating" : "3",
     "multiattack" : null,
     "actions" : {
-      "hooves" : {
+      "hoove" : {
         "name" : "Hooves",
         "melee" : true,
         "attackModifier" : 6,
@@ -10544,7 +10544,7 @@
     "savingThrows" : "DEX(+9),CON(+16),WIS(+10),CHA(+16)",
     "challengeRating" : "24",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -10616,20 +10616,9 @@
     "savingThrows" : null,
     "challengeRating" : "2",
     "multiattack" : {
-      "combinations" : [ "1*pike and 1*hooves", "2*longbow" ]
+      "combinations" : [ ]
     },
     "actions" : {
-      "hooves" : {
-        "name" : "Hooves",
-        "melee" : true,
-        "attackModifier" : 6,
-        "savingThrow" : null,
-        "damage" : {
-          "type" : "bludgeoning",
-          "amount" : "11(2d6+4)",
-          "disadvantage" : null
-        }
-      },
       "pike" : {
         "name" : "Pike",
         "melee" : true,
@@ -10649,6 +10638,17 @@
         "damage" : {
           "type" : "piercing",
           "amount" : "6(1d8+2)",
+          "disadvantage" : null
+        }
+      },
+      "hoove" : {
+        "name" : "Hooves",
+        "melee" : true,
+        "attackModifier" : 6,
+        "savingThrow" : null,
+        "damage" : {
+          "type" : "bludgeoning",
+          "amount" : "11(2d6+4)",
           "disadvantage" : null
         }
       }
@@ -10685,7 +10685,7 @@
     "savingThrows" : "DEX(+5),CON(+12),WIS(+6),CHA(+10)",
     "challengeRating" : "16",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -11157,7 +11157,7 @@
     "savingThrows" : "DEX(+4),CON(+9),WIS(+4),CHA(+3)",
     "challengeRating" : "11",
     "multiattack" : {
-      "combinations" : [ "1*beak  1*talons" ]
+      "combinations" : [ "1*beak  1*talon" ]
     },
     "actions" : {
       "beak" : {
@@ -11171,7 +11171,7 @@
           "disadvantage" : null
         }
       },
-      "talons" : {
+      "talon" : {
         "name" : "Talons",
         "melee" : true,
         "attackModifier" : 13,
@@ -11217,7 +11217,7 @@
     "challengeRating" : "5",
     "multiattack" : null,
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws (Hag Form Only)",
         "melee" : true,
         "attackModifier" : 7,
@@ -11476,7 +11476,7 @@
     "challengeRating" : "1/2",
     "multiattack" : null,
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 4,
@@ -11945,7 +11945,7 @@
     "challengeRating" : "2",
     "multiattack" : null,
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 5,
@@ -12002,7 +12002,7 @@
     "savingThrows" : "DEX(+6),CON(+10),WIS(+7),CHA(+8)",
     "challengeRating" : "15",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -12220,7 +12220,7 @@
           "disadvantage" : null
         }
       },
-      "phantasms" : {
+      "phantasm" : {
         "name" : "Phantasms (Recharges after a Short or Long Rest)",
         "melee" : false,
         "attackModifier" : 0,
@@ -12264,7 +12264,7 @@
     "savingThrows" : "DEX(+6),CON(+10),WIS(+7),CHA(+8)",
     "challengeRating" : "14",
     "multiattack" : {
-      "combinations" : [ "1*bite  2*claws" ]
+      "combinations" : [ "1*bite  2*claw" ]
     },
     "actions" : {
       "claw" : {
@@ -12386,7 +12386,7 @@
     "savingThrows" : "INT(+5),WIS(+9),CHA(+9)",
     "challengeRating" : "30",
     "multiattack" : {
-      "combinations" : [ "1*bite 2*claws 1*horns  1*tail" ]
+      "combinations" : [ "1*bite 2*claw 1*horn  1*tail" ]
     },
     "actions" : {
       "claw" : {
@@ -12397,6 +12397,17 @@
         "damage" : {
           "type" : "slashing",
           "amount" : "28(4d8+10)",
+          "disadvantage" : null
+        }
+      },
+      "horn" : {
+        "name" : "Horns",
+        "melee" : true,
+        "attackModifier" : 19,
+        "savingThrow" : null,
+        "damage" : {
+          "type" : "piercing",
+          "amount" : "32(4d10+10)",
           "disadvantage" : null
         }
       },
@@ -12419,17 +12430,6 @@
         "damage" : {
           "type" : "bludgeoning",
           "amount" : "24(4d6+10)",
-          "disadvantage" : null
-        }
-      },
-      "horns" : {
-        "name" : "Horns",
-        "melee" : true,
-        "attackModifier" : 19,
-        "savingThrow" : null,
-        "damage" : {
-          "type" : "piercing",
-          "amount" : "32(4d10+10)",
           "disadvantage" : null
         }
       }
@@ -12575,10 +12575,10 @@
     "savingThrows" : null,
     "challengeRating" : "1/4",
     "multiattack" : {
-      "combinations" : [ "1*bite  1*claws" ]
+      "combinations" : [ "1*bite  1*claw" ]
     },
     "actions" : {
-      "claws" : {
+      "claw" : {
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 2,

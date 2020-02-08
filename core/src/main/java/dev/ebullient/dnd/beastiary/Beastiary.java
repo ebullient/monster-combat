@@ -47,7 +47,7 @@ public class Beastiary {
     public Beast findOne() {
         if (allBeasts.isEmpty()) {
             return null;
-        } else if ( allBeasts.size() == 1 ) {
+        } else if (allBeasts.size() == 1) {
             return allBeasts.get(0);
         }
         return allBeasts.get(Dice.range(allBeasts.size()));
@@ -60,7 +60,7 @@ public class Beastiary {
         List<Beast> beasts = beastsByChallengeRating.get(cr);
         if (beasts.isEmpty()) {
             return null;
-        } else if ( allBeasts.size() == 1 ) {
+        } else if (allBeasts.size() == 1) {
             return beasts.get(0);
         }
         return beasts.get(Dice.range(beasts.size()));

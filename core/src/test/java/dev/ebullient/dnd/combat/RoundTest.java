@@ -38,7 +38,7 @@ public class RoundTest {
         attack.attackModifier = 2;
         attack.damage = new MockDamage("bludgeoning", "14(2d8+5)");
 
-        Encounter.AttackResult result = new Encounter.AttackResult(mcs[0], mcs[1], attack, Dice.Method.USE_AVERAGE);
+        Encounter.AttackResult result = new Encounter.AttackResult(mcs[0], mcs[1], attack, Dice.Method.USE_AVERAGE, "id");
         System.out.println(result);
         if (result.hit) {
             Assert.assertFalse("Combatant should be dead (14 damage vs. 10 hit points)", mcs[1].isAlive());
@@ -59,7 +59,7 @@ public class RoundTest {
         attack.savingThrow = "CON(22)";
         attack.damage = new MockDamage("poison", "14(2d8+5)");
 
-        Encounter.AttackResult result = new Encounter.AttackResult(mcs[0], mcs[1], attack, Dice.Method.USE_AVERAGE);
+        Encounter.AttackResult result = new Encounter.AttackResult(mcs[0], mcs[1], attack, Dice.Method.USE_AVERAGE, "id");
         System.out.println(result);
         if (result.hit) {
             Assert.assertFalse("Combatant should be dead (14 damage vs. 10 hit points)", mcs[1].isAlive());
@@ -93,7 +93,7 @@ public class RoundTest {
 
         int i = 0;
         List<Combatant> survivors = Arrays.asList(mcs);
-        while ( survivors.size() > 1 ) {
+        while (survivors.size() > 1) {
             i++;
             RoundResult result = r.takeTurns(survivors);
             survivors = result.getSurvivors();
