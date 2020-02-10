@@ -11,7 +11,7 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.mechanics;
+package dev.ebullient.dnd.combat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,40 +20,43 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import dev.ebullient.dnd.MockCombatant;
-import dev.ebullient.dnd.combat.Combatant;
+import dev.ebullient.dnd.MockBeast;
 
 public class ComparatorsTest {
 
     @Test
     public void testInitiativeOrder() {
 
-        MockCombatant[] mcs = new MockCombatant[] {
-                new MockCombatant("0", 10),
-                new MockCombatant("1", 10),
-                new MockCombatant("2", 10),
-                new MockCombatant("3", 10)
+        MockBeast[] mbs = new MockBeast[] {
+                new MockBeast("0"),
+                new MockBeast("1"),
+                new MockBeast("2"),
+                new MockBeast("3")
         };
 
-        List<MockCombatant> combatants = new ArrayList<>(Arrays.asList(mcs));
+        List<Combatant> combatants = new ArrayList<>(mbs.length);
+        for (int i = 0; i < mbs.length; i++) {
+            combatants.add(new Combatant(mbs[i], 10, 10));
+        }
 
         combatants.sort(Comparators.InitiativeOrder);
+
         Assert.assertEquals("when initiative & dex are equal (0), combatants should be sorted in name order",
                 "0123", listToString(combatants));
 
-        mcs[0].modifiers.dexterity = 1;
-        mcs[1].modifiers.dexterity = 2;
-        mcs[2].modifiers.dexterity = 3;
-        mcs[3].modifiers.dexterity = 4;
+        mbs[0].modifiers.dexterity = 1;
+        mbs[1].modifiers.dexterity = 2;
+        mbs[2].modifiers.dexterity = 3;
+        mbs[3].modifiers.dexterity = 4;
 
         combatants.sort(Comparators.InitiativeOrder);
         Assert.assertEquals("When initiative is the same, sort by dexterity",
                 "3210", listToString(combatants));
 
-        mcs[0].initiative = 10;
-        mcs[1].initiative = 2;
-        mcs[2].initiative = 17;
-        mcs[3].initiative = 6;
+        combatants.set(0, new Combatant(mbs[0], 10, 10));
+        combatants.set(1, new Combatant(mbs[1], 2, 10));
+        combatants.set(2, new Combatant(mbs[2], 17, 10));
+        combatants.set(3, new Combatant(mbs[3], 6, 10));
 
         combatants.sort(Comparators.InitiativeOrder);
         Assert.assertEquals("Combatants should be in unique-initiative order",
@@ -63,47 +66,54 @@ public class ComparatorsTest {
     @Test
     public void testChallengeRatingOrder() {
 
-        MockCombatant[] mcs = new MockCombatant[] {
-                new MockCombatant("0", 10),
-                new MockCombatant("1", 10),
-                new MockCombatant("2", 10),
-                new MockCombatant("3", 10)
+        MockBeast[] mbs = new MockBeast[] {
+                new MockBeast("0"),
+                new MockBeast("1"),
+                new MockBeast("2"),
+                new MockBeast("3")
         };
 
-        List<MockCombatant> combatants = new ArrayList<>(Arrays.asList(mcs));
+        List<Combatant> combatants = new ArrayList<>(mbs.length);
+        for (int i = 0; i < mbs.length; i++) {
+            combatants.add(new Combatant(mbs[i], 10, 10));
+        }
 
         combatants.sort(Comparators.ChallengeRatingOrder);
         Assert.assertEquals("when cr (0) and max health (10) are equal, combatants should be sorted in name order",
                 "0123", listToString(combatants));
 
-        mcs[1].resetHealth(20);
+        combatants.set(1, new Combatant(mbs[1], 10, 20));
 
         combatants.sort(Comparators.ChallengeRatingOrder);
         Assert.assertEquals("when cr (0), combatants should be sorted by max health, then name",
-                "0231", listToString(combatants));
+                "1023", listToString(combatants));
 
-        mcs[0].cr = 5;
-        mcs[1].cr = -3;
-        mcs[2].cr = -3;
-        mcs[3].cr = 5;
+        mbs[0].cr = 5;
+        mbs[1].cr = -3;
+        mbs[2].cr = -3;
+        mbs[3].cr = 5;
 
         combatants.sort(Comparators.ChallengeRatingOrder);
         Assert.assertEquals("combatants sorted in cr order, then in health order, then in name order",
-                "2103", listToString(combatants));
+                "0312", listToString(combatants));
     }
 
     @Test
     public void testRelativeHealthOrder() {
 
-        MockCombatant[] mcs = new MockCombatant[] {
-                new MockCombatant("0", 10),
-                new MockCombatant("1", 10),
-                new MockCombatant("2", 10),
-                new MockCombatant("3", 10)
+        MockBeast[] mbs = new MockBeast[] {
+                new MockBeast("0"),
+                new MockBeast("1"),
+                new MockBeast("2"),
+                new MockBeast("3")
         };
 
-        List<MockCombatant> combatants = new ArrayList<>(Arrays.asList(mcs));
+        Combatant[] mcs = new Combatant[mbs.length];
+        for (int i = 0; i < mbs.length; i++) {
+            mcs[i] = new Combatant(mbs[i], 10, 10);
+        }
 
+        List<Combatant> combatants = new ArrayList<>(Arrays.asList(mcs));
         combatants.sort(Comparators.RelativeHealthOrder);
         Assert.assertEquals("when relative is equal (0), combatants should be sorted in name order",
                 "0123", listToString(combatants));
@@ -116,7 +126,7 @@ public class ComparatorsTest {
                 "2301", listToString(combatants));
     }
 
-    String listToString(List<MockCombatant> list) {
+    String listToString(List<Combatant> list) {
         StringBuilder sb = new StringBuilder();
         for (Combatant c : list) {
             sb.append(c.getName());

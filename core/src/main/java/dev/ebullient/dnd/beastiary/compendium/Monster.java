@@ -23,11 +23,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import dev.ebullient.dnd.beastiary.Beast;
 import dev.ebullient.dnd.combat.Attack;
-import dev.ebullient.dnd.combat.Combatant;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.ChallengeRating;
 import dev.ebullient.dnd.mechanics.Dice;
-import dev.ebullient.dnd.mechanics.HitPoints;
 import dev.ebullient.dnd.mechanics.Size;
 import dev.ebullient.dnd.mechanics.Type;
 
@@ -37,7 +35,7 @@ import dev.ebullient.dnd.mechanics.Type;
  *
  * @see CompendiumReader
  */
-public class Monster {
+public class Monster implements Beast {
     static final Pattern ATTACK_SEQ = Pattern.compile("\\b(\\d+)\\*([-a-z]+)\\b");
 
     String name;
@@ -55,6 +53,7 @@ public class Monster {
     Map<String, MonsterAttack> actions;
     Map<String, String> description;
     int passivePerception;
+    int spellSaveDC;
 
     int armorClass;
     Size size;
@@ -71,6 +70,9 @@ public class Monster {
 
     @JsonIgnore
     List<String> keySet = null;
+
+    @JsonIgnore
+    int cr;
 
     public String toString() {
         return name
@@ -89,12 +91,13 @@ public class Monster {
                 + "]";
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @Override
     public String getName() {
         return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAlignment() {
@@ -121,6 +124,7 @@ public class Monster {
         this.type = type;
     }
 
+    @Override
     public int getArmorClass() {
         return armorClass;
     }
@@ -129,6 +133,7 @@ public class Monster {
         this.armorClass = armorClass;
     }
 
+    @Override
     public String getHitPoints() {
         return hitPoints;
     }
@@ -261,20 +266,31 @@ public class Monster {
         this.savingThrows = savingThrows;
     }
 
+    @Override
     public String getChallengeRating() {
         return challengeRating;
     }
 
     public void setChallengeRating(String challengeRating) {
         this.challengeRating = challengeRating;
+        this.cr = ChallengeRating.stringToCr(challengeRating);
     }
 
+    @Override
     public int getPassivePerception() {
         return passivePerception;
     }
 
     public void setPassivePerception(int passivePerception) {
         this.passivePerception = passivePerception;
+    }
+
+    public int getSpellSaveDC() {
+        return spellSaveDC;
+    }
+
+    public void setSpellSaveDC(int spellSaveDC) {
+        this.spellSaveDC = spellSaveDC;
     }
 
     public Map<String, String> getDescription() {
@@ -302,166 +318,84 @@ public class Monster {
         this.multiattack = multiattack;
     }
 
-    @JsonIgnore
-    public Beast asBeast() {
-        final Monster m = this;
-
-        return new Beast() {
-            @Override
-            public String getChallengeRating() {
-                return m.getChallengeRating();
-            }
-
-            @Override
-            public Combatant createCombatant(Dice.Method method) {
-                return new Monster.CombatantView(m, method);
-
-            }
-        }; // new Beast
+    @Override
+    public int getCR() {
+        return cr;
     }
 
-    static class CombatantView implements Combatant {
-
-        final Monster my;
-        final double maxHitPoints;
-        final Dice.Method method;
-        final int initiative;
-        final int cr;
-
-        int hitPoints;
-
-        CombatantView(Monster m, Dice.Method method) {
-            this.my = m;
-            this.method = method;
-            this.initiative = Dice.d20() + my.modifiers.dexterity;
-            this.hitPoints = HitPoints.startingHitPoints(my.name, my.hitPoints, method);
-            this.maxHitPoints = (double) hitPoints;
-            this.cr = ChallengeRating.stringToCr(my.challengeRating);
+    @Override
+    public int getAbilityModifier(Ability s) {
+        switch (s) {
+            case STR:
+                return modifiers.strength;
+            case DEX:
+                return modifiers.dexterity;
+            case CON:
+                return modifiers.constitution;
+            case INT:
+                return modifiers.intelligence;
+            case WIS:
+                return modifiers.wisdom;
+            case CHA:
+                return modifiers.charisma;
         }
+        return 0;
+    }
 
-        @Override
-        public String getName() {
-            return my.name;
+    @Override
+    public int getSavingThrow(Ability s) {
+        int save;
+        switch (s) {
+            case STR:
+                save = saveThrows.strength;
+                return save == 0 ? modifiers.strength : save;
+            case DEX:
+                save = saveThrows.dexterity;
+                return save == 0 ? modifiers.dexterity : save;
+            case CON:
+                save = saveThrows.constitution;
+                return save == 0 ? modifiers.constitution : save;
+            case INT:
+                save = saveThrows.intelligence;
+                return save == 0 ? modifiers.intelligence : save;
+            case WIS:
+                save = saveThrows.wisdom;
+                return save == 0 ? modifiers.wisdom : save;
+            case CHA:
+                save = saveThrows.charisma;
+                return save == 0 ? modifiers.charisma : save;
         }
+        return 0;
+    }
 
-        @Override
-        public String getDescription() {
-            final String description = my.name + ", " + my.description.get("General");
-            return description;
-        }
-
-        @Override
-        public int getCR() {
-            return cr;
-        }
-
-        @Override
-        public int getInitiative() {
-            return initiative;
-        }
-
-        @Override
-        public int getPassivePerception() {
-            return my.passivePerception;
-        }
-
-        @Override
-        public int getArmorClass() {
-            return my.armorClass;
-        }
-
-        @Override
-        public void takeDamage(int damage) {
-            this.hitPoints -= damage;
-            if (this.hitPoints < 0) {
-                this.hitPoints = 0;
-            }
-        }
-
-        @Override
-        public boolean isAlive() {
-            return hitPoints > 0;
-        }
-
-        @Override
-        public int getRelativeHealth() {
-            return (int) ((hitPoints / maxHitPoints) * 100);
-        }
-
-        @Override
-        public int getMaxHitPoints() {
-            return (int) maxHitPoints;
-        }
-
-        @Override
-        public List<Attack> getAttacks() {
-            List<Attack> list = new ArrayList<>();
-            if (my.multiattack != null) {
-                String sequence = my.multiattack.randomCombination();
-                Matcher m = ATTACK_SEQ.matcher(sequence);
-                while (m.find()) {
-                    for (int i = 0; i < Integer.parseInt(m.group(1)); i++) {
-                        if ("melee".equals(m.group(2))) {
-                            list.add(my.actions.get(getRandomAttack()));
-                        } else {
-                            list.add(my.actions.get(m.group(2)));
-                        }
+    @Override
+    @JsonIgnore
+    public List<Attack> getAttacks() {
+        List<Attack> list = new ArrayList<>();
+        if (multiattack != null) {
+            String sequence = multiattack.randomCombination();
+            Matcher m = ATTACK_SEQ.matcher(sequence);
+            while (m.find()) {
+                for (int i = 0; i < Integer.parseInt(m.group(1)); i++) {
+                    if ("melee".equals(m.group(2))) {
+                        list.add(actions.get(getRandomAttack()));
+                    } else {
+                        list.add(actions.get(m.group(2)));
                     }
                 }
-            } else {
-                list.add(my.actions.get(getRandomAttack()));
             }
-            return list;
+        } else {
+            list.add(actions.get(getRandomAttack()));
+        }
+        return list;
+    }
+
+    String getRandomAttack() {
+        if (actions.size() == 1) {
+            return keySet.get(0);
         }
 
-        @Override
-        public int getSavingThrow(Ability s) {
-            int save;
-            switch (s) {
-                case STR:
-                    save = my.saveThrows.strength;
-                    return save == 0 ? my.modifiers.strength : save;
-                case DEX:
-                    save = my.saveThrows.dexterity;
-                    return save == 0 ? my.modifiers.dexterity : save;
-                case CON:
-                    save = my.saveThrows.constitution;
-                    return save == 0 ? my.modifiers.constitution : save;
-                case INT:
-                    save = my.saveThrows.intelligence;
-                    return save == 0 ? my.modifiers.intelligence : save;
-                case WIS:
-                    save = my.saveThrows.wisdom;
-                    return save == 0 ? my.modifiers.wisdom : save;
-                case CHA:
-                    save = my.saveThrows.charisma;
-                    return save == 0 ? my.modifiers.charisma : save;
-            }
-            return 0;
-        }
-
-        @Override
-        public int getAbilityModifier(Ability s) {
-            switch (s) {
-                case STR:
-                    return my.modifiers.strength;
-                case DEX:
-                    return my.modifiers.dexterity;
-                case CON:
-                    return my.modifiers.constitution;
-                case INT:
-                    return my.modifiers.intelligence;
-                case WIS:
-                    return my.modifiers.wisdom;
-                case CHA:
-                    return my.modifiers.charisma;
-            }
-            return 0;
-        }
-
-        String getRandomAttack() {
-            int random = Dice.range(my.actions.size());
-            return my.keySet.get(random);
-        }
+        int random = Dice.range(actions.size());
+        return keySet.get(random);
     }
 }

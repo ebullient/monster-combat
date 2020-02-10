@@ -13,7 +13,10 @@
  */
 package dev.ebullient.dnd.combat;
 
+import java.util.List;
 import java.util.regex.Pattern;
+
+import dev.ebullient.dnd.mechanics.Ability;
 
 public interface Attack {
     public Pattern SAVE = Pattern.compile("([A-Z]+)\\(([-+0-9]+)\\)");
@@ -22,6 +25,10 @@ public interface Attack {
         String getAmount();
 
         String getType();
+
+        List<Ability> getDisadvantage();
+
+        String getSavingThrow();
     }
 
     String getName();
@@ -31,4 +38,6 @@ public interface Attack {
     int getAttackModifier();
 
     String getSavingThrow();
+
+    Damage getAdditionalEffect();
 }

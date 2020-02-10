@@ -11,30 +11,27 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary;
+package dev.ebullient.dnd;
 
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
-import dev.ebullient.dnd.combat.Attack;
-import dev.ebullient.dnd.mechanics.Ability;
+import io.micrometer.core.instrument.MeterRegistry;
 
-public interface Beast {
+@Component
+class CombatMetrics {
+    static final Logger logger = LoggerFactory.getLogger(CombatMetrics.class);
 
-    String getName();
+    MeterRegistry registry;
 
-    String getHitPoints();
+    public CombatMetrics(MeterRegistry registry) {
+        this.registry = registry;
+    }
 
-    String getChallengeRating();
+    public void startEncounter() {
+    }
 
-    int getArmorClass();
-
-    int getPassivePerception();
-
-    int getAbilityModifier(Ability s);
-
-    int getSavingThrow(Ability s);
-
-    int getCR();
-
-    List<Attack> getAttacks();
+    public void endEncounter(int totalRounds) {
+    }
 }

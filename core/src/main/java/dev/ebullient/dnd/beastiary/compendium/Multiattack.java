@@ -28,6 +28,9 @@ public class Multiattack {
     }
 
     public void setCombinations(List<String> combinations) {
+        if (combinations.isEmpty()) {
+            throw new IllegalArgumentException("Multiattack can not have an empty list of attack combinations");
+        }
         this.combinations = combinations;
     }
 

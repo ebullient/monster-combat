@@ -2,7 +2,8 @@
 
 URL=$1
 if [ -z "$URL" ]; then
-  URL=http://monsters.192.168.99.100.nip.io/battle/faceoff
+  #URL=http://monsters.192.168.99.100.nip.io/combat/faceoff
+  URL=http://localhost:8080/combat/faceoff
 fi
 
 while :

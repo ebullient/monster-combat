@@ -1,5 +1,7 @@
 target
 logs
+nohup.out
+tmp
 
 ### STS ###
 .apt_generated

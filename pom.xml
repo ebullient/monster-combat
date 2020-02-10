@@ -10,7 +10,7 @@
 
     <!-- submodules -->
     <modules>
-        <module>beastiary</module>
+        <module>core</module>
         <module>spring5-micrometer</module>
     </modules>
 

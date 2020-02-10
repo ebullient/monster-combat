@@ -15,35 +15,31 @@ package dev.ebullient.dnd;
 
 import java.util.List;
 
+import dev.ebullient.dnd.beastiary.Beast;
 import dev.ebullient.dnd.combat.Attack;
-import dev.ebullient.dnd.combat.Combatant;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Size;
 import dev.ebullient.dnd.mechanics.Type;
 
-public class MockCombatant implements Combatant {
+public class MockBeast implements Beast {
 
     final String name;
-    double maxHitPoints;
-    int hitPoints;
+    String hitPointString = "10";
+    String challengeRating;
 
     public int cr;
     public int passivePerception;
-    public int initiative;
 
     public int armorClass;
     public Size size;
     public Type type;
 
     public List<Attack> attacks;
-
     public final Ability.All modifiers = new Ability.All();
     public final Ability.All saveThrows = new Ability.All();
 
-    public MockCombatant(String name, int hitPoints) {
+    public MockBeast(String name) {
         this.name = name;
-        this.hitPoints = hitPoints;
-        this.maxHitPoints = (double) hitPoints;
     }
 
     @Override
@@ -52,8 +48,13 @@ public class MockCombatant implements Combatant {
     }
 
     @Override
-    public String getDescription() {
-        return "Mock description";
+    public String getHitPoints() {
+        return hitPointString;
+    }
+
+    @Override
+    public String getChallengeRating() {
+        return challengeRating;
     }
 
     @Override
@@ -67,41 +68,13 @@ public class MockCombatant implements Combatant {
     }
 
     @Override
-    public List<Attack> getAttacks() {
-        return attacks;
-    }
-
-    @Override
-    public int getInitiative() {
-        return initiative;
-    }
-
-    @Override
     public int getPassivePerception() {
         return passivePerception;
     }
 
     @Override
-    public void takeDamage(int damage) {
-        this.hitPoints -= damage;
-        if (this.hitPoints < 0) {
-            this.hitPoints = 0;
-        }
-    }
-
-    @Override
-    public boolean isAlive() {
-        return hitPoints > 0;
-    }
-
-    @Override
-    public int getRelativeHealth() {
-        return (int) ((hitPoints / maxHitPoints) * 100);
-    }
-
-    @Override
-    public int getMaxHitPoints() {
-        return (int) maxHitPoints;
+    public List<Attack> getAttacks() {
+        return attacks;
     }
 
     @Override
@@ -149,8 +122,7 @@ public class MockCombatant implements Combatant {
         return 0;
     }
 
-    public void resetHealth(int i) {
-        hitPoints = i;
-        maxHitPoints = (double) i;
+    public String toString() {
+        return "MockBeast[" + name + "]";
     }
 }

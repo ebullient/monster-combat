@@ -36,6 +36,7 @@ import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -60,6 +61,7 @@ public class ConvertHtmlToJson {
     final Pattern HIT = Pattern.compile("(\\d+\\s*[-+d()0-9 ]*)\\s*(\\w+)\\s*damage");
     final Pattern ATTACK = Pattern.compile(".*Attack: ([-+0-9]+) .*");
     final Pattern DC = Pattern.compile("a DC (\\d+) (\\w+) saving throw");
+    final Pattern SPELL_SAVE_DC = Pattern.compile("spell save DC (\\d+)\\b");
 
     Map<String, String> sanitizedAttacks = new HashMap<>();
     Map<String, String> pluralSingular = new HashMap<>();
@@ -91,14 +93,16 @@ public class ConvertHtmlToJson {
         }
 
         log(compendium.size());
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper()
+                .setSerializationInclusion(Include.NON_EMPTY);
+
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 
         writer.writeValue(Paths.get("./src/main/resources/compendium.json").toFile(), compendium);
 
         Map<String, Monster> single = new HashMap<>();
         single.put("owlbear", compendium.get("owlbear"));
-        writer.writeValue(Paths.get("./src/test/resources/goodMonster.json").toFile(), single);
+        writer.writeValue(Paths.get("./src/test/resources/owlbear.json").toFile(), single);
 
         single.clear();
         single.put("young red dragon", compendium.get("young red dragon"));
@@ -106,7 +110,15 @@ public class ConvertHtmlToJson {
 
         single.clear();
         single.put("erinyes", compendium.get("erinyes"));
-        writer.writeValue(Paths.get("./src/test/resources/meleeMonster.json").toFile(), single);
+        writer.writeValue(Paths.get("./src/test/resources/erinyes.json").toFile(), single);
+
+        single.clear();
+        single.put("lamia", compendium.get("lamia"));
+        writer.writeValue(Paths.get("./src/test/resources/lamia.json").toFile(), single);
+
+        single.clear();
+        single.put("wraith", compendium.get("wraith"));
+        writer.writeValue(Paths.get("./src/test/resources/wraith.json").toFile(), single);
     }
 
     public Monster createMonster(File f) throws Exception {
@@ -213,7 +225,12 @@ public class ConvertHtmlToJson {
             for (Element e : notes) {
                 noteText.add(e.text());
             }
-            description.put("Notes", String.join("\n", noteText));
+            String allNotes = String.join("\n", noteText);
+            Matcher m = SPELL_SAVE_DC.matcher(allNotes);
+            if (m.find()) {
+                monster.setSpellSaveDC(Integer.parseInt(m.group(1)));
+            }
+            description.put("Notes", allNotes);
         }
 
         // Gether together legendary actions (for use)
@@ -263,8 +280,8 @@ public class ConvertHtmlToJson {
                 a.setName(name);
 
                 List<MonsterDamage> damage = new ArrayList<>();
-                List<String> slice = Arrays.asList(segments).subList(1, segments.length);
 
+                List<String> slice = Arrays.asList(segments).subList(1, segments.length);
                 for (String s : slice) {
                     if (s.startsWith("Hit")) {
                         Matcher m = HIT.matcher(s);
@@ -276,8 +293,8 @@ public class ConvertHtmlToJson {
                         } else if (s.contains("cursed")) {
                             MonsterDamage d = new MonsterDamage();
                             d.setType("curse");
-                            d.setAmount("0");
-                            d.setDisadvantage(getDisadvantage(toLower(s)));
+                            d.setAmount("");
+                            d.setDisadvantage(getDisadvantage(toLower(all)));
                             damage.add(d);
                         } else {
                             log("Unexpected Hit definition: " + s);
@@ -291,29 +308,43 @@ public class ConvertHtmlToJson {
                         } else {
                             throw new IllegalArgumentException("Unexpected Attack definition: " + s);
                         }
+                    } else if (s.startsWith("The target must") && s.contains("damage") && s.contains("saving throw")) {
+                        log(s);
+                        MonsterDamage d = parseDamage(s, null);
+                        if (d != null) {
+                            a.setAdditionalEffect(d);
+                        }
                     }
                 }
 
-                if (damage.size() > 1) {
-                    throw new IllegalArgumentException("Missing hit damage for attack: " + all);
+                if (damage.isEmpty() || damage.size() > 1) {
+                    throw new IllegalArgumentException("Incorrect definition of damage: \n"
+                            + damage + "\n"
+                            + all);
                 }
+
                 a.setDamage(damage.get(0));
-                attacks.put(sanitizeAttack(name), a);
+                attacks.put(sanitizeAttack(name, true), a);
             } else if (all.contains("Recharge")) {
                 String name = segments[0];
 
                 MonsterAttack a = new MonsterAttack();
                 a.setName(name);
 
+                List<MonsterDamage> damage = new ArrayList<>();
                 if (all.contains(" DC ") && all.contains("damage")) {
-                    a.setDamage(parseDamage(all, a));
+                    damage.add(parseDamage(all, a));
                 } else {
                     MonsterDamage d = new MonsterDamage();
-                    d.setAmount("0");
-                    a.setDamage(d);
+                    d.setAmount("");
+                    damage.add(d);
                 }
 
-                attacks.put(sanitizeAttack(name), a);
+                if (damage.isEmpty()) {
+                    throw new IllegalArgumentException("Attack has no damage " + all);
+                }
+                a.setDamage(damage.get(0));
+                attacks.put(sanitizeAttack(name, true), a);
             }
         }
 
@@ -328,11 +359,20 @@ public class ConvertHtmlToJson {
         MonsterDamage d = new MonsterDamage();
         Matcher m1 = DC.matcher(s);
         if (m1.find()) {
-            a.setSavingThrow(Ability.convert(m1.group(2)) + "(" + m1.group(1) + ")");
+            if (a == null) {
+                d.setSavingThrow(Ability.convert(m1.group(2)) + "(" + m1.group(1) + ")");
+            } else {
+                a.setSavingThrow(Ability.convert(m1.group(2)) + "(" + m1.group(1) + ")");
+            }
+
             Matcher m2 = HIT.matcher(s);
             if (m2.find()) {
                 d.setAmount(m2.group(1).replaceAll("\\s+", ""));
                 d.setType(m2.group(2).trim());
+                return d;
+            } else if (s.contains("have its hit point maximum reduced") || s.contains("its hit point maximum is reduced")) {
+                d.setType("hpdrain");
+                d.setAmount("");
                 return d;
             } else {
                 log("Unexpected DC damage definition: " + s);
@@ -364,6 +404,7 @@ public class ConvertHtmlToJson {
             if (s.contains("charisma")) {
                 list.add(Ability.CHA);
             }
+            return list;
         }
         return Collections.emptyList();
     }
@@ -376,7 +417,7 @@ public class ConvertHtmlToJson {
         final Pattern REPEAT_ATTACK = Pattern.compile("\\b([-a-z]+) ([-a-z]+) attacks?(?:\\b|\\.)");
         final Pattern VARIABLE_ATTACK = Pattern.compile("\\b([d0-9]+) ([-a-z]+) attacks?(?:\\b|\\.)");
         final Pattern USES_ATTACK = Pattern.compile("\\buses its ([-a-z]+)(?: ([-a-z]+))?");
-        final Pattern MULTIATTACK_STR = Pattern.compile("([d0-9]+\\*)([-a-z]+)");
+        final Pattern MULTIATTACK_STR = Pattern.compile("(([d0-9]+)\\*)([-a-z]+)");
 
         // dump completely unparsable alternatives. Maybe someday
         // drop "The whatever makes .. " prefix
@@ -519,13 +560,15 @@ public class ConvertHtmlToJson {
             combinations.add("2*longsword");
             combinations.add("1*longsword 1*life-drain");
             combinations.add("2*longbow");
+        } else if (lower.contains("each of which it can replace with one use of fling")) {
+            combinations.add("3*tentacle");
         } else if ("1*pike and 1*hooves or 2*longbow".equals(lower)) {
             combinations.add("1*pike and 1*hooves");
             combinations.add("2*longbow");
         } else if ("2*scimitar or 2*hurl-flame".equals(lower)) {
             combinations.add("2*scimitar");
             combinations.add("2*hurl-flame");
-        } else if ("1*claws and 1*dagger or intoxicating-touch".equals(lower)) {
+        } else if ("1*claw and 1*dagger or intoxicating-touch".equals(lower)) {
             combinations.add("1*claws 1*dagger");
             combinations.add("1*claws 1*intoxicating-touch");
         } else if ("1*bite and 2*claws or 3*tail-spikes".equals(lower)) {
@@ -534,18 +577,33 @@ public class ConvertHtmlToJson {
         } else if ("either 3*melee — 1*snake-hair and 2*shortsword — or 2*longbow".equals(lower)) {
             combinations.add("1*snake-hair 2*shortsword");
             combinations.add("2*longbow");
-        } else if ("1*bite and 1*claws or harpoon".equals(lower)) {
-            combinations.add("1*bite 1*claws");
+        } else if ("1*bite and 1*claw or harpoon".equals(lower)) {
+            combinations.add("1*bite 1*claw");
             combinations.add("1*bite 1*harpoon");
-        } else if ("1*claws or 1*glaive".equals(lower)) {
-            combinations.add("1*claws");
-            combinations.add("1*glaive");
-        } else if ("1*bite and 1*claws or spear".equals(lower)) {
-            combinations.add("1*bite 1*claws");
+        } else if ("1*claw or 1*glaive".equals(lower)) {
+            combinations.add("2*claw");
+            combinations.add("2*glaive");
+        } else if ("1*bite and 1*claw or spear".equals(lower)) {
+            combinations.add("1*bite 1*claw");
             combinations.add("1*bite 1*spear");
         } else if ("1*longsword or 1*longbow".equals(lower)) {
             combinations.add("1*longsword");
             combinations.add("1*longbow");
+        } else if ("1*pike and 1*hoove or 2*longbow".equals(lower)) {
+            combinations.add("1*pike 1*hoove");
+            combinations.add("2*longbow");
+        } else if ("1*bite and 2*claw or 3*tail-spike".equals(lower)) {
+            combinations.add("1*bite 2*claw");
+            combinations.add("3*tail-spike");
+        } else if ("each one with a different weapon".equals(lower)) {
+            combinations.add("1*spiked-shield 1*javelin");
+            combinations.add("1*spiked-shield 1*bite");
+            combinations.add("1*spiked-shield 1*heavy-club");
+            combinations.add("1*javelin 1*bite");
+            combinations.add("1*javelin 1*heavy-club");
+            combinations.add("1*bite 1*heavy-club");
+        } else if ("only-one-bite".equals(lower)) {
+            combinations.add("1*bite 1*claw");
         } else if (lower.contains("either") || lower.contains(" or ")) {
             log("Should handle this: " + lower + " with clause " + clause);
         } else {
@@ -558,22 +616,27 @@ public class ConvertHtmlToJson {
         }
 
         if (combinations.isEmpty()) {
-            log("WOOPS: " + lower);
-            // } else if ( !clause.isEmpty() ) {
-            //     log("CHECK: " + lower + " -- " + clause);
+            throw new IllegalArgumentException("bad multiattack string: " + multiattack);
         }
 
         for (int i = 0; i < combinations.size(); i++) {
+            int count = 0;
             String s = combinations.get(i);
             m = MULTIATTACK_STR.matcher(s);
             sb = new StringBuffer();
             while (m.find()) {
-                String key = sanitizeAttack(m.group(2));
+                String key = sanitizeAttack(m.group(3), false);
                 m.appendReplacement(sb, m.group(1) + checkExists(key, attacks));
+                if (total > 0) {
+                    count += Integer.parseInt(m.group(2));
+                }
             }
             m.appendTail(sb);
             lower = sb.toString();
             combinations.set(i, lower);
+            if (total > 0 && count != total) {
+                log("WARNING: Multiattack doesn't match total allowed (" + total + "): " + multiattack + " --> " + lower);
+            }
         }
 
         Multiattack attack = new Multiattack();
@@ -794,7 +857,7 @@ public class ConvertHtmlToJson {
         throw new IllegalArgumentException("Unexpected node type " + n.getClass());
     }
 
-    String sanitizeAttack(String s) {
+    String sanitizeAttack(String s, boolean write) {
         // Trim any parenthical stuff, we end up ignoring it later anyway
         String key = toLower(s).replaceAll("\\(.*\\)", "").trim();
 
@@ -803,8 +866,9 @@ public class ConvertHtmlToJson {
         String value = key.replaceAll(" ", "-")
                 .replaceAll("(.*)s\\b", "$1");
 
-        if (!key.equals(value)) {
+        if (!key.equals(value) && write) {
             sanitizedAttacks.put(key, value);
+            sanitizedAttacks.put(key + "s", value);
         }
         return value;
     }

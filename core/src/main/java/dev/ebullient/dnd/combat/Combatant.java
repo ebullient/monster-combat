@@ -15,36 +15,88 @@ package dev.ebullient.dnd.combat;
 
 import java.util.List;
 
+import dev.ebullient.dnd.beastiary.Beast;
 import dev.ebullient.dnd.mechanics.Ability;
+import dev.ebullient.dnd.mechanics.Dice;
+import dev.ebullient.dnd.mechanics.HitPoints;
 
-public interface Combatant {
-    String getName();
+public class Combatant {
+    final Beast b;
+    final Dice.Method method;
+    final int initiative;
 
-    String getDescription();
+    int hitPoints;
+    double maxHitPoints;
 
-    int getArmorClass();
+    public Combatant(Beast b, Dice.Method method) {
+        this.b = b;
+        this.method = method;
+        this.initiative = Dice.d20() + b.getAbilityModifier(Ability.DEX);
 
-    int getPassivePerception();
+        this.hitPoints = HitPoints.startingHitPoints(b.getName(), b.getHitPoints(), method);
+        this.maxHitPoints = (double) hitPoints;
+    }
 
-    int getAbilityModifier(Ability s);
+    public Combatant(Beast b, int initiative, int startingHitPoints) {
+        this.b = b;
+        this.method = Dice.Method.USE_AVERAGE;
+        this.initiative = initiative;
 
-    int getSavingThrow(Ability s);
+        this.hitPoints = startingHitPoints;
+        this.maxHitPoints = (double) hitPoints;
+    }
 
-    boolean isAlive();
+    public String getName() {
+        return b.getName();
+    }
 
-    int getRelativeHealth();
+    public void takeDamage(int damage) {
+        this.hitPoints -= damage;
+        if (this.hitPoints < 0) {
+            this.hitPoints = 0;
+        }
+    }
 
-    List<Attack> getAttacks();
+    public int getMaxHitPoints() {
+        return (int) maxHitPoints;
+    }
 
-    void takeDamage(int damage);
+    public int getRelativeHealth() {
+        return (int) ((hitPoints / maxHitPoints) * 100);
+    }
 
-    /** numeric representation of challenge rating for sorting */
-    int getCR();
+    public boolean isAlive() {
+        return hitPoints > 0;
+    }
 
-    /** initiative determines the order in which combatants take turns */
-    int getInitiative();
+    public int getInitiative() {
+        return initiative;
+    }
 
-    /** the combatant's maximum hit points for sorting */
-    int getMaxHitPoints();
+    public int getCR() {
+        return b.getCR();
+    }
 
+    public int getArmorClass() {
+        return b.getArmorClass();
+    }
+
+    public int getAbilityModifier(Ability ability) {
+        return b.getAbilityModifier(ability);
+    }
+
+    public int getSavingThrow(Ability ability) {
+        return b.getSavingThrow(ability);
+    }
+
+    public List<Attack> getAttacks() {
+        return b.getAttacks();
+    }
+
+    public String toString() {
+        return "Combatant["
+                + b
+                + "(" + hitPoints + "/" + maxHitPoints + ")"
+                + "]";
+    }
 }

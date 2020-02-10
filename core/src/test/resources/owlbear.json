@@ -9,7 +9,6 @@
     "intelligence" : "3(-4)",
     "wisdom" : "12(+1)",
     "charisma" : "7(-2)",
-    "savingThrows" : null,
     "challengeRating" : "3",
     "multiattack" : {
       "combinations" : [ "1*beak  1*claw" ]
@@ -19,22 +18,18 @@
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
-        "savingThrow" : null,
         "damage" : {
           "type" : "slashing",
-          "amount" : "14(2d8+5)",
-          "disadvantage" : null
+          "amount" : "14(2d8+5)"
         }
       },
       "beak" : {
         "name" : "Beak",
         "melee" : true,
         "attackModifier" : 7,
-        "savingThrow" : null,
         "damage" : {
           "type" : "piercing",
-          "amount" : "10(1d10+5)",
-          "disadvantage" : null
+          "amount" : "10(1d10+5)"
         }
       }
     },
@@ -53,6 +48,7 @@
       "Challenge" : "3 (700 XP)"
     },
     "passivePerception" : 13,
+    "spellSaveDC" : 0,
     "armorClass" : 3,
     "size" : "LARGE",
     "type" : "MONSTROSITY"

@@ -31,7 +31,7 @@ public class CompendiumReader {
         try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/compendium.json")) {
             Map<String, Monster> compendium = mapper.readValue(jsonInput, typeRef);
             for (Monster m : compendium.values()) {
-                beastiary.save(m.asBeast());
+                beastiary.save(m);
             }
         }
     }

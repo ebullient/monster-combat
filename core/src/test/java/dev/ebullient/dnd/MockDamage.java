@@ -13,12 +13,17 @@
  */
 package dev.ebullient.dnd;
 
+import java.util.List;
+
 import dev.ebullient.dnd.combat.Attack;
+import dev.ebullient.dnd.mechanics.Ability;
 
 public class MockDamage implements Attack.Damage {
 
     public String type;
     public String amount;
+    public String savingThrow;
+    public List<Ability> disadvantage;
 
     public MockDamage(String type, String amount) {
         this.type = type;
@@ -35,7 +40,28 @@ public class MockDamage implements Attack.Damage {
         return amount;
     }
 
+    @Override
+    public List<Ability> getDisadvantage() {
+        return disadvantage;
+    }
+
+    @Override
+    public String getSavingThrow() {
+        return savingThrow;
+    }
+
     public String toString() {
-        return amount + type;
+        StringBuilder sb = new StringBuilder();
+        if (!amount.isEmpty()) {
+            sb.append(amount).append("|");
+        }
+        sb.append(type);
+        if (savingThrow != null) {
+            sb.append("|").append(savingThrow);
+        }
+        if (disadvantage != null) {
+            sb.append("|").append("-").append(disadvantage);
+        }
+        return sb.toString();
     }
 }

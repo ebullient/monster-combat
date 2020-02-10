@@ -18,11 +18,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import dev.ebullient.dnd.beastiary.Beast;
+import dev.ebullient.dnd.combat.Attack.Damage;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Dice;
 
@@ -34,40 +38,57 @@ public class Encounter {
 
     final TargetSelector selector;
     final Dice.Method method;
+    final Set<Combatant> initiativeOrder;
 
-    public Encounter(TargetSelector selector, Dice.Method method) {
+    public Encounter(TargetSelector selector, Dice.Method method, List<Beast> beasts) {
         this.selector = selector;
         this.method = method;
+        this.initiativeOrder = new TreeSet<>(Comparators.InitiativeOrder);
+        for (Beast b : beasts) {
+            this.initiativeOrder.add(new Combatant(b, method));
+        }
     }
 
-    public RoundResult takeTurns(List<Combatant> initiativeOrder) {
+    Encounter(TargetSelector selector, Dice.Method method, Set<Combatant> combatants) {
+        this.selector = selector;
+        this.method = method;
+        this.initiativeOrder = combatants;
+    }
+
+    public boolean isFinal() {
+        return initiativeOrder.size() <= 1;
+    }
+
+    public RoundResult oneRound() {
         logger.debug("take turns: {}", initiativeOrder);
 
         RoundResult result = new RoundResult(initiativeOrder);
-        for (Combatant p : initiativeOrder) {
-            if (p.isAlive()) {
-                // TODO: multiple targets, not just multiple attacks
-                Combatant target = selector.chooseTarget(p, initiativeOrder);
+        for (Combatant attacker : initiativeOrder) {
+            if (attacker.isAlive()) {
+                Combatant target = selector.chooseTarget(attacker, initiativeOrder);
 
                 // Single or many attacks
-                List<Attack> attacks = p.getAttacks();
+                List<Attack> attacks = attacker.getAttacks();
                 for (Attack a : attacks) {
                     if (a == null) {
                         throw new IllegalStateException("Attack should not be null " + attacks);
                     }
                     if (target.isAlive()) {
-                        AttackResult r = new AttackResult(p, target, a, method, id).attack();
+                        AttackResult r = new AttackResult(attacker, target, a, method, id);
+                        r.attack();
                         result.events.add(r);
                         logger.debug("take turns: {}", r);
                     }
                 }
 
                 // Highlander
-                if (!target.isAlive()) {
-                    result.survivors.remove(p);
+                if (target.hitPoints <= 0) {
+                    result.survivors.remove(target);
                 }
             }
         }
+
+        initiativeOrder.retainAll(result.survivors);
 
         logger.debug("take turns: survivors {}", result.survivors);
         return result;
@@ -77,9 +98,9 @@ public class Encounter {
         List<Combatant> survivors;
         List<AttackResult> events;
 
-        RoundResult(List<Combatant> initiativeOrder) {
-            survivors = new ArrayList<>(initiativeOrder);
+        RoundResult(Set<Combatant> initiativeOrder) {
             events = new ArrayList<>();
+            survivors = new ArrayList<>(initiativeOrder);
         }
 
         public List<AttackResult> getEvents() {
@@ -149,6 +170,7 @@ public class Encounter {
                     damage += damage;
                 }
                 target.takeDamage(damage); // ouch
+                additionalEffects();
             }
         }
 
@@ -170,6 +192,44 @@ public class Encounter {
                 target.takeDamage(damage); // ouch
             } else {
                 throw new IllegalArgumentException(attacker.getName() + " has badly formed saving throw " + a);
+            }
+        }
+
+        void additionalEffects() {
+            // If the attack brings additional damage, and it hits..
+            Damage effect = a.getAdditionalEffect();
+            if (effect != null) {
+                int effectDamage = 0;
+                if (effect.getAmount() != null && !effect.getAmount().isEmpty()) {
+                    effectDamage = Dice.roll(effect.getAmount(), method);
+                }
+
+                String savingThrow = effect.getSavingThrow();
+                if (savingThrow != null) {
+                    Matcher m = Attack.SAVE.matcher(savingThrow);
+                    if (m.matches()) {
+                        int dc = Integer.parseInt(m.group(2));
+                        int save = Dice.d20() + target.getSavingThrow(Ability.valueOf(m.group(1)));
+
+                        if ("hpdrain".equals(effect.getType())) {
+                            if (save < dc) {
+                                int maxhp = target.getMaxHitPoints();
+                                if (damage > maxhp) {
+                                    target.takeDamage(damage);
+
+                                }
+                            }
+                        } else {
+                            if (save >= dc) {
+                                saved = true;
+                                effectDamage = effectDamage / 2;
+                            }
+                            target.takeDamage(effectDamage); // ouch
+                        }
+                    }
+                } else {
+                    target.takeDamage(effectDamage); // ouch
+                }
             }
         }
 
@@ -206,4 +266,5 @@ public class Encounter {
             return damage;
         }
     }
+
 }

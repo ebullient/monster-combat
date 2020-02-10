@@ -11,18 +11,18 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.mechanics;
+package dev.ebullient.dnd.combat;
 
 import java.util.Comparator;
 
-import dev.ebullient.dnd.combat.Combatant;
+import dev.ebullient.dnd.mechanics.Ability;
 
 public interface Comparators {
 
     public static final Comparator<Combatant> InitiativeOrder = new Comparator<Combatant>() {
         @Override
         public int compare(Combatant o1, Combatant o2) {
-            // sort by initiative
+            // sort by initiative descending
             if (o2.getInitiative() == o1.getInitiative()) {
                 // dex is already in the initiative score in a way, but .. use that as second factor (descending)
                 if (o2.getAbilityModifier(Ability.DEX) == o1.getAbilityModifier(Ability.DEX)) {
@@ -38,16 +38,16 @@ public interface Comparators {
     public static final Comparator<Combatant> ChallengeRatingOrder = new Comparator<Combatant>() {
         @Override
         public int compare(Combatant o1, Combatant o2) {
-            // sort by cr ascending
-            if (o1.getCR() == o2.getCR()) {
-                // Then sort by max hit points ascending
-                if (o1.getMaxHitPoints() == o2.getMaxHitPoints()) {
+            // sort by cr descending
+            if (o2.getCR() == o1.getCR()) {
+                // Then sort by max hit points descending
+                if (o2.getMaxHitPoints() == o1.getMaxHitPoints()) {
                     // finally, sort by name ascending
                     return o1.getName().compareTo(o2.getName());
                 }
-                return o1.getMaxHitPoints() - o2.getMaxHitPoints();
+                return o2.getMaxHitPoints() - o1.getMaxHitPoints();
             }
-            return o1.getCR() - o2.getCR();
+            return o2.getCR() - o1.getCR();
         }
     };
 

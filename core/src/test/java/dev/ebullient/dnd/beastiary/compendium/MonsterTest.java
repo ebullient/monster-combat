@@ -21,11 +21,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import dev.ebullient.dnd.beastiary.Beast;
 import dev.ebullient.dnd.combat.Attack;
-import dev.ebullient.dnd.combat.Combatant;
 import dev.ebullient.dnd.mechanics.Ability;
-import dev.ebullient.dnd.mechanics.Dice;
 import dev.ebullient.dnd.mechanics.Size;
 import dev.ebullient.dnd.mechanics.Type;
 
@@ -59,10 +56,10 @@ public class MonsterTest {
     }
 
     @Test
-    public void testMonster() throws Exception {
+    public void testOwlbearMonster() throws Exception {
         Map<String, Monster> compendium;
 
-        try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/goodMonster.json")) {
+        try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/owlbear.json")) {
             compendium = CompendiumReader.mapper.readValue(jsonInput, CompendiumReader.typeRef);
             Assert.assertEquals(1, compendium.size());
         }
@@ -78,59 +75,33 @@ public class MonsterTest {
         m.savingThrows = "INT(2)";
         m.saveThrows.intelligence = 2;
 
-        // See the Monster as a Beast
-        Beast b = m.asBeast();
+        Assert.assertEquals(3, m.getArmorClass());
+        Assert.assertEquals(13, m.getPassivePerception());
 
-        // Make sure ability scores / modifiers were parsed properly through participant view
-        Combatant c = b.createCombatant(Dice.Method.USE_AVERAGE);
-        Monster.CombatantView mc = (Monster.CombatantView) c;
-
-        Assert.assertEquals(3, c.getArmorClass());
-        Assert.assertEquals(13, c.getPassivePerception());
-
-        Assert.assertEquals(5, c.getAbilityModifier(Ability.STR));
-        Assert.assertEquals(1, c.getAbilityModifier(Ability.DEX));
-        Assert.assertEquals(3, c.getAbilityModifier(Ability.CON));
-        Assert.assertEquals(-4, c.getAbilityModifier(Ability.INT));
-        Assert.assertEquals(1, c.getAbilityModifier(Ability.WIS));
-        Assert.assertEquals(-2, c.getAbilityModifier(Ability.CHA));
-
-        // Poke on some participant behavior
-        Assert.assertEquals(100, c.getRelativeHealth());
-
-        // 1/2 health
-        int startingHP = mc.hitPoints;
-        Assert.assertEquals("Preset value for max health", 40, startingHP);
-
-        int halfDamage = startingHP / 2;
-        c.takeDamage(halfDamage);
-        Assert.assertEquals("starting=" + startingHP + ", half damage=" + halfDamage + ", expect relative health of 50",
-                50, c.getRelativeHealth());
-
-        // 1/4 health
-        startingHP = mc.hitPoints;
-        halfDamage = startingHP / 2;
-        c.takeDamage(halfDamage);
-        Assert.assertEquals("starting=" + startingHP + ", half damage=" + halfDamage + ", expect relative health of 25",
-                25, c.getRelativeHealth());
+        Assert.assertEquals(5, m.getAbilityModifier(Ability.STR));
+        Assert.assertEquals(1, m.getAbilityModifier(Ability.DEX));
+        Assert.assertEquals(3, m.getAbilityModifier(Ability.CON));
+        Assert.assertEquals(-4, m.getAbilityModifier(Ability.INT));
+        Assert.assertEquals(1, m.getAbilityModifier(Ability.WIS));
+        Assert.assertEquals(-2, m.getAbilityModifier(Ability.CHA));
 
         Assert.assertNotNull(m.getMultiattack());
 
-        List<Attack> attacks = c.getAttacks();
+        List<Attack> attacks = m.getAttacks();
         Assert.assertNotNull(attacks);
         Assert.assertEquals(2, attacks.size());
 
         Assert.assertEquals("Known modifier should be used when no saving throw is specified: " + m,
-                5, c.getSavingThrow(Ability.STR));
+                5, m.getSavingThrow(Ability.STR));
         Assert.assertEquals("Specified saving throw should be used: " + m,
-                2, c.getSavingThrow(Ability.INT));
+                2, m.getSavingThrow(Ability.INT));
     }
 
     @Test
-    public void testMeleeMonster() throws Exception {
+    public void testErinyesMonster() throws Exception {
         Map<String, Monster> compendium;
 
-        try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/meleeMonster.json")) {
+        try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/erinyes.json")) {
             compendium = CompendiumReader.mapper.readValue(jsonInput, CompendiumReader.typeRef);
             Assert.assertEquals(1, compendium.size());
         }
@@ -146,8 +117,7 @@ public class MonsterTest {
         Assert.assertEquals("Has one combined multiattack", 1, m.multiattack.combinations.size());
         Assert.assertTrue("Multiattack string contains a melee weapon", m.multiattack.combinations.get(0).contains("melee"));
 
-        Combatant c = m.asBeast().createCombatant(Dice.Method.USE_AVERAGE);
-        List<Attack> attacks = c.getAttacks();
+        List<Attack> attacks = m.getAttacks();
         Assert.assertNotNull(attacks);
         Assert.assertEquals(3, attacks.size());
         Assert.assertFalse("List of attacks should not contain 'melee'", attacks.toString().contains("melee"));
@@ -168,14 +138,65 @@ public class MonsterTest {
         Assert.assertEquals(Type.DRAGON, m.getType());
         Assert.assertEquals(Size.LARGE, m.getSize());
 
-        System.out.println(m.actions);
-        System.out.println(m.multiattack.combinations);
-
-        Combatant c = m.asBeast().createCombatant(Dice.Method.USE_AVERAGE);
-        List<Attack> attacks = c.getAttacks();
-        System.out.println(attacks);
+        List<Attack> attacks = m.getAttacks();
+        Assert.assertNotNull(attacks);
+        Assert.assertEquals(3, attacks.size());
 
         // this is the lazy way to check this
         Assert.assertFalse("No attack list elements should be null", attacks.toString().contains("null"));
+    }
+
+    @Test
+    public void testLamiaAttacks() throws Exception {
+        Map<String, Monster> compendium;
+
+        try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/lamia.json")) {
+            compendium = CompendiumReader.mapper.readValue(jsonInput, CompendiumReader.typeRef);
+            Assert.assertEquals(1, compendium.size());
+        }
+
+        // snag our single parsed value
+        Monster m = compendium.values().iterator().next();
+        Assert.assertNotNull(m);
+        Assert.assertEquals(Type.MONSTROSITY, m.getType());
+        Assert.assertEquals(Size.LARGE, m.getSize());
+
+        List<Attack> attacks = m.getAttacks();
+        Assert.assertNotNull(attacks);
+        Assert.assertEquals(2, attacks.size());
+
+        MonsterAttack a = m.actions.get("intoxicating-touch");
+        Assert.assertNotNull(a);
+        MonsterDamage d = a.getDamage();
+        Assert.assertEquals("curse", d.type);
+        Assert.assertEquals(1, d.getDisadvantage().size());
+        Assert.assertEquals(Ability.WIS, d.getDisadvantage().get(0));
+    }
+
+    @Test
+    public void testWraithAttacks() throws Exception {
+        Map<String, Monster> compendium;
+
+        try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/wraith.json")) {
+            compendium = CompendiumReader.mapper.readValue(jsonInput, CompendiumReader.typeRef);
+            Assert.assertEquals(1, compendium.size());
+        }
+
+        // snag our single parsed value
+        Monster m = compendium.values().iterator().next();
+        Assert.assertNotNull(m);
+        Assert.assertEquals(Type.UNDEAD, m.getType());
+        Assert.assertEquals(Size.MEDIUM, m.getSize());
+
+        List<Attack> attacks = m.getAttacks();
+        Assert.assertNotNull(attacks);
+        Assert.assertEquals(1, attacks.size());
+
+        MonsterAttack a = m.actions.get("life-drain");
+        Assert.assertNotNull(a);
+
+        MonsterDamage d = a.getDamage();
+        Assert.assertEquals("necrotic", d.type);
+        Assert.assertNotNull(a.getAdditionalEffect());
     }
 }

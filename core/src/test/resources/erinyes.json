@@ -19,22 +19,18 @@
         "name" : "Longbow",
         "melee" : false,
         "attackModifier" : 7,
-        "savingThrow" : null,
         "damage" : {
           "type" : "piercing",
-          "amount" : "7(1d8+3)",
-          "disadvantage" : null
+          "amount" : "7(1d8+3)"
         }
       },
       "longsword" : {
         "name" : "Longsword",
         "melee" : true,
         "attackModifier" : 8,
-        "savingThrow" : null,
         "damage" : {
           "type" : "slashing",
-          "amount" : "8(1d8+4)",
-          "disadvantage" : null
+          "amount" : "8(1d8+4)"
         }
       }
     },
@@ -56,6 +52,7 @@
       "Notes" : "Hellish Weapons. The erinyes's weapon attacks are magical and deal an extra 13 (3d8) poison damage on a hit (included in the attacks).\nMagic Resistance. The erinyes has advantage on saving throws against spells and other magical effects."
     },
     "passivePerception" : 12,
+    "spellSaveDC" : 0,
     "armorClass" : 8,
     "size" : "MEDIUM",
     "type" : "FIEND"

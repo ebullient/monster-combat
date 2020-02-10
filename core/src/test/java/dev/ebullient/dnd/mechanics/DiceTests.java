@@ -66,13 +66,6 @@ public class DiceTests {
     }
 
     @Test
-    public void testVariableRollWithAverage() {
-        String roll = "15(2d20+2d6)";
-        int result = Dice.roll(roll, Dice.Method.ROLL);
-        Assert.assertNotEquals(roll + " should not return average", 15, result);
-    }
-
-    @Test
     public void testOnlyAverageRoll() {
         String roll = "15";
         int result = Dice.roll(roll, Dice.Method.ROLL);

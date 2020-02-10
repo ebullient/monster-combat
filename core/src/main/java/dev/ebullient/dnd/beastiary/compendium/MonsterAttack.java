@@ -27,6 +27,7 @@ public class MonsterAttack implements Attack {
     int attackModifier;
     String savingThrow;
     MonsterDamage damage;
+    MonsterDamage additionalEffect;
 
     public String getName() {
         return name;
@@ -44,7 +45,7 @@ public class MonsterAttack implements Attack {
         this.attackModifier = attackModifier;
     }
 
-    public Damage getDamage() {
+    public MonsterDamage getDamage() {
         return damage;
     }
 
@@ -60,6 +61,22 @@ public class MonsterAttack implements Attack {
         this.savingThrow = savingThrow;
     }
 
+    public boolean isMelee() {
+        return melee;
+    }
+
+    public void setMelee(boolean melee) {
+        this.melee = melee;
+    }
+
+    public MonsterDamage getAdditionalEffect() {
+        return additionalEffect;
+    }
+
+    public void setAdditionalEffect(MonsterDamage additionalEffect) {
+        this.additionalEffect = additionalEffect;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(name).append("[");
@@ -72,14 +89,13 @@ public class MonsterAttack implements Attack {
 
         sb.append(damage.toString().replaceAll("\\s+", ""))
                 .append("]");
+
+        if (additionalEffect != null) {
+            sb.append(additionalEffect.toString()
+                    .replaceAll("\\s+", ""))
+                    .append("]");
+        }
+
         return sb.toString();
-    }
-
-    public boolean isMelee() {
-        return melee;
-    }
-
-    public void setMelee(boolean melee) {
-        this.melee = melee;
     }
 }

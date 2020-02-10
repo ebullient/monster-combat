@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 IBM Corp. All rights reserved.
+ * Copyright © 2019,2020 IBM Corp. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -11,30 +11,14 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary;
+package dev.ebullient.dnd;
 
-import java.util.List;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import dev.ebullient.dnd.combat.Attack;
-import dev.ebullient.dnd.mechanics.Ability;
-
-public interface Beast {
-
-    String getName();
-
-    String getHitPoints();
-
-    String getChallengeRating();
-
-    int getArmorClass();
-
-    int getPassivePerception();
-
-    int getAbilityModifier(Ability s);
-
-    int getSavingThrow(Ability s);
-
-    int getCR();
-
-    List<Attack> getAttacks();
+@SpringBootApplication
+public class Main {
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
+    }
 }

@@ -15,26 +15,25 @@ package dev.ebullient.dnd.combat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import dev.ebullient.dnd.mechanics.Comparators;
 import dev.ebullient.dnd.mechanics.Dice;
 
 /**
- * For combat rounds, we're dealing with very small lists (< 10)
+ * For combat rounds, we're dealing with very small sets (< 10)
  */
 public interface TargetSelector {
 
-    public Combatant chooseTarget(Combatant p, List<Combatant> list);
+    public Combatant chooseTarget(Combatant p, Set<Combatant> list);
 
     public static final TargetSelector SelectByHighestRelativeHealth = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
+        public Combatant chooseTarget(Combatant p, Set<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
+
             if (targets.isEmpty()) {
                 return null;
-            } else if (targets.size() == 1) {
-                return targets.get(0);
             }
 
             targets.sort(Comparators.RelativeHealthOrder);
@@ -44,7 +43,7 @@ public interface TargetSelector {
 
     public static final TargetSelector SelectByLowestRelativeHealth = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
+        public Combatant chooseTarget(Combatant p, Set<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
@@ -58,9 +57,23 @@ public interface TargetSelector {
         }
     };
 
-    public static final TargetSelector SelectByChallengeRating = new TargetSelector() {
+    public static final TargetSelector SelectByHighestChallengeRating = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
+        public Combatant chooseTarget(Combatant p, Set<Combatant> initiativeOrder) {
+            List<Combatant> targets = new ArrayList<>(initiativeOrder);
+            targets.remove(p);
+            if (targets.isEmpty()) {
+                return null;
+            }
+
+            targets.sort(Comparators.ChallengeRatingOrder);
+            return targets.get(0);
+        }
+    };
+
+    public static final TargetSelector SelectByLowestChallengeRating = new TargetSelector() {
+
+        public Combatant chooseTarget(Combatant p, Set<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
@@ -69,14 +82,14 @@ public interface TargetSelector {
                 return targets.get(0);
             }
 
-            targets.sort(Comparators.RelativeHealthOrder);
+            targets.sort(Comparators.ChallengeRatingOrder);
             return targets.get(targets.size() - 1);
         }
     };
 
     public static final TargetSelector SelectAtRandom = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
+        public Combatant chooseTarget(Combatant p, Set<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {

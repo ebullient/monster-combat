@@ -16,11 +16,9 @@ package dev.ebullient.dnd.beastiary;
 import java.util.List;
 
 import dev.ebullient.dnd.combat.Attack;
-import dev.ebullient.dnd.combat.Combatant;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.ChallengeRating;
 import dev.ebullient.dnd.mechanics.Dice;
-import dev.ebullient.dnd.mechanics.HitPoints;
 import dev.ebullient.dnd.mechanics.Size;
 import dev.ebullient.dnd.mechanics.Type;
 
@@ -34,7 +32,6 @@ public class GeneratedBeast implements Beast {
     final Type type;
     final String challengeRating;
     final int cr;
-    final int startingHP;
 
     final int armorClass;
     final int passivePerception;
@@ -68,7 +65,6 @@ public class GeneratedBeast implements Beast {
         // Calculate based on previous values
         armorClass = calculateAC(modifiers.dexterity, cr);
         passivePerception = 10 + modifiers.intelligence;
-        startingHP = HitPoints.startingHitPoints(modifiers.constitution, cr, size);
     }
 
     public String toString() {
@@ -86,114 +82,62 @@ public class GeneratedBeast implements Beast {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getHitPoints() {
+        return "0";
+    }
+
+    @Override
     public String getChallengeRating() {
         return challengeRating;
     }
 
     @Override
-    public Combatant createCombatant(Dice.Method method) {
-        return new GeneratedBeast.ParticipantView(this);
+    public int getCR() {
+        return cr;
     }
 
-    static class ParticipantView implements Combatant {
-        final GeneratedBeast g;
-        final double maxHitPoints;
-        final int initiative;
-        final int cr;
+    @Override
+    public int getArmorClass() {
+        return armorClass;
+    }
 
-        int hitPoints;
+    @Override
+    public int getPassivePerception() {
+        return passivePerception;
+    }
 
-        public ParticipantView(GeneratedBeast g) {
-            this.g = g;
-            this.hitPoints = g.startingHP;
-            this.maxHitPoints = (double) hitPoints;
-            this.initiative = Dice.d20() + g.modifiers.dexterity;
-            this.cr = ChallengeRating.stringToCr(g.challengeRating);
+    @Override
+    public int getAbilityModifier(Ability s) {
+        switch (s) {
+            case STR:
+                return modifiers.strength;
+            case DEX:
+                return modifiers.dexterity;
+            case CON:
+                return modifiers.constitution;
+            case INT:
+                return modifiers.intelligence;
+            case WIS:
+                return modifiers.wisdom;
+            case CHA:
+                return modifiers.charisma;
         }
+        return 0;
+    }
 
-        @Override
-        public String getName() {
-            return g.name;
-        }
+    @Override
+    public int getSavingThrow(Ability s) {
+        return 0;
+    }
 
-        @Override
-        public String getDescription() {
-            final String description = String.format("%s %s, generated neutral", g.size, g.type);
-            return description;
-        }
-
-        @Override
-        public int getCR() {
-            return cr;
-        }
-
-        @Override
-        public int getInitiative() {
-            return initiative;
-        }
-
-        @Override
-        public int getArmorClass() {
-            return g.armorClass;
-        }
-
-        @Override
-        public int getPassivePerception() {
-            return g.passivePerception;
-        }
-
-        @Override
-        public int getAbilityModifier(Ability s) {
-            switch (s) {
-                case STR:
-                    return g.modifiers.strength;
-                case DEX:
-                    return g.modifiers.dexterity;
-                case CON:
-                    return g.modifiers.constitution;
-                case INT:
-                    return g.modifiers.intelligence;
-                case WIS:
-                    return g.modifiers.wisdom;
-                case CHA:
-                    return g.modifiers.charisma;
-            }
-            return 0;
-        }
-
-        @Override
-        public int getSavingThrow(Ability s) {
-            return 0;
-        }
-
-        @Override
-        public void takeDamage(int damage) {
-            this.hitPoints -= damage;
-            if (this.hitPoints < 0) {
-                this.hitPoints = 0;
-            }
-        }
-
-        @Override
-        public boolean isAlive() {
-            return hitPoints > 0;
-        }
-
-        @Override
-        public int getRelativeHealth() {
-            return (int) ((hitPoints / maxHitPoints) * 100);
-        }
-
-        @Override
-        public int getMaxHitPoints() {
-            return (int) maxHitPoints;
-        }
-
-        @Override
-        public List<Attack> getAttacks() {
-            // TODO Auto-generated method stub
-            return null;
-        }
+    @Override
+    public List<Attack> getAttacks() {
+        return null;
     }
 
     /**

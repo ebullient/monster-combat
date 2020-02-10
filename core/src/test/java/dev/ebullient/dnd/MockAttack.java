@@ -20,6 +20,7 @@ public class MockAttack implements Attack {
     final String name;
 
     public Damage damage;
+    public Damage additionalEffect;
     public int attackModifier;
     public String savingThrow;
 
@@ -35,6 +36,11 @@ public class MockAttack implements Attack {
     @Override
     public Damage getDamage() {
         return damage;
+    }
+
+    @Override
+    public Damage getAdditionalEffect() {
+        return additionalEffect;
     }
 
     @Override
@@ -59,6 +65,13 @@ public class MockAttack implements Attack {
 
         sb.append(damage.toString().replaceAll("\\s+", ""))
                 .append("]");
+
+        if (additionalEffect != null) {
+            sb.append(additionalEffect.toString()
+                    .replaceAll("\\s+", ""))
+                    .append("]");
+        }
+
         return sb.toString();
     }
 }
