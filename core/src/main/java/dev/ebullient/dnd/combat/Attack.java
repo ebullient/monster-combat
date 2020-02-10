@@ -29,6 +29,8 @@ public interface Attack {
         List<Ability> getDisadvantage();
 
         String getSavingThrow();
+
+        int getDuration();
     }
 
     String getName();

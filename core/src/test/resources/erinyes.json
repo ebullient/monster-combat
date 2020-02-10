@@ -21,7 +21,8 @@
         "attackModifier" : 7,
         "damage" : {
           "type" : "piercing",
-          "amount" : "7(1d8+3)"
+          "amount" : "7(1d8+3)",
+          "duration" : 0
         }
       },
       "longsword" : {
@@ -30,7 +31,8 @@
         "attackModifier" : 8,
         "damage" : {
           "type" : "slashing",
-          "amount" : "8(1d8+4)"
+          "amount" : "8(1d8+4)",
+          "duration" : 0
         }
       }
     },

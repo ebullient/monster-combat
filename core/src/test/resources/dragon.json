@@ -22,7 +22,8 @@
         "savingThrow" : "DEX(17)",
         "damage" : {
           "type" : "fire",
-          "amount" : "56(16d6)"
+          "amount" : "56(16d6)",
+          "duration" : 0
         }
       },
       "claw" : {
@@ -31,7 +32,8 @@
         "attackModifier" : 10,
         "damage" : {
           "type" : "slashing",
-          "amount" : "13(2d6+6)"
+          "amount" : "13(2d6+6)",
+          "duration" : 0
         }
       },
       "bite" : {
@@ -40,7 +42,8 @@
         "attackModifier" : 10,
         "damage" : {
           "type" : "piercing",
-          "amount" : "17(2d10+6)"
+          "amount" : "17(2d10+6)",
+          "duration" : 0
         }
       }
     },

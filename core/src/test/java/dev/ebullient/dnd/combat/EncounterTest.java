@@ -26,9 +26,10 @@ import dev.ebullient.dnd.MockAttack;
 import dev.ebullient.dnd.MockBeast;
 import dev.ebullient.dnd.MockDamage;
 import dev.ebullient.dnd.combat.Encounter.RoundResult;
+import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Dice;
 
-public class RoundTest {
+public class EncounterTest {
 
     @Test
     public void testSingleMeleeAttack() {
@@ -73,6 +74,36 @@ public class RoundTest {
         MockAttack attack = new MockAttack("testDCAttack");
         attack.savingThrow = "CON(22)";
         attack.damage = new MockDamage("poison", "14(2d8+5)");
+
+        Encounter.AttackResult result = new Encounter.AttackResult(mcs[0], mcs[1], attack, Dice.Method.USE_AVERAGE, "id");
+        result.attack();
+
+        System.out.println(result);
+        if (result.hit) {
+            Assert.assertFalse("Combatant should be dead (14 damage vs. 10 hit points)", mcs[1].isAlive());
+            Assert.assertEquals(14, result.damage);
+        } else {
+            Assert.assertTrue("Combatant should be alive (miss)", mcs[1].isAlive());
+        }
+    }
+
+    @Test
+    public void testSingleDCAttackDisadvantage() {
+        MockBeast[] mbs = new MockBeast[] {
+                new MockBeast("0"),
+                new MockBeast("1")
+        };
+
+        Combatant[] mcs = new Combatant[] {
+                new Combatant(mbs[0], 10, 10),
+                new Combatant(mbs[1], 10, 10)
+        };
+
+        MockAttack attack = new MockAttack("testDCAttack");
+        attack.savingThrow = "CON(22)";
+        attack.damage = new MockDamage("poison", "14(2d8+5)");
+
+        mcs[1].addCondition().disadvantage(Arrays.asList(Ability.CON));
 
         Encounter.AttackResult result = new Encounter.AttackResult(mcs[0], mcs[1], attack, Dice.Method.USE_AVERAGE, "id");
         result.attack();

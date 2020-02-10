@@ -25,6 +25,13 @@ public class Dice {
         ROLL
     }
 
+    public enum Constraint {
+        ADVANTAGE,
+        DISADVANTAGE,
+        FAIL,
+        NONE
+    }
+
     static final Random random = new Random();
 
     /** @return a value in a range including 0: [0, bound) */
@@ -132,6 +139,20 @@ public class Dice {
     /** @return the value of a 1d20 roll: [1,20] */
     public static final int d20() {
         return random.nextInt(20) + 1;
+    }
+
+    public static final int d20(Constraint c) {
+        int roll1 = Dice.d20();
+        int roll2 = Dice.d20();
+
+        if (c == Constraint.DISADVANTAGE) {
+            return Math.min(roll1, roll2);
+        } else if (c == Constraint.ADVANTAGE) {
+            return Math.max(roll1, roll2);
+        } else if (c == Constraint.FAIL) {
+            return 1;
+        }
+        return roll1;
     }
 
     /** @return the value of n 1d20 rolls */

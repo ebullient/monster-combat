@@ -28,6 +28,8 @@ public class Combatant {
     int hitPoints;
     double maxHitPoints;
 
+    Condition condition;
+
     public Combatant(Beast b, Dice.Method method) {
         this.b = b;
         this.method = method;
@@ -93,10 +95,44 @@ public class Combatant {
         return b.getAttacks();
     }
 
+    public Condition addCondition() {
+        this.condition = new Condition();
+        return condition;
+    }
+
+    public boolean attackLimit() {
+        if (condition != null) {
+            return condition.singleAttack;
+        }
+        return false;
+    }
+
+    public Dice.Constraint withConstraint(Ability ability) {
+        if (condition != null && condition.disadvantage.contains(ability)) {
+            return Dice.Constraint.DISADVANTAGE;
+        }
+        return Dice.Constraint.NONE;
+    }
+
+    public Dice.Constraint rollOnAttack() {
+        if (condition != null) {
+            return condition.onAttack;
+        }
+        return Dice.Constraint.NONE;
+    }
+
+    public Dice.Constraint rollAsTarget() {
+        if (condition != null) {
+            return condition.asTarget;
+        }
+        return Dice.Constraint.NONE;
+    }
+
     public String toString() {
         return "Combatant["
                 + b
                 + "(" + hitPoints + "/" + maxHitPoints + ")"
                 + "]";
     }
+
 }

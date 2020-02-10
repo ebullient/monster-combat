@@ -44,7 +44,7 @@ public class HitPointsTest {
 
         // Using fixed averages rather than rolls,
         // hp should increase nicely.
-        for (Size size : Size.values()) {
+        for (Size size : Size.allValues) {
             prev = 0;
             for (int i = -3; i < 23; i++) {
                 hp = HitPoints.startingHitPoints(8, i, size);

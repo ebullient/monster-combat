@@ -77,13 +77,20 @@ public class ConvertHtmlToJson {
 
         try (BufferedReader br = new BufferedReader(new FileReader(basePath.resolve("list.txt").toFile()))) {
             br.lines().forEach(line -> {
-                if (line.contains("Deck_of_Many_Things")) {
+                // Remove creatures with no attack actions
+                if (line.contains("Deck_of_Many_Things")
+                        || line.contains("Rug_of_Smothering")
+                        || line.contains("Shrieker")) {
                     return;
                 }
                 File f = basePath.resolve(line).toFile();
                 try {
                     // log(f.getAbsolutePath());
                     Monster m = converter.createMonster(f);
+                    Map<String, MonsterAttack> actions = m.getActions();
+                    if (actions == null || actions.isEmpty()) {
+                        throw new IllegalArgumentException("Monster has no defined actions: " + m);
+                    }
                     compendium.put(toLower(m.getName()), m);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -119,6 +126,10 @@ public class ConvertHtmlToJson {
         single.clear();
         single.put("wraith", compendium.get("wraith"));
         writer.writeValue(Paths.get("./src/test/resources/wraith.json").toFile(), single);
+
+        single.clear();
+        single.put("gibbering mouther", compendium.get("gibbering mouther"));
+        writer.writeValue(Paths.get("./src/test/resources/gibbering-mouther.json").toFile(), single);
     }
 
     public Monster createMonster(File f) throws Exception {
@@ -292,7 +303,7 @@ public class ConvertHtmlToJson {
                             damage.add(d);
                         } else if (s.contains("cursed")) {
                             MonsterDamage d = new MonsterDamage();
-                            d.setType("curse");
+                            d.setType("cursed");
                             d.setAmount("");
                             d.setDisadvantage(getDisadvantage(toLower(all)));
                             damage.add(d);
@@ -309,7 +320,7 @@ public class ConvertHtmlToJson {
                             throw new IllegalArgumentException("Unexpected Attack definition: " + s);
                         }
                     } else if (s.startsWith("The target must") && s.contains("damage") && s.contains("saving throw")) {
-                        log(s);
+                        log("Additional Effect: " + s);
                         MonsterDamage d = parseDamage(s, null);
                         if (d != null) {
                             a.setAdditionalEffect(d);
@@ -327,24 +338,13 @@ public class ConvertHtmlToJson {
                 attacks.put(sanitizeAttack(name, true), a);
             } else if (all.contains("Recharge")) {
                 String name = segments[0];
-
                 MonsterAttack a = new MonsterAttack();
-                a.setName(name);
-
-                List<MonsterDamage> damage = new ArrayList<>();
-                if (all.contains(" DC ") && all.contains("damage")) {
-                    damage.add(parseDamage(all, a));
-                } else {
-                    MonsterDamage d = new MonsterDamage();
-                    d.setAmount("");
-                    damage.add(d);
+                MonsterDamage d = parseDamage(all, a);
+                if (d != null) {
+                    a.setName(name);
+                    a.setDamage(d);
+                    attacks.put(sanitizeAttack(name, true), a);
                 }
-
-                if (damage.isEmpty()) {
-                    throw new IllegalArgumentException("Attack has no damage " + all);
-                }
-                a.setDamage(damage.get(0));
-                attacks.put(sanitizeAttack(name, true), a);
             }
         }
 
@@ -365,6 +365,18 @@ public class ConvertHtmlToJson {
                 a.setSavingThrow(Ability.convert(m1.group(2)) + "(" + m1.group(1) + ")");
             }
 
+            if (s.contains("for 1 minute")) {
+                d.setDuration(10);
+            }
+
+            if (s.contains("for 1 hour")) {
+                d.setDuration(600);
+            }
+
+            if (s.contains("until the end of the mouther's next turn")) {
+                d.setDuration(1);
+            }
+
             Matcher m2 = HIT.matcher(s);
             if (m2.find()) {
                 d.setAmount(m2.group(1).replaceAll("\\s+", ""));
@@ -374,8 +386,29 @@ public class ConvertHtmlToJson {
                 d.setType("hpdrain");
                 d.setAmount("");
                 return d;
+            } else if (s.contains("blinded")) {
+                d.setType("blinded");
+                d.setAmount("");
+                return d;
+            } else if (s.contains("frightened")) {
+                d.setType("frightened");
+                d.setAmount("");
+                return d;
+            } else if (s.contains("possessed")) {
+                d.setType("possessed");
+                d.setAmount("");
+                return d;
+            } else if (s.contains("restrained")) {
+                d.setType("restrained");
+                d.setAmount("");
+                return d;
+            } else if (s.contains("it can't make more than one attack on its turn")) {
+                d.setType("slowed");
+                d.setAmount("");
+                return d;
             } else {
                 log("Unexpected DC damage definition: " + s);
+                throw new IllegalArgumentException();
             }
         } else {
             log("Different kind of DC check: " + s);

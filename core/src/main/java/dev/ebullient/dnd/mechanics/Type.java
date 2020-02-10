@@ -13,6 +13,10 @@
  */
 package dev.ebullient.dnd.mechanics;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public enum Type {
     PLANT,
     SWARM,
@@ -30,9 +34,9 @@ public enum Type {
     GIANT,
     ELEMENTAL;
 
-    static final Type[] arr = values();
+    public static final List<Type> allValues = Collections.unmodifiableList(Arrays.asList(values()));
 
     public static Type getOne() {
-        return arr[Dice.range(arr.length)];
+        return allValues.get(Dice.range(allValues.size()));
     }
 }

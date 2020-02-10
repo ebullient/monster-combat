@@ -28,6 +28,7 @@ public class MonsterDamage implements Attack.Damage {
     String amount;
     List<Ability> disadvantage;
     String savingThrow;
+    int duration;
 
     public String getType() {
         return type;
@@ -63,7 +64,7 @@ public class MonsterDamage implements Attack.Damage {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (!amount.isEmpty()) {
+        if (amount != null && !amount.isEmpty()) {
             sb.append(amount).append("|");
         }
         sb.append(type);
@@ -74,5 +75,13 @@ public class MonsterDamage implements Attack.Damage {
             sb.append("|").append("-").append(disadvantage);
         }
         return sb.toString();
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

@@ -79,47 +79,13 @@ public class MockBeast implements Beast {
 
     @Override
     public int getSavingThrow(Ability s) {
-        int save;
-        switch (s) {
-            case STR:
-                save = saveThrows.strength;
-                return save == 0 ? modifiers.strength : save;
-            case DEX:
-                save = saveThrows.dexterity;
-                return save == 0 ? modifiers.dexterity : save;
-            case CON:
-                save = saveThrows.constitution;
-                return save == 0 ? modifiers.constitution : save;
-            case INT:
-                save = saveThrows.intelligence;
-                return save == 0 ? modifiers.intelligence : save;
-            case WIS:
-                save = saveThrows.wisdom;
-                return save == 0 ? modifiers.wisdom : save;
-            case CHA:
-                save = saveThrows.charisma;
-                return save == 0 ? modifiers.charisma : save;
-        }
-        return 0;
+        int save = saveThrows.get(s);
+        return save == 0 ? modifiers.get(s) : save;
     }
 
     @Override
     public int getAbilityModifier(Ability s) {
-        switch (s) {
-            case STR:
-                return modifiers.strength;
-            case DEX:
-                return modifiers.dexterity;
-            case CON:
-                return modifiers.constitution;
-            case INT:
-                return modifiers.intelligence;
-            case WIS:
-                return modifiers.wisdom;
-            case CHA:
-                return modifiers.charisma;
-        }
-        return 0;
+        return modifiers.get(s);
     }
 
     public String toString() {

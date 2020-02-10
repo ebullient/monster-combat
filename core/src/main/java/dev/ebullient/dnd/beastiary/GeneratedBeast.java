@@ -47,36 +47,27 @@ public class GeneratedBeast implements Beast {
 
         // Roll our ability scores: this will be random w/in range,
         // but higher level monsters can get higher scores
-        abilities.strength = 8 + Dice.range(cr);
-        abilities.dexterity = 8 + Dice.range(cr);
-        abilities.constitution = 8 + Dice.range(cr);
-        abilities.intelligence = 8 + Dice.range(cr);
-        abilities.wisdom = 8 + Dice.range(cr);
-        abilities.charisma = 8 + Dice.range(cr);
-
-        // Determine modifiers
-        modifiers.strength = (abilities.strength - 10) / 2;
-        modifiers.dexterity = (abilities.dexterity - 10) / 2;
-        modifiers.constitution = (abilities.constitution - 10) / 2;
-        modifiers.intelligence = (abilities.intelligence - 10) / 2;
-        modifiers.wisdom = (abilities.wisdom - 10) / 2;
-        modifiers.charisma = (abilities.charisma - 10) / 2;
+        for (Ability a : Ability.allValues) {
+            int value = 8 + Dice.range(cr);
+            abilities.set(a, 8 + Dice.range(cr));
+            modifiers.set(a, (value - 10) / 2);
+        }
 
         // Calculate based on previous values
-        armorClass = calculateAC(modifiers.dexterity, cr);
-        passivePerception = 10 + modifiers.intelligence;
+        armorClass = calculateAC(modifiers.get(Ability.DEX), cr);
+        passivePerception = 10 + modifiers.get(Ability.INT);
     }
 
     public String toString() {
         return name
                 + "[" + size + " " + type
                 + ", ac=" + armorClass
-                + ", str=" + prettyString(abilities.strength, modifiers.strength)
-                + ", dex=" + prettyString(abilities.dexterity, modifiers.dexterity)
-                + ", con=" + prettyString(abilities.constitution, modifiers.constitution)
-                + ", int=" + prettyString(abilities.intelligence, modifiers.intelligence)
-                + ", wis=" + prettyString(abilities.wisdom, modifiers.wisdom)
-                + ", cha=" + prettyString(abilities.charisma, modifiers.charisma)
+                + ", str=" + prettyString(Ability.STR)
+                + ", dex=" + prettyString(Ability.DEX)
+                + ", con=" + prettyString(Ability.CON)
+                + ", int=" + prettyString(Ability.INT)
+                + ", wis=" + prettyString(Ability.WIS)
+                + ", cha=" + prettyString(Ability.CHA)
                 + ", cr=" + challengeRating
                 + "]";
     }
@@ -112,26 +103,12 @@ public class GeneratedBeast implements Beast {
     }
 
     @Override
-    public int getAbilityModifier(Ability s) {
-        switch (s) {
-            case STR:
-                return modifiers.strength;
-            case DEX:
-                return modifiers.dexterity;
-            case CON:
-                return modifiers.constitution;
-            case INT:
-                return modifiers.intelligence;
-            case WIS:
-                return modifiers.wisdom;
-            case CHA:
-                return modifiers.charisma;
-        }
-        return 0;
+    public int getAbilityModifier(Ability a) {
+        return modifiers.get(a);
     }
 
     @Override
-    public int getSavingThrow(Ability s) {
+    public int getSavingThrow(Ability a) {
         return 0;
     }
 
@@ -140,14 +117,14 @@ public class GeneratedBeast implements Beast {
         return null;
     }
 
+    String prettyString(Ability a) {
+        return abilities.get(a) + "(" + modifiers.get(a) + ")";
+    }
+
     /**
      * I am making this up, but it looks right.
      */
     static int calculateAC(int dexterity, int cr) {
         return 9 + ((dexterity + cr) / 3);
-    }
-
-    static String prettyString(int ability, int modifier) {
-        return ability + "(" + modifier + ")";
     }
 }

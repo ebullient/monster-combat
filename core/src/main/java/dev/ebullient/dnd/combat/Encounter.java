@@ -60,7 +60,7 @@ public class Encounter {
     }
 
     public RoundResult oneRound() {
-        logger.debug("take turns: {}", initiativeOrder);
+        logger.debug("oneRound: {}", initiativeOrder);
 
         RoundResult result = new RoundResult(initiativeOrder);
         for (Combatant attacker : initiativeOrder) {
@@ -69,15 +69,13 @@ public class Encounter {
 
                 // Single or many attacks
                 List<Attack> attacks = attacker.getAttacks();
-                for (Attack a : attacks) {
-                    if (a == null) {
-                        throw new IllegalStateException("Attack should not be null " + attacks);
-                    }
-                    if (target.isAlive()) {
-                        AttackResult r = new AttackResult(attacker, target, a, method, id);
-                        r.attack();
-                        result.events.add(r);
-                        logger.debug("take turns: {}", r);
+
+                // A condition can impose a single attack constraint
+                if (attacks.size() == 1 || attacker.attackLimit()) {
+                    makeAttack(result, attacker, attacks.get(0), target);
+                } else {
+                    for (Attack a : attacks) {
+                        makeAttack(result, attacker, a, target);
                     }
                 }
 
@@ -90,8 +88,20 @@ public class Encounter {
 
         initiativeOrder.retainAll(result.survivors);
 
-        logger.debug("take turns: survivors {}", result.survivors);
+        logger.debug("oneRound: survivors {}", result.survivors);
         return result;
+    }
+
+    void makeAttack(RoundResult result, Combatant attacker, Attack a, Combatant target) {
+        if (a == null) {
+            throw new IllegalStateException("Attack should not be null: " + attacker.getAttacks());
+        }
+        if (target.isAlive()) {
+            AttackResult r = new AttackResult(attacker, target, a, method, id);
+            r.attack();
+            result.events.add(r);
+            logger.debug("makeAttack: {}", r);
+        }
     }
 
     public static class RoundResult {
@@ -117,6 +127,10 @@ public class Encounter {
         final Combatant target;
         final Attack a;
         final String encounterId;
+        final Condition attackerStartingCondition;
+        final Condition targetStartingCondition;
+        Condition attackerEndingCondition;
+        Condition targetEndingCondition;
 
         boolean hit;
         boolean critical;
@@ -124,13 +138,17 @@ public class Encounter {
         Dice.Method method;
         int damage;
 
-        AttackResult(Combatant attacker, Combatant target,
-                Attack a, Dice.Method method, String encounterId) {
+        AttackResult(Combatant attacker, Combatant target, Attack a, Dice.Method method, String encounterId) {
             this.attacker = attacker;
             this.target = target;
             this.a = a;
             this.method = method;
             this.encounterId = encounterId;
+
+            // conditions change between rounds/attacks.
+            // save what was present for this attack for poking and prodding later.
+            this.attackerStartingCondition = attacker.condition;
+            this.targetStartingCondition = target.condition;
         }
 
         AttackResult attack() {
@@ -142,12 +160,21 @@ public class Encounter {
                 // We're still reading from some input somewhere.
                 throw new IllegalArgumentException(attacker.getName() + " has badly formed attack " + a);
             }
+
+            // Attacks / Actions can apply conditions.
+            // Save what was present at the end of this attack for poking & prodding later.
+            this.attackerEndingCondition = attacker.condition;
+            this.targetEndingCondition = target.condition;
             return this;
         }
 
         void attemptAttack() {
             // Did we hit?
-            int attackRoll = Dice.d20();
+            int attackRoll;
+
+            // attack roll may be at advantage or disadvantage
+            attackRoll = Dice.d20(getRollConstraint());
+
             if (attackRoll == 1) {
                 // critical fail. WOOPS!
                 critical = true;
@@ -165,11 +192,19 @@ public class Encounter {
             }
 
             if (hit) {
-                damage = Dice.roll(a.getDamage().getAmount(), method);
-                if (critical) {
-                    damage += damage;
+                Attack.Damage d = a.getDamage();
+
+                String amount = d.getAmount();
+                if (amount == null || amount.isEmpty()) {
+                    applyConditions(d, target);
+                } else {
+                    damage = Dice.roll(a.getDamage().getAmount(), method);
+                    if (critical) {
+                        damage += damage;
+                    }
+                    target.takeDamage(damage); // ouch
                 }
-                target.takeDamage(damage); // ouch
+
                 additionalEffects();
             }
         }
@@ -180,18 +215,66 @@ public class Encounter {
             Matcher m = Attack.SAVE.matcher(a.getSavingThrow());
             if (m.matches()) {
                 int dc = Integer.parseInt(m.group(2));
-                int save = Dice.d20() + target.getSavingThrow(Ability.valueOf(m.group(1)));
+                int save;
 
-                damage = Dice.roll(a.getDamage().getAmount(), method);
+                Ability ability = Ability.valueOf(m.group(1));
 
-                if (save >= dc) {
-                    saved = true;
-                    damage = damage / 2;
+                // A condition may require disadvantage on saving throws
+                save = Dice.d20(target.withConstraint(ability))
+                        + target.getSavingThrow(ability);
+
+                String amount = a.getDamage().getAmount();
+                if (amount == null || amount.isEmpty()) {
+                    applyConditions(a.getDamage(), target);
+                } else {
+                    damage = Dice.roll(amount, method);
+                    if (save >= dc) {
+                        saved = true;
+                        damage = damage / 2;
+                    }
+                    target.takeDamage(damage); // ouch
                 }
-
-                target.takeDamage(damage); // ouch
             } else {
                 throw new IllegalArgumentException(attacker.getName() + " has badly formed saving throw " + a);
+            }
+        }
+
+        void applyConditions(Attack.Damage d, Combatant target) {
+            switch (d.getType()) {
+                case "cursed":
+                    // no damage, but disadvantage on later rolls
+                    target.addCondition()
+                            .disadvantage(d.getDisadvantage());
+                    break;
+                case "blinded":
+                case "restrained":
+                    target.addCondition()
+                            .asTarget(Dice.Constraint.ADVANTAGE)
+                            .onAttack(Dice.Constraint.DISADVANTAGE);
+                    break;
+                case "poisoned":
+                case "frightened":
+                    target.addCondition()
+                            .disadvantage(Ability.allValues)
+                            .onAttack(Dice.Constraint.DISADVANTAGE);
+                    break;
+                case "paralyzed":
+                    target.addCondition()
+                            .disadvantage(Ability.DEX, Ability.STR)
+                            .asTarget(Dice.Constraint.ADVANTAGE)
+                            .onAttack(Dice.Constraint.FAIL);
+                    break;
+                case "slowed":
+                    target.addCondition()
+                            .singleAttack();
+                    break;
+                default:
+                    damage = Dice.roll(a.getDamage().getAmount(), method);
+                    if (critical) {
+                        damage += damage;
+                    }
+                    target.takeDamage(damage); // ouch
+                    break;
             }
         }
 
@@ -233,6 +316,18 @@ public class Encounter {
             }
         }
 
+        private Dice.Constraint getRollConstraint() {
+            // A condition may give advantage to the attacker (a check on the target)
+            Dice.Constraint c = target.rollAsTarget();
+
+            // A condition may similarly require a creature to attack with disadvantage
+            if (c == Dice.Constraint.NONE) {
+                c = attacker.rollOnAttack();
+            }
+
+            return c;
+        }
+
         public String toString() {
             String success = hit ? "hit>" : "miss:";
             success = critical ? success.toUpperCase(Locale.ROOT) : success;
@@ -266,5 +361,4 @@ public class Encounter {
             return damage;
         }
     }
-
 }

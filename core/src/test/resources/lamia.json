@@ -20,7 +20,8 @@
         "attackModifier" : 5,
         "damage" : {
           "type" : "slashing",
-          "amount" : "14(2d10+3)"
+          "amount" : "14(2d10+3)",
+          "duration" : 0
         }
       },
       "dagger" : {
@@ -29,7 +30,8 @@
         "attackModifier" : 5,
         "damage" : {
           "type" : "piercing",
-          "amount" : "5(1d4+3)"
+          "amount" : "5(1d4+3)",
+          "duration" : 0
         }
       },
       "intoxicating-touch" : {
@@ -37,8 +39,9 @@
         "melee" : true,
         "attackModifier" : 5,
         "damage" : {
-          "type" : "curse",
-          "disadvantage" : [ "WIS" ]
+          "type" : "cursed",
+          "disadvantage" : [ "WIS" ],
+          "duration" : 0
         }
       }
     },

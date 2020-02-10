@@ -22,8 +22,8 @@ public class ChallengeRatingTest {
     public void testCalculateCR() {
         int lowest = 0;
         int highest = 0;
-        for (Type t : Type.values()) {
-            for (Size s : Size.values()) {
+        for (Type t : Type.allValues) {
+            for (Size s : Size.allValues) {
                 int cr = ChallengeRating.calculateCR(s, t);
                 //System.out.println(s + " " + t + ": " + cr);
 

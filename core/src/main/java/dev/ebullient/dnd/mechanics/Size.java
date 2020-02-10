@@ -13,6 +13,10 @@
  */
 package dev.ebullient.dnd.mechanics;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public enum Size {
     TINY,
     SMALL,
@@ -21,9 +25,9 @@ public enum Size {
     HUGE,
     GARGANTUAN;
 
-    static final Size[] arr = values();
+    public static final List<Size> allValues = Collections.unmodifiableList(Arrays.asList(values()));
 
     public static Size getOne() {
-        return arr[Dice.range(arr.length)];
+        return allValues.get(Dice.range(allValues.size()));
     }
 }

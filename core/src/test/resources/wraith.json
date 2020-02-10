@@ -17,11 +17,13 @@
         "attackModifier" : 6,
         "damage" : {
           "type" : "necrotic",
-          "amount" : "21(4d8+3)"
+          "amount" : "21(4d8+3)",
+          "duration" : 0
         },
         "additionalEffect" : {
           "type" : "hpdrain",
-          "savingThrow" : "CON(14)"
+          "savingThrow" : "CON(14)",
+          "duration" : 0
         }
       }
     },

@@ -149,9 +149,9 @@ public class Monster implements Beast {
     public void setStrength(String s) {
         Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
-            abilities.strength = Integer.parseInt(m.group(1));
-            modifiers.strength = Integer.parseInt(m.group(2));
             this.strength = s;
+            abilities.set(Ability.STR, Integer.parseInt(m.group(1)));
+            modifiers.set(Ability.STR, Integer.parseInt(m.group(2)));
         } else {
             throw new IllegalArgumentException(name + " has unparseable statistics " + s);
         }
@@ -164,9 +164,9 @@ public class Monster implements Beast {
     public void setDexterity(String s) {
         Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
-            abilities.dexterity = Integer.parseInt(m.group(1));
-            modifiers.dexterity = Integer.parseInt(m.group(2));
             this.dexterity = s;
+            abilities.set(Ability.DEX, Integer.parseInt(m.group(1)));
+            modifiers.set(Ability.DEX, Integer.parseInt(m.group(2)));
         } else {
             throw new IllegalArgumentException(name + " has unparseable statistics " + s);
         }
@@ -179,9 +179,9 @@ public class Monster implements Beast {
     public void setIntelligence(String s) {
         Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
-            abilities.intelligence = Integer.parseInt(m.group(1));
-            modifiers.intelligence = Integer.parseInt(m.group(2));
             this.intelligence = s;
+            abilities.set(Ability.INT, Integer.parseInt(m.group(1)));
+            modifiers.set(Ability.INT, Integer.parseInt(m.group(2)));
         } else {
             throw new IllegalArgumentException(name + " has unparseable statistics " + s);
         }
@@ -194,9 +194,9 @@ public class Monster implements Beast {
     public void setConstitution(String s) {
         Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
-            abilities.constitution = Integer.parseInt(m.group(1));
-            modifiers.constitution = Integer.parseInt(m.group(2));
             this.constitution = s;
+            abilities.set(Ability.CON, Integer.parseInt(m.group(1)));
+            modifiers.set(Ability.CON, Integer.parseInt(m.group(2)));
         } else {
             throw new IllegalArgumentException(name + " has unparseable statistics " + s);
         }
@@ -209,9 +209,9 @@ public class Monster implements Beast {
     public void setWisdom(String s) {
         Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
-            abilities.wisdom = Integer.parseInt(m.group(1));
-            modifiers.wisdom = Integer.parseInt(m.group(2));
             this.wisdom = s;
+            abilities.set(Ability.WIS, Integer.parseInt(m.group(1)));
+            modifiers.set(Ability.WIS, Integer.parseInt(m.group(2)));
         } else {
             throw new IllegalArgumentException(name + " has unparseable statistics " + s);
         }
@@ -224,9 +224,9 @@ public class Monster implements Beast {
     public void setCharisma(String s) {
         Matcher m = Dice.AVG_ROLL_MOD.matcher(s);
         if (m.matches()) {
-            abilities.charisma = Integer.parseInt(m.group(1));
-            modifiers.charisma = Integer.parseInt(m.group(2));
             this.charisma = s;
+            abilities.set(Ability.CHA, Integer.parseInt(m.group(1)));
+            modifiers.set(Ability.CHA, Integer.parseInt(m.group(2)));
         } else {
             throw new IllegalArgumentException(name + " has unparseable statistics " + s);
         }
@@ -240,29 +240,9 @@ public class Monster implements Beast {
         if (savingThrows != null) {
             Matcher m = Attack.SAVE.matcher(savingThrows);
             while (m.find()) {
-                switch (m.group(1)) {
-                    case "STR":
-                        saveThrows.strength = Integer.parseInt(m.group(2));
-                        break;
-                    case "DEX":
-                        saveThrows.dexterity = Integer.parseInt(m.group(2));
-                        break;
-                    case "CON":
-                        saveThrows.constitution = Integer.parseInt(m.group(2));
-                        break;
-                    case "INT":
-                        saveThrows.intelligence = Integer.parseInt(m.group(2));
-                        break;
-                    case "WIS":
-                        saveThrows.wisdom = Integer.parseInt(m.group(2));
-                        break;
-                    case "CHA":
-                        saveThrows.charisma = Integer.parseInt(m.group(2));
-                        break;
-                }
+                saveThrows.set(m.group(1), Integer.parseInt(m.group(2)));
             }
         }
-
         this.savingThrows = savingThrows;
     }
 
@@ -325,47 +305,13 @@ public class Monster implements Beast {
 
     @Override
     public int getAbilityModifier(Ability s) {
-        switch (s) {
-            case STR:
-                return modifiers.strength;
-            case DEX:
-                return modifiers.dexterity;
-            case CON:
-                return modifiers.constitution;
-            case INT:
-                return modifiers.intelligence;
-            case WIS:
-                return modifiers.wisdom;
-            case CHA:
-                return modifiers.charisma;
-        }
-        return 0;
+        return modifiers.get(s);
     }
 
     @Override
     public int getSavingThrow(Ability s) {
-        int save;
-        switch (s) {
-            case STR:
-                save = saveThrows.strength;
-                return save == 0 ? modifiers.strength : save;
-            case DEX:
-                save = saveThrows.dexterity;
-                return save == 0 ? modifiers.dexterity : save;
-            case CON:
-                save = saveThrows.constitution;
-                return save == 0 ? modifiers.constitution : save;
-            case INT:
-                save = saveThrows.intelligence;
-                return save == 0 ? modifiers.intelligence : save;
-            case WIS:
-                save = saveThrows.wisdom;
-                return save == 0 ? modifiers.wisdom : save;
-            case CHA:
-                save = saveThrows.charisma;
-                return save == 0 ? modifiers.charisma : save;
-        }
-        return 0;
+        int save = saveThrows.get(s);
+        return save == 0 ? modifiers.get(s) : save;
     }
 
     @Override
@@ -391,6 +337,9 @@ public class Monster implements Beast {
     }
 
     String getRandomAttack() {
+        if (actions == null) {
+            throw new IllegalArgumentException("Monster has no actions: " + this);
+        }
         if (actions.size() == 1) {
             return keySet.get(0);
         }

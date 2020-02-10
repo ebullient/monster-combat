@@ -73,7 +73,7 @@ public class MonsterTest {
         // preset to predictable values ahead of participant creation
         m.hitPoints = "40";
         m.savingThrows = "INT(2)";
-        m.saveThrows.intelligence = 2;
+        m.saveThrows.set(Ability.INT, 2);
 
         Assert.assertEquals(3, m.getArmorClass());
         Assert.assertEquals(13, m.getPassivePerception());
@@ -168,7 +168,7 @@ public class MonsterTest {
         MonsterAttack a = m.actions.get("intoxicating-touch");
         Assert.assertNotNull(a);
         MonsterDamage d = a.getDamage();
-        Assert.assertEquals("curse", d.type);
+        Assert.assertEquals("cursed", d.type);
         Assert.assertEquals(1, d.getDisadvantage().size());
         Assert.assertEquals(Ability.WIS, d.getDisadvantage().get(0));
     }
@@ -193,10 +193,40 @@ public class MonsterTest {
         Assert.assertEquals(1, attacks.size());
 
         MonsterAttack a = m.actions.get("life-drain");
-        Assert.assertNotNull(a);
+        Assert.assertNotNull("life-drain should be a known attack", a);
 
         MonsterDamage d = a.getDamage();
         Assert.assertEquals("necrotic", d.type);
         Assert.assertNotNull(a.getAdditionalEffect());
+    }
+
+    @Test
+    public void testConditionAttacks() throws Exception {
+        Map<String, Monster> compendium;
+
+        try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/gibbering-mouther.json")) {
+            compendium = CompendiumReader.mapper.readValue(jsonInput, CompendiumReader.typeRef);
+            Assert.assertEquals(1, compendium.size());
+        }
+
+        // snag our single parsed value
+        Monster m = compendium.values().iterator().next();
+        Assert.assertNotNull(m);
+        Assert.assertEquals(Type.ABERRATION, m.getType());
+        Assert.assertEquals(Size.MEDIUM, m.getSize());
+
+        List<Attack> attacks = m.getAttacks();
+        Assert.assertNotNull(attacks);
+        Assert.assertEquals(2, attacks.size());
+
+        MonsterAttack a = m.actions.get("blinding-spittle");
+        Assert.assertNotNull("blinding-spittle should be a known action", a);
+        System.out.println(a);
+
+        MonsterDamage d = a.getDamage();
+        System.out.println(d);
+
+        Assert.assertEquals("blinded", d.type);
+        Assert.assertEquals("target is blinded for one turn", 1, d.duration);
     }
 }

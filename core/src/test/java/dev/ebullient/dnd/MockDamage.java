@@ -24,6 +24,7 @@ public class MockDamage implements Attack.Damage {
     public String amount;
     public String savingThrow;
     public List<Ability> disadvantage;
+    public int duration;
 
     public MockDamage(String type, String amount) {
         this.type = type;
@@ -48,6 +49,10 @@ public class MockDamage implements Attack.Damage {
     @Override
     public String getSavingThrow() {
         return savingThrow;
+    }
+
+    public int getDuration() {
+        return duration;
     }
 
     public String toString() {

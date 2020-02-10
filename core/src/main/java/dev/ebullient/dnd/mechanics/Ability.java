@@ -13,7 +13,12 @@
  */
 package dev.ebullient.dnd.mechanics;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public enum Ability {
     STR,
@@ -23,34 +28,50 @@ public enum Ability {
     WIS,
     CHA;
 
-    /**
-     * Convenience structure for internal storage of
-     * ability score, ability modifier or saving throws
-     */
+    public static final List<Ability> allValues = Collections.unmodifiableList(Arrays.asList(values()));
+
     public static class All {
-        public int strength;
-        public int dexterity;
-        public int constitution;
-        public int intelligence;
-        public int wisdom;
-        public int charisma;
+        Map<Ability, Integer> all = new HashMap<>();
+
+        public void set(Ability a, int value) {
+            all.put(a, value);
+        }
+
+        public void set(String a, int value) {
+            all.put(convert(a), value);
+        }
+
+        public int get(Ability a) {
+            Integer value = all.get(a);
+            if (value == null) {
+                return 0;
+            }
+            return value;
+        }
     }
 
     public static Ability convert(String score) {
         switch (score.toLowerCase(Locale.ROOT)) {
             case "strength":
+            case "str":
                 return STR;
             case "dexterity":
+            case "dex":
                 return DEX;
             case "constitution":
+            case "con":
                 return CON;
             case "intelligence":
+            case "int":
                 return INT;
             case "wisdom":
+            case "wis":
                 return WIS;
             case "charisma":
+            case "cha":
                 return CHA;
         }
-        return null;
+
+        throw new IllegalArgumentException("Unknown ability score: " + score);
     }
 }

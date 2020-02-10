@@ -21,6 +21,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import dev.ebullient.dnd.MockBeast;
+import dev.ebullient.dnd.mechanics.Ability;
 
 public class ComparatorsTest {
 
@@ -44,10 +45,10 @@ public class ComparatorsTest {
         Assert.assertEquals("when initiative & dex are equal (0), combatants should be sorted in name order",
                 "0123", listToString(combatants));
 
-        mbs[0].modifiers.dexterity = 1;
-        mbs[1].modifiers.dexterity = 2;
-        mbs[2].modifiers.dexterity = 3;
-        mbs[3].modifiers.dexterity = 4;
+        mbs[0].modifiers.set(Ability.DEX, 1);
+        mbs[1].modifiers.set(Ability.DEX, 2);
+        mbs[2].modifiers.set(Ability.DEX, 3);
+        mbs[3].modifiers.set(Ability.DEX, 4);
 
         combatants.sort(Comparators.InitiativeOrder);
         Assert.assertEquals("When initiative is the same, sort by dexterity",
