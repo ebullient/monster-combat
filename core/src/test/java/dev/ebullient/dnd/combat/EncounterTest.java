@@ -15,6 +15,7 @@ package dev.ebullient.dnd.combat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -28,8 +29,63 @@ import dev.ebullient.dnd.MockDamage;
 import dev.ebullient.dnd.combat.Encounter.RoundResult;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Dice;
+import dev.ebullient.dnd.mechanics.Size;
+import dev.ebullient.dnd.mechanics.Type;
 
 public class EncounterTest {
+
+    @Test
+    public void testConstruction() {
+        MockBeast[] mbs = new MockBeast[] {
+                new MockBeast("0"),
+                new MockBeast("1")
+        };
+
+        mbs[0].size = Size.TINY;
+        mbs[0].type = Type.ABERRATION;
+        mbs[0].cr = 0; // CR 1/2
+
+        mbs[1].size = Size.TINY;
+        mbs[1].type = Type.ABERRATION;
+        mbs[1].cr = 0; // CR 1/2
+
+        Set<Combatant> set = new HashSet<>();
+        for (int i = 0; i < mbs.length; i++) {
+            set.add(new Combatant(mbs[i], 10, 10));
+        }
+
+        Encounter e = new Encounter(set, TargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
+        Assert.assertEquals("Size delta should be 0 when beasts are the same size",
+                0, e.sizeDelta);
+        Assert.assertEquals("CR delta should be 0 when beasts have the same CR",
+                0, e.crDelta);
+        Assert.assertEquals("Number of types should be 1 when beasts are the same type",
+                1, e.numTypes);
+        Assert.assertEquals("Number of combatants should be 2",
+                2, e.numCombatants);
+
+        mbs[1].size = Size.SMALL;
+        mbs[1].type = Type.BEAST;
+        mbs[1].cr = 1;
+
+        e = new Encounter(set, TargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
+        Assert.assertEquals("Size delta should be 1 when beasts are 1 size apart",
+                1, e.sizeDelta);
+        Assert.assertEquals("CR delta should be 1 when cr differs by 1",
+                1, e.crDelta);
+        Assert.assertEquals("Number of types should be 2",
+                2, e.numTypes);
+
+        mbs[0].cr = -3; // CR 0
+        mbs[1].size = Size.GARGANTUAN;
+        mbs[1].cr = 1;
+
+        e = new Encounter(set, TargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
+        Assert.assertEquals("Size delta should be 5 (max delta)",
+                Size.GARGANTUAN.ordinal() - Size.TINY.ordinal(), e.sizeDelta);
+        Assert.assertEquals("CR delta should be 4 when cr ( -3 to 1 )",
+                4, e.crDelta);
+    }
 
     @Test
     public void testSingleMeleeAttack() {
@@ -124,30 +180,35 @@ public class EncounterTest {
                 new MockBeast("1")
         };
 
-        MockAttack[] mks = new MockAttack[] {
-                new MockAttack("testDCAttack")
-        };
+        mbs[0].size = Size.TINY;
+        mbs[0].type = Type.HUMANOID;
+        mbs[0].cr = -2; // CR 1/4
 
-        mks[0].savingThrow = "CON(30)";
-        mks[0].damage = new MockDamage("poison", "10");
+        mbs[1].size = Size.TINY;
+        mbs[1].type = Type.HUMANOID;
+        mbs[1].cr = -2; // CR 1/4
 
         // Both monsters have the same attack. A DC attack
         // with a save of 30 means it will always hit for full
         // damage (10)
-        mbs[0].attacks = Arrays.asList(mks);
-        mbs[1].attacks = Arrays.asList(mks);
+        MockAttack attack = new MockAttack("testDCAttack");
+        attack.savingThrow = "CON(30)";
+        attack.damage = new MockDamage("poison", "10");
 
+        mbs[0].attacks = Arrays.asList(attack);
+        mbs[1].attacks = Arrays.asList(attack);
+
+        // Create list for return result
         List<Combatant> survivors = new ArrayList<>();
         for (int i = 0; i < mbs.length; i++) {
             survivors.add(new Combatant(mbs[i], 10, 30));
         }
-
         Combatant expected = survivors.get(0);
 
         Set<Combatant> initiativeOrder = new TreeSet<>(Comparators.InitiativeOrder);
         initiativeOrder.addAll(survivors);
 
-        Encounter r = new Encounter(TargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE, initiativeOrder);
+        Encounter r = new Encounter(initiativeOrder, TargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
         Assert.assertFalse(r.isFinal());
 
         int i = 0;

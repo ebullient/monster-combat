@@ -21,8 +21,9 @@ import dev.ebullient.dnd.mechanics.Dice;
 import dev.ebullient.dnd.mechanics.HitPoints;
 
 public class Combatant {
-    final Beast b;
+
     final Dice.Method method;
+    final Beast beast;
     final int initiative;
 
     int hitPoints;
@@ -31,7 +32,7 @@ public class Combatant {
     Condition condition;
 
     public Combatant(Beast b, Dice.Method method) {
-        this.b = b;
+        this.beast = b;
         this.method = method;
         this.initiative = Dice.d20() + b.getAbilityModifier(Ability.DEX);
 
@@ -40,7 +41,7 @@ public class Combatant {
     }
 
     public Combatant(Beast b, int initiative, int startingHitPoints) {
-        this.b = b;
+        this.beast = b;
         this.method = Dice.Method.USE_AVERAGE;
         this.initiative = initiative;
 
@@ -49,7 +50,7 @@ public class Combatant {
     }
 
     public String getName() {
-        return b.getName();
+        return beast.getName();
     }
 
     public void takeDamage(int damage) {
@@ -76,23 +77,23 @@ public class Combatant {
     }
 
     public int getCR() {
-        return b.getCR();
+        return beast.getCR();
     }
 
     public int getArmorClass() {
-        return b.getArmorClass();
+        return beast.getArmorClass();
     }
 
     public int getAbilityModifier(Ability ability) {
-        return b.getAbilityModifier(ability);
+        return beast.getAbilityModifier(ability);
     }
 
     public int getSavingThrow(Ability ability) {
-        return b.getSavingThrow(ability);
+        return beast.getSavingThrow(ability);
     }
 
     public List<Attack> getAttacks() {
-        return b.getAttacks();
+        return beast.getAttacks();
     }
 
     public Condition addCondition() {
@@ -130,7 +131,7 @@ public class Combatant {
 
     public String toString() {
         return "Combatant["
-                + b
+                + beast
                 + "(" + hitPoints + "/" + maxHitPoints + ")"
                 + "]";
     }

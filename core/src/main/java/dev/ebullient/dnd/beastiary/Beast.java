@@ -17,6 +17,8 @@ import java.util.List;
 
 import dev.ebullient.dnd.combat.Attack;
 import dev.ebullient.dnd.mechanics.Ability;
+import dev.ebullient.dnd.mechanics.Size;
+import dev.ebullient.dnd.mechanics.Type;
 
 public interface Beast {
 
@@ -35,6 +37,10 @@ public interface Beast {
     int getSavingThrow(Ability s);
 
     int getCR();
+
+    Size getSize();
+
+    Type getType();
 
     List<Attack> getAttacks();
 }

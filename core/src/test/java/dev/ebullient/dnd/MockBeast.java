@@ -63,6 +63,16 @@ public class MockBeast implements Beast {
     }
 
     @Override
+    public Size getSize() {
+        return size;
+    }
+
+    @Override
+    public Type getType() {
+        return type;
+    }
+
+    @Override
     public int getArmorClass() {
         return armorClass;
     }

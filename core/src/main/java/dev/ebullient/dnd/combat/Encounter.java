@@ -16,6 +16,7 @@ package dev.ebullient.dnd.combat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -29,6 +30,7 @@ import dev.ebullient.dnd.beastiary.Beast;
 import dev.ebullient.dnd.combat.Attack.Damage;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Dice;
+import dev.ebullient.dnd.mechanics.Type;
 
 public class Encounter {
     static final Logger logger = LoggerFactory.getLogger(Encounter.class);
@@ -39,24 +41,66 @@ public class Encounter {
     final TargetSelector selector;
     final Dice.Method method;
     final Set<Combatant> initiativeOrder;
+    final int numCombatants;
+    final int numTypes;
+    final int crDelta;
+    final int sizeDelta;
 
-    public Encounter(TargetSelector selector, Dice.Method method, List<Beast> beasts) {
-        this.selector = selector;
-        this.method = method;
-        this.initiativeOrder = new TreeSet<>(Comparators.InitiativeOrder);
-        for (Beast b : beasts) {
-            this.initiativeOrder.add(new Combatant(b, method));
-        }
+    public Encounter(List<Beast> beasts, TargetSelector selector, Dice.Method method) {
+        this(createSet(beasts, method), selector, method);
     }
 
-    Encounter(TargetSelector selector, Dice.Method method, Set<Combatant> combatants) {
+    static Set<Combatant> createSet(List<Beast> beasts, Dice.Method method) {
+        Set<Combatant> set = new TreeSet<>(Comparators.InitiativeOrder);
+        for (Beast b : beasts) {
+            set.add(new Combatant(b, method));
+        }
+        return set;
+    }
+
+    Encounter(Set<Combatant> combatants, TargetSelector selector, Dice.Method method) {
+        Combatant first = combatants.iterator().next();
+        int maxCR = first.beast.getCR();
+        int minCR = maxCR;
+        int maxSize = first.beast.getSize().ordinal();
+        int minSize = maxSize;
+        Set<Type> types = new HashSet<>();
+
+        for (Combatant x : combatants) {
+            types.add(x.beast.getType());
+            maxCR = Math.max(x.beast.getCR(), maxCR);
+            minCR = Math.min(x.beast.getCR(), minCR);
+            maxSize = Math.max(x.beast.getSize().ordinal(), maxSize);
+            minSize = Math.min(x.beast.getSize().ordinal(), minSize);
+        }
+
         this.selector = selector;
         this.method = method;
         this.initiativeOrder = combatants;
+        this.numCombatants = initiativeOrder.size();
+        this.crDelta = maxCR - minCR;
+        this.sizeDelta = maxSize - minSize;
+        this.numTypes = types.size();
     }
 
     public boolean isFinal() {
         return initiativeOrder.size() <= 1;
+    }
+
+    public int size() {
+        return numCombatants;
+    }
+
+    public int sizeDelta() {
+        return sizeDelta;
+    }
+
+    public int crDelta() {
+        return crDelta;
+    }
+
+    public int numTypes() {
+        return numTypes;
     }
 
     public RoundResult oneRound() {
