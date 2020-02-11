@@ -25,7 +25,7 @@
         }
       },
       "blinding-spittle" : {
-        "name" : "Blinding Spittle (Recharge 5-6)",
+        "name" : "Blinding Spittle",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(13)",

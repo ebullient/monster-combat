@@ -337,7 +337,7 @@ public class ConvertHtmlToJson {
                 a.setDamage(damage.get(0));
                 attacks.put(sanitizeAttack(name, true), a);
             } else if (all.contains("Recharge")) {
-                String name = segments[0];
+                String name = segments[0].replaceAll("\\(.*", "").trim();
                 MonsterAttack a = new MonsterAttack();
                 MonsterDamage d = parseDamage(all, a);
                 if (d != null) {

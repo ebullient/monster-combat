@@ -207,7 +207,7 @@
         }
       },
       "poison-breath" : {
-        "name" : "Poison Breath (Recharge 5-6)",
+        "name" : "Poison Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(22)",
@@ -303,7 +303,7 @@
     "challengeRating" : "1/2",
     "actions" : {
       "fire-breath" : {
-        "name" : "Fire Breath (Recharge 6)",
+        "name" : "Fire Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(11)",
@@ -407,7 +407,7 @@
     },
     "actions" : {
       "fire-breath" : {
-        "name" : "Fire Breath (Recharge 5-6)",
+        "name" : "Fire Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(15)",
@@ -483,7 +483,7 @@
     },
     "actions" : {
       "fire-breath" : {
-        "name" : "Fire Breath (Recharge 5-6)",
+        "name" : "Fire Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(15)",
@@ -1531,7 +1531,7 @@
         }
       },
       "whelm" : {
-        "name" : "Whelm (Recharge 4-6)",
+        "name" : "Whelm",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "STR(15)",
@@ -2585,7 +2585,7 @@
         }
       },
       "spore" : {
-        "name" : "Spores (Recharge 6)",
+        "name" : "Spores",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(14)",
@@ -2886,7 +2886,7 @@
         }
       },
       "poison-breath" : {
-        "name" : "Poison Breath (Recharge 6)",
+        "name" : "Poison Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(19)",
@@ -2965,7 +2965,7 @@
         }
       },
       "lightning-breath" : {
-        "name" : "Lightning Breath (Recharge 5-6)",
+        "name" : "Lightning Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(19)",
@@ -3161,7 +3161,7 @@
         }
       },
       "acid-breath" : {
-        "name" : "Acid Breath (Recharge 5-6)",
+        "name" : "Acid Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(11)",
@@ -3241,7 +3241,7 @@
         }
       },
       "cold-breath" : {
-        "name" : "Cold Breath (Recharge 5-6)",
+        "name" : "Cold Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(19)",
@@ -3485,7 +3485,7 @@
         }
       },
       "cold-breath" : {
-        "name" : "Cold Breath (Recharge 5-6)",
+        "name" : "Cold Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(15)",
@@ -3752,7 +3752,7 @@
     },
     "actions" : {
       "fire-breath" : {
-        "name" : "Fire Breath (Recharge 5-6)",
+        "name" : "Fire Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(21)",
@@ -4032,7 +4032,7 @@
     "challengeRating" : "3",
     "actions" : {
       "fire-breath" : {
-        "name" : "Fire Breath (Recharge 5-6)",
+        "name" : "Fire Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(12)",
@@ -4215,7 +4215,7 @@
         }
       },
       "acid-breath" : {
-        "name" : "Acid Breath (Recharge 5-6)",
+        "name" : "Acid Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(22)",
@@ -4595,7 +4595,7 @@
         }
       },
       "acid-breath" : {
-        "name" : "Acid Breath (Recharge 5-6)",
+        "name" : "Acid Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(14)",
@@ -5085,7 +5085,7 @@
         }
       },
       "poison-breath" : {
-        "name" : "Poison Breath (Recharge 5-6)",
+        "name" : "Poison Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(14)",
@@ -5308,7 +5308,7 @@
     },
     "actions" : {
       "fire-breath" : {
-        "name" : "Fire Breath (Recharge 5-6)",
+        "name" : "Fire Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(17)",
@@ -6103,7 +6103,7 @@
     "challengeRating" : "4",
     "actions" : {
       "fire-breath" : {
-        "name" : "Fire Breath (Recharge 5-6)",
+        "name" : "Fire Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(13)",
@@ -6299,7 +6299,7 @@
         }
       },
       "cold-breath" : {
-        "name" : "Cold Breath (Recharge 5-6)",
+        "name" : "Cold Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(22)",
@@ -6350,7 +6350,7 @@
     },
     "actions" : {
       "fire-breath" : {
-        "name" : "Fire Breath (Recharge 5-6)",
+        "name" : "Fire Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(24)",
@@ -6597,7 +6597,7 @@
         }
       },
       "frost-breath" : {
-        "name" : "Frost Breath (Recharge 6)",
+        "name" : "Frost Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(10)",
@@ -7126,7 +7126,7 @@
         }
       },
       "lightning-breath" : {
-        "name" : "Lightning Breath (Recharge 5-6)",
+        "name" : "Lightning Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(16)",
@@ -7605,7 +7605,7 @@
         }
       },
       "blinding-spittle" : {
-        "name" : "Blinding Spittle (Recharge 5-6)",
+        "name" : "Blinding Spittle",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(13)",
@@ -7888,7 +7888,7 @@
         }
       },
       "steam-breath" : {
-        "name" : "Steam Breath (Recharge 6)",
+        "name" : "Steam Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(10)",
@@ -8153,7 +8153,7 @@
         }
       },
       "possession" : {
-        "name" : "Possession (Recharge 6)",
+        "name" : "Possession",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CHA(13)",
@@ -8386,7 +8386,7 @@
         }
       },
       "lightning-breath" : {
-        "name" : "Lightning Breath (Recharge 5-6)",
+        "name" : "Lightning Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(12)",
@@ -8525,7 +8525,7 @@
         }
       },
       "wall-of-ice" : {
-        "name" : "Wall of Ice (Recharge 6)",
+        "name" : "Wall of Ice",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(17)",
@@ -8674,7 +8674,7 @@
         }
       },
       "slow" : {
-        "name" : "Slow (Recharge 5-6)",
+        "name" : "Slow",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "WIS(17)",
@@ -8856,7 +8856,7 @@
         }
       },
       "acid-breath" : {
-        "name" : "Acid Breath (Recharge 5-6)",
+        "name" : "Acid Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(18)",
@@ -9239,7 +9239,7 @@
         }
       },
       "lightning-breath" : {
-        "name" : "Lightning Breath (Recharge 5-6)",
+        "name" : "Lightning Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(23)",
@@ -9636,7 +9636,7 @@
         }
       },
       "horror-nimbu" : {
-        "name" : "Horror Nimbus (Recharge 5-6)",
+        "name" : "Horror Nimbus",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "WIS(15)",
@@ -9786,7 +9786,7 @@
         }
       },
       "steam-breath" : {
-        "name" : "Steam Breath (Recharge 5-6)",
+        "name" : "Steam Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(18)",
@@ -9862,7 +9862,7 @@
         }
       },
       "cold-breath" : {
-        "name" : "Cold Breath (Recharge 5-6)",
+        "name" : "Cold Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(12)",
@@ -9951,7 +9951,7 @@
     "challengeRating" : "5",
     "actions" : {
       "petrifying-breath" : {
-        "name" : "Petrifying Breath (Recharge 5-6)",
+        "name" : "Petrifying Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(13)",
@@ -10015,7 +10015,7 @@
     "challengeRating" : "2",
     "actions" : {
       "acid-spray" : {
-        "name" : "Acid Spray (Recharge 6)",
+        "name" : "Acid Spray",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(13)",
@@ -10487,7 +10487,7 @@
         }
       },
       "lightning-strike" : {
-        "name" : "Lightning Strike (Recharge 5-6)",
+        "name" : "Lightning Strike",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(17)",
@@ -10911,7 +10911,7 @@
         }
       },
       "whirlwind" : {
-        "name" : "Whirlwind (Recharge 4-6)",
+        "name" : "Whirlwind",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "STR(13)",
@@ -10968,7 +10968,7 @@
         }
       },
       "poison-breath" : {
-        "name" : "Poison Breath (Recharge 5-6)",
+        "name" : "Poison Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(11)",
@@ -11025,7 +11025,7 @@
         }
       },
       "blinding-breath" : {
-        "name" : "Blinding Breath (Recharge 6)",
+        "name" : "Blinding Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(10)",
@@ -11556,7 +11556,7 @@
         }
       },
       "poison-breath" : {
-        "name" : "Poison Breath (Recharge 5-6)",
+        "name" : "Poison Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "CON(18)",
@@ -12150,7 +12150,7 @@
         }
       },
       "lightning-breath" : {
-        "name" : "Lightning Breath (Recharge 5-6)",
+        "name" : "Lightning Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(16)",

@@ -19,6 +19,8 @@ import dev.ebullient.dnd.beastiary.Beast;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Dice;
 import dev.ebullient.dnd.mechanics.HitPoints;
+import dev.ebullient.dnd.mechanics.Size;
+import dev.ebullient.dnd.mechanics.Type;
 
 public class Combatant {
 
@@ -53,11 +55,20 @@ public class Combatant {
         return beast.getName();
     }
 
-    public void takeDamage(int damage) {
-        this.hitPoints -= damage;
-        if (this.hitPoints < 0) {
-            this.hitPoints = 0;
-        }
+    public int getCR() {
+        return beast.getCR();
+    }
+
+    public int getArmorClass() {
+        return beast.getArmorClass();
+    }
+
+    public Size getSize() {
+        return beast.getSize();
+    }
+
+    public Type getType() {
+        return beast.getType();
     }
 
     public int getMaxHitPoints() {
@@ -72,63 +83,6 @@ public class Combatant {
         return hitPoints > 0;
     }
 
-    public int getInitiative() {
-        return initiative;
-    }
-
-    public int getCR() {
-        return beast.getCR();
-    }
-
-    public int getArmorClass() {
-        return beast.getArmorClass();
-    }
-
-    public int getAbilityModifier(Ability ability) {
-        return beast.getAbilityModifier(ability);
-    }
-
-    public int getSavingThrow(Ability ability) {
-        return beast.getSavingThrow(ability);
-    }
-
-    public List<Attack> getAttacks() {
-        return beast.getAttacks();
-    }
-
-    public Condition addCondition() {
-        this.condition = new Condition();
-        return condition;
-    }
-
-    public boolean attackLimit() {
-        if (condition != null) {
-            return condition.singleAttack;
-        }
-        return false;
-    }
-
-    public Dice.Constraint withConstraint(Ability ability) {
-        if (condition != null && condition.disadvantage.contains(ability)) {
-            return Dice.Constraint.DISADVANTAGE;
-        }
-        return Dice.Constraint.NONE;
-    }
-
-    public Dice.Constraint rollOnAttack() {
-        if (condition != null) {
-            return condition.onAttack;
-        }
-        return Dice.Constraint.NONE;
-    }
-
-    public Dice.Constraint rollAsTarget() {
-        if (condition != null) {
-            return condition.asTarget;
-        }
-        return Dice.Constraint.NONE;
-    }
-
     public String toString() {
         return "Combatant["
                 + beast
@@ -136,4 +90,59 @@ public class Combatant {
                 + "]";
     }
 
+    int getAbilityModifier(Ability ability) {
+        return beast.getAbilityModifier(ability);
+    }
+
+    int getSavingThrow(Ability ability) {
+        return beast.getSavingThrow(ability);
+    }
+
+    List<Attack> getAttacks() {
+        return beast.getAttacks();
+    }
+
+    int getInitiative() {
+        return initiative;
+    }
+
+    void takeDamage(int damage) {
+        this.hitPoints -= damage;
+        if (this.hitPoints < 0) {
+            this.hitPoints = 0;
+        }
+    }
+
+    Condition addCondition() {
+        this.condition = new Condition();
+        return condition;
+    }
+
+    boolean attackLimit() {
+        if (condition != null) {
+            return condition.singleAttack;
+        }
+        return false;
+    }
+
+    Dice.Constraint withConstraint(Ability ability) {
+        if (condition != null && condition.disadvantage.contains(ability)) {
+            return Dice.Constraint.DISADVANTAGE;
+        }
+        return Dice.Constraint.NONE;
+    }
+
+    Dice.Constraint rollOnAttack() {
+        if (condition != null) {
+            return condition.onAttack;
+        }
+        return Dice.Constraint.NONE;
+    }
+
+    Dice.Constraint rollAsTarget() {
+        if (condition != null) {
+            return condition.asTarget;
+        }
+        return Dice.Constraint.NONE;
+    }
 }

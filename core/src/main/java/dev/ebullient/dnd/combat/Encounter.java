@@ -107,6 +107,7 @@ public class Encounter {
         logger.debug("oneRound: {}", initiativeOrder);
 
         RoundResult result = new RoundResult(initiativeOrder);
+
         for (Combatant attacker : initiativeOrder) {
             if (attacker.isAlive()) {
                 Combatant target = selector.chooseTarget(attacker, initiativeOrder);
@@ -151,10 +152,33 @@ public class Encounter {
     public static class RoundResult {
         List<Combatant> survivors;
         List<AttackResult> events;
+        final int numCombatants;
+        final int numTypes;
+        final int crDelta;
+        final int sizeDelta;
 
         RoundResult(Set<Combatant> initiativeOrder) {
-            events = new ArrayList<>();
-            survivors = new ArrayList<>(initiativeOrder);
+            Combatant first = initiativeOrder.iterator().next();
+            int maxCR = first.beast.getCR();
+            int minCR = maxCR;
+            int maxSize = first.beast.getSize().ordinal();
+            int minSize = maxSize;
+            Set<Type> types = new HashSet<>();
+
+            for (Combatant x : initiativeOrder) {
+                types.add(x.beast.getType());
+                maxCR = Math.max(x.beast.getCR(), maxCR);
+                minCR = Math.min(x.beast.getCR(), minCR);
+                maxSize = Math.max(x.beast.getSize().ordinal(), maxSize);
+                minSize = Math.min(x.beast.getSize().ordinal(), minSize);
+            }
+
+            this.events = new ArrayList<>();
+            this.survivors = new ArrayList<>(initiativeOrder);
+            this.numCombatants = initiativeOrder.size();
+            this.crDelta = maxCR - minCR;
+            this.sizeDelta = maxSize - minSize;
+            this.numTypes = types.size();
         }
 
         public List<AttackResult> getEvents() {
@@ -163,6 +187,22 @@ public class Encounter {
 
         public List<Combatant> getSurvivors() {
             return survivors;
+        }
+
+        public int size() {
+            return numCombatants;
+        }
+
+        public int sizeDelta() {
+            return sizeDelta;
+        }
+
+        public int crDelta() {
+            return crDelta;
+        }
+
+        public int numTypes() {
+            return numTypes;
         }
     }
 
@@ -193,6 +233,38 @@ public class Encounter {
             // save what was present for this attack for poking and prodding later.
             this.attackerStartingCondition = attacker.condition;
             this.targetStartingCondition = target.condition;
+        }
+
+        public String getName() {
+            return a.getName();
+        }
+
+        public String getType() {
+            return a.getDamage().getType();
+        }
+
+        public Combatant getAttacker() {
+            return attacker;
+        }
+
+        public Combatant getTarget() {
+            return target;
+        }
+
+        public boolean wasCritical() {
+            return critical;
+        }
+
+        public boolean wasHit() {
+            return hit;
+        }
+
+        public boolean wasSaved() {
+            return saved;
+        }
+
+        public int getDamage() {
+            return damage;
         }
 
         AttackResult attack() {
@@ -360,7 +432,7 @@ public class Encounter {
             }
         }
 
-        private Dice.Constraint getRollConstraint() {
+        Dice.Constraint getRollConstraint() {
             // A condition may give advantage to the attacker (a check on the target)
             Dice.Constraint c = target.rollAsTarget();
 
@@ -387,22 +459,6 @@ public class Encounter {
             }
 
             return sb.toString();
-        }
-
-        public boolean wasCritical() {
-            return critical;
-        }
-
-        public boolean wasHit() {
-            return hit;
-        }
-
-        public boolean wasSaved() {
-            return saved;
-        }
-
-        public int getDamage() {
-            return damage;
         }
     }
 }

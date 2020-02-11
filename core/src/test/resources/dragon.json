@@ -16,7 +16,7 @@
     },
     "actions" : {
       "fire-breath" : {
-        "name" : "Fire Breath (Recharge 5-6)",
+        "name" : "Fire Breath",
         "melee" : false,
         "attackModifier" : 0,
         "savingThrow" : "DEX(17)",
