@@ -2458,7 +2458,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw (Oni Form Only)",
+        "name" : "Claw",
         "melee" : true,
         "attackModifier" : 7,
         "damage" : {
@@ -2645,7 +2645,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw (Bear or Hybrid Form Only)",
+        "name" : "Claw",
         "melee" : true,
         "attackModifier" : 7,
         "damage" : {
@@ -2655,7 +2655,7 @@
         }
       },
       "bite" : {
-        "name" : "Bite (Bear or Hybrid Form Only)",
+        "name" : "Bite",
         "melee" : true,
         "attackModifier" : 7,
         "damage" : {
@@ -2665,7 +2665,7 @@
         }
       },
       "greataxe" : {
-        "name" : "Greataxe (Humanoid or Hybrid Form Only)",
+        "name" : "Greataxe",
         "melee" : true,
         "attackModifier" : 7,
         "damage" : {
@@ -2709,7 +2709,7 @@
     "challengeRating" : "1",
     "actions" : {
       "claw" : {
-        "name" : "Claws (Bite in Beast Form)",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 4,
         "damage" : {
@@ -4785,7 +4785,7 @@
     "challengeRating" : "4",
     "actions" : {
       "claw" : {
-        "name" : "Claw (Tiger or Hybrid Form Only)",
+        "name" : "Claw",
         "melee" : true,
         "attackModifier" : 5,
         "damage" : {
@@ -4795,7 +4795,7 @@
         }
       },
       "bite" : {
-        "name" : "Bite (Tiger or Hybrid Form Only)",
+        "name" : "Bite",
         "melee" : true,
         "attackModifier" : 5,
         "damage" : {
@@ -4805,7 +4805,7 @@
         }
       },
       "longbow" : {
-        "name" : "Longbow (Humanoid or Hybrid Form Only)",
+        "name" : "Longbow",
         "melee" : false,
         "attackModifier" : 4,
         "damage" : {
@@ -4815,7 +4815,7 @@
         }
       },
       "scimitar" : {
-        "name" : "Scimitar (Humanoid or Hybrid Form Only)",
+        "name" : "Scimitar",
         "melee" : true,
         "attackModifier" : 5,
         "damage" : {
@@ -5240,7 +5240,7 @@
     "challengeRating" : "2",
     "actions" : {
       "shortsword" : {
-        "name" : "Shortsword (Humanoid or Hybrid Form Only)",
+        "name" : "Shortsword",
         "melee" : true,
         "attackModifier" : 4,
         "damage" : {
@@ -5250,7 +5250,7 @@
         }
       },
       "bite" : {
-        "name" : "Bite (Rat or Hybrid Form Only)",
+        "name" : "Bite",
         "melee" : true,
         "attackModifier" : 4,
         "damage" : {
@@ -5260,7 +5260,7 @@
         }
       },
       "hand-crossbow" : {
-        "name" : "Hand Crossbow (Humanoid or Hybrid Form Only)",
+        "name" : "Hand Crossbow",
         "melee" : false,
         "attackModifier" : 4,
         "damage" : {
@@ -6211,7 +6211,7 @@
     "challengeRating" : "4",
     "actions" : {
       "maul" : {
-        "name" : "Maul (Humanoid or Hybrid Form Only)",
+        "name" : "Maul",
         "melee" : true,
         "attackModifier" : 5,
         "damage" : {
@@ -6221,7 +6221,7 @@
         }
       },
       "tusk" : {
-        "name" : "Tusks (Boar or Hybrid Form Only)",
+        "name" : "Tusks",
         "melee" : true,
         "attackModifier" : 5,
         "damage" : {
@@ -9043,7 +9043,7 @@
     "challengeRating" : "3",
     "actions" : {
       "claw" : {
-        "name" : "Claws (Hybrid Form Only)",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 4,
         "damage" : {
@@ -9053,7 +9053,7 @@
         }
       },
       "spear" : {
-        "name" : "Spear (Humanoid Form Only)",
+        "name" : "Spear",
         "melee" : true,
         "attackModifier" : 4,
         "damage" : {
@@ -9063,7 +9063,7 @@
         }
       },
       "bite" : {
-        "name" : "Bite (Wolf or Hybrid Form Only)",
+        "name" : "Bite",
         "melee" : true,
         "attackModifier" : 4,
         "damage" : {
@@ -10764,7 +10764,7 @@
     "challengeRating" : "5",
     "actions" : {
       "claw" : {
-        "name" : "Claws (Hag Form Only)",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
         "damage" : {
@@ -10852,7 +10852,7 @@
     "challengeRating" : "1",
     "actions" : {
       "sting" : {
-        "name" : "Sting (Bite in Beast Form)",
+        "name" : "Sting",
         "melee" : true,
         "attackModifier" : 5,
         "damage" : {
@@ -11164,7 +11164,7 @@
     "challengeRating" : "13",
     "actions" : {
       "unarmed-strike" : {
-        "name" : "Unarmed Strike (Vampire Form Only)",
+        "name" : "Unarmed Strike",
         "melee" : true,
         "attackModifier" : 9,
         "damage" : {
@@ -11174,7 +11174,7 @@
         }
       },
       "bite" : {
-        "name" : "Bite (Bat or Vampire Form Only)",
+        "name" : "Bite",
         "melee" : true,
         "attackModifier" : 9,
         "damage" : {

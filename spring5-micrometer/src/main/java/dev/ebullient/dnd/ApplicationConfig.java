@@ -34,6 +34,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import dev.ebullient.dnd.beastiary.Beastiary;
 import dev.ebullient.dnd.beastiary.compendium.CompendiumReader;
+import io.micrometer.core.instrument.config.MeterFilter;
 
 @Configuration
 public class ApplicationConfig {
@@ -53,6 +54,22 @@ public class ApplicationConfig {
         return beastiary;
     }
 
+    @Bean
+    public MeterFilter configureCommonDistributionMetrics() {
+        return new MeterFilter() {
+            // public DistributionStatisticConfig configure(Meter.Id id, DistributionStatisticConfig config) {
+            //     if (id.getName().startsWith("encounter.rounds")) {
+            //         return DistributionStatisticConfig.builder()
+            //                 .minimumExpectedValue((long) 1)
+            //                 .maximumExpectedValue((long) 15)
+            //                 .build()
+            //                 .merge(config);
+            //     }
+            //     return config;
+            // }
+        };
+    }
+
     /**
      * Create a route for '/' to return index.html
      */
@@ -64,7 +81,7 @@ public class ApplicationConfig {
                 GET("/"),
                 request -> ok()
                         .contentType(MediaType.TEXT_HTML)
-                        .syncBody(html));
+                        .bodyValue(html));
     }
 
     /**
@@ -84,6 +101,7 @@ public class ApplicationConfig {
         return RouterFunctions.route(
                 GET("/metrics"),
                 request -> ok()
-                        .syncBody(prometheusScrapeEndpoint.scrape()));
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .bodyValue(prometheusScrapeEndpoint.scrape()));
     }
 }

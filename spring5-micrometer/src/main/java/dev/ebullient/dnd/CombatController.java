@@ -30,6 +30,7 @@ import dev.ebullient.dnd.combat.Encounter.RoundResult;
 import dev.ebullient.dnd.combat.TargetSelector;
 import dev.ebullient.dnd.mechanics.Dice;
 import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.instrument.Timer.Sample;
 import reactor.core.publisher.Flux;
 
 @RestController
@@ -71,19 +72,23 @@ public class CombatController {
     }
 
     Publisher<RoundResult> go(TargetSelector selector, List<Beast> monsters) {
-        Encounter encounter = new Encounter(selector, Dice.Method.ROLL, monsters);
+        Encounter encounter = new Encounter(monsters, selector, Dice.Method.ROLL);
 
         return Flux.push(emitter -> {
-            metrics.startEncounter();
+            Sample eSample = metrics.startEncounter();
             int totalRounds = 0;
 
             while (!encounter.isFinal()) {
+                totalRounds++;
+                Sample rSample = metrics.startRound();
                 RoundResult result = encounter.oneRound();
+                metrics.endRound(rSample, result);
+
                 emitter.next(result);
             }
 
-            metrics.endEncounter(totalRounds);
             emitter.complete();
+            metrics.endEncounter(eSample, encounter, totalRounds);
         });
     }
 }

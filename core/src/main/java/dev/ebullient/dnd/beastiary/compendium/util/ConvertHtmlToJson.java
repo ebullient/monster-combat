@@ -140,7 +140,7 @@ public class ConvertHtmlToJson {
 
         Elements headlines = doc.getElementsByClass("mw-headline");
         Element title = headlines.first();
-        monster.setName(title.text());
+        monster.setName(title.text().replaceAll("\\(.*", "").trim());
         Element beginning = title.parent();
 
         // table
@@ -288,7 +288,7 @@ public class ConvertHtmlToJson {
                 String name = segments[0];
 
                 MonsterAttack a = new MonsterAttack();
-                a.setName(name);
+                a.setName(name.replaceAll("\\(.*", "").trim());
 
                 List<MonsterDamage> damage = new ArrayList<>();
 
@@ -337,11 +337,11 @@ public class ConvertHtmlToJson {
                 a.setDamage(damage.get(0));
                 attacks.put(sanitizeAttack(name, true), a);
             } else if (all.contains("Recharge")) {
-                String name = segments[0].replaceAll("\\(.*", "").trim();
+                String name = segments[0];
                 MonsterAttack a = new MonsterAttack();
                 MonsterDamage d = parseDamage(all, a);
                 if (d != null) {
-                    a.setName(name);
+                    a.setName(name.replaceAll("\\(.*", "").trim());
                     a.setDamage(d);
                     attacks.put(sanitizeAttack(name, true), a);
                 }
