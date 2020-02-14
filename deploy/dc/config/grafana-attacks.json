@@ -143,13 +143,13 @@
           ],
           "targets": [
             {
-              "expr": "sum(dice_rolls_count)",
+              "expr": "sum(dice_rolls_count{job=\"$job\"})",
               "instant": true,
               "legendFormat": "Overall",
               "refId": "A"
             },
             {
-              "expr": "sum by (die) (dice_rolls_count)",
+              "expr": "sum by (die) (dice_rolls_count{job=\"$job\"})",
               "instant": true,
               "legendFormat": "{{die}}",
               "refId": "B"
@@ -203,7 +203,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d20\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d20\", job=\"$job\"}[30m]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{face}}",
@@ -296,7 +296,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d10\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d10\",job=\"$job\"}[30m]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{face}}",
@@ -389,7 +389,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d6\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d6\",job=\"$job\"}[30m]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{face}}",
@@ -482,7 +482,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d12\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d12\",job=\"$job\"}[30m]))",
               "legendFormat": "{{face}}",
               "refId": "A"
             }
@@ -573,7 +573,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d8\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d8\",job=\"$job\"}[30m]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{face}}",
@@ -666,7 +666,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d4\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d4\",job=\"$job\"}[30m]))",
               "legendFormat": "{{face}}",
               "refId": "A"
             }
@@ -796,13 +796,13 @@
           ],
           "targets": [
             {
-              "expr": "sum(round_attacks_count)",
+              "expr": "sum(round_attacks_count{job=\"$job\"})",
               "instant": true,
               "legendFormat": "Overall",
               "refId": "A"
             },
             {
-              "expr": "sum by (hitOrMiss)(round_attacks_count)",
+              "expr": "sum by (hitOrMiss)(round_attacks_count{job=\"$job\"})",
               "instant": true,
               "legendFormat": "{{hitOrMiss}}",
               "refId": "B"
@@ -854,7 +854,7 @@
           "pluginVersion": "6.6.0",
           "targets": [
             {
-              "expr": "sum by (hitOrMiss)(rate(round_attacks_count[20m]))",
+              "expr": "sum by (hitOrMiss)(rate(round_attacks_count{job=\"$job\"}[20m]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{hitOrMiss}}",
@@ -912,7 +912,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (hitOrMiss)(increase(round_attacks_sum[20m])) / sum by (hitOrMiss)(increase(round_attacks_count[20m]))",
+              "expr": "sum by (hitOrMiss)(increase(round_attacks_sum{job=\"$job\"}[20m])) / sum by (hitOrMiss)(increase(round_attacks_count{job=\"$job\"}[20m]))",
               "legendFormat": "{{hitOrMiss}}",
               "refId": "B"
             }
@@ -998,7 +998,7 @@
           "pluginVersion": "6.6.0",
           "targets": [
             {
-              "expr": "sum by (hitOrMiss)(increase(round_attacks_sum[20m])) / sum by (hitOrMiss)(increase(round_attacks_count[20m]))",
+              "expr": "sum by (hitOrMiss)(increase(round_attacks_sum{job=\"$job\"}[20m])) / sum by (hitOrMiss)(increase(round_attacks_count{job=\"$job\"}[20m]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{hitOrMiss}}",
@@ -1091,13 +1091,13 @@
           ],
           "targets": [
             {
-              "expr": "sum(round_attacks_count)",
+              "expr": "sum(round_attacks_count{job=\"$job\"})",
               "instant": true,
               "legendFormat": "Overall",
               "refId": "A"
             },
             {
-              "expr": "sum by (attackType)(round_attacks_count)",
+              "expr": "sum by (attackType)(round_attacks_count{job=\"$job\"})",
               "instant": true,
               "legendFormat": "{{attackType}}",
               "refId": "B"
@@ -1155,7 +1155,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (attackType)(increase(round_attacks_count[20m]))",
+              "expr": "sum by (attackType)(increase(round_attacks_count{job=\"$job\"}[20m]))",
               "legendFormat": "{{attackType}}",
               "refId": "B"
             }
@@ -1267,7 +1267,7 @@
           ],
           "targets": [
             {
-              "expr": "sum by (attackType)(round_attacks_sum) / sum by (attackType)(round_attacks_count)",
+              "expr": "sum by (attackType)(round_attacks_sum{job=\"$job\"}) / sum by (attackType)(round_attacks_count{job=\"$job\"})",
               "instant": true,
               "legendFormat": "{{attackType}}",
               "refId": "A"
@@ -1325,7 +1325,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (attackType)(increase(round_attacks_sum[20m])) / sum by (attackType)(increase(round_attacks_count[20m]))",
+              "expr": "sum by (attackType)(increase(round_attacks_sum{job=\"$job\"}[20m])) / sum by (attackType)(increase(round_attacks_count{job=\"$job\"}[20m]))",
               "legendFormat": "{{attackType}}",
               "refId": "B"
             }
@@ -1452,7 +1452,7 @@
           ],
           "targets": [
             {
-              "expr": "sum by (attacker)(round_attacks_count)",
+              "expr": "sum by (attacker)(round_attacks_count{job=\"$job\"})",
               "instant": true,
               "legendFormat": "{{attacker}}",
               "refId": "B"
@@ -1530,7 +1530,7 @@
           ],
           "targets": [
             {
-              "expr": "sum by (attacker)(round_attacks_sum) / sum by (attacker)(round_attacks_count)",
+              "expr": "sum by (attacker)(round_attacks_sum{job=\"$job\"}) / sum by (attacker)(round_attacks_count{job=\"$job\"})",
               "instant": true,
               "legendFormat": "{{attacker}}",
               "refId": "A"
@@ -1608,7 +1608,7 @@
           ],
           "targets": [
             {
-              "expr": "sum by (attacker)(round_attacks_sum)",
+              "expr": "sum by (attacker)(round_attacks_sum{job=\"$job\"})",
               "instant": true,
               "legendFormat": "{{attacker}}",
               "refId": "A"
@@ -1661,7 +1661,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (attacker)(increase(round_attacks_sum[15m])) / sum by (attacker)(increase(round_attacks_count[15m]))",
+              "expr": "sum by (attacker)(increase(round_attacks_sum{job=\"$job\"}[15m])) / sum by (attacker)(increase(round_attacks_count{job=\"$job\"}[15m]))",
               "instant": false,
               "legendFormat": "{{attacker}}",
               "refId": "A"
@@ -1739,7 +1739,7 @@
           "reverseYBuckets": false,
           "targets": [
             {
-              "expr": "sum by (attacker)(increase(round_attacks_sum[15m])) / sum by (attacker)(increase(round_attacks_count[15m]))",
+              "expr": "sum by (attacker)(increase(round_attacks_sum{job=\"$job\"}[15m])) / sum by (attacker)(increase(round_attacks_count{job=\"$job\"}[15m]))",
               "instant": false,
               "legendFormat": "{{attacker}}",
               "refId": "A"
@@ -1781,7 +1781,32 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allFormat": "glob",
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "",
+        "hide": 0,
+        "includeAll": false,
+        "label": "job",
+        "multi": false,
+        "multiFormat": "glob",
+        "name": "job",
+        "options": [],
+        "query": "label_values(job)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
