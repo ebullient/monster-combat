@@ -64,4 +64,40 @@
       <optional>true</optional>
     </dependency>
   </dependencies>
+
+    <build>
+    <plugins>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>${jib-maven-plugin.version}</version>
+        <configuration>
+          <to>
+            <image>${imageName}</image>
+          </to>
+          <container>
+            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+            <labels>
+              <org.opencontainers.image.title>Monster Combat</org.opencontainers.image.title>
+              <org.opencontainers.image.created>${git.build.time}</org.opencontainers.image.created>
+              <org.opencontainers.image.url>https://github.com/ebullient/monster-combat</org.opencontainers.image.url>
+              <org.opencontainers.image.source>https://github.com/ebullient/monster-combat</org.opencontainers.image.source>
+              <org.opencontainers.image.version>${git.build.version}</org.opencontainers.image.version>
+              <org.opencontainers.image.revision>${git.commit.id.describe-short}</org.opencontainers.image.revision>
+              <org.opencontainers.image.licenses>	Apache-2.0</org.opencontainers.image.licenses>
+            </labels>
+          </container>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>dockerBuild</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
