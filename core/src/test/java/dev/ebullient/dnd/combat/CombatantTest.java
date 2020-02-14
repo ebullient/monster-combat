@@ -23,7 +23,7 @@ public class CombatantTest {
     @Test
     public void testHealth() {
 
-        Combatant c = new Combatant(new MockBeast("0"), 10, 40);
+        EncounterCombatant c = new EncounterCombatant(new MockBeast("0"), 10, 40);
 
         // Poke on some participant behavior
         Assert.assertEquals(100, c.getRelativeHealth());

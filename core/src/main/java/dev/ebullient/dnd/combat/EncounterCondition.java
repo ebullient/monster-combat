@@ -20,7 +20,7 @@ import java.util.Set;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Dice;
 
-public class Condition {
+class EncounterCondition {
     Dice.Constraint onAttack = Dice.Constraint.NONE;
     Dice.Constraint asTarget = Dice.Constraint.NONE;
     final Set<Ability> advantage = new HashSet<>();
@@ -30,7 +30,7 @@ public class Condition {
     boolean singleAttack;
     int maxHitPointsDecrease;
 
-    Condition setDisadvantage(List<Ability> abilities) {
+    EncounterCondition setDisadvantage(List<Ability> abilities) {
         if (abilities != null && !abilities.isEmpty()) {
             for (Ability a : abilities) {
                 this.disadvantage.add(a);
@@ -39,29 +39,29 @@ public class Condition {
         return this;
     }
 
-    Condition setDisadvantage(Ability... abilities) {
+    EncounterCondition setDisadvantage(Ability... abilities) {
         for (Ability a : abilities) {
             this.disadvantage.add(a);
         }
         return this;
     }
 
-    Condition setForDuration(int duration) {
+    EncounterCondition setForDuration(int duration) {
         this.duration = duration;
         return this;
     }
 
-    Condition setAttackRollConstraint(Dice.Constraint constraint) {
+    EncounterCondition setAttackRollConstraint(Dice.Constraint constraint) {
         this.onAttack = constraint;
         return this;
     }
 
-    Condition setTargetRollConstraint(Dice.Constraint constraint) {
+    EncounterCondition setTargetRollConstraint(Dice.Constraint constraint) {
         this.asTarget = constraint;
         return this;
     }
 
-    Condition setSingleAttackLimit() {
+    EncounterCondition setSingleAttackLimit() {
         this.singleAttack = true;
         return this;
     }

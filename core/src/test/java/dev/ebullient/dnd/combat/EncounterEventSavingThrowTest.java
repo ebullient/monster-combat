@@ -27,8 +27,8 @@ public class EncounterEventSavingThrowTest {
         MockBeast targetBeast = new MockBeast("1");
         targetBeast.saveThrows.set(Ability.CON, 3);
 
-        Combatant actor = new Combatant(new MockBeast("0"), 10, 10);
-        Combatant target = new Combatant(targetBeast, 10, 10);
+        EncounterCombatant actor = new EncounterCombatant(new MockBeast("0"), 10, 10);
+        EncounterCombatant target = new EncounterCombatant(targetBeast, 10, 10);
 
         // force 10 + modifier of 3 (above), which is > 12, which would pass
         target.condition = new MockCondition(Dice.Constraint.TEN);
@@ -61,8 +61,8 @@ public class EncounterEventSavingThrowTest {
     public void testMakeActionWithUnsuccessfulSavingThrow() {
         MockBeast targetBeast = new MockBeast("1");
 
-        Combatant actor = new Combatant(new MockBeast("0"), 10, 10);
-        Combatant target = new Combatant(targetBeast, 10, 10);
+        EncounterCombatant actor = new EncounterCombatant(new MockBeast("0"), 10, 10);
+        EncounterCombatant target = new EncounterCombatant(targetBeast, 10, 10);
 
         // force 10. No modifier, which is < 12, which should fail
         target.condition = new MockCondition(Dice.Constraint.TEN);
@@ -95,8 +95,8 @@ public class EncounterEventSavingThrowTest {
         MockBeast targetBeast = new MockBeast("1");
         targetBeast.saveThrows.set(Ability.INT, 3);
 
-        Combatant actor = new Combatant(new MockBeast("0"), 10, 10);
-        Combatant target = new Combatant(targetBeast, 10, 10);
+        EncounterCombatant actor = new EncounterCombatant(new MockBeast("0"), 10, 10);
+        EncounterCombatant target = new EncounterCombatant(targetBeast, 10, 10);
 
         // force 10 + modifier of 3 (above), which is > 12, which would pass
         target.condition = new MockCondition(Dice.Constraint.TEN);
@@ -124,8 +124,8 @@ public class EncounterEventSavingThrowTest {
     public void testExtraEffectWithUnsuccessfulSavingThrow() {
         MockBeast targetBeast = new MockBeast("1");
 
-        Combatant actor = new Combatant(new MockBeast("0"), 10, 10);
-        Combatant target = new Combatant(targetBeast, 10, 10);
+        EncounterCombatant actor = new EncounterCombatant(new MockBeast("0"), 10, 10);
+        EncounterCombatant target = new EncounterCombatant(targetBeast, 10, 10);
 
         // force 10. No modifier, which is < 12, which should fail
         target.condition = new MockCondition(Dice.Constraint.TEN);

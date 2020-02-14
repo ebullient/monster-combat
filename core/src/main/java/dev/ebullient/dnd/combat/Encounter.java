@@ -41,27 +41,27 @@ public class Encounter {
 
     final TargetSelector selector;
     final Dice.Method method;
-    final List<Combatant> initiativeOrder;
+    final List<EncounterCombatant> initiativeOrder;
     final int numCombatants;
     final int numTypes;
     final int crDelta;
     final int sizeDelta;
 
-    Encounter(List<Combatant> combatants, TargetSelector selector, Dice.Method method) {
+    Encounter(List<EncounterCombatant> combatants, TargetSelector selector, Dice.Method method) {
         this.initiativeOrder = new ArrayList<>(combatants);
         this.initiativeOrder.sort(Comparators.InitiativeOrder);
         this.numCombatants = initiativeOrder.size();
         this.selector = selector;
         this.method = method;
 
-        Combatant first = initiativeOrder.iterator().next();
+        EncounterCombatant first = initiativeOrder.iterator().next();
         int maxCR = first.beast.getCR();
         int minCR = maxCR;
         int maxSize = first.beast.getSize().ordinal();
         int minSize = maxSize;
         Set<Type> types = new HashSet<>();
 
-        for (Combatant x : combatants) {
+        for (EncounterCombatant x : combatants) {
             types.add(x.beast.getType());
             maxCR = Math.max(x.beast.getCR(), maxCR);
             minCR = Math.min(x.beast.getCR(), minCR);
@@ -78,30 +78,30 @@ public class Encounter {
         return initiativeOrder.size() <= 1;
     }
 
-    public int size() {
+    public int getSize() {
         return numCombatants;
     }
 
-    public int sizeDelta() {
+    public int getSizeDelta() {
         return sizeDelta;
     }
 
-    public int crDelta() {
+    public int getCrDelta() {
         return crDelta;
     }
 
-    public int numTypes() {
+    public int getNumTypes() {
         return numTypes;
     }
 
     public RoundResult oneRound() {
         logger.debug("oneRound: {} {}", initiativeOrder, id);
 
-        RoundResult result = new RoundResult(initiativeOrder);
+        Result result = new Result(initiativeOrder);
 
-        for (Combatant actor : initiativeOrder) {
+        for (EncounterCombatant actor : initiativeOrder) {
             if (actor.isAlive()) {
-                Combatant target = selector.chooseTarget(actor, initiativeOrder);
+                EncounterCombatant target = selector.chooseTarget(actor, initiativeOrder);
 
                 // Single or many attacks
                 List<Attack> attacks = actor.getAttacks();
@@ -128,7 +128,7 @@ public class Encounter {
         return result;
     }
 
-    void makeAttack(RoundResult result, Combatant actor, Attack a, Combatant target) {
+    void makeAttack(Result result, EncounterCombatant actor, Attack a, EncounterCombatant target) {
         if (target.isAlive()) {
             AttackEvent r = new AttackEvent(actor, target, a, method, id);
             r.attack();
@@ -137,23 +137,23 @@ public class Encounter {
         }
     }
 
-    public static class RoundResult {
-        List<Combatant> survivors;
+    public static class Result implements RoundResult {
+        List<EncounterCombatant> survivors;
         List<AttackEvent> events;
         final int numCombatants;
         final int numTypes;
         final int crDelta;
         final int sizeDelta;
 
-        RoundResult(List<Combatant> initiativeOrder) {
-            Combatant first = initiativeOrder.iterator().next();
+        Result(List<EncounterCombatant> initiativeOrder) {
+            EncounterCombatant first = initiativeOrder.iterator().next();
             int maxCR = first.beast.getCR();
             int minCR = maxCR;
             int maxSize = first.beast.getSize().ordinal();
             int minSize = maxSize;
             Set<Type> types = new HashSet<>();
 
-            for (Combatant x : initiativeOrder) {
+            for (EncounterCombatant x : initiativeOrder) {
                 types.add(x.beast.getType());
                 maxCR = Math.max(x.beast.getCR(), maxCR);
                 minCR = Math.min(x.beast.getCR(), minCR);
@@ -173,49 +173,54 @@ public class Encounter {
             return events;
         }
 
-        public List<Combatant> getSurvivors() {
+        public List<EncounterCombatant> getSurvivors() {
             return survivors;
         }
 
-        public int size() {
+        public int getSize() {
             return numCombatants;
         }
 
-        public int sizeDelta() {
+        public int getSizeDelta() {
             return sizeDelta;
         }
 
-        public int crDelta() {
+        public int getCrDelta() {
             return crDelta;
         }
 
-        public int numTypes() {
+        public int getNumTypes() {
             return numTypes;
         }
     }
 
-    public static class AttackEvent {
+    public static class AttackEvent implements RoundResult.Event {
         @JsonIgnore
         final String encounterId;
 
-        final Combatant actor;
-        final Combatant target;
+        @JsonIgnore
+        final Dice.Method method;
+
+        @JsonIgnore
         final Attack attack;
-        final Condition actorStartingCondition;
-        final Condition targetStartingCondition;
-        Condition actorEndingCondition;
-        Condition targetEndingCondition;
+
+        final EncounterCombatant actor;
+        final EncounterCombatant target;
+        final EncounterCondition actorStartingCondition;
+        final EncounterCondition targetStartingCondition;
+        EncounterCondition actorEndingCondition;
+        EncounterCondition targetEndingCondition;
 
         boolean hit;
         boolean critical;
         boolean saved;
-        Dice.Method method;
         int damageAmount;
 
         boolean effectSaved;
         int effectAmount;
 
-        AttackEvent(Combatant actor, Combatant target, Attack attack, Dice.Method method, String encounterId) {
+        AttackEvent(EncounterCombatant actor, EncounterCombatant target, Attack attack, Dice.Method method,
+                String encounterId) {
             this.actor = actor;
             this.target = target;
             this.attack = attack;
@@ -236,28 +241,44 @@ public class Encounter {
             return attack.getDamage().getType();
         }
 
-        public Combatant getAttacker() {
+        public EncounterCombatant getActor() {
             return actor;
         }
 
-        public Combatant getTarget() {
+        public EncounterCombatant getTarget() {
             return target;
         }
 
-        public boolean wasCritical() {
+        public boolean isCritical() {
             return critical;
         }
 
-        public boolean wasHit() {
+        public boolean isHit() {
             return hit;
         }
 
-        public boolean wasSaved() {
+        public boolean isSaved() {
             return saved;
         }
 
         public int getDamageAmount() {
             return damageAmount;
+        }
+
+        public String getActorStartingCondition() {
+            return actorStartingCondition == null ? "" : actorStartingCondition.toString();
+        }
+
+        public String getTargetStartingCondition() {
+            return targetStartingCondition == null ? "" : targetStartingCondition.toString();
+        }
+
+        public String getActorEndingCondition() {
+            return actorEndingCondition == null ? "" : actorEndingCondition.toString();
+        }
+
+        public String getTargetEndingCondition() {
+            return targetEndingCondition == null ? "" : targetEndingCondition.toString();
         }
 
         AttackEvent attack() {

@@ -18,8 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import dev.ebullient.dnd.combat.Encounter;
-import dev.ebullient.dnd.combat.Encounter.AttackEvent;
-import dev.ebullient.dnd.combat.Encounter.RoundResult;
+import dev.ebullient.dnd.combat.RoundResult;
+import dev.ebullient.dnd.combat.RoundResult.Event;
 import dev.ebullient.dnd.mechanics.Dice;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tags;
@@ -43,10 +43,10 @@ class CombatMetrics {
 
     public void endEncounter(Sample sample, Encounter e, int totalRounds) {
         Tags tags = Tags.of(
-                "numCombatants", label(e.size()),
-                "numTypes", label(e.numTypes()),
-                "sizeDelta", label(e.sizeDelta()),
-                "crDelta", label(e.crDelta()));
+                "numCombatants", label(e.getSize()),
+                "numTypes", label(e.getNumTypes()),
+                "sizeDelta", label(e.getSizeDelta()),
+                "crDelta", label(e.getCrDelta()));
 
         sample.stop(registry.timer("encounter.duration", tags));
         registry.summary("encounter.rounds", tags).record((double) totalRounds);
@@ -60,17 +60,17 @@ class CombatMetrics {
 
         sample.stop(registry.timer("round.duration",
                 "numSurvivors", label(result.getSurvivors().size()),
-                "numCombatants", label(result.size()),
-                "sizeDelta", label(result.sizeDelta()),
-                "crDelta", label(result.crDelta())));
+                "numCombatants", label(result.getSize()),
+                "sizeDelta", label(result.getSizeDelta()),
+                "crDelta", label(result.getCrDelta())));
 
-        for (AttackEvent event : result.getEvents()) {
-            String hitOrMiss = (event.wasCritical() ? "critical " : "")
-                    + (event.wasSaved() ? "saved " : "")
-                    + (event.wasHit() ? "hit" : "miss");
+        for (Event event : result.getEvents()) {
+            String hitOrMiss = (event.isCritical() ? "critical " : "")
+                    + (event.isSaved() ? "saved " : "")
+                    + (event.isHit() ? "hit" : "miss");
 
             registry.summary("round.attacks",
-                    "attacker", event.getAttacker().getName(),
+                    "attacker", event.getActor().getName(),
                     "attackType", event.getType(),
                     "attackName", event.getName(),
                     "hitOrMiss", hitOrMiss)

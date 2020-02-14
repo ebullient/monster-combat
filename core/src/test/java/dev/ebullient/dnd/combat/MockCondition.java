@@ -17,7 +17,7 @@ import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Dice;
 import dev.ebullient.dnd.mechanics.Dice.Constraint;
 
-public class MockCondition extends Condition {
+public class MockCondition extends EncounterCondition {
 
     Dice.Constraint useConstraint;
 

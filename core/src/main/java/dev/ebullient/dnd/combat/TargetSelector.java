@@ -23,12 +23,12 @@ import dev.ebullient.dnd.mechanics.Dice;
  */
 public interface TargetSelector {
 
-    public Combatant chooseTarget(Combatant p, List<Combatant> list);
+    public EncounterCombatant chooseTarget(EncounterCombatant p, List<EncounterCombatant> list);
 
     public static final TargetSelector SelectByHighestRelativeHealth = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
-            List<Combatant> targets = new ArrayList<>(initiativeOrder);
+        public EncounterCombatant chooseTarget(EncounterCombatant p, List<EncounterCombatant> initiativeOrder) {
+            List<EncounterCombatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
 
             if (targets.isEmpty()) {
@@ -42,8 +42,8 @@ public interface TargetSelector {
 
     public static final TargetSelector SelectByLowestRelativeHealth = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
-            List<Combatant> targets = new ArrayList<>(initiativeOrder);
+        public EncounterCombatant chooseTarget(EncounterCombatant p, List<EncounterCombatant> initiativeOrder) {
+            List<EncounterCombatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
                 return null;
@@ -58,8 +58,8 @@ public interface TargetSelector {
 
     public static final TargetSelector SelectByHighestChallengeRating = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
-            List<Combatant> targets = new ArrayList<>(initiativeOrder);
+        public EncounterCombatant chooseTarget(EncounterCombatant p, List<EncounterCombatant> initiativeOrder) {
+            List<EncounterCombatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
                 return null;
@@ -72,8 +72,8 @@ public interface TargetSelector {
 
     public static final TargetSelector SelectByLowestChallengeRating = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
-            List<Combatant> targets = new ArrayList<>(initiativeOrder);
+        public EncounterCombatant chooseTarget(EncounterCombatant p, List<EncounterCombatant> initiativeOrder) {
+            List<EncounterCombatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
                 return null;
@@ -88,8 +88,8 @@ public interface TargetSelector {
 
     public static final TargetSelector SelectAtRandom = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
-            List<Combatant> targets = new ArrayList<>(initiativeOrder);
+        public EncounterCombatant chooseTarget(EncounterCombatant p, List<EncounterCombatant> initiativeOrder) {
+            List<EncounterCombatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
                 return null;

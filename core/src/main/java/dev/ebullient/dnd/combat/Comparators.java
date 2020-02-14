@@ -19,9 +19,9 @@ import dev.ebullient.dnd.mechanics.Ability;
 
 public interface Comparators {
 
-    public static final Comparator<Combatant> InitiativeOrder = new Comparator<Combatant>() {
+    public static final Comparator<EncounterCombatant> InitiativeOrder = new Comparator<EncounterCombatant>() {
         @Override
-        public int compare(Combatant o1, Combatant o2) {
+        public int compare(EncounterCombatant o1, EncounterCombatant o2) {
             // sort by initiative descending
             if (o2.getInitiative() == o1.getInitiative()) {
                 // dex is already in the initiative score in a way, but .. use that as second factor (descending)
@@ -39,9 +39,9 @@ public interface Comparators {
         }
     };
 
-    public static final Comparator<Combatant> ChallengeRatingOrder = new Comparator<Combatant>() {
+    public static final Comparator<EncounterCombatant> ChallengeRatingOrder = new Comparator<EncounterCombatant>() {
         @Override
-        public int compare(Combatant o1, Combatant o2) {
+        public int compare(EncounterCombatant o1, EncounterCombatant o2) {
             // sort by cr descending
             if (o2.getCR() == o1.getCR()) {
                 // Then sort by max hit points descending
@@ -59,9 +59,9 @@ public interface Comparators {
         }
     };
 
-    public static final Comparator<Combatant> RelativeHealthOrder = new Comparator<Combatant>() {
+    public static final Comparator<EncounterCombatant> RelativeHealthOrder = new Comparator<EncounterCombatant>() {
         @Override
-        public int compare(Combatant o1, Combatant o2) {
+        public int compare(EncounterCombatant o1, EncounterCombatant o2) {
             // sort by relative health descending
             if (o2.getRelativeHealth() == o1.getRelativeHealth()) {
                 // Then sort by max hit points descending

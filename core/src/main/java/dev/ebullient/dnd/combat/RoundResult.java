@@ -13,17 +13,37 @@
  */
 package dev.ebullient.dnd.combat;
 
-import dev.ebullient.dnd.mechanics.Size;
-import dev.ebullient.dnd.mechanics.Type;
+import java.util.List;
 
-public interface Combatant {
-    public String getName();
+public interface RoundResult {
 
-    public int getCR();
+    public interface Event {
+        public String getName();
 
-    public int getArmorClass();
+        public String getType();
 
-    public Size getSize();
+        public Combatant getActor();
 
-    public Type getType();
+        public Combatant getTarget();
+
+        public boolean isCritical();
+
+        public boolean isHit();
+
+        public boolean isSaved();
+
+        public int getDamageAmount();
+    }
+
+    public List<? extends Event> getEvents();
+
+    public List<? extends Combatant> getSurvivors();
+
+    public int getSize();
+
+    public int getSizeDelta();
+
+    public int getCrDelta();
+
+    public int getNumTypes();
 }

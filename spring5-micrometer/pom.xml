@@ -23,6 +23,7 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     <imageName>ebullient/${project.name}</imageName>
     <jib-maven-plugin.version>1.6.1</jib-maven-plugin.version>
   </properties>
@@ -32,7 +33,6 @@
     <dependency>
       <groupId>dev.ebullient.dnd</groupId>
       <artifactId>mc-core</artifactId>
-      <version>0.1-SNAPSHOT</version>
     </dependency>
 
     <dependency>
@@ -50,7 +50,13 @@
       <artifactId>micrometer-registry-prometheus</artifactId>
     </dependency>
 
-    <!--Test -->
+    <!-- General test dependencies are in parent: JUnit 5 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-test</artifactId>
@@ -63,9 +69,10 @@
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
     </dependency>
+
   </dependencies>
 
-    <build>
+  <build>
     <plugins>
       <plugin>
         <groupId>com.google.cloud.tools</groupId>

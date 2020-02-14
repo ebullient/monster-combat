@@ -26,8 +26,8 @@ public class EncounterEventMeleeAttackTest {
         MockBeast targetBeast = new MockBeast("1");
         targetBeast.armorClass = 11;
 
-        Combatant actor = new Combatant(new MockBeast("0"), 10, 10);
-        Combatant target = new Combatant(targetBeast, 10, 10);
+        EncounterCombatant actor = new EncounterCombatant(new MockBeast("0"), 10, 10);
+        EncounterCombatant target = new EncounterCombatant(targetBeast, 10, 10);
 
         // force roll of 10
         actor.condition = new MockCondition(Dice.Constraint.TEN);
@@ -59,8 +59,8 @@ public class EncounterEventMeleeAttackTest {
         MockBeast targetBeast = new MockBeast("1");
         targetBeast.armorClass = 15;
 
-        Combatant actor = new Combatant(new MockBeast("0"), 10, 10);
-        Combatant target = new Combatant(targetBeast, 10, 10);
+        EncounterCombatant actor = new EncounterCombatant(new MockBeast("0"), 10, 10);
+        EncounterCombatant target = new EncounterCombatant(targetBeast, 10, 10);
 
         // force roll of 10
         actor.condition = new MockCondition(Dice.Constraint.TEN);

@@ -26,9 +26,9 @@ public class EncounterEventConditionTest {
 
     @Test
     public void testApplyConditionWithDamage() {
-        Combatant[] mcs = new Combatant[] {
-                new Combatant(new MockBeast("0"), 10, 10),
-                new Combatant(new MockBeast("1"), 10, 10)
+        EncounterCombatant[] mcs = new EncounterCombatant[] {
+                new EncounterCombatant(new MockBeast("0"), 10, 10),
+                new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
         Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
@@ -46,9 +46,9 @@ public class EncounterEventConditionTest {
 
     @Test
     public void testBlindedCondition() {
-        Combatant[] mcs = new Combatant[] {
-                new Combatant(new MockBeast("0"), 10, 10),
-                new Combatant(new MockBeast("1"), 10, 10)
+        EncounterCombatant[] mcs = new EncounterCombatant[] {
+                new EncounterCombatant(new MockBeast("0"), 10, 10),
+                new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
         Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
@@ -74,9 +74,9 @@ public class EncounterEventConditionTest {
 
     @Test
     public void testCursedCondition() {
-        Combatant[] mcs = new Combatant[] {
-                new Combatant(new MockBeast("0"), 10, 10),
-                new Combatant(new MockBeast("1"), 10, 10)
+        EncounterCombatant[] mcs = new EncounterCombatant[] {
+                new EncounterCombatant(new MockBeast("0"), 10, 10),
+                new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
         Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
@@ -105,9 +105,9 @@ public class EncounterEventConditionTest {
 
     @Test
     public void testPoisonedCondition() {
-        Combatant[] mcs = new Combatant[] {
-                new Combatant(new MockBeast("0"), 10, 10),
-                new Combatant(new MockBeast("1"), 10, 10)
+        EncounterCombatant[] mcs = new EncounterCombatant[] {
+                new EncounterCombatant(new MockBeast("0"), 10, 10),
+                new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
         Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
@@ -133,9 +133,9 @@ public class EncounterEventConditionTest {
 
     @Test
     public void testParalyzedCondition() {
-        Combatant[] mcs = new Combatant[] {
-                new Combatant(new MockBeast("0"), 10, 10),
-                new Combatant(new MockBeast("1"), 10, 10)
+        EncounterCombatant[] mcs = new EncounterCombatant[] {
+                new EncounterCombatant(new MockBeast("0"), 10, 10),
+                new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
         Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
@@ -165,9 +165,9 @@ public class EncounterEventConditionTest {
 
     @Test
     public void testSlowedCondition() {
-        Combatant[] mcs = new Combatant[] {
-                new Combatant(new MockBeast("0"), 10, 10),
-                new Combatant(new MockBeast("1"), 10, 10)
+        EncounterCombatant[] mcs = new EncounterCombatant[] {
+                new EncounterCombatant(new MockBeast("0"), 10, 10),
+                new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
         Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
@@ -193,9 +193,9 @@ public class EncounterEventConditionTest {
 
     @Test
     public void testHPDrainCondition() {
-        Combatant[] mcs = new Combatant[] {
-                new Combatant(new MockBeast("0"), 10, 10),
-                new Combatant(new MockBeast("1"), 10, 10)
+        EncounterCombatant[] mcs = new EncounterCombatant[] {
+                new EncounterCombatant(new MockBeast("0"), 10, 10),
+                new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
         Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],

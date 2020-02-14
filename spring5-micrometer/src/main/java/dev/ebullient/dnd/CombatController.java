@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.ebullient.dnd.beastiary.Beastiary;
 import dev.ebullient.dnd.combat.Encounter;
-import dev.ebullient.dnd.combat.Encounter.RoundResult;
+import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.combat.TargetSelector;
 import dev.ebullient.dnd.mechanics.Dice;
 import io.micrometer.core.annotation.Timed;

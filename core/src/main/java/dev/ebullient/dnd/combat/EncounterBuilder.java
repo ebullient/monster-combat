@@ -54,7 +54,7 @@ public class EncounterBuilder {
     }
 
     public Encounter build() {
-        List<Combatant> list = new ArrayList<>();
+        List<EncounterCombatant> list = new ArrayList<>();
         for (int i = 0; i < howMany; i++) {
             Beast beast;
             if (challengeRating == null) {
@@ -62,17 +62,17 @@ public class EncounterBuilder {
             } else {
                 beast = beastiary.findOneByChallengeRating(challengeRating);
             }
-            list.add(new Combatant(beast, method));
+            list.add(new EncounterCombatant(beast, method));
         }
 
         return new Encounter(list, selector, method);
     }
 
     public static Encounter build(List<Beast> beasts, TargetSelector selector, Dice.Method method) {
-        List<Combatant> list = new ArrayList<>();
+        List<EncounterCombatant> list = new ArrayList<>();
         for (Beast b : beasts) {
             Encounter.validate(b);
-            list.add(new Combatant(b, method));
+            list.add(new EncounterCombatant(b, method));
         }
         return new Encounter(list, selector, method);
     }
