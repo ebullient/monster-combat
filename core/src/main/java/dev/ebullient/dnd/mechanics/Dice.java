@@ -20,6 +20,15 @@ import java.util.regex.Pattern;
 public class Dice {
     public static final Pattern AVG_ROLL_MOD = Pattern.compile("(\\d+)(?:\\(([-+d0-9]+)\\))?");
 
+    public static interface Monitor {
+        public void notify(String tag, int value);
+    }
+
+    static Monitor NO_OP = new Monitor() {
+        public void notify(String tag, int value) {
+        }
+    };
+
     public enum Method {
         USE_AVERAGE,
         ROLL
@@ -29,10 +38,21 @@ public class Dice {
         ADVANTAGE,
         DISADVANTAGE,
         FAIL,
+        TEN,
+        CRITICAL,
         NONE
     }
 
     static final Random random = new Random();
+    static Monitor monitor = NO_OP;
+
+    public static void setMonitor(Monitor m) {
+        if (m == null) {
+            monitor = NO_OP;
+        } else {
+            monitor = m;
+        }
+    }
 
     /** @return a value in a range including 0: [0, bound) */
     public static final int range(int bound) {
@@ -44,9 +64,7 @@ public class Dice {
         return random.nextInt(bound) + 1;
     }
 
-    /**
-     * @return average roll per sides
-     */
+    /** @return average roll per sides */
     public static final double averageRoll(int sides) {
         switch (sides) {
             case 4:
@@ -68,7 +86,9 @@ public class Dice {
 
     /** @return the value of a 1d4 roll: [1,4] */
     public static final int d4() {
-        return random.nextInt(4) + 1;
+        int value = random.nextInt(4) + 1;
+        monitor.notify("d4", value);
+        return value;
     }
 
     /** @return the value of n 1d4 rolls */
@@ -82,7 +102,9 @@ public class Dice {
 
     /** @return the value of a 1d6 roll: [1,6] */
     public static final int d6() {
-        return random.nextInt(6) + 1;
+        int value = random.nextInt(6) + 1;
+        monitor.notify("d6", value);
+        return value;
     }
 
     /** @return the value of n 1d6 rolls */
@@ -96,7 +118,9 @@ public class Dice {
 
     /** @return the value of a 1d8 roll: [1,8] */
     public static final int d8() {
-        return random.nextInt(8) + 1;
+        int value = random.nextInt(8) + 1;
+        monitor.notify("d8", value);
+        return value;
     }
 
     /** @return the value of n 1d8 rolls */
@@ -110,7 +134,9 @@ public class Dice {
 
     /** @return the value of a 1d10 roll: [1,10] */
     public static final int d10() {
-        return random.nextInt(10) + 1;
+        int value = random.nextInt(10) + 1;
+        monitor.notify("d10", value);
+        return value;
     }
 
     /** @return the value of n 1d10 rolls */
@@ -124,7 +150,9 @@ public class Dice {
 
     /** @return the value of a 1d12 roll: [1,12] */
     public static final int d12() {
-        return random.nextInt(12) + 1;
+        int value = random.nextInt(12) + 1;
+        monitor.notify("d12", value);
+        return value;
     }
 
     /** @return the value of n 1d12 rolls */
@@ -138,21 +166,30 @@ public class Dice {
 
     /** @return the value of a 1d20 roll: [1,20] */
     public static final int d20() {
-        return random.nextInt(20) + 1;
+        int value = random.nextInt(20) + 1;
+        monitor.notify("d20", value);
+        return value;
     }
 
-    public static final int d20(Constraint c) {
+    public static final int d20(Constraint constraint) {
         int roll1 = Dice.d20();
         int roll2 = Dice.d20();
 
-        if (c == Constraint.DISADVANTAGE) {
-            return Math.min(roll1, roll2);
-        } else if (c == Constraint.ADVANTAGE) {
-            return Math.max(roll1, roll2);
-        } else if (c == Constraint.FAIL) {
-            return 1;
+        switch (constraint) {
+            case DISADVANTAGE:
+                return Math.min(roll1, roll2);
+            case ADVANTAGE:
+                return Math.max(roll1, roll2);
+            case FAIL:
+                return 1;
+            case CRITICAL:
+                return 20;
+            case TEN:
+                return 10;
+            default:
+            case NONE:
+                return roll1;
         }
-        return roll1;
     }
 
     /** @return the value of n 1d20 rolls */
@@ -200,6 +237,9 @@ public class Dice {
                     break;
                 case "10":
                     result = d10(n);
+                    break;
+                case "12":
+                    result = d12(n);
                     break;
                 case "20":
                     result = d20(n);

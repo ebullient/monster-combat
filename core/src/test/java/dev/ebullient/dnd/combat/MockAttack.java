@@ -11,9 +11,7 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd;
-
-import dev.ebullient.dnd.combat.Attack;
+package dev.ebullient.dnd.combat;
 
 public class MockAttack implements Attack {
 
@@ -31,6 +29,11 @@ public class MockAttack implements Attack {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getDescription() {
+        return toString();
     }
 
     @Override

@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dev.ebullient.dnd.combat.Encounter;
+import dev.ebullient.dnd.combat.EncounterBuilder;
 import dev.ebullient.dnd.mechanics.Dice;
 
 public class Beastiary {
@@ -28,8 +30,12 @@ public class Beastiary {
 
     /**
      * Add one beast to the Beastiary
+     *
+     * @throws IllegalArgumentException if Beast is not valid for combat encounters
      */
     public Beast save(Beast b) {
+
+        Encounter.validate(b); // validate for sanity once
         allBeasts.add(b);
 
         String cr = b.getChallengeRating();
@@ -64,6 +70,10 @@ public class Beastiary {
             return beasts.get(0);
         }
         return beasts.get(Dice.range(beasts.size()));
+    }
+
+    public EncounterBuilder buildEncounter() {
+        return new EncounterBuilder(this);
     }
 
     public String toString() {

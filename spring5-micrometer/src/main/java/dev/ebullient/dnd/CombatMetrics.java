@@ -18,8 +18,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import dev.ebullient.dnd.combat.Encounter;
-import dev.ebullient.dnd.combat.Encounter.AttackResult;
+import dev.ebullient.dnd.combat.Encounter.AttackEvent;
 import dev.ebullient.dnd.combat.Encounter.RoundResult;
+import dev.ebullient.dnd.mechanics.Dice;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tags;
 import io.micrometer.core.instrument.Timer;
@@ -33,6 +34,7 @@ class CombatMetrics {
 
     public CombatMetrics(MeterRegistry registry) {
         this.registry = registry;
+        Dice.setMonitor((k, v) -> registry.summary("dice.rolls", "die", k, "face", label(v)).record((double) v));
     }
 
     public Sample startEncounter() {
@@ -57,23 +59,22 @@ class CombatMetrics {
     public void endRound(Sample sample, RoundResult result) {
 
         sample.stop(registry.timer("round.duration",
-                "numCombatants", label(result.size()),
                 "numSurvivors", label(result.getSurvivors().size()),
-                "numTypes", label(result.numTypes()),
+                "numCombatants", label(result.size()),
                 "sizeDelta", label(result.sizeDelta()),
                 "crDelta", label(result.crDelta())));
 
-        for (AttackResult ar : result.getEvents()) {
-            String hitOrMiss = (ar.wasCritical() ? "critical " : "")
-                    + (ar.wasSaved() ? "saved " : "")
-                    + (ar.wasHit() ? "hit" : "miss");
+        for (AttackEvent event : result.getEvents()) {
+            String hitOrMiss = (event.wasCritical() ? "critical " : "")
+                    + (event.wasSaved() ? "saved " : "")
+                    + (event.wasHit() ? "hit" : "miss");
 
             registry.summary("round.attacks",
-                    "attacker", ar.getAttacker().getName(),
-                    "attackType", ar.getType(),
-                    "attackName", ar.getName(),
+                    "attacker", event.getAttacker().getName(),
+                    "attackType", event.getType(),
+                    "attackName", event.getName(),
                     "hitOrMiss", hitOrMiss)
-                    .record((double) ar.getDamage());
+                    .record((double) event.getDamageAmount());
         }
     }
 

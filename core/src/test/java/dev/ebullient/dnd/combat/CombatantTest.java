@@ -16,7 +16,7 @@ package dev.ebullient.dnd.combat;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import dev.ebullient.dnd.MockBeast;
+import dev.ebullient.dnd.beastiary.MockBeast;
 
 public class CombatantTest {
 

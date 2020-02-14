@@ -29,7 +29,7 @@ public class Combatant {
     final int initiative;
 
     int hitPoints;
-    double maxHitPoints;
+    final double maxHitPoints;
 
     Condition condition;
 
@@ -42,7 +42,7 @@ public class Combatant {
         this.maxHitPoints = (double) hitPoints;
     }
 
-    public Combatant(Beast b, int initiative, int startingHitPoints) {
+    Combatant(Beast b, int initiative, int startingHitPoints) {
         this.beast = b;
         this.method = Dice.Method.USE_AVERAGE;
         this.initiative = initiative;
@@ -72,11 +72,18 @@ public class Combatant {
     }
 
     public int getMaxHitPoints() {
+        if (condition != null) {
+            return (int) maxHitPoints - condition.getMaxHitPointsDecrease();
+        }
         return (int) maxHitPoints;
     }
 
     public int getRelativeHealth() {
-        return (int) ((hitPoints / maxHitPoints) * 100);
+        double effectiveMax = maxHitPoints;
+        if (condition != null) {
+            effectiveMax -= condition.getMaxHitPointsDecrease();
+        }
+        return (int) ((hitPoints / effectiveMax) * 100);
     }
 
     public boolean isAlive() {
@@ -126,22 +133,22 @@ public class Combatant {
     }
 
     Dice.Constraint withConstraint(Ability ability) {
-        if (condition != null && condition.disadvantage.contains(ability)) {
-            return Dice.Constraint.DISADVANTAGE;
+        if (condition != null) {
+            return condition.getAbilityCheckConstraint(ability);
         }
         return Dice.Constraint.NONE;
     }
 
-    Dice.Constraint rollOnAttack() {
+    Dice.Constraint getAttackConstraint() {
         if (condition != null) {
-            return condition.onAttack;
+            return condition.getAttackConstraint();
         }
         return Dice.Constraint.NONE;
     }
 
-    Dice.Constraint rollAsTarget() {
+    Dice.Constraint getTargetConstraint() {
         if (condition != null) {
-            return condition.asTarget;
+            return condition.getTargetConstraint();
         }
         return Dice.Constraint.NONE;
     }

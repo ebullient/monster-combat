@@ -300,12 +300,10 @@ public class ConvertHtmlToJson {
                             MonsterDamage d = new MonsterDamage();
                             d.setAmount(m.group(1).replaceAll("\\s+", ""));
                             d.setType(m.group(2).trim());
+                            d.setDescription(s);
                             damage.add(d);
                         } else if (s.contains("cursed")) {
-                            MonsterDamage d = new MonsterDamage();
-                            d.setType("cursed");
-                            d.setAmount("");
-                            d.setDisadvantage(getDisadvantage(toLower(all)));
+                            MonsterDamage d = parseDamage(all, a);
                             damage.add(d);
                         } else {
                             log("Unexpected Hit definition: " + s);
@@ -335,6 +333,7 @@ public class ConvertHtmlToJson {
                 }
 
                 a.setDamage(damage.get(0));
+                a.setDescription(all);
                 attacks.put(sanitizeAttack(name, true), a);
             } else if (all.contains("Recharge")) {
                 String name = segments[0];
@@ -343,6 +342,7 @@ public class ConvertHtmlToJson {
                 if (d != null) {
                     a.setName(name.replaceAll("\\(.*", "").trim());
                     a.setDamage(d);
+                    a.setDescription(all);
                     attacks.put(sanitizeAttack(name, true), a);
                 }
             }
@@ -357,24 +357,22 @@ public class ConvertHtmlToJson {
 
     private MonsterDamage parseDamage(String s, MonsterAttack a) {
         MonsterDamage d = new MonsterDamage();
+        d.setDescription(s);
+
+        if (s.contains("for 1 minute")) {
+            d.setDuration(10);
+        } else if (s.contains("for 1 hour")) {
+            d.setDuration(60);
+        } else if (s.contains("until the end of the mouther's next turn")) {
+            d.setDuration(1);
+        }
+
         Matcher m1 = DC.matcher(s);
         if (m1.find()) {
             if (a == null) {
                 d.setSavingThrow(Ability.convert(m1.group(2)) + "(" + m1.group(1) + ")");
             } else {
                 a.setSavingThrow(Ability.convert(m1.group(2)) + "(" + m1.group(1) + ")");
-            }
-
-            if (s.contains("for 1 minute")) {
-                d.setDuration(10);
-            }
-
-            if (s.contains("for 1 hour")) {
-                d.setDuration(600);
-            }
-
-            if (s.contains("until the end of the mouther's next turn")) {
-                d.setDuration(1);
             }
 
             Matcher m2 = HIT.matcher(s);
@@ -410,6 +408,11 @@ public class ConvertHtmlToJson {
                 log("Unexpected DC damage definition: " + s);
                 throw new IllegalArgumentException();
             }
+        } else if (s.contains("cursed")) {
+            d.setType("cursed");
+            d.setAmount("");
+            d.setDisadvantage(getDisadvantage(toLower(s)));
+            return d;
         } else {
             log("Different kind of DC check: " + s);
         }

@@ -15,15 +15,18 @@
         "name" : "Life Drain",
         "melee" : true,
         "attackModifier" : 6,
+        "description" : "Life Drain. Melee Weapon Attack: +6 to hit, reach 5 ft., one creature. Hit: 21 (4d8 + 3) necrotic damage. The target must succeed on a DC 14 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0.",
         "damage" : {
           "type" : "necrotic",
           "amount" : "21(4d8+3)",
-          "duration" : 0
+          "duration" : 0,
+          "description" : "Hit: 21 (4d8 + 3) necrotic damage"
         },
         "additionalEffect" : {
           "type" : "hpdrain",
           "savingThrow" : "CON(14)",
-          "duration" : 0
+          "duration" : 0,
+          "description" : "The target must succeed on a DC 14 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken"
         }
       }
     },

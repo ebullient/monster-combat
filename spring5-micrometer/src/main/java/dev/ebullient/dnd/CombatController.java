@@ -13,9 +13,6 @@
  */
 package dev.ebullient.dnd;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.ebullient.dnd.beastiary.Beast;
 import dev.ebullient.dnd.beastiary.Beastiary;
 import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.Encounter.RoundResult;
@@ -48,31 +44,30 @@ public class CombatController {
     }
 
     @Timed
+    @GetMapping(path = "/any", produces = "application/json")
+    private Publisher<RoundResult> any() {
+        return go(TargetSelector.SelectAtRandom, Dice.Method.ROLL, Dice.range(5) + 2);
+    }
+
+    @Timed
     @GetMapping(path = "/faceoff", produces = "application/json")
     private Publisher<RoundResult> faceoff() {
-
-        List<Beast> monsters = new ArrayList<>();
-        monsters.add(beastiary.findOne());
-        monsters.add(beastiary.findOne());
-
-        return go(TargetSelector.SelectAtRandom, monsters);
+        return go(TargetSelector.SelectAtRandom, Dice.Method.ROLL, 2);
     }
 
     @Timed
     @GetMapping(path = "/melee", produces = "application/json")
     private Publisher<RoundResult> melee() {
-
-        List<Beast> monsters = new ArrayList<>();
-        int n = Dice.range(4) + 3;
-        for (int i = 0; i < n; i++) {
-            monsters.add(beastiary.findOne());
-        }
-
-        return go(TargetSelector.SelectAtRandom, monsters);
+        return go(TargetSelector.SelectAtRandom, Dice.Method.ROLL, Dice.range(4) + 3);
     }
 
-    Publisher<RoundResult> go(TargetSelector selector, List<Beast> monsters) {
-        Encounter encounter = new Encounter(monsters, selector, Dice.Method.ROLL);
+    Publisher<RoundResult> go(TargetSelector selector, Dice.Method method, int howMany) {
+
+        Encounter encounter = beastiary.buildEncounter()
+                .setHowMany(howMany)
+                .setTargetSelector(selector)
+                .setMethod(method)
+                .build();
 
         return Flux.push(emitter -> {
             Sample eSample = metrics.startEncounter();

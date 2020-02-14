@@ -26,6 +26,7 @@ public class MonsterAttack implements Attack {
     boolean melee;
     int attackModifier;
     String savingThrow;
+    String description;
     MonsterDamage damage;
     MonsterDamage additionalEffect;
 
@@ -75,6 +76,14 @@ public class MonsterAttack implements Attack {
 
     public void setAdditionalEffect(MonsterDamage additionalEffect) {
         this.additionalEffect = additionalEffect;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String toString() {

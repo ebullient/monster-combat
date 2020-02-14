@@ -21,14 +21,16 @@ import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Dice;
 
 public class Condition {
-    Dice.Constraint onAttack;
-    Dice.Constraint asTarget;
+    Dice.Constraint onAttack = Dice.Constraint.NONE;
+    Dice.Constraint asTarget = Dice.Constraint.NONE;
     final Set<Ability> advantage = new HashSet<>();
     final Set<Ability> disadvantage = new HashSet<>();
+
     int duration;
     boolean singleAttack;
+    int maxHitPointsDecrease;
 
-    Condition disadvantage(List<Ability> abilities) {
+    Condition setDisadvantage(List<Ability> abilities) {
         if (abilities != null && !abilities.isEmpty()) {
             for (Ability a : abilities) {
                 this.disadvantage.add(a);
@@ -37,30 +39,58 @@ public class Condition {
         return this;
     }
 
-    Condition disadvantage(Ability... abilities) {
+    Condition setDisadvantage(Ability... abilities) {
         for (Ability a : abilities) {
             this.disadvantage.add(a);
         }
         return this;
     }
 
-    Condition forDuration(int duration) {
+    Condition setForDuration(int duration) {
         this.duration = duration;
         return this;
     }
 
-    Condition onAttack(Dice.Constraint constraint) {
+    Condition setAttackRollConstraint(Dice.Constraint constraint) {
         this.onAttack = constraint;
         return this;
     }
 
-    Condition asTarget(Dice.Constraint constraint) {
+    Condition setTargetRollConstraint(Dice.Constraint constraint) {
         this.asTarget = constraint;
         return this;
     }
 
-    public Condition singleAttack() {
+    Condition setSingleAttackLimit() {
         this.singleAttack = true;
         return this;
     }
+
+    void setMaxHitPointsDecrease(int damageAmount) {
+        this.maxHitPointsDecrease = damageAmount;
+    }
+
+    Dice.Constraint getAbilityCheckConstraint(Ability ability) {
+        if (disadvantage.contains(ability)) {
+            return Dice.Constraint.DISADVANTAGE;
+        }
+        return Dice.Constraint.NONE;
+    }
+
+    Dice.Constraint getAttackConstraint() {
+        return onAttack;
+    }
+
+    Dice.Constraint getTargetConstraint() {
+        return asTarget;
+    }
+
+    boolean isSingleAttackLimit() {
+        return singleAttack;
+    }
+
+    int getMaxHitPointsDecrease() {
+        return maxHitPointsDecrease;
+    }
+
 }

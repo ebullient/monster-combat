@@ -13,35 +13,31 @@
  */
 package dev.ebullient.dnd.combat;
 
-import java.util.List;
-import java.util.regex.Pattern;
-
 import dev.ebullient.dnd.mechanics.Ability;
+import dev.ebullient.dnd.mechanics.Dice;
+import dev.ebullient.dnd.mechanics.Dice.Constraint;
 
-public interface Attack {
-    public Pattern SAVE = Pattern.compile("([A-Z]+)\\(([-+0-9]+)\\)");
+public class MockCondition extends Condition {
 
-    public interface Damage {
-        String getAmount();
+    Dice.Constraint useConstraint;
 
-        String getType();
-
-        List<Ability> getDisadvantage();
-
-        String getSavingThrow();
-
-        int getDuration();
+    MockCondition(Dice.Constraint useConstraint) {
+        this.useConstraint = useConstraint;
     }
 
-    String getName();
+    @Override
+    Constraint getAbilityCheckConstraint(Ability ability) {
+        return useConstraint;
+    }
 
-    Damage getDamage();
+    @Override
+    Constraint getAttackConstraint() {
+        return useConstraint;
+    }
 
-    String getDescription();
+    @Override
+    Constraint getTargetConstraint() {
+        return useConstraint;
+    }
 
-    int getAttackModifier();
-
-    String getSavingThrow();
-
-    Damage getAdditionalEffect();
 }

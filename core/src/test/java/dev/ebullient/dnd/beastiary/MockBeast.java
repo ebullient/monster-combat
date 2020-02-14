@@ -11,11 +11,10 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd;
+package dev.ebullient.dnd.beastiary;
 
 import java.util.List;
 
-import dev.ebullient.dnd.beastiary.Beast;
 import dev.ebullient.dnd.combat.Attack;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Size;

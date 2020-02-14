@@ -33,5 +33,5 @@ services:
     container_name: spring5-micrometer
     image: ebullient/dnd-mc-spring5-micrometer
     ports:
-      - "8080:8080"
+      - "8081:8080"
 

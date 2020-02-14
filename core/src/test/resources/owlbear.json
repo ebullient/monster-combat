@@ -18,20 +18,24 @@
         "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
+        "description" : "Claws. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) slashing damage.",
         "damage" : {
           "type" : "slashing",
           "amount" : "14(2d8+5)",
-          "duration" : 0
+          "duration" : 0,
+          "description" : "Hit: 14 (2d8 + 5) slashing damage"
         }
       },
       "beak" : {
         "name" : "Beak",
         "melee" : true,
         "attackModifier" : 7,
+        "description" : "Beak. Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 10 (1d10 + 5) piercing damage.",
         "damage" : {
           "type" : "piercing",
           "amount" : "10(1d10+5)",
-          "duration" : 0
+          "duration" : 0,
+          "description" : "Hit: 10 (1d10 + 5) piercing damage"
         }
       }
     },

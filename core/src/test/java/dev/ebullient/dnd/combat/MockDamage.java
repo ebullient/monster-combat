@@ -11,11 +11,10 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd;
+package dev.ebullient.dnd.combat;
 
 import java.util.List;
 
-import dev.ebullient.dnd.combat.Attack;
 import dev.ebullient.dnd.mechanics.Ability;
 
 public class MockDamage implements Attack.Damage {
@@ -25,6 +24,9 @@ public class MockDamage implements Attack.Damage {
     public String savingThrow;
     public List<Ability> disadvantage;
     public int duration;
+
+    public MockDamage() {
+    }
 
     public MockDamage(String type, String amount) {
         this.type = type;

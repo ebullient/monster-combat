@@ -26,9 +26,10 @@ import dev.ebullient.dnd.mechanics.Ability;
 public class MonsterDamage implements Attack.Damage {
     String type;
     String amount;
-    List<Ability> disadvantage;
     String savingThrow;
+    List<Ability> disadvantage;
     int duration;
+    String description;
 
     public String getType() {
         return type;
@@ -62,6 +63,22 @@ public class MonsterDamage implements Attack.Damage {
         this.savingThrow = savingThrow;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (amount != null && !amount.isEmpty()) {
@@ -75,13 +92,5 @@ public class MonsterDamage implements Attack.Damage {
             sb.append("|").append("-").append(disadvantage);
         }
         return sb.toString();
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 }

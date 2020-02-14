@@ -347,4 +347,5 @@ public class Monster implements Beast {
         int random = Dice.range(actions.size());
         return keySet.get(random);
     }
+
 }

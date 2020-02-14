@@ -171,6 +171,7 @@ public class MonsterTest {
         Assert.assertEquals("cursed", d.type);
         Assert.assertEquals(1, d.getDisadvantage().size());
         Assert.assertEquals(Ability.WIS, d.getDisadvantage().get(0));
+        Assert.assertEquals("target is cursed for one hour", 60, d.duration);
     }
 
     @Test

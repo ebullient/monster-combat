@@ -15,7 +15,6 @@ package dev.ebullient.dnd.combat;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import dev.ebullient.dnd.mechanics.Dice;
 
@@ -24,11 +23,11 @@ import dev.ebullient.dnd.mechanics.Dice;
  */
 public interface TargetSelector {
 
-    public Combatant chooseTarget(Combatant p, Set<Combatant> list);
+    public Combatant chooseTarget(Combatant p, List<Combatant> list);
 
     public static final TargetSelector SelectByHighestRelativeHealth = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, Set<Combatant> initiativeOrder) {
+        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
 
@@ -43,7 +42,7 @@ public interface TargetSelector {
 
     public static final TargetSelector SelectByLowestRelativeHealth = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, Set<Combatant> initiativeOrder) {
+        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
@@ -59,7 +58,7 @@ public interface TargetSelector {
 
     public static final TargetSelector SelectByHighestChallengeRating = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, Set<Combatant> initiativeOrder) {
+        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
@@ -73,7 +72,7 @@ public interface TargetSelector {
 
     public static final TargetSelector SelectByLowestChallengeRating = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, Set<Combatant> initiativeOrder) {
+        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {
@@ -89,7 +88,7 @@ public interface TargetSelector {
 
     public static final TargetSelector SelectAtRandom = new TargetSelector() {
 
-        public Combatant chooseTarget(Combatant p, Set<Combatant> initiativeOrder) {
+        public Combatant chooseTarget(Combatant p, List<Combatant> initiativeOrder) {
             List<Combatant> targets = new ArrayList<>(initiativeOrder);
             targets.remove(p);
             if (targets.isEmpty()) {

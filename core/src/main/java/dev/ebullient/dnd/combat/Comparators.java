@@ -27,6 +27,10 @@ public interface Comparators {
                 // dex is already in the initiative score in a way, but .. use that as second factor (descending)
                 if (o2.getAbilityModifier(Ability.DEX) == o1.getAbilityModifier(Ability.DEX)) {
                     // if all else is the same, sort by name ascending
+                    if (o2.getName().equals(o1.getName())) {
+                        // keep all!!
+                        return System.identityHashCode(o2) - System.identityHashCode(o1);
+                    }
                     return o1.getName().compareTo(o2.getName());
                 }
                 return o2.getAbilityModifier(Ability.DEX) - o1.getAbilityModifier(Ability.DEX);
@@ -42,7 +46,11 @@ public interface Comparators {
             if (o2.getCR() == o1.getCR()) {
                 // Then sort by max hit points descending
                 if (o2.getMaxHitPoints() == o1.getMaxHitPoints()) {
-                    // finally, sort by name ascending
+                    // if all else is the same, sort by name ascending
+                    if (o2.getName().equals(o1.getName())) {
+                        // keep all!!
+                        return System.identityHashCode(o2) - System.identityHashCode(o1);
+                    }
                     return o1.getName().compareTo(o2.getName());
                 }
                 return o2.getMaxHitPoints() - o1.getMaxHitPoints();
@@ -58,7 +66,11 @@ public interface Comparators {
             if (o2.getRelativeHealth() == o1.getRelativeHealth()) {
                 // Then sort by max hit points descending
                 if (o2.getMaxHitPoints() == o1.getMaxHitPoints()) {
-                    // finally, sort by name ascending
+                    // if all else is the same, sort by name ascending
+                    if (o2.getName().equals(o1.getName())) {
+                        // keep all!!
+                        return System.identityHashCode(o2) - System.identityHashCode(o1);
+                    }
                     return o1.getName().compareTo(o2.getName());
                 }
                 return o2.getMaxHitPoints() - o1.getMaxHitPoints();
