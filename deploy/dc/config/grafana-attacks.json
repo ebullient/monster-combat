@@ -64,6 +64,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
+  "iteration": 1581692485443,
   "links": [],
   "panels": [
     {
@@ -743,7 +744,7 @@
             "h": 8,
             "w": 4,
             "x": 0,
-            "y": 2
+            "y": 10
           },
           "id": 4,
           "options": {},
@@ -820,7 +821,7 @@
             "h": 4,
             "w": 8,
             "x": 4,
-            "y": 2
+            "y": 10
           },
           "id": 31,
           "options": {
@@ -854,7 +855,7 @@
           "pluginVersion": "6.6.0",
           "targets": [
             {
-              "expr": "sum by (hitOrMiss)(rate(round_attacks_count{job=\"$job\"}[20m]))",
+              "expr": "sum by (hitOrMiss)(rate(round_attacks_count{job=\"$job\"}[30m]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{hitOrMiss}}",
@@ -863,7 +864,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Frequency of hit or miss : rate[20m]",
+          "title": "Frequency of hit or miss : rate[30m]",
           "type": "bargauge"
         },
         {
@@ -879,7 +880,7 @@
             "h": 8,
             "w": 11,
             "x": 12,
-            "y": 2
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 9,
@@ -912,7 +913,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (hitOrMiss)(increase(round_attacks_sum{job=\"$job\"}[20m])) / sum by (hitOrMiss)(increase(round_attacks_count{job=\"$job\"}[20m]))",
+              "expr": "sum by (hitOrMiss)(increase(round_attacks_sum{job=\"$job\"}[30m])) / sum by (hitOrMiss)(increase(round_attacks_count{job=\"$job\"}[30m]))",
               "legendFormat": "{{hitOrMiss}}",
               "refId": "B"
             }
@@ -921,7 +922,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Average damage by hit or miss : increase[20m]",
+          "title": "Average damage by hit or miss : increase[30m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -964,7 +965,7 @@
             "h": 4,
             "w": 8,
             "x": 4,
-            "y": 6
+            "y": 14
           },
           "id": 32,
           "options": {
@@ -998,7 +999,7 @@
           "pluginVersion": "6.6.0",
           "targets": [
             {
-              "expr": "sum by (hitOrMiss)(increase(round_attacks_sum{job=\"$job\"}[20m])) / sum by (hitOrMiss)(increase(round_attacks_count{job=\"$job\"}[20m]))",
+              "expr": "sum by (hitOrMiss)(increase(round_attacks_sum{job=\"$job\"}[30m])) / sum by (hitOrMiss)(increase(round_attacks_count{job=\"$job\"}[30m]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{hitOrMiss}}",
@@ -1007,7 +1008,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Mean average damage : increase[20m]",
+          "title": "Mean average damage : increase[30m]",
           "type": "bargauge"
         }
       ],
@@ -1023,7 +1024,7 @@
         "x": 0,
         "y": 2
       },
-      "id": 6,
+      "id": 36,
       "panels": [
         {
           "columns": [
@@ -1035,8 +1036,8 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 13,
-            "w": 6,
+            "h": 19,
+            "w": 5,
             "x": 0,
             "y": 3
           },
@@ -1110,6 +1111,52 @@
           "type": "table"
         },
         {
+          "datasource": "${DS_PROMETHEUS}",
+          "gridPos": {
+            "h": 9,
+            "w": 18,
+            "x": 5,
+            "y": 3
+          },
+          "id": 10,
+          "options": {
+            "displayMode": "basic",
+            "fieldOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "defaults": {
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              "overrides": [],
+              "values": false
+            },
+            "orientation": "horizontal",
+            "showUnfilled": true
+          },
+          "pluginVersion": "6.6.0",
+          "targets": [
+            {
+              "expr": "sum by (attackType)(increase(round_attacks_count{job=\"$job\"}[30m]))",
+              "legendFormat": "{{attackType}}",
+              "refId": "B"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Mean frequency of attack type : increase[30m]",
+          "type": "bargauge"
+        },
+        {
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
@@ -1118,13 +1165,13 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 13,
+            "h": 10,
             "w": 18,
-            "x": 6,
-            "y": 3
+            "x": 5,
+            "y": 12
           },
           "hiddenSeries": false,
-          "id": 10,
+          "id": 33,
           "legend": {
             "alignAsTable": true,
             "avg": false,
@@ -1155,7 +1202,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (attackType)(increase(round_attacks_count{job=\"$job\"}[20m]))",
+              "expr": "sum by (attackType)(increase(round_attacks_count{job=\"$job\"}[30m]))",
               "legendFormat": "{{attackType}}",
               "refId": "B"
             }
@@ -1164,7 +1211,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Frequency of attack type : increase[20m], log(base 2)",
+          "title": "Frequency of attack type : increase[30m], log(base 2)",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1200,7 +1247,22 @@
             "align": false,
             "alignLevel": null
           }
-        },
+        }
+      ],
+      "title": "Attack frequency  by type",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": "${DS_PROMETHEUS}",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 6,
+      "panels": [
         {
           "columns": [
             {
@@ -1211,10 +1273,10 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 12,
-            "w": 6,
+            "h": 19,
+            "w": 5,
             "x": 0,
-            "y": 16
+            "y": 4
           },
           "id": 27,
           "options": {},
@@ -1280,6 +1342,56 @@
           "type": "table"
         },
         {
+          "datasource": "${DS_PROMETHEUS}",
+          "gridPos": {
+            "h": 9,
+            "w": 18,
+            "x": 5,
+            "y": 4
+          },
+          "id": 24,
+          "options": {
+            "displayMode": "basic",
+            "fieldOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "defaults": {
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [],
+              "values": false
+            },
+            "orientation": "horizontal",
+            "showUnfilled": true
+          },
+          "pluginVersion": "6.6.0",
+          "targets": [
+            {
+              "expr": "sum by (attackType)(increase(round_attacks_sum{job=\"$job\"}[30m])) / sum by (attackType)(increase(round_attacks_count{job=\"$job\"}[30m]))",
+              "legendFormat": "{{attackType}}",
+              "refId": "B"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Mean average amage by attack type : increase[30m]",
+          "type": "bargauge"
+        },
+        {
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
@@ -1288,13 +1400,13 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 12,
+            "h": 10,
             "w": 18,
-            "x": 6,
-            "y": 16
+            "x": 5,
+            "y": 13
           },
           "hiddenSeries": false,
-          "id": 24,
+          "id": 34,
           "legend": {
             "alignAsTable": true,
             "avg": false,
@@ -1325,7 +1437,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (attackType)(increase(round_attacks_sum{job=\"$job\"}[20m])) / sum by (attackType)(increase(round_attacks_count{job=\"$job\"}[20m]))",
+              "expr": "sum by (attackType)(increase(round_attacks_sum{job=\"$job\"}[30m])) / sum by (attackType)(increase(round_attacks_count{job=\"$job\"}[30m]))",
               "legendFormat": "{{attackType}}",
               "refId": "B"
             }
@@ -1334,7 +1446,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Damage by attack type : increase[20m], log(base 2)",
+          "title": "Average damage by attack type : increase[30m], log(base 2)",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1372,7 +1484,7 @@
           }
         }
       ],
-      "title": "Attacks by type",
+      "title": "Attack damage by type",
       "type": "row"
     },
     {
@@ -1382,7 +1494,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 3
+        "y": 4
       },
       "id": 23,
       "panels": [
@@ -1399,7 +1511,7 @@
             "h": 14,
             "w": 7,
             "x": 0,
-            "y": 4
+            "y": 5
           },
           "id": 25,
           "options": {},
@@ -1452,7 +1564,7 @@
           ],
           "targets": [
             {
-              "expr": "sum by (attacker)(round_attacks_count{job=\"$job\"})",
+              "expr": "sum by (attacker)(increase(round_attacks_count{job=\"$job\"}[3h]))",
               "instant": true,
               "legendFormat": "{{attacker}}",
               "refId": "B"
@@ -1460,7 +1572,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Number of attacks",
+          "title": "Number of attacks : increase[3h]",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
@@ -1477,7 +1589,7 @@
             "h": 14,
             "w": 7,
             "x": 7,
-            "y": 4
+            "y": 5
           },
           "id": 26,
           "options": {},
@@ -1530,7 +1642,7 @@
           ],
           "targets": [
             {
-              "expr": "sum by (attacker)(round_attacks_sum{job=\"$job\"}) / sum by (attacker)(round_attacks_count{job=\"$job\"})",
+              "expr": "sum by (attacker)(increase(round_attacks_sum{job=\"$job\"}[3h])) / sum by (attacker)(increase(round_attacks_count{job=\"$job\"}[3h]))",
               "instant": true,
               "legendFormat": "{{attacker}}",
               "refId": "A"
@@ -1538,7 +1650,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Damage per attack",
+          "title": "Average damage per attack : increase[3h]",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
@@ -1555,7 +1667,7 @@
             "h": 14,
             "w": 8,
             "x": 14,
-            "y": 4
+            "y": 5
           },
           "id": 28,
           "options": {},
@@ -1608,7 +1720,7 @@
           ],
           "targets": [
             {
-              "expr": "sum by (attacker)(round_attacks_sum{job=\"$job\"})",
+              "expr": "sum by (attacker)(increase(round_attacks_sum{job=\"$job\"}[3h]))",
               "instant": true,
               "legendFormat": "{{attacker}}",
               "refId": "A"
@@ -1616,7 +1728,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Cumulative damage",
+          "title": "Cumulative damage : increase[3h]",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
@@ -1630,9 +1742,9 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 14,
-            "w": 12,
+            "w": 11,
             "x": 0,
-            "y": 18
+            "y": 19
           },
           "hiddenSeries": false,
           "id": 29,
@@ -1661,7 +1773,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (attacker)(increase(round_attacks_sum{job=\"$job\"}[15m])) / sum by (attacker)(increase(round_attacks_count{job=\"$job\"}[15m]))",
+              "expr": "sum by (attacker)(increase(round_attacks_sum{job=\"$job\"}[3h])) / sum by (attacker)(increase(round_attacks_count{job=\"$job\"}[3h]))",
               "instant": false,
               "legendFormat": "{{attacker}}",
               "refId": "A"
@@ -1671,7 +1783,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Damage per attack",
+          "title": "Damage per attack : increase[3h]",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -1724,9 +1836,9 @@
           "datasource": "${DS_PROMETHEUS}",
           "gridPos": {
             "h": 14,
-            "w": 12,
-            "x": 12,
-            "y": 18
+            "w": 11,
+            "x": 11,
+            "y": 19
           },
           "heatmap": {},
           "hideZeroBuckets": false,
@@ -1739,7 +1851,7 @@
           "reverseYBuckets": false,
           "targets": [
             {
-              "expr": "sum by (attacker)(increase(round_attacks_sum{job=\"$job\"}[15m])) / sum by (attacker)(increase(round_attacks_count{job=\"$job\"}[15m]))",
+              "expr": "sum by (attacker)(increase(round_attacks_sum{job=\"$job\"}[3h])) / sum by (attacker)(increase(round_attacks_count{job=\"$job\"}[3h]))",
               "instant": false,
               "legendFormat": "{{attacker}}",
               "refId": "A"
@@ -1747,7 +1859,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Damage per attack",
+          "title": "Damage per attack : increase[3h]",
           "tooltip": {
             "show": true,
             "showHistogram": false
@@ -1829,5 +1941,5 @@
   "timezone": "",
   "title": "Attacks",
   "uid": "0d-fhmwZz",
-  "version": 12
+  "version": 3
 }

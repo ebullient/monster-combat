@@ -58,6 +58,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
+  "iteration": 1581697149758,
   "links": [],
   "panels": [
     {
@@ -1376,5 +1377,5 @@
   "timezone": "",
   "title": "Encounters",
   "uid": "91ABnmQWz",
-  "version": 16
+  "version": 1
 }
