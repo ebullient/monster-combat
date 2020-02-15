@@ -34,8 +34,8 @@ import reactor.core.publisher.Flux;
 public class CombatController {
     static final Logger logger = LoggerFactory.getLogger(CombatController.class);
 
-    private Beastiary beastiary;
-    private CombatMetrics metrics;
+    final Beastiary beastiary;
+    final CombatMetrics metrics;
 
     public CombatController(Beastiary beastiary, CombatMetrics metrics) {
         this.beastiary = beastiary;
@@ -45,28 +45,28 @@ public class CombatController {
 
     @Timed
     @GetMapping(path = "/any", produces = "application/json")
-    private Publisher<RoundResult> any() {
-        return go(TargetSelector.SelectAtRandom, Dice.Method.ROLL, Dice.range(5) + 2);
+    Publisher<RoundResult> any() {
+        return go(Dice.range(5) + 2);
     }
 
     @Timed
     @GetMapping(path = "/faceoff", produces = "application/json")
-    private Publisher<RoundResult> faceoff() {
-        return go(TargetSelector.SelectAtRandom, Dice.Method.ROLL, 2);
+    Publisher<RoundResult> faceoff() {
+        return go(2);
     }
 
     @Timed
     @GetMapping(path = "/melee", produces = "application/json")
-    private Publisher<RoundResult> melee() {
-        return go(TargetSelector.SelectAtRandom, Dice.Method.ROLL, Dice.range(4) + 3);
+    Publisher<RoundResult> melee() {
+        return go(Dice.range(4) + 3);
     }
 
-    Publisher<RoundResult> go(TargetSelector selector, Dice.Method method, int howMany) {
+    Publisher<RoundResult> go(int howMany) {
 
         Encounter encounter = beastiary.buildEncounter()
                 .setHowMany(howMany)
-                .setTargetSelector(selector)
-                .setMethod(method)
+                .setTargetSelector(TargetSelector.SelectAtRandom)
+                .setMethod(Dice.Method.ROLL)
                 .build();
 
         return Flux.push(emitter -> {
