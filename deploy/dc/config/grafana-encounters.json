@@ -11,12 +11,6 @@
   ],
   "__requires": [
     {
-      "type": "panel",
-      "id": "bargauge",
-      "name": "Bar Gauge",
-      "version": ""
-    },
-    {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
@@ -58,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1581697149758,
+  "iteration": 1581874898052,
   "links": [],
   "panels": [
     {
@@ -70,7 +64,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 14,
+      "id": 28,
       "panels": [
         {
           "cacheTimeout": null,
@@ -83,8 +77,8 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 11,
-            "w": 5,
+            "h": 7,
+            "w": 4,
             "x": 0,
             "y": 1
           },
@@ -162,59 +156,6 @@
           "type": "table"
         },
         {
-          "cacheTimeout": null,
-          "datasource": "${DS_PROMETHEUS}",
-          "description": "",
-          "gridPos": {
-            "h": 5,
-            "w": 19,
-            "x": 5,
-            "y": 1
-          },
-          "id": 20,
-          "links": [],
-          "options": {
-            "displayMode": "basic",
-            "fieldOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": [],
-              "values": false
-            },
-            "orientation": "horizontal",
-            "showUnfilled": true
-          },
-          "pluginVersion": "6.6.0",
-          "targets": [
-            {
-              "expr": "sum by (numCombatants)(increase(encounter_rounds_count{job=\"$job\"}[30m]))",
-              "legendFormat": "{{numCombatants}} combatants",
-              "refId": "B"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Mean number of encounters by number of combatants : increase[30m]",
-          "type": "bargauge"
-        },
-        {
           "aliasColors": {},
           "bars": false,
           "cacheTimeout": null,
@@ -222,16 +163,16 @@
           "dashes": false,
           "datasource": "${DS_PROMETHEUS}",
           "description": "",
-          "fill": 0,
+          "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 6,
+            "h": 7,
             "w": 19,
-            "x": 5,
-            "y": 6
+            "x": 4,
+            "y": 1
           },
           "hiddenSeries": false,
-          "id": 25,
+          "id": 20,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -240,7 +181,7 @@
             "min": false,
             "rightSide": true,
             "show": true,
-            "total": true,
+            "total": false,
             "values": true
           },
           "lines": true,
@@ -252,12 +193,12 @@
           },
           "percentage": false,
           "pluginVersion": "6.6.0",
-          "pointradius": 1,
+          "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
@@ -270,7 +211,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Number of encounters by number of combatants : increase[30m]",
+          "title": "Encounters by number of combatants : increase[30m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -306,7 +247,22 @@
             "align": false,
             "alignLevel": null
           }
-        },
+        }
+      ],
+      "title": "Encounters by number of combatants",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": "${DS_PROMETHEUS}",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 14,
+      "panels": [
         {
           "cacheTimeout": null,
           "columns": [
@@ -318,10 +274,10 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 11,
-            "w": 5,
+            "h": 15,
+            "w": 4,
             "x": 0,
-            "y": 12
+            "y": 2
           },
           "id": 7,
           "links": [],
@@ -395,56 +351,96 @@
           "type": "table"
         },
         {
+          "aliasColors": {},
+          "bars": false,
           "cacheTimeout": null,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "fillGradient": 0,
           "gridPos": {
-            "h": 4,
+            "h": 7,
             "w": 19,
-            "x": 5,
-            "y": 12
+            "x": 4,
+            "y": 2
           },
+          "hiddenSeries": false,
           "id": 24,
-          "links": [],
-          "options": {
-            "displayMode": "basic",
-            "fieldOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": [],
-              "values": false
-            },
-            "orientation": "horizontal",
-            "showUnfilled": true
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
           },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
           "pluginVersion": "6.6.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (numCombatants)(increase(encounter_rounds_sum{job=\"$job\"}[30m])) / sum by (numCombatants)(increase(encounter_rounds_count[30m]))",
-              "legendFormat": "{{numCombatants}}",
+              "expr": "sum by (numCombatants)(increase(encounter_rounds_sum{job=\"$job\"}[30m]))",
+              "legendFormat": "{{numCombatants}} combatants",
               "refId": "B"
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
-          "title": "Mean average rounds/encounters by number of combatants : increase[30m]",
-          "type": "bargauge"
+          "title": "Rounds by number of combatants : increase[30m]",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
@@ -456,10 +452,10 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 7,
+            "h": 8,
             "w": 19,
-            "x": 5,
-            "y": 16
+            "x": 4,
+            "y": 9
           },
           "hiddenSeries": false,
           "id": 8,
@@ -471,7 +467,7 @@
             "min": false,
             "rightSide": true,
             "show": true,
-            "total": true,
+            "total": false,
             "values": true
           },
           "lines": true,
@@ -555,9 +551,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 2
       },
-      "id": 12,
+      "id": 30,
       "panels": [
         {
           "cacheTimeout": null,
@@ -570,10 +566,10 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 13,
-            "w": 5,
+            "h": 8,
+            "w": 4,
             "x": 0,
-            "y": 2
+            "y": 25
           },
           "id": 15,
           "links": [],
@@ -649,75 +645,22 @@
           "type": "table"
         },
         {
-          "cacheTimeout": null,
-          "datasource": "${DS_PROMETHEUS}",
-          "gridPos": {
-            "h": 5,
-            "w": 19,
-            "x": 5,
-            "y": 2
-          },
-          "id": 23,
-          "links": [],
-          "options": {
-            "displayMode": "basic",
-            "fieldOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": [],
-              "values": false
-            },
-            "orientation": "horizontal",
-            "showUnfilled": true
-          },
-          "pluginVersion": "6.6.0",
-          "targets": [
-            {
-              "expr": "sum by (sizeDelta)(increase(encounter_rounds_count{job=\"$job\"}[30m]))",
-              "legendFormat": "{{sizeDelta}}",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Mean number of encounters by sizeDelta : increase[30m]",
-          "type": "bargauge"
-        },
-        {
           "aliasColors": {},
           "bars": false,
           "cacheTimeout": null,
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_PROMETHEUS}",
-          "description": "",
-          "fill": 0,
+          "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 8,
             "w": 19,
-            "x": 5,
-            "y": 7
+            "x": 4,
+            "y": 25
           },
           "hiddenSeries": false,
-          "id": 16,
+          "id": 23,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -726,7 +669,7 @@
             "min": false,
             "rightSide": true,
             "show": true,
-            "total": true,
+            "total": false,
             "values": true
           },
           "lines": true,
@@ -738,25 +681,25 @@
           },
           "percentage": false,
           "pluginVersion": "6.6.0",
-          "pointradius": 1,
+          "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
               "expr": "sum by (sizeDelta)(increase(encounter_rounds_count{job=\"$job\"}[30m]))",
-              "legendFormat": "{{sizeDelta}} sizeDelta",
-              "refId": "B"
+              "legendFormat": "{{sizeDelta}}",
+              "refId": "A"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Number of encounters by sizeDelta : increase[30m]",
+          "title": "Encounters by sizeDelta : increase[30m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -792,7 +735,22 @@
             "align": false,
             "alignLevel": null
           }
-        },
+        }
+      ],
+      "title": "Encounters by difference in size",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": "${DS_PROMETHEUS}",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 12,
+      "panels": [
         {
           "cacheTimeout": null,
           "columns": [
@@ -804,10 +762,10 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 13,
-            "w": 5,
+            "h": 14,
+            "w": 4,
             "x": 0,
-            "y": 15
+            "y": 19
           },
           "id": 9,
           "links": [],
@@ -881,56 +839,103 @@
           "type": "table"
         },
         {
+          "aliasColors": {},
+          "bars": false,
           "cacheTimeout": null,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "${DS_PROMETHEUS}",
+          "description": "",
+          "fill": 1,
+          "fillGradient": 0,
           "gridPos": {
-            "h": 5,
+            "h": 6,
             "w": 19,
-            "x": 5,
-            "y": 15
+            "x": 4,
+            "y": 19
           },
+          "hiddenSeries": false,
           "id": 26,
-          "links": [],
-          "options": {
-            "displayMode": "basic",
-            "fieldOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": [],
-              "values": false
-            },
-            "orientation": "horizontal",
-            "showUnfilled": true
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
           },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
           "pluginVersion": "6.6.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (sizeDelta)(increase(encounter_rounds_sum{job=\"$job\"}[30m])) / sum by (sizeDelta)(increase(encounter_rounds_count{job=\"$job\"}[30m]))",
+              "expr": "sum by (sizeDelta)(increase(encounter_rounds_sum{job=\"$job\"}[30m]))",
               "legendFormat": "{{sizeDelta}}",
               "refId": "A"
+            },
+            {
+              "expr": "sum by (sizeDelta)(increase(encounter_rounds_sum{job=\"$job\", numCombatants=\"03\"}[30m]))",
+              "hide": true,
+              "legendFormat": "{{sizeDelta}}",
+              "refId": "B"
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
-          "title": "Mean average rounds/encounter by sizeDelta : increase[30m]",
-          "type": "bargauge"
+          "title": "Rounds by sizeDelta : increase[30m]",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
@@ -944,8 +949,8 @@
           "gridPos": {
             "h": 8,
             "w": 19,
-            "x": 5,
-            "y": 20
+            "x": 4,
+            "y": 25
           },
           "hiddenSeries": false,
           "id": 10,
@@ -957,7 +962,7 @@
             "min": false,
             "rightSide": true,
             "show": true,
-            "total": true,
+            "total": false,
             "values": true
           },
           "lines": true,
@@ -978,7 +983,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(encounter_rounds_sum{job=\"$job\"}[30m])) / sum(increase(encounter_rounds_count{job=\"$job\"}[30m]))",
+              "expr": "sum(increase(encounter_rounds_sum{job=\"$job\"}[1h])) / sum(increase(encounter_rounds_count{job=\"$job\"}[1h]))",
               "instant": false,
               "legendFormat": "Overall",
               "refId": "A"
@@ -993,7 +998,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Average rounds per encounter by sizeDelta : increase[30m]",
+          "title": "Average rounds/encounter by sizeDelta : increase[1h]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1032,295 +1037,6 @@
         }
       ],
       "title": "Rounds / Encounter by difference in size",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "datasource": "${DS_PROMETHEUS}",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 2
-      },
-      "id": 18,
-      "panels": [
-        {
-          "cacheTimeout": null,
-          "columns": [
-            {
-              "text": "Total",
-              "value": "total"
-            }
-          ],
-          "datasource": "${DS_PROMETHEUS}",
-          "fontSize": "80%",
-          "gridPos": {
-            "h": 27,
-            "w": 4,
-            "x": 0,
-            "y": 3
-          },
-          "id": 19,
-          "links": [],
-          "options": {},
-          "pageSize": null,
-          "pluginVersion": "6.6.0",
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": false
-          },
-          "styles": [
-            {
-              "alias": "Time",
-              "align": "auto",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "",
-              "align": "left",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "string",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "right",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "sum(encounter_rounds_count{job=\"$job\"})",
-              "format": "time_series",
-              "instant": true,
-              "legendFormat": "Overall",
-              "refId": "A"
-            },
-            {
-              "expr": "sum by (crDelta)(encounter_rounds_count{job=\"$job\"})",
-              "format": "time_series",
-              "instant": true,
-              "legendFormat": "{{crDelta}} crDelta",
-              "refId": "B"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Number of encounters",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "cacheTimeout": null,
-          "datasource": "${DS_PROMETHEUS}",
-          "description": "",
-          "gridPos": {
-            "h": 27,
-            "w": 8,
-            "x": 4,
-            "y": 3
-          },
-          "id": 6,
-          "links": [],
-          "options": {
-            "displayMode": "basic",
-            "fieldOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    }
-                  ]
-                }
-              },
-              "overrides": [],
-              "values": false
-            },
-            "orientation": "horizontal",
-            "showUnfilled": true
-          },
-          "pluginVersion": "6.6.0",
-          "targets": [
-            {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_count{job=\"$job\"}[30m]))",
-              "legendFormat": "{{crDelta}} crDelta",
-              "refId": "B"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Number of encounters : Mean increase[30m]",
-          "type": "bargauge"
-        },
-        {
-          "cacheTimeout": null,
-          "columns": [
-            {
-              "text": "Total",
-              "value": "total"
-            }
-          ],
-          "datasource": "${DS_PROMETHEUS}",
-          "fontSize": "80%",
-          "gridPos": {
-            "h": 27,
-            "w": 4,
-            "x": 12,
-            "y": 3
-          },
-          "id": 21,
-          "links": [],
-          "options": {},
-          "pageSize": null,
-          "pluginVersion": "6.6.0",
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": false
-          },
-          "styles": [
-            {
-              "alias": "Time",
-              "align": "auto",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "",
-              "align": "left",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "string",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "right",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "sum(encounter_rounds_sum{job=\"$job\"})",
-              "instant": true,
-              "legendFormat": "Overall",
-              "refId": "A"
-            },
-            {
-              "expr": "sum by (crDelta)(encounter_rounds_sum{job=\"$job\"})",
-              "instant": true,
-              "legendFormat": "{{crDelta}} crDelta",
-              "refId": "B"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Number of rounds",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "cacheTimeout": null,
-          "datasource": "${DS_PROMETHEUS}",
-          "description": "",
-          "gridPos": {
-            "h": 27,
-            "w": 8,
-            "x": 16,
-            "y": 3
-          },
-          "id": 22,
-          "links": [],
-          "options": {
-            "displayMode": "basic",
-            "fieldOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    }
-                  ]
-                }
-              },
-              "overrides": [],
-              "values": false
-            },
-            "orientation": "horizontal",
-            "showUnfilled": true
-          },
-          "pluginVersion": "6.6.0",
-          "targets": [
-            {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{job=\"$job\"}[30m])) / sum by (crDelta)(increase(encounter_rounds_count{job=\"$job\"}[30m]))",
-              "legendFormat": "{{crDelta}} crDelta",
-              "refId": "B"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Mean average rounds/encounter : increase[30m]",
-          "type": "bargauge"
-        }
-      ],
-      "title": "Rounds / Encounter by difference in challenge rating",
       "type": "row"
     }
   ],
@@ -1377,5 +1093,5 @@
   "timezone": "",
   "title": "Encounters",
   "uid": "91ABnmQWz",
-  "version": 1
+  "version": 10
 }
