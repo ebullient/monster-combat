@@ -11,6 +11,7 @@
     <!-- submodules -->
     <modules>
         <module>core</module>
+        <module>quarkus-micrometer</module>
         <module>spring5-micrometer</module>
     </modules>
 

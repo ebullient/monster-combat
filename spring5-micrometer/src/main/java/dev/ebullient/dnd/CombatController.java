@@ -26,7 +26,6 @@ import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.combat.TargetSelector;
 import dev.ebullient.dnd.mechanics.Dice;
 import io.micrometer.core.annotation.Timed;
-import io.micrometer.core.instrument.Timer.Sample;
 import reactor.core.publisher.Flux;
 
 @RestController
@@ -65,25 +64,39 @@ public class CombatController {
 
         Encounter encounter = beastiary.buildEncounter()
                 .setHowMany(howMany)
-                .setTargetSelector(TargetSelector.SelectAtRandom)
-                .setMethod(Dice.Method.ROLL)
+                .setTargetSelector(pickOne(howMany))
                 .build();
 
         return Flux.push(emitter -> {
-            Sample eSample = metrics.startEncounter();
             int totalRounds = 0;
 
             while (!encounter.isFinal()) {
                 totalRounds++;
-                Sample rSample = metrics.startRound();
                 RoundResult result = encounter.oneRound();
-                metrics.endRound(rSample, result);
+                metrics.endRound(result);
 
                 emitter.next(result);
             }
 
             emitter.complete();
-            metrics.endEncounter(eSample, encounter, totalRounds);
+            metrics.endEncounter(encounter, totalRounds);
         });
+    }
+
+    TargetSelector pickOne(int howMany) {
+        int which = Dice.range(5);
+        switch (which) {
+            case 4:
+                return TargetSelector.SelectBiggest;
+            case 3:
+                return TargetSelector.SelectSmallest;
+            case 2:
+                return TargetSelector.SelectByHighestRelativeHealth;
+            case 1:
+                return TargetSelector.SelectByLowestRelativeHealth;
+            default:
+            case 0:
+                return TargetSelector.SelectAtRandom;
+        }
     }
 }

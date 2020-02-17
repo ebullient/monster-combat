@@ -29,9 +29,27 @@ services:
       - './target/data/grafana:/var/lib/grafana'
       - './target/logs/grafana:/var/log/grafana'
 
+  spring5-faceoff:
+    container_name: spring5-micrometer-faceoff
+    image: ebullient/dnd-mc-spring5-micrometer
+    ports:
+      - "8380:8080"
+
+  quarkus1-faceoff:
+    container_name: quarkus-micrometer-faceoff
+    image: ebullient/dnd-mc-quarkus-micrometer
+    ports:
+      - "8381:8080"
+
   spring5:
     container_name: spring5-micrometer
     image: ebullient/dnd-mc-spring5-micrometer
     ports:
-      - "8081:8080"
+      - "8280:8080"
+
+  quarkus1:
+    container_name: quarkus-micrometer
+    image: ebullient/dnd-mc-quarkus-micrometer
+    ports:
+      - "8281:8080"
 

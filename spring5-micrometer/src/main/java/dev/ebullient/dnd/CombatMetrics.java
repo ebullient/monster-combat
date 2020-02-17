@@ -22,9 +22,6 @@ import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.combat.RoundResult.Event;
 import dev.ebullient.dnd.mechanics.Dice;
 import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.core.instrument.Tags;
-import io.micrometer.core.instrument.Timer;
-import io.micrometer.core.instrument.Timer.Sample;
 
 @Component
 class CombatMetrics {
@@ -35,34 +32,21 @@ class CombatMetrics {
     public CombatMetrics(MeterRegistry registry) {
         this.registry = registry;
         Dice.setMonitor((k, v) -> registry.summary("dice.rolls", "die", k, "face", label(v)).record((double) v));
+
+        logger.debug("Created CombatMetrics with MeterRegistry: {}", registry);
     }
 
-    public Sample startEncounter() {
-        return Timer.start();
-    }
+    public void endEncounter(Encounter e, int totalRounds) {
 
-    public void endEncounter(Sample sample, Encounter e, int totalRounds) {
-        Tags tags = Tags.of(
+        registry.summary("encounter.rounds",
                 "numCombatants", label(e.getSize()),
-                "numTypes", label(e.getNumTypes()),
+                "targetSelector", e.getSelector(),
                 "sizeDelta", label(e.getSizeDelta()),
-                "crDelta", label(e.getCrDelta()));
-
-        sample.stop(registry.timer("encounter.duration", tags));
-        registry.summary("encounter.rounds", tags).record((double) totalRounds);
+                "crDelta", label(e.getCrDelta()))
+                .record((double) totalRounds);
     }
 
-    public Sample startRound() {
-        return Timer.start();
-    }
-
-    public void endRound(Sample sample, RoundResult result) {
-
-        sample.stop(registry.timer("round.duration",
-                "numSurvivors", label(result.getSurvivors().size()),
-                "numCombatants", label(result.getSize()),
-                "sizeDelta", label(result.getSizeDelta()),
-                "crDelta", label(result.getCrDelta())));
+    public void endRound(RoundResult result) {
 
         for (Event event : result.getEvents()) {
             String hitOrMiss = (event.isCritical() ? "critical " : "")
@@ -73,8 +57,15 @@ class CombatMetrics {
                     "attacker", event.getActor().getName(),
                     "attackType", event.getType(),
                     "attackName", event.getName(),
-                    "hitOrMiss", hitOrMiss)
+                    "hitOrMiss", hitOrMiss,
+                    "targetSelector", result.getSelector())
                     .record((double) event.getDamageAmount());
+
+            registry.counter("attack",
+                    "hitOrMiss", hitOrMiss,
+                    "attackModifier", label(event.getAttackModifier()),
+                    "difficultyClass", label(event.getDifficultyClass()))
+                    .increment();
         }
     }
 
