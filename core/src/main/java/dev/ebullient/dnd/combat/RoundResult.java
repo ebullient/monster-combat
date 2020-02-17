@@ -33,6 +33,10 @@ public interface RoundResult {
         public boolean isSaved();
 
         public int getDamageAmount();
+
+        public int getAttackModifier();
+
+        public int getDifficultyClass();
     }
 
     public List<? extends Event> getEvents();
@@ -46,4 +50,6 @@ public interface RoundResult {
     public int getCrDelta();
 
     public int getNumTypes();
+
+    public String getSelector();
 }

@@ -31,6 +31,7 @@ public class RoundResult implements dev.ebullient.dnd.combat.RoundResult {
     int numTypes;
     int crDelta;
     int sizeDelta;
+    String selector;
 
     public List<Combatant> getSurvivors() {
         return survivors;
@@ -52,7 +53,7 @@ public class RoundResult implements dev.ebullient.dnd.combat.RoundResult {
         return size;
     }
 
-    public void getSize(int size) {
+    public void setSize(int size) {
         this.size = size;
     }
 
@@ -78,5 +79,13 @@ public class RoundResult implements dev.ebullient.dnd.combat.RoundResult {
 
     public void setSizeDelta(int sizeDelta) {
         this.sizeDelta = sizeDelta;
+    }
+
+    public String getSelector() {
+        return selector;
+    }
+
+    public void setSelector(String selector) {
+        this.selector = selector;
     }
 }

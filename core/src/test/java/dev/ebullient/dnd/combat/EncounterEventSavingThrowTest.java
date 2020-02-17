@@ -49,6 +49,9 @@ public class EncounterEventSavingThrowTest {
         Assert.assertEquals("Damage amount should be half the average", 7, result.damageAmount);
         Assert.assertFalse("Never critical", result.critical);
 
+        Assert.assertEquals("Attack modifier should be 3", 3, result.getAttackModifier());
+        Assert.assertEquals("Difficulty class should be should be 12", 12, result.getDifficultyClass());
+
         Assert.assertFalse("Extra Effect saving throw should remain false", result.effectSaved);
         Assert.assertEquals("Extra Effect damage amount should remain 0", 0, result.effectAmount);
 
@@ -81,6 +84,9 @@ public class EncounterEventSavingThrowTest {
         result.makeActionWithSavingThrow(attack.damage, false);
         Assert.assertFalse("Saving throw should not be successful for attack", result.saved);
         Assert.assertEquals("Damage amount should be the average", 14, result.damageAmount);
+
+        Assert.assertEquals("Attack modifier should be 0", 0, result.getAttackModifier());
+        Assert.assertEquals("Difficulty class should be should be 12", 12, result.getDifficultyClass());
 
         Assert.assertFalse("Extra Effect saving throw should remain false", result.effectSaved);
         Assert.assertEquals("Extra Effect damage amount should remain 0", 0, result.effectAmount);

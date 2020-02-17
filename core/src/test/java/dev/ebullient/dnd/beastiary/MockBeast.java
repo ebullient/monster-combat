@@ -30,7 +30,7 @@ public class MockBeast implements Beast {
     public int passivePerception;
 
     public int armorClass;
-    public Size size;
+    public Size size = Size.TINY;
     public Type type;
 
     public List<Attack> attacks;

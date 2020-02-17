@@ -59,7 +59,7 @@
     },
     "passivePerception" : 12,
     "spellSaveDC" : 0,
-    "armorClass" : 8,
+    "armorClass" : 18,
     "size" : "MEDIUM",
     "type" : "FIEND"
   }

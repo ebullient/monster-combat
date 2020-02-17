@@ -75,7 +75,7 @@ public class MonsterTest {
         m.savingThrows = "INT(2)";
         m.saveThrows.set(Ability.INT, 2);
 
-        Assert.assertEquals(3, m.getArmorClass());
+        Assert.assertEquals(13, m.getArmorClass());
         Assert.assertEquals(13, m.getPassivePerception());
 
         Assert.assertEquals(5, m.getAbilityModifier(Ability.STR));

@@ -94,10 +94,14 @@ public class Encounter {
         return numTypes;
     }
 
+    public String getSelector() {
+        return selector.toString();
+    }
+
     public RoundResult oneRound() {
         logger.debug("oneRound: {} {}", initiativeOrder, id);
 
-        Result result = new Result(initiativeOrder);
+        Result result = new Result(initiativeOrder, selector);
 
         for (EncounterCombatant actor : initiativeOrder) {
             if (actor.isAlive()) {
@@ -144,8 +148,9 @@ public class Encounter {
         final int numTypes;
         final int crDelta;
         final int sizeDelta;
+        final String selector;
 
-        Result(List<EncounterCombatant> initiativeOrder) {
+        Result(List<EncounterCombatant> initiativeOrder, TargetSelector selector) {
             EncounterCombatant first = initiativeOrder.iterator().next();
             int maxCR = first.beast.getCR();
             int minCR = maxCR;
@@ -167,6 +172,7 @@ public class Encounter {
             this.crDelta = maxCR - minCR;
             this.sizeDelta = maxSize - minSize;
             this.numTypes = types.size();
+            this.selector = selector.toString();
         }
 
         public List<AttackEvent> getEvents() {
@@ -192,6 +198,10 @@ public class Encounter {
         public int getNumTypes() {
             return numTypes;
         }
+
+        public String getSelector() {
+            return selector;
+        }
     }
 
     public static class AttackEvent implements RoundResult.Event {
@@ -215,6 +225,9 @@ public class Encounter {
         boolean critical;
         boolean saved;
         int damageAmount;
+
+        int difficultyClass;
+        int attackModifier;
 
         boolean effectSaved;
         int effectAmount;
@@ -263,6 +276,14 @@ public class Encounter {
 
         public int getDamageAmount() {
             return damageAmount;
+        }
+
+        public int getAttackModifier() {
+            return attackModifier;
+        }
+
+        public int getDifficultyClass() {
+            return difficultyClass;
         }
 
         public String getActorStartingCondition() {
@@ -322,6 +343,8 @@ public class Encounter {
         void attemptMeleeAttack() {
             // Did we hit? Attack roll may be at advantage or disadvantage
             int attackRoll = Dice.d20(getRollConstraint());
+            this.attackModifier = attack.getAttackModifier();
+            this.difficultyClass = target.getArmorClass();
 
             if (attackRoll == 1) {
                 // critical fail. WOOPS!
@@ -335,8 +358,8 @@ public class Encounter {
                 this.critical = false;
 
                 // Add attack modifier, then see if we hit.
-                attackRoll += attack.getAttackModifier();
-                this.hit = attackRoll >= target.getArmorClass();
+                attackRoll += this.attackModifier;
+                this.hit = attackRoll >= this.difficultyClass;
             }
 
             if (hit) {
@@ -388,6 +411,7 @@ public class Encounter {
 
                 // A condition may require disadvantage on saving throws
                 int savingThrow = Dice.d20(target.withConstraint(ability));
+                int modifier = target.getSavingThrow(ability);
 
                 if (savingThrow == 1) {
                     successful = false;
@@ -395,7 +419,7 @@ public class Encounter {
                     successful = true;
                 } else {
                     // Add modifier, then see if target makes the saving throw
-                    savingThrow += target.getSavingThrow(ability);
+                    savingThrow += modifier;
                     successful = savingThrow >= dc;
                 }
 
@@ -410,14 +434,16 @@ public class Encounter {
                     amount = applyConditions(damage);
                     target.takeDamage(amount); // ouch
                 }
-            }
 
-            if (additionalEffect) {
-                this.effectSaved = successful;
-                this.effectAmount = amount;
-            } else {
-                this.saved = successful;
-                this.damageAmount = amount;
+                if (additionalEffect) {
+                    this.effectSaved = successful;
+                    this.effectAmount = amount;
+                } else {
+                    this.saved = successful;
+                    this.damageAmount = amount;
+                    this.difficultyClass = dc;
+                    this.attackModifier = modifier;
+                }
             }
         }
 

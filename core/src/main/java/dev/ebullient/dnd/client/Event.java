@@ -39,6 +39,9 @@ class Event implements dev.ebullient.dnd.combat.RoundResult.Event {
     boolean saved;
     int damageAmount;
 
+    int difficultyClass;
+    int attackModifier;
+
     boolean effectSaved;
     int effectAmount;
 
@@ -152,5 +155,21 @@ class Event implements dev.ebullient.dnd.combat.RoundResult.Event {
 
     public void setEffectAmount(int effectAmount) {
         this.effectAmount = effectAmount;
+    }
+
+    public int getDifficultyClass() {
+        return difficultyClass;
+    }
+
+    public void setDifficultyClass(int difficultyClass) {
+        this.difficultyClass = difficultyClass;
+    }
+
+    public int getAttackModifier() {
+        return attackModifier;
+    }
+
+    public void setAttackModifier(int attackModifier) {
+        this.attackModifier = attackModifier;
     }
 }

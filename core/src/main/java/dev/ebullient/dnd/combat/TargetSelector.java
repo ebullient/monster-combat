@@ -38,6 +38,10 @@ public interface TargetSelector {
             targets.sort(Comparators.RelativeHealthOrder);
             return targets.get(0);
         }
+
+        public String toString() {
+            return "HighestHealth";
+        }
     };
 
     public static final TargetSelector SelectByLowestRelativeHealth = new TargetSelector() {
@@ -54,6 +58,10 @@ public interface TargetSelector {
             targets.sort(Comparators.RelativeHealthOrder);
             return targets.get(targets.size() - 1);
         }
+
+        public String toString() {
+            return "LowestHealth";
+        }
     };
 
     public static final TargetSelector SelectByHighestChallengeRating = new TargetSelector() {
@@ -67,6 +75,10 @@ public interface TargetSelector {
 
             targets.sort(Comparators.ChallengeRatingOrder);
             return targets.get(0);
+        }
+
+        public String toString() {
+            return "HighestCR";
         }
     };
 
@@ -84,6 +96,48 @@ public interface TargetSelector {
             targets.sort(Comparators.ChallengeRatingOrder);
             return targets.get(targets.size() - 1);
         }
+
+        public String toString() {
+            return "LowestCR";
+        }
+    };
+
+    public static final TargetSelector SelectBiggest = new TargetSelector() {
+
+        public EncounterCombatant chooseTarget(EncounterCombatant p, List<EncounterCombatant> initiativeOrder) {
+            List<EncounterCombatant> targets = new ArrayList<>(initiativeOrder);
+            targets.remove(p);
+            if (targets.isEmpty()) {
+                return null;
+            }
+
+            targets.sort(Comparators.SizeOrder);
+            return targets.get(0);
+        }
+
+        public String toString() {
+            return "BiggestFirst";
+        }
+    };
+
+    public static final TargetSelector SelectSmallest = new TargetSelector() {
+
+        public EncounterCombatant chooseTarget(EncounterCombatant p, List<EncounterCombatant> initiativeOrder) {
+            List<EncounterCombatant> targets = new ArrayList<>(initiativeOrder);
+            targets.remove(p);
+            if (targets.isEmpty()) {
+                return null;
+            } else if (targets.size() == 1) {
+                return targets.get(0);
+            }
+
+            targets.sort(Comparators.SizeOrder);
+            return targets.get(targets.size() - 1);
+        }
+
+        public String toString() {
+            return "SmallestFirst";
+        }
     };
 
     public static final TargetSelector SelectAtRandom = new TargetSelector() {
@@ -98,6 +152,10 @@ public interface TargetSelector {
             }
 
             return targets.get(Dice.range(targets.size()));
+        }
+
+        public String toString() {
+            return "Random";
         }
     };
 }

@@ -46,6 +46,9 @@ public class EncounterEventMeleeAttackTest {
         Assert.assertFalse("Attack was not saved", result.saved);
         Assert.assertFalse("Not a critical hit", result.critical);
 
+        Assert.assertEquals("Attack modifier should be one", 1, result.getAttackModifier());
+        Assert.assertEquals("Difficulty class should be should be 11", 11, result.getDifficultyClass());
+
         // force roll of 20
         actor.condition = new MockCondition(Dice.Constraint.CRITICAL);
         result.attemptMeleeAttack();
@@ -78,6 +81,9 @@ public class EncounterEventMeleeAttackTest {
         Assert.assertEquals("Damage should be 0", 0, result.damageAmount);
         Assert.assertFalse("Attack was not saved", result.saved);
         Assert.assertFalse("Not a critical miss", result.critical);
+
+        Assert.assertEquals("Attack modifier should be one", 1, result.getAttackModifier());
+        Assert.assertEquals("Difficulty class should be should be 15", 15, result.getDifficultyClass());
 
         // force roll of 1
         actor.condition = new MockCondition(Dice.Constraint.FAIL);

@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import dev.ebullient.dnd.beastiary.MockBeast;
 import dev.ebullient.dnd.mechanics.Ability;
+import dev.ebullient.dnd.mechanics.Size;
 
 public class ComparatorsTest {
 
@@ -116,14 +117,42 @@ public class ComparatorsTest {
 
         List<EncounterCombatant> combatants = new ArrayList<>(Arrays.asList(mcs));
         combatants.sort(Comparators.RelativeHealthOrder);
-        Assert.assertEquals("when relative is equal (0), combatants should be sorted in name order",
+        Assert.assertEquals("when health is equal (0), combatants should be sorted in name order",
                 "0123", listToString(combatants));
 
         mcs[0].takeDamage(3);
         mcs[1].takeDamage(7);
 
         combatants.sort(Comparators.RelativeHealthOrder);
-        Assert.assertEquals("combatants sorted in cr order, then in name order",
+        Assert.assertEquals("combatants sorted in health order, then in name order",
+                "2301", listToString(combatants));
+    }
+
+    @Test
+    public void testSizeOrder() {
+
+        MockBeast[] mbs = new MockBeast[] {
+                new MockBeast("0"),
+                new MockBeast("1"),
+                new MockBeast("2"),
+                new MockBeast("3")
+        };
+
+        EncounterCombatant[] mcs = new EncounterCombatant[mbs.length];
+        for (int i = 0; i < mbs.length; i++) {
+            mcs[i] = new EncounterCombatant(mbs[i], 10, 10);
+        }
+
+        List<EncounterCombatant> combatants = new ArrayList<>(Arrays.asList(mcs));
+        combatants.sort(Comparators.RelativeHealthOrder);
+        Assert.assertEquals("when all are the same size, combatants should be sorted in name order",
+                "0123", listToString(combatants));
+
+        mbs[2].size = Size.GARGANTUAN;
+        mbs[3].size = Size.LARGE;
+
+        combatants.sort(Comparators.SizeOrder);
+        Assert.assertEquals("combatants sorted in size order, then in name order",
                 "2301", listToString(combatants));
     }
 

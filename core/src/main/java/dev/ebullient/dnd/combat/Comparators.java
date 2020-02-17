@@ -78,4 +78,25 @@ public interface Comparators {
             return o2.getRelativeHealth() - o1.getRelativeHealth();
         }
     };
+
+    public static final Comparator<EncounterCombatant> SizeOrder = new Comparator<EncounterCombatant>() {
+        @Override
+        public int compare(EncounterCombatant o1, EncounterCombatant o2) {
+            // sort by cr descending
+            if (o2.getSize() == o1.getSize()) {
+                // Then sort by max hit points descending
+                if (o2.getMaxHitPoints() == o1.getMaxHitPoints()) {
+                    // if all else is the same, sort by name ascending
+                    if (o2.getName().equals(o1.getName())) {
+                        // keep all!!
+                        return System.identityHashCode(o2) - System.identityHashCode(o1);
+                    }
+                    return o1.getName().compareTo(o2.getName());
+                }
+                return o2.getMaxHitPoints() - o1.getMaxHitPoints();
+            }
+            return o2.getSize().compareTo(o1.getSize());
+        }
+    };
+
 }

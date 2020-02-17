@@ -55,7 +55,7 @@
     },
     "passivePerception" : 13,
     "spellSaveDC" : 0,
-    "armorClass" : 3,
+    "armorClass" : 13,
     "size" : "LARGE",
     "type" : "MONSTROSITY"
   }

@@ -841,7 +841,7 @@ public class ConvertHtmlToJson {
     }
 
     void getBasicStats(Monster monster, Element parent, Map<String, String> description) {
-        final Pattern AC = Pattern.compile(".*(\\d+).*");
+        final Pattern AC = Pattern.compile(".* (\\d+).*");
         final String HP = "Hit Points";
         final String SPEED = "Speed";
 
@@ -855,6 +855,7 @@ public class ConvertHtmlToJson {
         Matcher m1 = AC.matcher(acString);
         if (m1.matches()) {
             monster.setArmorClass(Integer.parseInt(m1.group(1)));
+            System.out.println(monster.getArmorClass() + " --> " + acString);
         } else {
             throw new IllegalArgumentException("Unexpected armor class definition: " + acString);
         }

@@ -92,7 +92,7 @@ public class EncounterTest {
         mbs[0].attacks = Arrays.asList(attack);
         mbs[1].attacks = Arrays.asList(attack);
 
-        List<EncounterCombatant> combatants = Arrays.asList(new EncounterCombatant(mbs[0], 10, 30),
+        List<EncounterCombatant> combatants = Arrays.asList(new EncounterCombatant(mbs[0], 10, 40),
                 new EncounterCombatant(mbs[1], 10, 30));
 
         Encounter r = new Encounter(combatants, TargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);

@@ -41,6 +41,7 @@ public class EncounterEventConditionTest {
         damageAmount = result.applyConditions(damage);
         Assert.assertEquals("Damage amount should be average",
                 14, damageAmount);
+
         Assert.assertNull("Condition should be null", mcs[1].condition);
     }
 
