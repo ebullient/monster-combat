@@ -2,13 +2,17 @@
 
 This Spring Boot 2 application has a few purposes:
 
-a) to teach me, a rookie Dungeon Master, how D&D combat rules work
-b) to explore the capabilities of [Micrometer metrics]()
-c) to mess with metrics and spring boot applications with Kubernetes, Prometheus, and Grafana.
+1. to teach me, a rookie Dungeon Master, how D&D combat rules work
+2. to explore usage and capabilities of metrics libraries, starting with [Micrometer](https://micrometer.io)
+3. to mess with metrics and spring boot applications with Kubernetes, Prometheus, and Grafana.
 
-This application also uses WebFlux (no Tomcat).
+Additional notes: 
 
-Metrics are gathered in `src/main/java/application/battle/BattleMetrics.java`. I kept it all in one place to make it easier for me to fuss around. This approach means I did not use some of the Spring Micrometer annotations, but I felt the trade-off was worth it.
+* The Spring application also uses WebFlux (no Tomcat).
+* The Quarkus application uses the micrometer core library
+
+For these applications, metrics are gathered by one injectable class, usually called `CombatMetrics.java`. I wanted messing around with what was being collected and how. This choice means I'm not making extensive use of annotation-based configurations, but for what I'm attempting, I'm ok with that trade-off.
+
 
 ## Getting started
 
@@ -27,9 +31,20 @@ export MONSTER_DIR=${PWD}          # for future reference
 ### Prerequisites
 
 * [Docker](https://docs.docker.com/install/)
-* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-## General bring-up instructions
+## Lazy bones: quick and dirty with Docker compose
+
+A lot of what this application is about is just.. metrics. The surrounding environment doesn't matter much. If you're lazy, or on a constrained system, docker-compose will work just fine.
+
+```bash
+build.sh
+cd deploy/dc
+
+```
+
+## General bring-up instructions for Kubernetes
+
+[Initialize your cluster](#set-up-a-kubernetes-cluster)
 
 1. [Create or retrieve credentials for your cluster](#set-up-a-kubernetes-cluster)
 
@@ -50,7 +65,7 @@ export MONSTER_DIR=${PWD}          # for future reference
     ./deploy/k8s/kube-prometheus/build.sh apply    # Apply configuration to cluster
     ```
 
-    Note there are customizations happening in this step (in `./deploy/k8s/kube-prometheus/monsters.jsonnet`):
+    Note there are customizations happening (in `./deploy/k8s/kube-prometheus/monsters.jsonnet`):
 
     1. We reduce prometheus and alertmanager to single replicas. This is definitely a "fit on a tinier system" move that goes away from resilience.
     2. We instruct prometheus to monitor three additional namespaces: `gameon-system`, `ebullientworks` and `default`. The first is for services from https://gameontext.org, the second is used by this project, and the third is for your own experiments.
@@ -61,7 +76,7 @@ export MONSTER_DIR=${PWD}          # for future reference
     kubectl apply -f deploy/k8s/spring-prometheus/
     ```
 
-    If you delete/re-apply kube-prometheus metadata, you'll need to reapply this, too, as it is deployed into the `monitoring` namespace. For best results, ensure this is applied, and [spring-prometheus is included in the list of Prometheus targets]() before moving on to the next step.
+    If you delete/re-apply kube-prometheus metadata, you'll need to reapply this, too, as it is deployed into the `monitoring` namespace. For best results, ensure this is applied, and spring-prometheus is included in the list of Prometheus targets before moving on to the next step.
 
 4. Finally (!!), build and install the application:
 
@@ -72,15 +87,17 @@ export MONSTER_DIR=${PWD}          # for future reference
     eval $(minishift docker-env)
 
     # Run through all of the sub-projects and build them
-    This uses dockerBuild from the jib plugin to create an image
+    The Spring project uses dockerBuild from the jib plugin to create an image
     # in the local docker registry. Feel free to change that up.
+    
     ./buildme.sh
 
     # Depending on your choices, you may have to do a docker push
-    # at this stage, to put fresh images wherever they need to go.
+    # to put fresh images wherever they need to go.
 
     # Now deploy application metadata (service, deployment, ingress)
     # Verify that the ingress definition will work for your kubernetes cluster
+    
     kubectl apply -f deploy/k8s/monsters/
     ```
 
@@ -94,12 +111,12 @@ curl http://monsters.192.168.99.100.nip.io/actuator/prometheus
 
 # Battles:
 # faceoff is 2 monsters
-curl http://monsters.192.168.99.100.nip.io/battle/faceoff
+curl http://monsters.192.168.99.100.nip.io/combat/faceoff
 # melee is 3-5 monsters
-curl http://monsters.192.168.99.100.nip.io/battle/melee
+curl http://monsters.192.168.99.100.nip.io/combat/melee
 ```
 
-Check out the prometheus endpoit to see what metrics are being emitted.
+Check out the prometheus endpoint to see what metrics are being emitted.
 
 Hopefully, that all worked fine. If it didn't, come find me in the [gameontext slack](https://gameontext.org/slackin) and let me know. Or, ya know, open an issue. That works, too.
 
