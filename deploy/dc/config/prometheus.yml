@@ -29,26 +29,12 @@ scrape_configs:
   scrape_interval: 5s
   static_configs:
     - targets:
-      - spring5:8080
+      - spring:8080
 
 - job_name: quarkus_micrometer
   metrics_path: /prometheus
   scrape_interval: 5s
   static_configs:
     - targets:
-      - quarkus1:8080
-
-- job_name: spring_monsters_faceoff
-  metrics_path: /actuator/prometheus
-  scrape_interval: 5s
-  static_configs:
-    - targets:
-      - spring5-faceoff:8080
-
-- job_name: quarkus_micrometer_faceoff
-  metrics_path: /prometheus
-  scrape_interval: 5s
-  static_configs:
-    - targets:
-      - quarkus1-faceoff:8080
+      - quarkus:8080
 

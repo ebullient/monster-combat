@@ -95,7 +95,7 @@ public class Encounter {
     }
 
     public String getSelector() {
-        return selector.toString();
+        return targetSelectorToString(selector, numCombatants);
     }
 
     public RoundResult oneRound() {
@@ -172,7 +172,7 @@ public class Encounter {
             this.crDelta = maxCR - minCR;
             this.sizeDelta = maxSize - minSize;
             this.numTypes = types.size();
-            this.selector = selector.toString();
+            this.selector = targetSelectorToString(selector, numCombatants);
         }
 
         public List<AttackEvent> getEvents() {
@@ -577,5 +577,12 @@ public class Encounter {
             }
 
         }
+    }
+
+    static String targetSelectorToString(TargetSelector t, int numCombatants) {
+        if (numCombatants == 2) {
+            return "FaceOff";
+        }
+        return t.toString();
     }
 }
