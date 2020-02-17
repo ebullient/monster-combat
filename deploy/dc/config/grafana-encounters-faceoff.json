@@ -69,517 +69,6 @@
         "x": 0,
         "y": 0
       },
-      "id": 28,
-      "panels": [
-        {
-          "cacheTimeout": null,
-          "columns": [
-            {
-              "text": "Total",
-              "value": "total"
-            }
-          ],
-          "datasource": "${DS_PROMETHEUS}",
-          "fontSize": "80%",
-          "gridPos": {
-            "h": 7,
-            "w": 4,
-            "x": 0,
-            "y": 1
-          },
-          "id": 2,
-          "links": [],
-          "options": {},
-          "pageSize": null,
-          "pluginVersion": "6.6.0",
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": false
-          },
-          "styles": [
-            {
-              "alias": "Time",
-              "align": "auto",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "",
-              "align": "left",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "string",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "right",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "sum(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"})",
-              "format": "time_series",
-              "instant": true,
-              "legendFormat": "Quarkus micrometer",
-              "refId": "A"
-            },
-            {
-              "expr": "sum(encounter_rounds_count{job=\"spring_monsters_faceoff\"})",
-              "format": "time_series",
-              "instant": true,
-              "legendFormat": "Spring 5 micrometer",
-              "refId": "B"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Number of encounters",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "cacheTimeout": null,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "description": "",
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 19,
-            "x": 4,
-            "y": 1
-          },
-          "hiddenSeries": false,
-          "id": 20,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pluginVersion": "6.6.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(increase(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"}[30m]))",
-              "legendFormat": "Quarkus micrometer",
-              "refId": "A"
-            },
-            {
-              "expr": "sum(increase(encounter_rounds_count{job=\"spring_monsters_faceoff\"}[30m]))",
-              "legendFormat": "Spring 5 micrometer",
-              "refId": "B"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Number of encounters : increase[30m]",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
-      "title": "Number of encounters",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "datasource": "${DS_PROMETHEUS}",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 1
-      },
-      "id": 14,
-      "panels": [
-        {
-          "cacheTimeout": null,
-          "columns": [
-            {
-              "text": "Total",
-              "value": "total"
-            }
-          ],
-          "datasource": "${DS_PROMETHEUS}",
-          "fontSize": "80%",
-          "gridPos": {
-            "h": 10,
-            "w": 4,
-            "x": 0,
-            "y": 9
-          },
-          "id": 7,
-          "links": [],
-          "options": {},
-          "pageSize": null,
-          "pluginVersion": "6.6.0",
-          "showHeader": true,
-          "sort": {
-            "col": 1,
-            "desc": true
-          },
-          "styles": [
-            {
-              "alias": "Time",
-              "align": "auto",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "",
-              "align": "left",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "string",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "right",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "sum(encounter_rounds_sum{job=\"spring_monsters_faceoff\"})",
-              "instant": true,
-              "legendFormat": "Spring 5 micrometer",
-              "refId": "A"
-            },
-            {
-              "expr": "sum (encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"})",
-              "instant": true,
-              "legendFormat": "Quarkus micrometer",
-              "refId": "B"
-            },
-            {
-              "expr": "sum (encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"} or encounter_rounds_sum{job=\"spring_monsters_faceoff\"})",
-              "instant": true,
-              "legendFormat": "Overall",
-              "refId": "C"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Number of rounds",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "cacheTimeout": null,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 5,
-            "w": 19,
-            "x": 4,
-            "y": 9
-          },
-          "hiddenSeries": false,
-          "id": 24,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pluginVersion": "6.6.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum (increase(encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"}[30m]))",
-              "legendFormat": "Quarkus micrometer",
-              "refId": "A"
-            },
-            {
-              "expr": "sum (increase(encounter_rounds_sum{job=\"spring_monsters_faceoff\"}[30m]))",
-              "legendFormat": "Spring 5 micrometer",
-              "refId": "B"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Number of rounds : increase[30m]",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "cacheTimeout": null,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 5,
-            "w": 19,
-            "x": 4,
-            "y": 14
-          },
-          "hiddenSeries": false,
-          "id": 8,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pluginVersion": "6.6.0",
-          "pointradius": 1,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum (increase(encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"}[30m])) / sum (increase(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"}[30m]))",
-              "legendFormat": "Quarkus micrometer",
-              "refId": "B"
-            },
-            {
-              "expr": "sum(increase(encounter_rounds_sum{job=\"spring_monsters_faceoff\"}[30m])) / sum(increase(encounter_rounds_count{job=\"spring_monsters_faceoff\"}[30m]))",
-              "instant": false,
-              "legendFormat": "Spring 5 Micrometer",
-              "refId": "A"
-            },
-            {
-              "expr": "sum(increase(encounter_rounds_sum{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"}[30m])) / sum(increase(encounter_rounds_count{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"}[30m]))",
-              "instant": false,
-              "legendFormat": "Overall",
-              "refId": "C"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Average rounds/encounter : increase[30m]",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
-      "title": "Rounds / Encounter",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "datasource": "${DS_PROMETHEUS}",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 2
-      },
       "id": 30,
       "panels": [
         {
@@ -593,10 +82,10 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 8,
+            "h": 7,
             "w": 4,
             "x": 0,
-            "y": 3
+            "y": 1
           },
           "id": 15,
           "links": [],
@@ -651,14 +140,14 @@
           ],
           "targets": [
             {
-              "expr": "sum by (sizeDelta)(encounter_rounds_count{job=\"spring_monsters_faceoff\"} or encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"})",
+              "expr": "sum by (sizeDelta)(encounter_rounds_count{numCombatants=\"02\"})",
               "format": "time_series",
               "instant": true,
               "legendFormat": "sizeDelta {{sizeDelta}}",
               "refId": "A"
             },
             {
-              "expr": "sum(encounter_rounds_count{job=\"spring_monsters_faceoff\"} or encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"})",
+              "expr": "sum(encounter_rounds_count{numCombatants=\"02\"})",
               "format": "time_series",
               "instant": true,
               "legendFormat": "Overall",
@@ -681,10 +170,10 @@
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 8,
+            "h": 7,
             "w": 19,
             "x": 4,
-            "y": 3
+            "y": 1
           },
           "hiddenSeries": false,
           "id": 23,
@@ -717,7 +206,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (sizeDelta)(increase(encounter_rounds_count{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"}[30m]))",
+              "expr": "sum by (sizeDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
               "legendFormat": "sizeDelta {{sizeDelta}}",
               "refId": "A"
             }
@@ -774,7 +263,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 3
+        "y": 1
       },
       "id": 12,
       "panels": [
@@ -792,7 +281,7 @@
             "h": 14,
             "w": 4,
             "x": 0,
-            "y": 4
+            "y": 2
           },
           "id": 9,
           "links": [],
@@ -847,13 +336,13 @@
           ],
           "targets": [
             {
-              "expr": "sum(encounter_rounds_sum{job=\"spring_monsters_faceoff\"} or encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"})",
+              "expr": "sum(encounter_rounds_sum{numCombatants=\"02\"})",
               "instant": true,
               "legendFormat": "Overall",
               "refId": "A"
             },
             {
-              "expr": "sum by (sizeDelta)(encounter_rounds_sum{job=\"spring_monsters_faceoff\"} or encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"})",
+              "expr": "sum by (sizeDelta)(encounter_rounds_sum{numCombatants=\"02\"})",
               "instant": true,
               "legendFormat": "sizeDelta {{sizeDelta}}",
               "refId": "B"
@@ -879,7 +368,7 @@
             "h": 6,
             "w": 19,
             "x": 4,
-            "y": 4
+            "y": 2
           },
           "hiddenSeries": false,
           "id": 26,
@@ -912,7 +401,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (sizeDelta)(increase(encounter_rounds_sum{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"}[30m]))",
+              "expr": "sum by (sizeDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m]))",
               "legendFormat": "sizeDelta {{sizeDelta}}",
               "refId": "A"
             }
@@ -971,7 +460,7 @@
             "h": 8,
             "w": 19,
             "x": 4,
-            "y": 10
+            "y": 8
           },
           "hiddenSeries": false,
           "id": 10,
@@ -1004,13 +493,13 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(encounter_rounds_sum{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"}[30m])) / sum(increase(encounter_rounds_count{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"}[30m]))",
+              "expr": "sum(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m])) / sum(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
               "instant": false,
               "legendFormat": "Overall",
               "refId": "A"
             },
             {
-              "expr": "sum by (sizeDelta)(increase(encounter_rounds_sum{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"}[30m])) / sum by (sizeDelta)(increase(encounter_rounds_count{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"}[30m]))",
+              "expr": "sum by (sizeDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m])) / sum by (sizeDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
               "legendFormat": "sizeDelta {{sizeDelta}}",
               "refId": "B"
             }
@@ -1067,7 +556,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 2
       },
       "id": 32,
       "panels": [
@@ -1082,10 +571,10 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 25,
+            "h": 22,
             "w": 4,
             "x": 0,
-            "y": 5
+            "y": 3
           },
           "id": 39,
           "links": [],
@@ -1140,14 +629,14 @@
           ],
           "targets": [
             {
-              "expr": "sum by (crDelta)(encounter_rounds_count{job=\"spring_monsters_faceoff\"} or encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"})",
+              "expr": "sum by (crDelta)(encounter_rounds_count{numCombatants=\"02\"})",
               "format": "time_series",
               "instant": true,
               "legendFormat": "crDelta {{crDelta}}",
               "refId": "A"
             },
             {
-              "expr": "sum(encounter_rounds_count{job=\"spring_monsters_faceoff\"} or encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"})",
+              "expr": "sum(encounter_rounds_count{numCombatants=\"02\"})",
               "format": "time_series",
               "instant": true,
               "legendFormat": "Overall",
@@ -1170,10 +659,10 @@
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 11,
-            "w": 16,
+            "h": 12,
+            "w": 15,
             "x": 4,
-            "y": 5
+            "y": 3
           },
           "hiddenSeries": false,
           "id": 40,
@@ -1206,7 +695,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_count{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"}[30m]))",
+              "expr": "sum by (crDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
               "legendFormat": "{{crDelta}}",
               "refId": "A"
             }
@@ -1263,10 +752,10 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 25,
-            "w": 3,
-            "x": 20,
-            "y": 5
+            "h": 22,
+            "w": 4,
+            "x": 19,
+            "y": 3
           },
           "id": 41,
           "links": [],
@@ -1275,7 +764,7 @@
           "pluginVersion": "6.6.0",
           "showHeader": true,
           "sort": {
-            "col": null,
+            "col": 0,
             "desc": false
           },
           "styles": [
@@ -1321,14 +810,14 @@
           ],
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_count{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"}[30m]))",
+              "expr": "sum by (crDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
               "legendFormat": "crDelta {{crDelta}}",
               "refId": "B"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Number of encounters by crDelta : increase[30m]",
+          "title": "Encounters by crDelta : increase[30m]",
           "transform": "timeseries_aggregations",
           "type": "table"
         }
@@ -1343,7 +832,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 3
       },
       "id": 18,
       "panels": [
@@ -1358,10 +847,10 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 25,
+            "h": 23,
             "w": 4,
             "x": 0,
-            "y": 6
+            "y": 4
           },
           "id": 37,
           "links": [],
@@ -1416,13 +905,13 @@
           ],
           "targets": [
             {
-              "expr": "sum(encounter_rounds_sum{job=\"spring_monsters_faceoff\"} or encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"})",
+              "expr": "sum(encounter_rounds_sum{numCombatants=\"02\"})",
               "instant": true,
               "legendFormat": "Overall",
               "refId": "A"
             },
             {
-              "expr": "sum by (crDelta)(encounter_rounds_sum{job=\"spring_monsters_faceoff\"} or encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"})",
+              "expr": "sum by (crDelta)(encounter_rounds_sum{numCombatants=\"02\"})",
               "instant": true,
               "legendFormat": "crDelta {{crDelta}}",
               "refId": "B"
@@ -1430,7 +919,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Number of rounds",
+          "title": "Rounds by crDelta",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
@@ -1446,9 +935,9 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
-            "w": 16,
+            "w": 15,
             "x": 4,
-            "y": 6
+            "y": 4
           },
           "hiddenSeries": false,
           "id": 38,
@@ -1481,7 +970,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"}[30m]))",
+              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m]))",
               "legendFormat": "crDelta {{crDelta}}",
               "refId": "A"
             }
@@ -1490,7 +979,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Number of rounds by sizeDelta : increase[30m]",
+          "title": "Rounds by difference in challenge rating : increase[30m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1538,10 +1027,10 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 25,
+            "h": 23,
             "w": 4,
-            "x": 20,
-            "y": 6
+            "x": 19,
+            "y": 4
           },
           "id": 36,
           "links": [],
@@ -1596,7 +1085,7 @@
           ],
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"}[30m])) / sum by (crDelta)(increase(encounter_rounds_count{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"}[30m]))",
+              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m])) / sum by (crDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
               "instant": true,
               "legendFormat": "{{crDelta}} crDelta",
               "refId": "B"
@@ -1619,10 +1108,10 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 10,
-            "w": 16,
+            "h": 8,
+            "w": 15,
             "x": 4,
-            "y": 12
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 42,
@@ -1633,7 +1122,7 @@
             "max": false,
             "min": false,
             "rightSide": false,
-            "show": true,
+            "show": false,
             "total": false,
             "values": false
           },
@@ -1655,7 +1144,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"}[30m])) / sum by (crDelta)(increase(encounter_rounds_count{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"}[30m]))",
+              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m])) / sum by (crDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
               "legendFormat": "crDelta {{crDelta}}",
               "refId": "A"
             }
@@ -1664,7 +1153,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Average rounds/encounter by crDelta : increase[30m]",
+          "title": "Average rounds/encounter by difference in challenge rating : increase[30m]",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -1719,9 +1208,9 @@
           "description": "",
           "gridPos": {
             "h": 9,
-            "w": 16,
+            "w": 15,
             "x": 4,
-            "y": 22
+            "y": 18
           },
           "heatmap": {},
           "hideZeroBuckets": false,
@@ -1736,14 +1225,14 @@
           "reverseYBuckets": false,
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_sum{job=\"quarkus_micrometer_faceoff\"}[30m])) / sum by (crDelta)(increase(encounter_rounds_count{job=\"spring_monsters_faceoff\"}[30m]) or increase(encounter_rounds_count{job=\"quarkus_micrometer_faceoff\"}[30m]))",
+              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m])) / sum by (crDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
               "legendFormat": "crDelta {{crDelta}}",
               "refId": "A"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Average rounds/encounter by crDelta : increase[30m]",
+          "title": "Average rounds/encounter by difference in challenge rating : increase[30m]",
           "tooltip": {
             "show": true,
             "showHistogram": false
@@ -1800,5 +1289,5 @@
   "timezone": "",
   "title": "Faceoff Encounters",
   "uid": "v5dAGdwZz",
-  "version": 4
+  "version": 3
 }
