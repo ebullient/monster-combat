@@ -1,0 +1,11 @@
+groups:
+  - name: recording_rules
+    rules:
+      - record: instance_attacks:round_attacks:rate15m
+        expr: rate(round_attacks_count[15m])
+      - record: attacks:round_attacks:rate15m
+        expr: sum without(instance, job) (instance_attacks:round_attacks:rate15m)
+      - record: instance_attacks_sum:round_attacks:rate15m
+        expr: rate(round_attacks_sum[15m])
+      - record: attacks_sum:round_attacks:rate15m
+        expr: sum without(instance, job) (instance_attacks_sum:round_attacks:rate15m)
