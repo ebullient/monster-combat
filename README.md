@@ -39,8 +39,31 @@ A lot of what this application is about is just.. metrics. The surrounding envir
 ```bash
 build.sh
 cd deploy/dc
-
+docker-compose up -d
 ```
+
+You should be able to do the following and get something interesting in return:
+
+```bash
+# Spring: 
+
+curl http://127.0.0.1:8280/
+curl http://127.0.0.1:8280/actuator/metrics
+curl http://127.0.0.1:8280/actuator/prometheus
+curl http://127.0.0.1:8280/combat/faceoff  # 2 monsters
+curl http://127.0.0.1:8280/combat/melee    # 3-6 monsters
+curl http://127.0.0.1:8280/combat/any      # 2-6 monsters
+
+# Quarkus
+
+curl http://127.0.0.1:8281/
+curl http://127.0.0.1:8281/prometheus      # micrometer library
+curl http://127.0.0.1:8281/combat/faceoff  # 2 monsters
+curl http://127.0.0.1:8281/combat/melee    # 3-6 monsters
+curl http://127.0.0.1:8281/combat/any      # 2-6 monsters
+ 
+```
+
 
 ## General bring-up instructions for Kubernetes
 
@@ -109,11 +132,13 @@ curl http://monsters.192.168.99.100.nip.io/
 curl http://monsters.192.168.99.100.nip.io/actuator/metrics
 curl http://monsters.192.168.99.100.nip.io/actuator/prometheus
 
-# Battles:
+# Encounters:
 # faceoff is 2 monsters
 curl http://monsters.192.168.99.100.nip.io/combat/faceoff
-# melee is 3-5 monsters
+# melee is 3-6 monsters
 curl http://monsters.192.168.99.100.nip.io/combat/melee
+# any is random from 2-6
+curl http://monsters.192.168.99.100.nip.io/combat/any
 ```
 
 Check out the prometheus endpoint to see what metrics are being emitted.
