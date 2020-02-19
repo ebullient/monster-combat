@@ -5,15 +5,18 @@ groups:
         expr: rate(round_attacks_count[15m])
       - record: attacks:round_attacks:rate15m
         expr: sum without(instance, job) (instance_attacks:round_attacks:rate15m)
-      - record: instance_attacks_sum:round_attacks:rate15m
+
+      - record: instance_damage:round_attacks:rate15m
         expr: rate(round_attacks_sum[15m])
-      - record: attacks_sum:round_attacks:rate15m
-        expr: sum without(instance, job) (instance_attacks_sum:round_attacks:rate15m)
-      - record: instance_rounds:encounter_rounds:rate15m
+      - record: damage:round_attacks:rate15m
+        expr: sum without(instance, job) (instance_damage:round_attacks:rate15m)
+
+      - record: instance_encounters:encounter_rounds:rate15m
         expr: rate(encounter_rounds_count[15m])
+      - record: encounters:encounter_rounds:rate15m
+        expr: sum without(instance, job) (instance_encounters:encounter_rounds:rate15m)
+
+      - record: instance_rounds:encounter_rounds:rate15m
+        expr: rate(encounter_rounds_sum[15m])
       - record: rounds:encounter_rounds:rate15m
         expr: sum without(instance, job) (instance_rounds:encounter_rounds:rate15m)
-      - record: instance_rounds_sum:encounter_rounds:rate15m
-        expr: rate(encounter_rounds_sum[15m])
-      - record: rounds_sum:encounter_rounds:rate15m
-        expr: sum without(instance, job) (instance_rounds_sum:encounter_rounds:rate15m)
