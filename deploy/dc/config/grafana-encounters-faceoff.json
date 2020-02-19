@@ -144,19 +144,19 @@
               "format": "time_series",
               "instant": true,
               "legendFormat": "sizeDelta {{sizeDelta}}",
-              "refId": "A"
+              "refId": "B"
             },
             {
               "expr": "sum(encounter_rounds_count{numCombatants=\"02\"})",
               "format": "time_series",
               "instant": true,
               "legendFormat": "Overall",
-              "refId": "B"
+              "refId": "A"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Number of encounters",
+          "title": "Encounters : instant",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
@@ -206,7 +206,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (sizeDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
+              "expr": "sum by (sizeDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"02\"} * 15 * 60)",
               "legendFormat": "sizeDelta {{sizeDelta}}",
               "refId": "A"
             }
@@ -215,7 +215,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Number of encounters by sizeDelta : increase[30m]",
+          "title": "Encounters by sizeDelta : increase[15m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -350,7 +350,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Number of rounds",
+          "title": "Rounds : instant",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
@@ -401,7 +401,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (sizeDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m]))",
+              "expr": "sum by (sizeDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"02\"} * 15 * 60)",
               "legendFormat": "sizeDelta {{sizeDelta}}",
               "refId": "A"
             }
@@ -410,7 +410,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Number of rounds by sizeDelta : increase[30m]",
+          "title": "Rounds by sizeDelta : increase[15m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -493,13 +493,13 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m])) / sum(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
+              "expr": "sum(rounds:encounter_rounds:rate15m{numCombatants=\"02\"} * 15 * 60) / sum(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
               "instant": false,
               "legendFormat": "Overall",
               "refId": "A"
             },
             {
-              "expr": "sum by (sizeDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m])) / sum by (sizeDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
+              "expr": "sum by (sizeDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"02\"} * 15 * 60) / sum by (sizeDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
               "legendFormat": "sizeDelta {{sizeDelta}}",
               "refId": "B"
             }
@@ -633,19 +633,19 @@
               "format": "time_series",
               "instant": true,
               "legendFormat": "crDelta {{crDelta}}",
-              "refId": "A"
+              "refId": "B"
             },
             {
               "expr": "sum(encounter_rounds_count{numCombatants=\"02\"})",
               "format": "time_series",
               "instant": true,
               "legendFormat": "Overall",
-              "refId": "B"
+              "refId": "A"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Number of encounters",
+          "title": "Encounters : instant",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
@@ -695,7 +695,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
+              "expr": "sum by (crDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"02\"} * 15 * 60)",
               "legendFormat": "{{crDelta}}",
               "refId": "A"
             }
@@ -704,7 +704,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Number of encounters by crDelta : increase[30m]",
+          "title": "Encounters by crDelta : increase[15m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -810,19 +810,19 @@
           ],
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
+              "expr": "sum by (crDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"02\"} * 15 * 60)",
               "legendFormat": "crDelta {{crDelta}}",
               "refId": "B"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Encounters by crDelta : increase[30m]",
+          "title": "Encounters by crDelta : increase[15m]",
           "transform": "timeseries_aggregations",
           "type": "table"
         }
       ],
-      "title": "Number of encounters by difference in challenge rating",
+      "title": "Encounters by difference in challenge rating",
       "type": "row"
     },
     {
@@ -970,7 +970,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m]))",
+              "expr": "sum by (crDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"02\"} * 15 * 60)",
               "legendFormat": "crDelta {{crDelta}}",
               "refId": "A"
             }
@@ -979,7 +979,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Rounds by difference in challenge rating : increase[30m]",
+          "title": "Rounds by difference in challenge rating : increase[15m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1085,7 +1085,7 @@
           ],
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m])) / sum by (crDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
+              "expr": "sum by (crDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"02\"} * 15 * 60) / sum by (crDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
               "instant": true,
               "legendFormat": "{{crDelta}} crDelta",
               "refId": "B"
@@ -1144,7 +1144,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m])) / sum by (crDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
+              "expr": "sum by (crDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"02\"} * 15 * 60) / sum by (crDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
               "legendFormat": "crDelta {{crDelta}}",
               "refId": "A"
             }
@@ -1153,7 +1153,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Average rounds/encounter by difference in challenge rating : increase[30m]",
+          "title": "Average rounds/encounter by difference in challenge rating : increase[15m]",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -1225,14 +1225,14 @@
           "reverseYBuckets": false,
           "targets": [
             {
-              "expr": "sum by (crDelta)(increase(encounter_rounds_sum{numCombatants=\"02\"}[30m])) / sum by (crDelta)(increase(encounter_rounds_count{numCombatants=\"02\"}[30m]))",
+              "expr": "sum by (crDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"02\"} * 15 * 60) / sum by (crDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
               "legendFormat": "crDelta {{crDelta}}",
               "refId": "A"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Average rounds/encounter by difference in challenge rating : increase[30m]",
+          "title": "Average rounds/encounter by difference in challenge rating : increase[15m]",
           "tooltip": {
             "show": true,
             "showHistogram": false
@@ -1261,7 +1261,7 @@
       "type": "row"
     }
   ],
-  "refresh": "10s",
+  "refresh": "30s",
   "schemaVersion": 22,
   "style": "dark",
   "tags": [],
@@ -1289,5 +1289,5 @@
   "timezone": "",
   "title": "Faceoff Encounters",
   "uid": "v5dAGdwZz",
-  "version": 3
+  "version": 2
 }

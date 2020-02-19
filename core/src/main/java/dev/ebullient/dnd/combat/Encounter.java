@@ -274,6 +274,13 @@ public class Encounter {
             return saved;
         }
 
+        @JsonIgnore
+        public String hitOrMiss() {
+            return (critical ? "critical " : "")
+                    + (saved ? "saved " : "")
+                    + (hit ? "hit" : "miss");
+        }
+
         public int getDamageAmount() {
             return damageAmount;
         }

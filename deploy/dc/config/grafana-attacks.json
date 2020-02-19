@@ -155,6 +155,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_PROMETHEUS}",
+          "description": "",
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -191,7 +192,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d20\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d20\"}[$__interval]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{face}}",
@@ -202,7 +203,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Roll a d20 : rate [30m]",
+          "title": "Roll a d20 : rate",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -284,7 +285,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d10\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d10\"}[$__interval]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{face}}",
@@ -295,7 +296,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Roll a d10 : rate[30m]",
+          "title": "Roll a d10 : rate",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -377,7 +378,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d6\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d6\"}[$__interval]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{face}}",
@@ -388,7 +389,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Roll a d6 : rate[30m]",
+          "title": "Roll a d6 : rate",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -470,7 +471,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d12\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d12\"}[$__interval]))",
               "legendFormat": "{{face}}",
               "refId": "A"
             }
@@ -479,7 +480,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Roll a d12 : rate[30m]",
+          "title": "Roll a d12 : rate",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -561,7 +562,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d8\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d8\"}[$__interval]))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{face}}",
@@ -572,7 +573,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Roll a d8 : rate[30m]",
+          "title": "Roll a d8 : rate",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -654,7 +655,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d4\"}[30m]))",
+              "expr": "sum by (face) (rate(dice_rolls_count{die=\"d4\"}[$__interval]))",
               "legendFormat": "{{face}}",
               "refId": "A"
             }
@@ -663,7 +664,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Roll a d4 : rate[30m]",
+          "title": "Roll a d4 : rate",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -731,7 +732,7 @@
             "h": 12,
             "w": 4,
             "x": 0,
-            "y": 2
+            "y": 10
           },
           "id": 4,
           "options": {},
@@ -798,7 +799,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Number of attacks",
+          "title": "Attacks : instant",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
@@ -814,7 +815,7 @@
             "h": 6,
             "w": 18,
             "x": 4,
-            "y": 2
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 31,
@@ -846,9 +847,10 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (hitOrMiss)(rate(round_attacks_count[30m]))",
+              "expr": "sum (attacks:round_attacks:rate15m) by (hitOrMiss)",
               "format": "time_series",
               "instant": false,
+              "intervalFactor": 1,
               "legendFormat": "{{hitOrMiss}}",
               "refId": "A"
             }
@@ -857,7 +859,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Frequency of hit or miss : rate[30m]",
+          "title": "Frequency of hit or miss : rate[15m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -907,7 +909,7 @@
             "h": 6,
             "w": 18,
             "x": 4,
-            "y": 8
+            "y": 16
           },
           "hiddenSeries": false,
           "id": 9,
@@ -941,7 +943,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (hitOrMiss)(increase(round_attacks_sum[30m])) / sum by (hitOrMiss)(increase(round_attacks_count[30m]))",
+              "expr": "sum by (hitOrMiss)(damage:round_attacks:rate15m * 15 * 60) / sum by (hitOrMiss)(attacks:round_attacks:rate15m * 15 * 60)",
               "legendFormat": "{{hitOrMiss}}",
               "refId": "B"
             }
@@ -950,7 +952,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Average damage by hit or miss : increase[30m]",
+          "title": "Average damage by hit or miss : increase[15m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1012,7 +1014,7 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 19,
+            "h": 23,
             "w": 4,
             "x": 0,
             "y": 3
@@ -1071,18 +1073,18 @@
               "expr": "sum by (attackType)(round_attacks_count)",
               "instant": true,
               "legendFormat": "{{attackType}}",
-              "refId": "A"
+              "refId": "B"
             },
             {
               "expr": "sum (round_attacks_count)",
               "instant": true,
               "legendFormat": "Overall",
-              "refId": "B"
+              "refId": "A"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Attacks by type",
+          "title": "Attacks : instant",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
@@ -1096,7 +1098,7 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 7,
+            "h": 11,
             "w": 18,
             "x": 4,
             "y": 3
@@ -1133,7 +1135,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (attackType)(rate(round_attacks_count[30m]))",
+              "expr": "sum by (attackType)(attacks:round_attacks:rate15m)",
               "legendFormat": "{{attackType}}",
               "refId": "B"
             }
@@ -1142,9 +1144,9 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Frequency of attack type : rate[30m]",
+          "title": "Frequency of attack type : rate[15m]",
           "tooltip": {
-            "shared": true,
+            "shared": false,
             "sort": 0,
             "value_type": "individual"
           },
@@ -1162,7 +1164,7 @@
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": "0",
               "show": true
             },
             {
@@ -1191,7 +1193,7 @@
             "h": 12,
             "w": 18,
             "x": 4,
-            "y": 10
+            "y": 14
           },
           "hiddenSeries": false,
           "id": 34,
@@ -1225,21 +1227,21 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (attackType)(increase(round_attacks_sum[30m])) / sum by (attackType)(increase(round_attacks_count[30m]))",
-              "legendFormat": "{{attackType}}",
-              "refId": "B"
-            },
-            {
-              "expr": "sum(increase(round_attacks_sum[30m])) / sum (increase(round_attacks_count[30m]))",
+              "expr": "sum(damage:round_attacks:rate15m * 15 * 60) / sum (attacks:round_attacks:rate15m * 15 * 60)",
               "legendFormat": "Overall",
               "refId": "A"
+            },
+            {
+              "expr": "sum by (attackType)(damage:round_attacks:rate15m * 15 * 60) / sum by (attackType)(attacks:round_attacks:rate15m * 15 * 60)",
+              "legendFormat": "{{attackType}}",
+              "refId": "B"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Average damage / type : increase[30m]",
+          "title": "Average damage / type : increase[15m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1486,11 +1488,11 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (hitOrMiss) (increase(round_attacks_count[3h]))",
+              "expr": "sum by (hitOrMiss) (attacks:round_attacks:rate15m)",
               "instant": false,
               "legendFormat": "{{hitOrMiss}}",
               "refId": "A"
@@ -1500,7 +1502,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Frequency of attack : increase[3h]",
+          "title": "Frequency of attack : rate[15m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1812,7 +1814,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum (increase(round_attacks_sum[3h])) / sum(increase(round_attacks_count[3h]))",
+              "expr": "sum (damage:round_attacks:rate15m * 15 * 60) / sum(attacks:round_attacks:rate15m * 15 * 60)",
               "instant": false,
               "legendFormat": "Overall",
               "refId": "A"
@@ -1822,7 +1824,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Average damage per attack : increase[3h]",
+          "title": "Average damage per attack : increase[15m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1925,7 +1927,7 @@
           ],
           "targets": [
             {
-              "expr": "bottomk(5, sum by (attackName)(round_attacks_sum) / sum by (attackName)(round_attacks_count))",
+              "expr": "bottomk(5, sum by (attackName)(round_attacks_sum != 0 ) / sum by (attackName)(round_attacks_count))  ",
               "instant": true,
               "legendFormat": "{{attackName}}",
               "refId": "B"
@@ -1970,5 +1972,5 @@
   "timezone": "",
   "title": "Attacks",
   "uid": "LnJicdQZz",
-  "version": 5
+  "version": 2
 }

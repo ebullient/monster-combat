@@ -54,20 +54,17 @@ class CombatMetrics {
     public void endRound(RoundResult result) {
 
         for (Event event : result.getEvents()) {
-            String hitOrMiss = (event.isCritical() ? "critical " : "")
-                    + (event.isSaved() ? "saved " : "")
-                    + (event.isHit() ? "hit" : "miss");
 
             registry.summary("round.attacks",
                     "attacker", event.getActor().getName(),
                     "attackType", event.getType(),
                     "attackName", event.getName(),
-                    "hitOrMiss", hitOrMiss,
+                    "hitOrMiss", event.hitOrMiss(),
                     "targetSelector", result.getSelector())
                     .record((double) event.getDamageAmount());
 
             registry.counter("attack",
-                    "hitOrMiss", hitOrMiss,
+                    "hitOrMiss", event.hitOrMiss(),
                     "attackModifier", label(event.getAttackModifier()),
                     "difficultyClass", label(event.getDifficultyClass()))
                     .increment();

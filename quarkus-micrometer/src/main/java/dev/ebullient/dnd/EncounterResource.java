@@ -23,7 +23,6 @@ public class EncounterResource {
     EncounterResource(BeastiaryConfig config, CombatMetrics metrics) {
         this.beastiary = config.getBeastiary();
         this.metrics = metrics;
-        Dice.setSource(Dice.Source.SECURE_RANDOM);
     }
 
     @GET

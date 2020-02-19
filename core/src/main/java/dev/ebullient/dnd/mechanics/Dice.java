@@ -14,7 +14,6 @@
 package dev.ebullient.dnd.mechanics;
 
 import java.security.SecureRandom;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,24 +43,8 @@ public class Dice {
         NONE
     }
 
-    public enum Source {
-        RANDOM,
-        SECURE_RANDOM
-    }
-
-    private static Random random = new Random();
+    private static SecureRandom random = new SecureRandom();
     private static Monitor monitor = NO_OP;
-
-    public static void setSource(Source type) {
-        switch (type) {
-            case RANDOM:
-                random = new Random();
-                break;
-            case SECURE_RANDOM:
-                random = new SecureRandom();
-                break;
-        }
-    }
 
     public static void setMonitor(Monitor m) {
         if (m == null) {

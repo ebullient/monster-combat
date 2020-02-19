@@ -32,6 +32,8 @@ public interface RoundResult {
 
         public boolean isSaved();
 
+        public String hitOrMiss();
+
         public int getDamageAmount();
 
         public int getAttackModifier();

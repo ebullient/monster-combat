@@ -76,19 +76,19 @@ public class Monster implements Beast {
 
     public String toString() {
         return name
-                + "[" + size + " " + type
-                + ", ac=" + armorClass
-                + ", hp=" + hitPoints
-                + ", str=" + strength
-                + ", dex=" + dexterity
-                + ", con=" + constitution
-                + ", int=" + intelligence
-                + ", wis=" + wisdom
-                + ", cha=" + charisma
-                + ", save=[" + savingThrows + "]"
-                + ", cr=" + challengeRating
-                + ", pp=" + passivePerception
-                + "]";
+                + "(" + size + " " + type + ")"
+                + "{AC:" + armorClass
+                + ",HP:" + hitPoints
+                + ",STR:" + strength
+                + ",DEX:" + dexterity
+                + ",CON:" + constitution
+                + ",INT:" + intelligence
+                + ",WIS:" + wisdom
+                + ",CHA:" + charisma
+                + (savingThrows == null ? "" : ",SAVE:[" + savingThrows + "]")
+                + ",CR:" + challengeRating
+                + ",PP:" + passivePerception
+                + "}";
     }
 
     @Override

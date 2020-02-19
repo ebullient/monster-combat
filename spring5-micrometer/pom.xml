@@ -15,7 +15,7 @@
   <version>0.1-SNAPSHOT</version>
 
   <name>dnd-mc-spring5-micrometer</name>
-  <description>DnD 5e monster combat simulator</description>
+  <description>DnD 5e monster combat simulator using Spring Boot</description>
   <packaging>jar</packaging>
 
   <properties>
@@ -84,8 +84,13 @@
           </to>
           <container>
             <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+            <user>1001:1001</user>
+            <jvmFlags>
+              <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
+            </jvmFlags>
             <labels>
-              <org.opencontainers.image.title>Monster Combat</org.opencontainers.image.title>
+              <org.opencontainers.image.title>${project.name}</org.opencontainers.image.title>
+              <org.opencontainers.image.description>${project.description}</org.opencontainers.image.description>
               <org.opencontainers.image.created>${git.build.time}</org.opencontainers.image.created>
               <org.opencontainers.image.url>https://github.com/ebullient/monster-combat</org.opencontainers.image.url>
               <org.opencontainers.image.source>https://github.com/ebullient/monster-combat</org.opencontainers.image.source>

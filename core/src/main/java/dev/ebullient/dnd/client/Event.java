@@ -13,6 +13,7 @@
  */
 package dev.ebullient.dnd.client;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -131,6 +132,13 @@ class Event implements dev.ebullient.dnd.combat.RoundResult.Event {
 
     public void setSaved(boolean saved) {
         this.saved = saved;
+    }
+
+    @JsonIgnore
+    public String hitOrMiss() {
+        return (critical ? "critical " : "")
+                + (saved ? "saved " : "")
+                + (hit ? "hit" : "miss");
     }
 
     public int getDamageAmount() {

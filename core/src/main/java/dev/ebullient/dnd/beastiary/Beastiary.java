@@ -18,11 +18,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.EncounterBuilder;
 import dev.ebullient.dnd.mechanics.Dice;
 
 public class Beastiary {
+    static final Logger logger = LoggerFactory.getLogger(Beastiary.class);
 
     int totalCount;
     List<Beast> allBeasts = new ArrayList<>(500);
@@ -34,8 +38,8 @@ public class Beastiary {
      * @throws IllegalArgumentException if Beast is not valid for combat encounters
      */
     public Beast save(Beast b) {
-
         Encounter.validate(b); // validate for sanity once
+
         allBeasts.add(b);
 
         String cr = b.getChallengeRating();
@@ -44,6 +48,7 @@ public class Beastiary {
                 .add(b);
 
         totalCount++;
+        logger.debug("Added: {}", b);
         return b;
     }
 
