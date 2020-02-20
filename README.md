@@ -1,18 +1,17 @@
 # Monster Combat
 
-This Spring Boot 2 application has a few purposes:
+This application had a few purposes:
 
 1. to teach me, a rookie Dungeon Master, how D&D combat rules work
 2. to explore usage and capabilities of metrics libraries, starting with [Micrometer](https://micrometer.io)
 3. to mess with metrics and spring boot applications with Kubernetes, Prometheus, and Grafana.
 
-Additional notes: 
+Additional notes:
 
 * The Spring application also uses WebFlux (no Tomcat).
 * The Quarkus application uses the micrometer core library
 
-For these applications, metrics are gathered by one injectable class, usually called `CombatMetrics.java`. I wanted messing around with what was being collected and how. This choice means I'm not making extensive use of annotation-based configurations, but for what I'm attempting, I'm ok with that trade-off.
-
+For these applications, metrics are gathered by one injectable class, usually called `CombatMetrics.java`. I wanted metrics collection to be easy to find, and easy to change. This choice means I'm not making extensive use of annotation-based configurations, but for what I'm attempting, I'm ok with that trade-off.
 
 ## Getting started
 
@@ -32,12 +31,15 @@ export MONSTER_DIR=${PWD}          # for future reference
 
 * [Docker](https://docs.docker.com/install/)
 
-## Lazy bones: quick and dirty with Docker compose
+## Lazy bones: quick and dirty with docker-compose
 
-A lot of what this application is about is just.. metrics. The surrounding environment doesn't matter much. If you're lazy, or on a constrained system, docker-compose will work just fine.
+This application is all about application metrics. The surrounding environment doesn't matter much. If you're lazy, or on a constrained system, docker-compose will work fine to start all the bits.
 
 ```bash
 build.sh
+# build.sh creates the following output directories to ensure host user ownership:
+# mkdir -p deploy/dc/target/prometheus deploy/dc/target/grafana
+
 cd deploy/dc
 docker-compose up -d
 ```
@@ -45,7 +47,7 @@ docker-compose up -d
 You should be able to do the following and get something interesting in return:
 
 ```bash
-# Spring: 
+# Spring:
 
 curl http://127.0.0.1:8280/
 curl http://127.0.0.1:8280/actuator/metrics
@@ -61,9 +63,36 @@ curl http://127.0.0.1:8281/prometheus      # micrometer library
 curl http://127.0.0.1:8281/combat/faceoff  # 2 monsters
 curl http://127.0.0.1:8281/combat/melee    # 3-6 monsters
 curl http://127.0.0.1:8281/combat/any      # 2-6 monsters
- 
+
+ ```
+
+Check out the prometheus endpoint (http://127.0.0.1:9090) to see emitted metrics. You can import pre-created dashboards (see below) to visualize collected metrics in grafana (http://127.0.0.1:3000, admin|admin is default username/password).
+
+The `runme.sh` script will keep a steady stream of requests hitting an endpoint of your choosing.
+
+Hopefully, that all worked fine. If it didn't, come find me in the [gameontext slack](https://gameontext.org/slackin) and let me know. Or open an issue. That works, too.
+
+### Prometheus and Grafana with docker-compose
+
+The `${MONSTER_DIR}/deploy/dc/config` directory contains configuration for Prometheus and Grafana when run with docker-compose. The config directory is bind-mounted into both containers. The docker-compose configuration also creates a bind mount to service-specific subdirectories under `target/data` for output.
+
+The config directory conains the following files:
+
+* `grafana.ini` configures grafana
+* `grafana-*.json` are importable grafana dashboards
+* `prometheus.yml` defines jobs for spring and quarkus metrics, and declares `prometheus.rules.yaml`
+* `prometheus.rules.yaml` defines reporting rules for prometheus that create additional time series to pre-aggregate chattier metrics.
+
+To reset prometheus and grafana (tossing all data):
+
+```bash
+docker-compose stop prom grafana
+docker-compose rm prom grafana
+rm -rf ${MONSTER_DIR}/deploy/dc/target/data/prometheus/*  ${MONSTER_DIR}/deploy/dc/target/data/grafana/*
+docker-compose up -d prom grafana
 ```
 
+Note: `${MONSTER_DIR}/deploy/dc/target/data/prometheus/` and `${MONSTER_DIR}/deploy/dc/target/data/grafana/` must be owned by the host user. If you delete the directories by accident, recreate them manually before using docker-compose to start the services again (as it will create the missing directories for you, and those will be owned by root, which will cause permission issues for services running as the host user).
 
 ## General bring-up instructions for Kubernetes
 
@@ -79,7 +108,7 @@ curl http://127.0.0.1:8281/combat/any      # 2-6 monsters
 
 3. Set up [kube-prometheus](https://github.com/coreos/kube-prometheus)
 
-    This script wraps all kinds of jsonnet goodness in a container so there is less setup overall:
+    This script wraps all kinds of jsonnet goodness in a container so there is less setup over-all:
 
     ```bash
     ./deploy/k8s/kube-prometheus/build.sh prep     # Once. setup kube-prometheus jsonnet
@@ -112,7 +141,7 @@ curl http://127.0.0.1:8281/combat/any      # 2-6 monsters
     # Run through all of the sub-projects and build them
     The Spring project uses dockerBuild from the jib plugin to create an image
     # in the local docker registry. Feel free to change that up.
-    
+
     ./buildme.sh
 
     # Depending on your choices, you may have to do a docker push
@@ -120,7 +149,7 @@ curl http://127.0.0.1:8281/combat/any      # 2-6 monsters
 
     # Now deploy application metadata (service, deployment, ingress)
     # Verify that the ingress definition will work for your kubernetes cluster
-    
+
     kubectl apply -f deploy/k8s/monsters/
     ```
 
@@ -143,11 +172,13 @@ curl http://monsters.192.168.99.100.nip.io/combat/any
 
 Check out the prometheus endpoint to see what metrics are being emitted.
 
-Hopefully, that all worked fine. If it didn't, come find me in the [gameontext slack](https://gameontext.org/slackin) and let me know. Or, ya know, open an issue. That works, too.
+The `runme.sh` script will keep a steady stream of requests hitting an endpoint of your choosing.
+
+Hopefully, that all worked fine. If it didn't, come find me in the [gameontext slack](https://gameontext.org/slackin) and let me know. Or open an issue. That works, too.
 
 ---
 
-## Working with Prometheus and Grafana
+### Working with Prometheus and Grafana in Kubernetes
 
 I am lazy. I dislike the behavior of port forwarding. I defined an ingress for kubernetes-dashboard, prometheus, and grafana:
 
@@ -163,11 +194,9 @@ Now you can visit the following in your browser:
 
 Feel free to adjust these if you aren't using minikube/minishift.
 
-The `runme.sh` script will keep a steady stream of requests hitting an endpoint of your choosing.
-
 ---
 
-## Set up a Kubernetes cluster
+### Set up a Kubernetes cluster
 
 `kubectl` needs to be able to talk to a Kuberenetes cluster! You may have one already, in which case, all you need to do is make sure `kubectl` can work with it.
 

@@ -1,0 +1,235 @@
+
+encounter_rounds_max{crDelta="26",numCombatants="04",sizeDelta="04",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="23",numCombatants="03",sizeDelta="05",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="31",numCombatants="03",sizeDelta="03",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="03",numCombatants="03",sizeDelta="02",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="09",numCombatants="04",sizeDelta="03",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="23",numCombatants="06",sizeDelta="05",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="22",numCombatants="03",sizeDelta="02",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="14",numCombatants="04",sizeDelta="01",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="15",numCombatants="03",sizeDelta="00",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="09",numCombatants="04",sizeDelta="01",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="12",numCombatants="06",sizeDelta="01",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="10",numCombatants="04",sizeDelta="03",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="16",numCombatants="06",sizeDelta="03",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="02",sizeDelta="03",targetSelector="FaceOff",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="05",sizeDelta="03",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="12",numCombatants="05",sizeDelta="03",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="25",numCombatants="05",sizeDelta="04",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="10",numCombatants="03",sizeDelta="05",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="03",numCombatants="03",sizeDelta="03",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="05",numCombatants="05",sizeDelta="01",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="05",sizeDelta="05",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="14",numCombatants="04",sizeDelta="02",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="04",sizeDelta="02",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="08",numCombatants="05",sizeDelta="03",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="02",sizeDelta="04",targetSelector="FaceOff",} 0.0
+encounter_rounds_max{crDelta="20",numCombatants="06",sizeDelta="05",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="01",numCombatants="02",sizeDelta="03",targetSelector="FaceOff",} 0.0
+encounter_rounds_max{crDelta="11",numCombatants="06",sizeDelta="01",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="05",sizeDelta="04",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="09",numCombatants="04",sizeDelta="01",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="18",numCombatants="03",sizeDelta="03",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="32",numCombatants="06",sizeDelta="04",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="06",numCombatants="04",sizeDelta="01",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="09",numCombatants="03",sizeDelta="00",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="14",numCombatants="04",sizeDelta="03",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="16",numCombatants="06",sizeDelta="01",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="06",numCombatants="04",sizeDelta="03",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="04",sizeDelta="01",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="10",numCombatants="04",sizeDelta="01",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="01",numCombatants="02",sizeDelta="02",targetSelector="FaceOff",} 0.0
+encounter_rounds_max{crDelta="31",numCombatants="03",sizeDelta="03",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="05",numCombatants="05",sizeDelta="03",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="11",numCombatants="06",sizeDelta="02",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="05",sizeDelta="03",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="06",numCombatants="04",sizeDelta="02",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="32",numCombatants="06",sizeDelta="03",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="09",numCombatants="03",sizeDelta="01",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="09",numCombatants="04",sizeDelta="02",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="16",numCombatants="06",sizeDelta="02",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="14",numCombatants="04",sizeDelta="04",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="04",sizeDelta="04",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="06",numCombatants="03",sizeDelta="03",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="17",numCombatants="05",sizeDelta="03",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="20",numCombatants="06",sizeDelta="03",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="08",numCombatants="05",sizeDelta="01",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="01",numCombatants="02",sizeDelta="01",targetSelector="FaceOff",} 0.0
+encounter_rounds_max{crDelta="05",numCombatants="05",sizeDelta="02",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="10",numCombatants="03",sizeDelta="00",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="11",numCombatants="06",sizeDelta="03",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="19",numCombatants="06",sizeDelta="04",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="08",numCombatants="05",sizeDelta="04",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="05",sizeDelta="02",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="18",numCombatants="03",sizeDelta="01",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="09",numCombatants="03",sizeDelta="02",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="04",sizeDelta="03",targetSelector="HighestHealth",} 9.0
+encounter_rounds_max{crDelta="16",numCombatants="06",sizeDelta="03",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="15",numCombatants="03",sizeDelta="00",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="08",numCombatants="05",sizeDelta="02",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="20",numCombatants="06",sizeDelta="04",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="01",numCombatants="02",sizeDelta="00",targetSelector="FaceOff",} 0.0
+encounter_rounds_max{crDelta="17",numCombatants="05",sizeDelta="02",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="27",numCombatants="03",sizeDelta="03",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="18",numCombatants="03",sizeDelta="04",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="26",numCombatants="04",sizeDelta="03",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="11",numCombatants="06",sizeDelta="04",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="05",numCombatants="05",sizeDelta="01",targetSelector="LowestHealth",} 0.0
+encounter_rounds_max{crDelta="10",numCombatants="03",sizeDelta="01",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="06",numCombatants="04",sizeDelta="00",targetSelector="Random",} 0.0
+encounter_rounds_max{crDelta="09",numCombatants="04",sizeDelta="00",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="30",numCombatants="04",sizeDelta="03",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="21",numCombatants="05",sizeDelta="01",targetSelector="BiggestFirst",} 0.0
+encounter_rounds_max{crDelta="09",numCombatants="03",sizeDelta="03",targetSelector="HighestHealth",} 0.0
+encounter_rounds_max{crDelta="18",numCombatants="03",sizeDelta="02",targetSelector="SmallestFirst",} 0.0
+encounter_rounds_max{crDelta="19",numCombatants="06",sizeDelta="05",targetSelector="SmallestFirst",} 0.0
+dice_rolls_max{die="d10",face="08",} 8.0
+dice_rolls_max{die="d10",face="09",} 9.0
+dice_rolls_max{die="d10",face="06",} 6.0
+dice_rolls_max{die="d10",face="07",} 7.0
+dice_rolls_max{die="d10",face="04",} 4.0
+dice_rolls_max{die="d10",face="05",} 5.0
+dice_rolls_max{die="d10",face="02",} 2.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Sahuagin",hitOrMiss="hit",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Red Dragon Wyrmling",hitOrMiss="hit",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Crush",attackType="bludgeoning",attacker="Darkmantle",hitOrMiss="hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Adult Silver Dragon",hitOrMiss="miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Xorn",hitOrMiss="miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Pseudopod",attackType="acid",attacker="Gelatinous Cube",hitOrMiss="critical miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Greatsword",attackType="slashing",attacker="Planetar",hitOrMiss="hit",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Ancient White Dragon",hitOrMiss="miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Beak",attackType="piercing",attacker="Owlbear",hitOrMiss="critical hit",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Pike",attackType="piercing",attacker="Centaur",hitOrMiss="miss",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Longsword",attackType="slashing",attacker="Hobgoblin",hitOrMiss="critical hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Troll",hitOrMiss="critical hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Slam",attackType="bludgeoning",attacker="Earth Elemental",hitOrMiss="miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Greatclub",attackType="bludgeoning",attacker="Ogre",hitOrMiss="miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Roper",hitOrMiss="hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Nalfeshnee",hitOrMiss="critical hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Adult Black Dragon",hitOrMiss="miss",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Shortbow",attackType="piercing",attacker="Goblin",hitOrMiss="critical miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Plesiosaurus",hitOrMiss="miss",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Bites",attackType="piercing",attacker="Swarm of Bats",hitOrMiss="miss",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Rotting Fist",attackType="bludgeoning",attacker="Mummy Lord",hitOrMiss="critical hit",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Life Drain",attackType="necrotic",attacker="Wraith",hitOrMiss="critical miss",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Young Silver Dragon",hitOrMiss="hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Adult Gold Dragon",hitOrMiss="miss",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Pincer",attackType="bludgeoning",attacker="Chuul",hitOrMiss="hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Young Brass Dragon",hitOrMiss="critical miss",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Claws",attackType="piercing",attacker="Quasit",hitOrMiss="hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Heavy Club",attackType="bludgeoning",attacker="Lizardfolk",hitOrMiss="critical hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Sting",attackType="piercing",attacker="Bone Devil",hitOrMiss="hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Adult Brass Dragon",hitOrMiss="critical hit",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Troll",hitOrMiss="critical hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Paralyzing Touch",attackType="cold",attacker="Lich",hitOrMiss="critical miss",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Greataxe",attackType="slashing",attacker="Minotaur Skeleton",hitOrMiss="critical hit",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="bludgeoning",attacker="Bullywug",hitOrMiss="hit",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Acid Spray",attackType="acid",attacker="Ankheg",hitOrMiss="hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Ancient Silver Dragon",hitOrMiss="critical hit",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Claws",attackType="slashing",attacker="Steam Mephit",hitOrMiss="critical miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Young Brass Dragon",hitOrMiss="hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Bone Devil",hitOrMiss="critical hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Adult Red Dragon",hitOrMiss="hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Battleaxe",attackType="slashing",attacker="Ettin",hitOrMiss="miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Touch",attackType="fire",attacker="Magmin",hitOrMiss="critical hit",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Otyugh",hitOrMiss="critical hit",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Pincer",attackType="bludgeoning",attacker="Glabrezu",hitOrMiss="miss",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Vampire",hitOrMiss="miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Beak",attackType="piercing",attacker="Vrock",hitOrMiss="hit",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Shortsword",attackType="piercing",attacker="Skeleton",hitOrMiss="critical hit",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Hooves",attackType="bludgeoning",attacker="Unicorn",hitOrMiss="critical miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Pseudopod",attackType="bludgeoning",attacker="Black Pudding",hitOrMiss="critical hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Tail",attackType="bludgeoning",attacker="Dragon Turtle",hitOrMiss="critical hit",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Young Black Dragon",hitOrMiss="critical hit",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Greatclub",attackType="bludgeoning",attacker="Hill Giant",hitOrMiss="critical miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Claws",attackType="slashing",attacker="Troll",hitOrMiss="critical miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Beard",attackType="piercing",attacker="Bearded Devil",hitOrMiss="miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Wyvern",hitOrMiss="critical hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Adult Red Dragon",hitOrMiss="critical miss",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Tiger",hitOrMiss="hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Javelin",attackType="piercing",attacker="Ogre",hitOrMiss="critical miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Wererat",hitOrMiss="critical miss",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Tentacle",attackType="bludgeoning",attacker="Aboleth",hitOrMiss="critical hit",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Spiked Bone Club",attackType="bludgeoning",attacker="Grimlock",hitOrMiss="miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Slam",attackType="bludgeoning",attacker="Treant",hitOrMiss="miss",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Shortsword",attackType="piercing",attacker="Skeleton",hitOrMiss="critical miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Stomp",attackType="bludgeoning",attacker="Triceratops",hitOrMiss="critical hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Whip",attackType="slashing",attacker="Balor",hitOrMiss="miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Cloaker",hitOrMiss="critical miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Silver Dragon Wyrmling",hitOrMiss="hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Young Silver Dragon",hitOrMiss="hit",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Pseudopod",attackType="bludgeoning",attacker="Black Pudding",hitOrMiss="critical hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Tail",attackType="bludgeoning",attacker="Salamander",hitOrMiss="miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Talons",attackType="slashing",attacker="Giant Owl",hitOrMiss="miss",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Plesiosaurus",hitOrMiss="critical miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Dragon Turtle",hitOrMiss="critical hit",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Slam",attackType="bludgeoning",attacker="Treant",hitOrMiss="hit",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Claws",attackType="slashing",attacker="Dretch",hitOrMiss="miss",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Pseudopod",attackType="bludgeoning",attacker="Mimic",hitOrMiss="hit",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Pike",attackType="piercing",attacker="Centaur",hitOrMiss="critical hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Dagger",attackType="piercing",attacker="Kobold",hitOrMiss="critical miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Horns",attackType="bludgeoning",attacker="Chimera",hitOrMiss="critical miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Club",attackType="bludgeoning",attacker="Dryad",hitOrMiss="miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Young Gold Dragon",hitOrMiss="hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Gore",attackType="piercing",attacker="Minotaur Skeleton",hitOrMiss="critical miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Shortbow",attackType="piercing",attacker="Satyr",hitOrMiss="miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Spear",attackType="piercing",attacker="Salamander",hitOrMiss="hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Sahuagin",hitOrMiss="miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Ram",attackType="bludgeoning",attacker="Giant Goat",hitOrMiss="critical miss",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Cockatrice",hitOrMiss="critical miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Hand Crossbow",attackType="piercing",attacker="Wererat",hitOrMiss="miss",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Longbow",attackType="piercing",attacker="Wight",hitOrMiss="critical miss",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Longbow",attackType="piercing",attacker="Weretiger",hitOrMiss="critical miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Pseudopod",attackType="bludgeoning",attacker="Mimic",hitOrMiss="critical hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Tarrasque",hitOrMiss="miss",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Steam Breath",attackType="fire",attacker="Steam Mephit",hitOrMiss="hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Tail",attackType="piercing",attacker="Horned Devil",hitOrMiss="critical hit",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Pincer",attackType="bludgeoning",attacker="Glabrezu",hitOrMiss="critical miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Beak",attackType="piercing",attacker="Owlbear",hitOrMiss="miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Hurl Flame",attackType="fire",attacker="Efreeti",hitOrMiss="miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Tyrannosaurus Rex",hitOrMiss="critical hit",targetSelector="FaceOff",} 78.0
+round_attacks_max{attackName="Dagger",attackType="piercing",attacker="Kobold",hitOrMiss="critical hit",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Petrifying Breath",attackType="restrained",attacker="Gorgon",hitOrMiss="hit",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Pseudopod",attackType="bludgeoning",attacker="Ochre Jelly",hitOrMiss="miss",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Ram",attackType="bludgeoning",attacker="Satyr",hitOrMiss="critical miss",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Hooves",attackType="bludgeoning",attacker="Unicorn",hitOrMiss="miss",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Poison Breath",attackType="poison",attacker="Iron Golem",hitOrMiss="hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Claws",attackType="slashing",attacker="Griffon",hitOrMiss="miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Morningstar",attackType="piercing",attacker="Cloud Giant",hitOrMiss="critical miss",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Adult White Dragon",hitOrMiss="critical hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Werewolf",hitOrMiss="hit",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Androsphinx",hitOrMiss="hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Intoxicating Touch",attackType="cursed",attacker="Lamia",hitOrMiss="miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Adult Blue Dragon",hitOrMiss="critical hit",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Longbow",attackType="piercing",attacker="Gnoll",hitOrMiss="miss",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Slam",attackType="bludgeoning",attacker="Doppelganger",hitOrMiss="miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Greatsword",attackType="slashing",attacker="Storm Giant",hitOrMiss="hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Dragon Turtle",hitOrMiss="critical miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Mimic",hitOrMiss="critical miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Poisoned Dart",attackType="piercing",attacker="Deep Gnome",hitOrMiss="miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Vampire Spawn",hitOrMiss="hit",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Remorhaz",hitOrMiss="critical hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Strength Drain",attackType="necrotic",attacker="Shadow",hitOrMiss="miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Bites",attackType="piercing",attacker="Gibbering Mouther",hitOrMiss="hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Ancient Gold Dragon",hitOrMiss="hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Ghast",hitOrMiss="miss",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Black Dragon Wyrmling",hitOrMiss="miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Lion",hitOrMiss="miss",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Manticore",hitOrMiss="hit",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Ancient Silver Dragon",hitOrMiss="miss",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Wererat",hitOrMiss="critical hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Adult Bronze Dragon",hitOrMiss="hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Paralyzing Touch",attackType="cold",attacker="Lich",hitOrMiss="critical hit",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Claws",attackType="slashing",attacker="Ice Mephit",hitOrMiss="critical miss",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Longsword",attackType="slashing",attacker="Balor",hitOrMiss="hit",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Sting",attackType="piercing",attacker="Pseudodragon",hitOrMiss="miss",targetSelector="BiggestFirst",} 0.0
+round_attacks_max{attackName="Hooves",attackType="bludgeoning",attacker="Riding Horse",hitOrMiss="critical hit",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Greatclub",attackType="bludgeoning",attacker="Hill Giant",hitOrMiss="miss",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Longbow",attackType="piercing",attacker="Gnoll",hitOrMiss="hit",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Greataxe",attackType="slashing",attacker="Minotaur",hitOrMiss="critical hit",targetSelector="SmallestFirst",} 0.0
+round_attacks_max{attackName="Claws",attackType="slashing",attacker="Dretch",hitOrMiss="critical miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Bite",attackType="piercing",attacker="Chimera",hitOrMiss="miss",targetSelector="LowestHealth",} 0.0
+round_attacks_max{attackName="Warhammer",attackType="bludgeoning",attacker="Azer",hitOrMiss="miss",targetSelector="FaceOff",} 0.0
+round_attacks_max{attackName="Claw",attackType="slashing",attacker="Ancient Red Dragon",hitOrMiss="critical miss",targetSelector="Random",} 0.0
+round_attacks_max{attackName="Tail",attackType="bludgeoning",attacker="Marilith",hitOrMiss="critical hit",targetSelector="HighestHealth",} 0.0
+round_attacks_max{attackName="Spit Poison",attackType="poison",attacker="Guardian Naga",hitOrMiss="critical miss",targetSelector="SmallestFirst",} 0.0

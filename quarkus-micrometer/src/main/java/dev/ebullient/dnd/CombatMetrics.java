@@ -56,17 +56,20 @@ class CombatMetrics {
 
             registry.summary("round.attacks",
                     "attackType", event.getType(),
-                    "attackName", event.getName(),
                     "hitOrMiss", event.hitOrMiss(),
                     "targetSelector", result.getSelector())
                     .record((double) event.getDamageAmount());
 
             registry.summary("attacker.damage",
                     "attacker", event.getActor().getName(),
-                    "hitOrMiss", event.hitOrMiss(),
-                    "attackModifier", label(event.getAttackModifier()),
-                    "difficultyClass", label(event.getDifficultyClass()))
+                    "attackName", event.getName(),
+                    "attackType", event.getType(),
+                    "hitOrMiss", event.hitOrMiss())
                     .record((double) event.getDamageAmount());
+
+            registry.summary("attack.success",
+                    "hitOrMiss", event.hitOrMiss())
+                    .record((double) event.getDifficultyClass() - event.getAttackModifier());
         }
     }
 
