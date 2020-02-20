@@ -36,7 +36,7 @@ class CombatMetrics {
         this.registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
         Metrics.addRegistry(registry);
 
-        Dice.setMonitor((k, v) -> registry.summary("dice.rolls", "die", k, "face", label(v)).record((double) v));
+        Dice.setMonitor((k, v) -> registry.counter("dice.rolls", "die", k, "face", label(v)).increment());
 
         logger.debug("Created CombatMetrics with MeterRegistry: {}", registry);
     }
