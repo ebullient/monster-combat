@@ -88,8 +88,11 @@ public class MonsterTest {
         Assert.assertNotNull(m.getMultiattack());
 
         List<Attack> attacks = m.getAttacks();
-        Assert.assertNotNull(attacks);
-        Assert.assertEquals(2, attacks.size());
+        Assert.assertNotNull("List of attacks should not be null", attacks);
+        Assert.assertFalse("List of attacks should not be empty", attacks.isEmpty());
+        Multiattack multi = m.getMultiattack();
+        Assert.assertNotNull("Multi-attack should not be null", multi);
+        Assert.assertEquals("Multi-attack should have one combination", 1, multi.combinations.size());
 
         Assert.assertEquals("Known modifier should be used when no saving throw is specified: " + m,
                 5, m.getSavingThrow(Ability.STR));
@@ -119,8 +122,13 @@ public class MonsterTest {
 
         List<Attack> attacks = m.getAttacks();
         Assert.assertNotNull(attacks);
-        Assert.assertEquals(3, attacks.size());
+        Assert.assertNotNull("List of attacks should not be null", attacks);
+        Assert.assertFalse("List of attacks should not be empty", attacks.isEmpty());
         Assert.assertFalse("List of attacks should not contain 'melee'", attacks.toString().contains("melee"));
+
+        Multiattack multi = m.getMultiattack();
+        Assert.assertNotNull("Multi-attack should not be null", multi);
+        Assert.assertEquals("Multi-attack should have one combination", 1, multi.combinations.size());
     }
 
     @Test
@@ -139,8 +147,11 @@ public class MonsterTest {
         Assert.assertEquals(Size.LARGE, m.getSize());
 
         List<Attack> attacks = m.getAttacks();
-        Assert.assertNotNull(attacks);
-        Assert.assertEquals(3, attacks.size());
+        Assert.assertNotNull("List of attacks should not be null", attacks);
+        Assert.assertFalse("List of attacks should not be empty", attacks.isEmpty());
+        Multiattack multi = m.getMultiattack();
+        Assert.assertNotNull("Multi-attack should not be null", multi);
+        Assert.assertEquals("Multi-attack should have one combination", 1, multi.combinations.size());
 
         // this is the lazy way to check this
         Assert.assertFalse("No attack list elements should be null", attacks.toString().contains("null"));
@@ -162,8 +173,11 @@ public class MonsterTest {
         Assert.assertEquals(Size.LARGE, m.getSize());
 
         List<Attack> attacks = m.getAttacks();
-        Assert.assertNotNull(attacks);
-        Assert.assertEquals(2, attacks.size());
+        Assert.assertNotNull("List of attacks should not be null", attacks);
+        Assert.assertFalse("List of attacks should not be empty", attacks.isEmpty());
+        Multiattack multi = m.getMultiattack();
+        Assert.assertNotNull("Multi-attack should not be null", multi);
+        Assert.assertEquals("Multi-attack should have two combinations", 2, multi.combinations.size());
 
         MonsterAttack a = m.actions.get("intoxicating-touch");
         Assert.assertNotNull(a);
@@ -217,8 +231,11 @@ public class MonsterTest {
         Assert.assertEquals(Size.MEDIUM, m.getSize());
 
         List<Attack> attacks = m.getAttacks();
-        Assert.assertNotNull(attacks);
-        Assert.assertEquals(2, attacks.size());
+        Assert.assertNotNull("List of attacks should not be null", attacks);
+        Assert.assertFalse("List of attacks should not be empty", attacks.isEmpty());
+        Multiattack multi = m.getMultiattack();
+        Assert.assertNotNull("Multi-attack should not be null", multi);
+        Assert.assertEquals("Multi-attack should have one combination", 1, multi.combinations.size());
 
         MonsterAttack a = m.actions.get("blinding-spittle");
         Assert.assertNotNull("blinding-spittle should be a known action", a);

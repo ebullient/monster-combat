@@ -41,8 +41,7 @@ class CombatMetrics {
         registry.summary("encounter.rounds",
                 "numCombatants", label(e.getSize()),
                 "targetSelector", e.getSelector(),
-                "sizeDelta", label(e.getSizeDelta()),
-                "crDelta", label(e.getCrDelta()))
+                "sizeDelta", label(e.getSizeDelta()))
                 .record((double) totalRounds);
     }
 
@@ -50,18 +49,18 @@ class CombatMetrics {
 
         for (Event event : result.getEvents()) {
             registry.summary("round.attacks",
-                    "attacker", event.getActor().getName(),
                     "attackType", event.getType(),
                     "attackName", event.getName(),
                     "hitOrMiss", event.hitOrMiss(),
                     "targetSelector", result.getSelector())
                     .record((double) event.getDamageAmount());
 
-            registry.counter("attack",
+            registry.summary("attack",
+                    "attacker", event.getActor().getName(),
                     "hitOrMiss", event.hitOrMiss(),
                     "attackModifier", label(event.getAttackModifier()),
                     "difficultyClass", label(event.getDifficultyClass()))
-                    .increment();
+                    .record((double) event.getDamageAmount());
         }
     }
 

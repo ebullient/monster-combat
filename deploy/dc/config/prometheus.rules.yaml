@@ -20,3 +20,14 @@ groups:
         expr: rate(encounter_rounds_sum[15m])
       - record: rounds:encounter_rounds:rate15m
         expr: sum without(instance, job) (instance_rounds:encounter_rounds:rate15m)
+
+      - record: instance_attackers:attacker_damage:rate15m
+        expr: rate(attacker_damage_count[15m])
+      - record: attackers:attacker_damage:rate15m
+        expr: sum without(instance, job) (instance_attackers:attacker_damage:rate15m)
+
+      - record: instance_damage:attacker_damage:rate15m
+        expr: rate(attacker_damage_sum[15m])
+      - record: damage:attacker_damage:rate15m
+        expr: sum without(instance, job) (instance_damage:attacker_damage:rate15m)
+

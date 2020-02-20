@@ -318,7 +318,8 @@ public class Monster implements Beast {
     @JsonIgnore
     public List<Attack> getAttacks() {
         List<Attack> list = new ArrayList<>();
-        if (multiattack != null) {
+        // Use multi-attack most of the time (2 out of 3)
+        if (multiattack != null && Dice.range(3) > 0) {
             String sequence = multiattack.randomCombination();
             Matcher m = ATTACK_SEQ.matcher(sequence);
             while (m.find()) {

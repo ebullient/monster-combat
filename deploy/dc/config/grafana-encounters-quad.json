@@ -23,12 +23,6 @@
       "version": ""
     },
     {
-      "type": "panel",
-      "id": "heatmap",
-      "name": "Heatmap",
-      "version": ""
-    },
-    {
       "type": "datasource",
       "id": "prometheus",
       "name": "Prometheus",
@@ -557,7 +551,7 @@
       "type": "row"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
@@ -566,499 +560,6 @@
         "y": 2
       },
       "id": 30,
-      "panels": [],
-      "title": "Encounters by difference in size",
-      "type": "row"
-    },
-    {
-      "cacheTimeout": null,
-      "columns": [
-        {
-          "text": "Total",
-          "value": "total"
-        }
-      ],
-      "datasource": "${DS_PROMETHEUS}",
-      "fontSize": "80%",
-      "gridPos": {
-        "h": 8,
-        "w": 4,
-        "x": 0,
-        "y": 3
-      },
-      "id": 15,
-      "links": [],
-      "options": {},
-      "pageSize": null,
-      "pluginVersion": "6.6.0",
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": false
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "",
-          "align": "left",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Metric",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "expr": "sum by (sizeDelta)(encounter_rounds_count{numCombatants=\"04\"})",
-          "format": "time_series",
-          "instant": true,
-          "legendFormat": "sizeDelta {{sizeDelta}}",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(encounter_rounds_count{numCombatants=\"04\"})",
-          "format": "time_series",
-          "instant": true,
-          "legendFormat": "Overall",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Encounters : instant",
-      "transform": "timeseries_aggregations",
-      "type": "table"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "cacheTimeout": null,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 19,
-        "x": 4,
-        "y": 3
-      },
-      "hiddenSeries": false,
-      "id": 23,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pluginVersion": "6.6.0",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum by (sizeDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
-          "legendFormat": "sizeDelta {{sizeDelta}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Encounters by sizeDelta : increase[15m]",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "datasource": "${DS_PROMETHEUS}",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 11
-      },
-      "id": 12,
-      "panels": [],
-      "title": "Rounds / Encounter by difference in size",
-      "type": "row"
-    },
-    {
-      "cacheTimeout": null,
-      "columns": [
-        {
-          "text": "Total",
-          "value": "total"
-        }
-      ],
-      "datasource": "${DS_PROMETHEUS}",
-      "fontSize": "80%",
-      "gridPos": {
-        "h": 13,
-        "w": 4,
-        "x": 0,
-        "y": 12
-      },
-      "id": 9,
-      "links": [],
-      "options": {},
-      "pageSize": null,
-      "pluginVersion": "6.6.0",
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": false
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "",
-          "align": "left",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Metric",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "expr": "sum(encounter_rounds_sum{numCombatants=\"04\"})",
-          "instant": true,
-          "legendFormat": "Overall",
-          "refId": "A"
-        },
-        {
-          "expr": "sum by (sizeDelta)(encounter_rounds_sum{numCombatants=\"04\"})",
-          "instant": true,
-          "legendFormat": "sizeDelta {{sizeDelta}}",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Rounds : instant",
-      "transform": "timeseries_aggregations",
-      "type": "table"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "cacheTimeout": null,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
-      "description": "",
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 19,
-        "x": 4,
-        "y": 12
-      },
-      "hiddenSeries": false,
-      "id": 51,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pluginVersion": "6.6.0",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum by (sizeDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
-          "legendFormat": "sizeDelta {{sizeDelta}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Rounds by sizeDelta : increase[15m]",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "cacheTimeout": null,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 19,
-        "x": 4,
-        "y": 18
-      },
-      "hiddenSeries": false,
-      "id": 52,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pluginVersion": "6.6.0",
-      "pointradius": 1,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(rounds:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60) / sum(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
-          "instant": false,
-          "legendFormat": "Overall",
-          "refId": "A"
-        },
-        {
-          "expr": "sum by (sizeDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60) / sum by (sizeDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
-          "legendFormat": "sizeDelta {{sizeDelta}}",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Average rounds/encounter by sizeDelta : increase[15m]",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": true,
-      "datasource": "${DS_PROMETHEUS}",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 25
-      },
-      "id": 32,
       "panels": [
         {
           "cacheTimeout": null,
@@ -1071,12 +572,12 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 22,
+            "h": 8,
             "w": 4,
             "x": 0,
-            "y": 5
+            "y": 3
           },
-          "id": 39,
+          "id": 15,
           "links": [],
           "options": {},
           "pageSize": null,
@@ -1129,18 +630,18 @@
           ],
           "targets": [
             {
-              "expr": "sum by (crDelta)(encounter_rounds_count{numCombatants=\"04\"})",
+              "expr": "sum by (sizeDelta)(encounter_rounds_count{numCombatants=\"04\"})",
               "format": "time_series",
               "instant": true,
-              "legendFormat": "crDelta {{crDelta}}",
-              "refId": "A"
+              "legendFormat": "sizeDelta {{sizeDelta}}",
+              "refId": "B"
             },
             {
               "expr": "sum(encounter_rounds_count{numCombatants=\"04\"})",
               "format": "time_series",
               "instant": true,
               "legendFormat": "Overall",
-              "refId": "B"
+              "refId": "A"
             }
           ],
           "timeFrom": null,
@@ -1159,23 +660,25 @@
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 12,
-            "w": 15,
+            "h": 8,
+            "w": 19,
             "x": 4,
-            "y": 5
+            "y": 3
           },
           "hiddenSeries": false,
-          "id": 40,
+          "id": 23,
           "legend": {
-            "alignAsTable": false,
-            "avg": false,
+            "alignAsTable": true,
+            "avg": true,
             "current": false,
             "max": false,
             "min": false,
-            "rightSide": false,
+            "rightSide": true,
             "show": true,
+            "sort": "avg",
+            "sortDesc": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -1195,8 +698,8 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (crDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
-              "legendFormat": "{{crDelta}}",
+              "expr": "sum by (sizeDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
+              "legendFormat": "sizeDelta {{sizeDelta}}",
               "refId": "A"
             }
           ],
@@ -1204,7 +707,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Encounters by crDelta : increase[15m]",
+          "title": "Encounters by sizeDelta : increase[15m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1240,89 +743,9 @@
             "align": false,
             "alignLevel": null
           }
-        },
-        {
-          "cacheTimeout": null,
-          "columns": [
-            {
-              "text": "Avg",
-              "value": "avg"
-            }
-          ],
-          "datasource": "${DS_PROMETHEUS}",
-          "fontSize": "80%",
-          "gridPos": {
-            "h": 22,
-            "w": 4,
-            "x": 19,
-            "y": 5
-          },
-          "id": 41,
-          "links": [],
-          "options": {},
-          "pageSize": null,
-          "pluginVersion": "6.6.0",
-          "showHeader": true,
-          "sort": {
-            "col": 1,
-            "desc": true
-          },
-          "styles": [
-            {
-              "alias": "Time",
-              "align": "auto",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "",
-              "align": "auto",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "string",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "right",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "sum by (crDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
-              "legendFormat": "crDelta {{crDelta}}",
-              "refId": "B"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Encounters by crDelta : increase[15m]",
-          "transform": "timeseries_aggregations",
-          "type": "table"
         }
       ],
-      "title": "Number of encounters by difference in challenge rating",
+      "title": "Encounters by difference in size",
       "type": "row"
     },
     {
@@ -1332,9 +755,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 3
       },
-      "id": 18,
+      "id": 12,
       "panels": [
         {
           "cacheTimeout": null,
@@ -1347,12 +770,12 @@
           "datasource": "${DS_PROMETHEUS}",
           "fontSize": "80%",
           "gridPos": {
-            "h": 23,
+            "h": 13,
             "w": 4,
             "x": 0,
-            "y": 6
+            "y": 4
           },
-          "id": 37,
+          "id": 9,
           "links": [],
           "options": {},
           "pageSize": null,
@@ -1411,15 +834,15 @@
               "refId": "A"
             },
             {
-              "expr": "sum by (crDelta)(encounter_rounds_sum{numCombatants=\"04\"})",
+              "expr": "sum by (sizeDelta)(encounter_rounds_sum{numCombatants=\"04\"})",
               "instant": true,
-              "legendFormat": "crDelta {{crDelta}}",
+              "legendFormat": "sizeDelta {{sizeDelta}}",
               "refId": "B"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Rounds by crDelta",
+          "title": "Rounds : instant",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
@@ -1435,22 +858,24 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
-            "w": 15,
+            "w": 19,
             "x": 4,
-            "y": 6
+            "y": 4
           },
           "hiddenSeries": false,
-          "id": 38,
+          "id": 51,
           "legend": {
-            "alignAsTable": false,
-            "avg": false,
+            "alignAsTable": true,
+            "avg": true,
             "current": false,
             "max": false,
             "min": false,
-            "rightSide": false,
-            "show": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "avg",
+            "sortDesc": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -1470,8 +895,8 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (crDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
-              "legendFormat": "crDelta {{crDelta}}",
+              "expr": "sum by (sizeDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
+              "legendFormat": "sizeDelta {{sizeDelta}}",
               "refId": "A"
             }
           ],
@@ -1479,9 +904,9 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Rounds by difference in challenge rating : increase[15m]",
+          "title": "Rounds by sizeDelta : increase[15m]",
           "tooltip": {
-            "shared": false,
+            "shared": true,
             "sort": 0,
             "value_type": "individual"
           },
@@ -1517,114 +942,34 @@
           }
         },
         {
-          "cacheTimeout": null,
-          "columns": [
-            {
-              "text": "Avg",
-              "value": "avg"
-            }
-          ],
-          "datasource": "${DS_PROMETHEUS}",
-          "fontSize": "80%",
-          "gridPos": {
-            "h": 23,
-            "w": 4,
-            "x": 19,
-            "y": 6
-          },
-          "id": 36,
-          "links": [],
-          "options": {},
-          "pageSize": null,
-          "pluginVersion": "6.6.0",
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": false
-          },
-          "styles": [
-            {
-              "alias": "Time",
-              "align": "auto",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "",
-              "align": "left",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "string",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "align": "right",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "sum by (crDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60) / sum by (crDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
-              "instant": true,
-              "legendFormat": "{{crDelta}} crDelta",
-              "refId": "B"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Average rounds / encounter",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
           "aliasColors": {},
           "bars": false,
           "cacheTimeout": null,
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_PROMETHEUS}",
-          "description": "",
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 8,
-            "w": 15,
+            "h": 7,
+            "w": 19,
             "x": 4,
-            "y": 12
+            "y": 10
           },
           "hiddenSeries": false,
-          "id": 42,
+          "id": 52,
           "legend": {
-            "alignAsTable": false,
-            "avg": false,
+            "alignAsTable": true,
+            "avg": true,
             "current": false,
             "max": false,
             "min": false,
-            "rightSide": false,
-            "show": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "avg",
+            "sortDesc": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -1635,7 +980,7 @@
           },
           "percentage": false,
           "pluginVersion": "6.6.0",
-          "pointradius": 2,
+          "pointradius": 1,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
@@ -1644,18 +989,24 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (crDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60) / sum by (crDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
-              "legendFormat": "crDelta {{crDelta}}",
+              "expr": "sum(rounds:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60) / sum(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
+              "instant": false,
+              "legendFormat": "Overall",
               "refId": "A"
+            },
+            {
+              "expr": "sum by (sizeDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60) / sum by (sizeDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
+              "legendFormat": "sizeDelta {{sizeDelta}}",
+              "refId": "B"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Average rounds/encounter by difference in challenge rating : increase[15m]",
+          "title": "Average rounds/encounter by sizeDelta : increase[15m]",
           "tooltip": {
-            "shared": false,
+            "shared": true,
             "sort": 0,
             "value_type": "individual"
           },
@@ -1689,75 +1040,9 @@
             "align": false,
             "alignLevel": null
           }
-        },
-        {
-          "cacheTimeout": null,
-          "cards": {
-            "cardPadding": null,
-            "cardRound": null
-          },
-          "color": {
-            "cardColor": "#b4ff00",
-            "colorScale": "sqrt",
-            "colorScheme": "interpolatePlasma",
-            "exponent": 0.5,
-            "mode": "spectrum"
-          },
-          "dataFormat": "timeseries",
-          "datasource": "${DS_PROMETHEUS}",
-          "description": "",
-          "gridPos": {
-            "h": 9,
-            "w": 15,
-            "x": 4,
-            "y": 20
-          },
-          "heatmap": {},
-          "hideZeroBuckets": false,
-          "highlightCards": true,
-          "id": 43,
-          "legend": {
-            "show": false
-          },
-          "links": [],
-          "options": {},
-          "pluginVersion": "6.6.0",
-          "reverseYBuckets": false,
-          "targets": [
-            {
-              "expr": "sum by (crDelta)(rounds:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60) / sum by (crDelta)(encounters:encounter_rounds:rate15m{numCombatants=\"04\"} * 15 * 60)",
-              "legendFormat": "crDelta {{crDelta}}",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Average rounds/encounter by difference in challenge rating : increase[15m]",
-          "tooltip": {
-            "show": true,
-            "showHistogram": false
-          },
-          "type": "heatmap",
-          "xAxis": {
-            "show": true
-          },
-          "xBucketNumber": null,
-          "xBucketSize": "5m",
-          "yAxis": {
-            "decimals": null,
-            "format": "short",
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true,
-            "splitFactor": null
-          },
-          "yBucketBound": "auto",
-          "yBucketNumber": 20,
-          "yBucketSize": null
         }
       ],
-      "title": "Rounds / Encounter by difference in challenge rating",
+      "title": "Rounds / Encounter by difference in size",
       "type": "row"
     }
   ],
@@ -1789,5 +1074,5 @@
   "timezone": "",
   "title": "4-creature Encounters",
   "uid": "VgQPKTwWk",
-  "version": 2
+  "version": 3
 }
