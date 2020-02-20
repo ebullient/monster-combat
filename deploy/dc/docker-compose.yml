@@ -37,7 +37,7 @@ services:
 
   quarkus:
     container_name: quarkus-micrometer
-    image: ebullient/dnd-mc-quarkus-micrometer
+    image: ebullient/dnd-mc-quarkus-micrometer:jvm
     ports:
       - "8281:8080"
 
