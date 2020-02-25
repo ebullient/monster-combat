@@ -24,9 +24,9 @@ public class EncounterBuilder {
 
     final Beastiary beastiary;
 
+    int howMany = 2;
     TargetSelector selector = TargetSelector.SelectAtRandom;
     Dice.Method method = Dice.Method.ROLL;
-    int howMany = 2;
     String challengeRating = null;
 
     public EncounterBuilder(Beastiary beastiary) {
@@ -65,7 +65,7 @@ public class EncounterBuilder {
             list.add(new EncounterCombatant(beast, method));
         }
 
-        return new Encounter(list, selector, method);
+        return new Encounter(list, (EncounterTargetSelector) selector, method);
     }
 
     public static Encounter build(List<Beast> beasts, TargetSelector selector, Dice.Method method) {
@@ -74,6 +74,6 @@ public class EncounterBuilder {
             Encounter.validate(b);
             list.add(new EncounterCombatant(b, method));
         }
-        return new Encounter(list, selector, method);
+        return new Encounter(list, (EncounterTargetSelector) selector, method);
     }
 }

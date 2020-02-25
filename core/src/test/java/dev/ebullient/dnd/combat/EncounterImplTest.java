@@ -27,7 +27,7 @@ import dev.ebullient.dnd.mechanics.Dice;
 import dev.ebullient.dnd.mechanics.Size;
 import dev.ebullient.dnd.mechanics.Type;
 
-public class EncounterTest {
+public class EncounterImplTest {
 
     ObjectMapper mapper = new ObjectMapper();
 
@@ -45,7 +45,8 @@ public class EncounterTest {
         mbs[1].type = Type.ABERRATION;
         mbs[1].cr = 0; // CR 1/2
 
-        Encounter e = new Encounter(Arrays.asList(mcs), TargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
+        Encounter e = new Encounter(Arrays.asList(mcs), EncounterTargetSelector.SelectAtRandom,
+                Dice.Method.USE_AVERAGE);
         Assert.assertEquals("Size delta should be 0 when beasts are the same size", 0, e.sizeDelta);
         Assert.assertEquals("CR delta should be 0 when beasts have the same CR", 0, e.crDelta);
         Assert.assertEquals("Number of types should be 1 when beasts are the same type", 1, e.numTypes);
@@ -55,7 +56,7 @@ public class EncounterTest {
         mbs[1].type = Type.BEAST;
         mbs[1].cr = 1;
 
-        e = new Encounter(Arrays.asList(mcs), TargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
+        e = new Encounter(Arrays.asList(mcs), EncounterTargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
         Assert.assertEquals("Size delta should be 1 when beasts are 1 size apart", 1, e.sizeDelta);
         Assert.assertEquals("CR delta should be 1 when cr differs by 1", 1, e.crDelta);
         Assert.assertEquals("Number of types should be 2", 2, e.numTypes);
@@ -64,7 +65,7 @@ public class EncounterTest {
         mbs[1].size = Size.GARGANTUAN;
         mbs[1].cr = 1;
 
-        e = new Encounter(Arrays.asList(mcs), TargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
+        e = new Encounter(Arrays.asList(mcs), EncounterTargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
         Assert.assertEquals("Size delta should be 5 (max delta)", Size.GARGANTUAN.ordinal() - Size.TINY.ordinal(),
                 e.sizeDelta);
         Assert.assertEquals("CR delta should be 4 when cr ( -3 to 1 )", 4, e.crDelta);
@@ -95,7 +96,7 @@ public class EncounterTest {
         List<EncounterCombatant> combatants = Arrays.asList(new EncounterCombatant(mbs[0], 10, 40),
                 new EncounterCombatant(mbs[1], 10, 30));
 
-        Encounter r = new Encounter(combatants, TargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
+        Encounter r = new Encounter(combatants, EncounterTargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
         Assert.assertFalse(r.isFinal());
 
         int i = 0;
@@ -118,7 +119,7 @@ public class EncounterTest {
 
     void testSerializeResult(RoundResult result) {
         Assertions.assertDoesNotThrow(() -> {
-            mapper.convertValue((Encounter.Result) result, dev.ebullient.dnd.client.RoundResult.class);
+            mapper.convertValue((EncounterRoundResult) result, dev.ebullient.dnd.client.RoundResult.class);
         });
     }
 }

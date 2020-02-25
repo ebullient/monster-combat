@@ -31,7 +31,7 @@ public class EncounterEventConditionTest {
                 new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
+        EncounterAttackEvent result = new EncounterAttackEvent(mcs[0], mcs[1],
                 new MockAttack("testApplyConditionWithDamage"), Dice.Method.USE_AVERAGE, "id");
 
         MockDamage damage;
@@ -52,7 +52,7 @@ public class EncounterEventConditionTest {
                 new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
+        EncounterAttackEvent result = new EncounterAttackEvent(mcs[0], mcs[1],
                 new MockAttack("testBlindedCondition"), Dice.Method.USE_AVERAGE, "id");
 
         MockDamage damage = new MockDamage("blinded", "14(2d8+5)");
@@ -80,7 +80,7 @@ public class EncounterEventConditionTest {
                 new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
+        EncounterAttackEvent result = new EncounterAttackEvent(mcs[0], mcs[1],
                 new MockAttack("testCursedCondition"), Dice.Method.USE_AVERAGE, "id");
 
         MockDamage damage = new MockDamage("cursed", "");
@@ -111,7 +111,7 @@ public class EncounterEventConditionTest {
                 new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
+        EncounterAttackEvent result = new EncounterAttackEvent(mcs[0], mcs[1],
                 new MockAttack("testPoisonedCondition"), Dice.Method.USE_AVERAGE, "id");
 
         MockDamage damage = new MockDamage("poisoned", "14(2d8+5)");
@@ -139,7 +139,7 @@ public class EncounterEventConditionTest {
                 new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
+        EncounterAttackEvent result = new EncounterAttackEvent(mcs[0], mcs[1],
                 new MockAttack("testParalyzedCondition"), Dice.Method.USE_AVERAGE, "id");
 
         MockDamage damage = new MockDamage("paralyzed", "14(2d8+5)");
@@ -171,7 +171,7 @@ public class EncounterEventConditionTest {
                 new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
+        EncounterAttackEvent result = new EncounterAttackEvent(mcs[0], mcs[1],
                 new MockAttack("testSlowedCondition"), Dice.Method.USE_AVERAGE, "id");
 
         MockDamage damage = new MockDamage("slowed", "14(2d8+5)");
@@ -199,7 +199,7 @@ public class EncounterEventConditionTest {
                 new EncounterCombatant(new MockBeast("1"), 10, 10)
         };
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(mcs[0], mcs[1],
+        EncounterAttackEvent result = new EncounterAttackEvent(mcs[0], mcs[1],
                 new MockAttack("testHPDrainCondition"), Dice.Method.USE_AVERAGE, "id");
         result.damageAmount = 5;
 

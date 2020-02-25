@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class Event implements dev.ebullient.dnd.combat.RoundResult.Event {
+class AttackEvent implements dev.ebullient.dnd.combat.RoundResult.Event {
 
     @JsonDeserialize(as = dev.ebullient.dnd.client.Combatant.class)
     Combatant actor;

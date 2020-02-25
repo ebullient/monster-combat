@@ -24,10 +24,10 @@ public class RoundResult implements dev.ebullient.dnd.combat.RoundResult {
     @JsonDeserialize(contentAs = dev.ebullient.dnd.client.Combatant.class)
     List<Combatant> survivors;
 
-    @JsonDeserialize(contentAs = dev.ebullient.dnd.client.Event.class)
+    @JsonDeserialize(contentAs = dev.ebullient.dnd.client.AttackEvent.class)
     List<Event> events;
 
-    int size;
+    int numCombatants;
     int numTypes;
     int crDelta;
     int sizeDelta;
@@ -49,12 +49,12 @@ public class RoundResult implements dev.ebullient.dnd.combat.RoundResult {
         this.events = events;
     }
 
-    public int getSize() {
-        return size;
+    public int getNumCombatants() {
+        return numCombatants;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setNumCombatants(int numCombatants) {
+        this.numCombatants = numCombatants;
     }
 
     public int getNumTypes() {

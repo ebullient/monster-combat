@@ -37,16 +37,14 @@ class CombatMetrics {
     }
 
     public void endEncounter(Encounter e, int totalRounds) {
-
         registry.summary("encounter.rounds",
-                "numCombatants", label(e.getSize()),
+                "numCombatants", label(e.getNumCombatants()),
                 "targetSelector", e.getSelector(),
                 "sizeDelta", label(e.getSizeDelta()))
                 .record((double) totalRounds);
     }
 
     public void endRound(RoundResult result) {
-
         for (Event event : result.getEvents()) {
             registry.summary("round.attacks",
                     "attackType", event.getType(),

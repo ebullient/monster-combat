@@ -41,7 +41,7 @@ public class EncounterEventSavingThrowTest {
         damage.savingThrow = "INT(12)";
         attack.damage = damage;
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(actor, target,
+        EncounterAttackEvent result = new EncounterAttackEvent(actor, target,
                 attack, Dice.Method.USE_AVERAGE, "id");
 
         result.makeActionWithSavingThrow(attack.damage, false);
@@ -78,7 +78,7 @@ public class EncounterEventSavingThrowTest {
         damage.savingThrow = "INT(9)";
         attack.damage = damage;
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(actor, target,
+        EncounterAttackEvent result = new EncounterAttackEvent(actor, target,
                 attack, Dice.Method.USE_AVERAGE, "id");
 
         result.makeActionWithSavingThrow(attack.damage, false);
@@ -115,7 +115,7 @@ public class EncounterEventSavingThrowTest {
         damage.savingThrow = "INT(12)";
         attack.damage = damage;
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(actor, target,
+        EncounterAttackEvent result = new EncounterAttackEvent(actor, target,
                 attack, Dice.Method.USE_AVERAGE, "id");
 
         result.makeActionWithSavingThrow(attack.damage, true);
@@ -144,7 +144,7 @@ public class EncounterEventSavingThrowTest {
         damage.savingThrow = "INT(12)";
         attack.damage = damage;
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(actor, target,
+        EncounterAttackEvent result = new EncounterAttackEvent(actor, target,
                 attack, Dice.Method.USE_AVERAGE, "id");
 
         result.makeActionWithSavingThrow(attack.damage, true);

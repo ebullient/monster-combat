@@ -16,14 +16,18 @@ package dev.ebullient.dnd.combat;
 import dev.ebullient.dnd.mechanics.Size;
 import dev.ebullient.dnd.mechanics.Type;
 
+/**
+ * @see dev.ebullient.dnd.client.Combatant for deserialization from JSON
+ */
 public interface Combatant {
-    public String getName();
 
-    public int getCR();
+    String getName();
 
-    public int getArmorClass();
+    int getCR();
 
-    public Size getSize();
+    int getArmorClass();
 
-    public Type getType();
+    Size getSize();
+
+    Type getType();
 }

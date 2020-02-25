@@ -17,9 +17,9 @@ import java.util.Comparator;
 
 import dev.ebullient.dnd.mechanics.Ability;
 
-public interface Comparators {
+interface EncounterComparators {
 
-    public static final Comparator<EncounterCombatant> InitiativeOrder = new Comparator<EncounterCombatant>() {
+    static final Comparator<EncounterCombatant> InitiativeOrder = new Comparator<EncounterCombatant>() {
         @Override
         public int compare(EncounterCombatant o1, EncounterCombatant o2) {
             // sort by initiative descending
@@ -39,7 +39,7 @@ public interface Comparators {
         }
     };
 
-    public static final Comparator<EncounterCombatant> ChallengeRatingOrder = new Comparator<EncounterCombatant>() {
+    static final Comparator<EncounterCombatant> ChallengeRatingOrder = new Comparator<EncounterCombatant>() {
         @Override
         public int compare(EncounterCombatant o1, EncounterCombatant o2) {
             // sort by cr descending
@@ -59,7 +59,7 @@ public interface Comparators {
         }
     };
 
-    public static final Comparator<EncounterCombatant> RelativeHealthOrder = new Comparator<EncounterCombatant>() {
+    static final Comparator<EncounterCombatant> RelativeHealthOrder = new Comparator<EncounterCombatant>() {
         @Override
         public int compare(EncounterCombatant o1, EncounterCombatant o2) {
             // sort by relative health descending
@@ -79,7 +79,7 @@ public interface Comparators {
         }
     };
 
-    public static final Comparator<EncounterCombatant> SizeOrder = new Comparator<EncounterCombatant>() {
+    static final Comparator<EncounterCombatant> SizeOrder = new Comparator<EncounterCombatant>() {
         @Override
         public int compare(EncounterCombatant o1, EncounterCombatant o2) {
             // sort by cr descending

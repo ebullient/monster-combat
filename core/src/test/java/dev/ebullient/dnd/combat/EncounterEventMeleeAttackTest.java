@@ -36,7 +36,7 @@ public class EncounterEventMeleeAttackTest {
         attack.attackModifier = 1;
         attack.damage = new MockDamage("piercing", "16(5d6)");
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(actor, target,
+        EncounterAttackEvent result = new EncounterAttackEvent(actor, target,
                 attack, Dice.Method.USE_AVERAGE, "id");
 
         result.attemptMeleeAttack();
@@ -72,7 +72,7 @@ public class EncounterEventMeleeAttackTest {
         attack.attackModifier = 1;
         attack.damage = new MockDamage("piercing", "16(5d6)");
 
-        Encounter.AttackEvent result = new Encounter.AttackEvent(actor, target,
+        EncounterAttackEvent result = new EncounterAttackEvent(actor, target,
                 attack, Dice.Method.USE_AVERAGE, "id");
 
         result.attemptMeleeAttack();

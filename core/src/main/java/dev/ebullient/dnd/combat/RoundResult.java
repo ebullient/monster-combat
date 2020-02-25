@@ -15,43 +15,50 @@ package dev.ebullient.dnd.combat;
 
 import java.util.List;
 
+/**
+ * @see dev.ebullient.dnd.client.RoundResult for deserialization from JSON
+ */
 public interface RoundResult {
 
+    /**
+     * @see dev.ebullient.dnd.client.AttackEvent for deserialization from JSON
+     */
     public interface Event {
-        public String getName();
 
-        public String getType();
+        String getName();
 
-        public Combatant getActor();
+        String getType();
 
-        public Combatant getTarget();
+        Combatant getActor();
 
-        public boolean isCritical();
+        Combatant getTarget();
 
-        public boolean isHit();
+        boolean isCritical();
 
-        public boolean isSaved();
+        boolean isHit();
 
-        public String hitOrMiss();
+        boolean isSaved();
 
-        public int getDamageAmount();
+        String hitOrMiss();
 
-        public int getAttackModifier();
+        int getDamageAmount();
 
-        public int getDifficultyClass();
+        int getAttackModifier();
+
+        int getDifficultyClass();
     }
 
-    public List<? extends Event> getEvents();
+    List<? extends Event> getEvents();
 
-    public List<? extends Combatant> getSurvivors();
+    List<? extends Combatant> getSurvivors();
 
-    public int getSize();
+    int getNumCombatants();
 
-    public int getSizeDelta();
+    int getSizeDelta();
 
-    public int getCrDelta();
+    int getCrDelta();
 
-    public int getNumTypes();
+    int getNumTypes();
 
-    public String getSelector();
+    String getSelector();
 }
