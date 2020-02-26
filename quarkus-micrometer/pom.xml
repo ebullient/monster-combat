@@ -74,43 +74,78 @@
     </dependency>
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>io.fabric8</groupId>
-        <artifactId>docker-maven-plugin</artifactId>
-        <version>${dmp.version}</version>
-        <configuration>
-          <images>
-            <image>
-              <name>${imageName}:jvm</name>
-              <build>
-                <contextDir>${project.basedir}</contextDir>
-                <dockerFile>src/main/docker/Dockerfile.jvm</dockerFile>
-                <labels>
-                  <org.opencontainers.image.title>${project.name}</org.opencontainers.image.title>
-                  <org.opencontainers.image.description>${project.description}</org.opencontainers.image.description>
-                  <org.opencontainers.image.created>${git.build.time}</org.opencontainers.image.created>
-                  <org.opencontainers.image.url>https://github.com/ebullient/monster-combat</org.opencontainers.image.url>
-                  <org.opencontainers.image.source>https://github.com/ebullient/monster-combat</org.opencontainers.image.source>
-                  <org.opencontainers.image.version>${git.build.version}</org.opencontainers.image.version>
-                  <org.opencontainers.image.revision>${git.commit.id.describe-short}</org.opencontainers.image.revision>
-                  <org.opencontainers.image.licenses>	Apache-2.0</org.opencontainers.image.licenses>
-                </labels>
-              </build>
-            </image>
-          </images>
-        </configuration>
-        <executions>
-          <execution>
-            <id>docker-build</id>
-            <goals>
-              <goal>build</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+  <profiles>
+    <profile>
+      <id>docker-jvm</id>
+      <activation>
+        <file>
+          <exists>target/lib</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>${dmp.version}</version>
+            <configuration>
+              <images>
+                <image>
+                  <name>${imageName}:jvm</name>
+                  <build>
+                    <contextDir>${project.basedir}</contextDir>
+                    <dockerFile>src/main/docker/Dockerfile.jvm</dockerFile>
+                  </build>
+                </image>
+              </images>
+            </configuration>
+            <executions>
+              <execution>
+                <id>docker-build</id>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>native</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>${dmp.version}</version>
+            <configuration>
+              <images>
+                <image>
+                  <name>${imageName}:native</name>
+                  <build>
+                    <contextDir>${project.basedir}</contextDir>
+                    <dockerFile>src/main/docker/Dockerfile.native</dockerFile>
+                  </build>
+                </image>
+              </images>
+            </configuration>
+            <executions>
+              <execution>
+                <id>docker-build</id>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>
+
+
 
 </project>

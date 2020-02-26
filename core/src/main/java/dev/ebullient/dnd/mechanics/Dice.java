@@ -13,12 +13,34 @@
  */
 package dev.ebullient.dnd.mechanics;
 
-import java.security.SecureRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Dice {
     public static final Pattern AVG_ROLL_MOD = Pattern.compile("(\\d+)(?:\\(([-+d0-9]+)\\))?");
+
+    /**
+     * Specific method required to roll dice. Other sources
+     * can be specified provided they follow this contract
+     *
+     * @see java.util.Random#nextInt(int)
+     */
+    public static interface RandomDice {
+        int nextInt(int bound);
+    }
+
+    /**
+     * Use java.util.Random by default
+     *
+     * @see java.util.Random#nextInt(int)
+     */
+    public static RandomDice DEFAULT_RANDOM = new RandomDice() {
+        java.util.Random random = new java.util.Random();
+
+        public int nextInt(int bound) {
+            return random.nextInt(bound);
+        }
+    };
 
     public static interface Monitor {
         public void notify(String tag, int value);
@@ -43,7 +65,7 @@ public class Dice {
         NONE
     }
 
-    private static SecureRandom random = new SecureRandom();
+    private static RandomDice random = DEFAULT_RANDOM;
     private static Monitor monitor = NO_OP;
 
     public static void setMonitor(Monitor m) {
@@ -51,6 +73,14 @@ public class Dice {
             monitor = NO_OP;
         } else {
             monitor = m;
+        }
+    }
+
+    public static void setRandomDice(RandomDice rd) {
+        if (rd == null) {
+            random = DEFAULT_RANDOM;
+        } else {
+            random = rd;
         }
     }
 

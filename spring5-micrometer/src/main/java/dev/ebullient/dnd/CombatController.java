@@ -25,6 +25,7 @@ import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.combat.TargetSelector;
 import dev.ebullient.dnd.mechanics.Dice;
+import dev.ebullient.dnd.mechanics.SecureRandomDice;
 import io.micrometer.core.annotation.Timed;
 import reactor.core.publisher.Flux;
 
@@ -40,6 +41,9 @@ public class CombatController {
         this.beastiary = beastiary;
         this.metrics = metrics;
         logger.debug("Controller initialized bestiary={}, metrics={}", this.beastiary, this.metrics);
+
+        // Use secure random for dice rolling
+        Dice.setRandomDice(new SecureRandomDice());
     }
 
     @Timed

@@ -16,6 +16,12 @@
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1
 
+LABEL "org.opencontainers.image.url"="https://github.com/ebullient/monster-combat" \
+      "org.opencontainers.image.source"="https://github.com/ebullient/monster-combat" \
+      "org.opencontainers.image.licenses"="Apache-2.0" \
+      "org.opencontainers.image.title"="dnd-mc-quarkus-micrometer" \
+      "org.opencontainers.image.description"="DnD 5e monster combat simulator using Quarkus and micrometer running in JVM mode"
+
 ARG JAVA_PACKAGE=java-1.8.0-openjdk-headless
 ARG RUN_JAVA_VERSION=1.3.5
 
