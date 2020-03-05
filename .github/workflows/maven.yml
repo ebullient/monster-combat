@@ -31,3 +31,8 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B clean install
+
+    - name: Native Quarkus build with maven
+      run: |
+        cd quarkus-micrometer
+        mvn -B clean install -Pnative
