@@ -35,4 +35,4 @@ jobs:
     - name: Native Quarkus build with maven
       run: |
         cd quarkus-micrometer
-        mvn -B clean install -Pnative
+        mvn -B install -Pnative -Dquarkus.native.container-build=true
