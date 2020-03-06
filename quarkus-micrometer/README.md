@@ -28,3 +28,8 @@ Or you can use Docker to build the native executable using: `./mvnw package -Pna
 You can then execute your binary: `./target/quarkus-micrometer-1.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image-guide .
+
+## Creating docker images
+
+The docker-maven-plugin is present. It will build a jvm image if the target/lib dir is present (which it will be for a non-native build),
+and a native image if the native profile is active.
