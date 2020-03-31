@@ -24,7 +24,7 @@ import java.util.regex.Matcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dev.ebullient.dnd.beastiary.Beast;
+import dev.ebullient.dnd.bestiary.Beast;
 import dev.ebullient.dnd.mechanics.Dice;
 import dev.ebullient.dnd.mechanics.Type;
 

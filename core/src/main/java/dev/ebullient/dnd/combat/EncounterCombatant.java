@@ -15,7 +15,7 @@ package dev.ebullient.dnd.combat;
 
 import java.util.List;
 
-import dev.ebullient.dnd.beastiary.Beast;
+import dev.ebullient.dnd.bestiary.Beast;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Dice;
 import dev.ebullient.dnd.mechanics.HitPoints;

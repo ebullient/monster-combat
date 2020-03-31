@@ -11,7 +11,7 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary.compendium.util;
+package dev.ebullient.dnd.bestiary.compendium.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -41,10 +41,10 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
-import dev.ebullient.dnd.beastiary.compendium.Monster;
-import dev.ebullient.dnd.beastiary.compendium.MonsterAttack;
-import dev.ebullient.dnd.beastiary.compendium.MonsterDamage;
-import dev.ebullient.dnd.beastiary.compendium.Multiattack;
+import dev.ebullient.dnd.bestiary.compendium.Monster;
+import dev.ebullient.dnd.bestiary.compendium.MonsterAttack;
+import dev.ebullient.dnd.bestiary.compendium.MonsterDamage;
+import dev.ebullient.dnd.bestiary.compendium.Multiattack;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.HitPoints;
 import dev.ebullient.dnd.mechanics.Size;

@@ -42,7 +42,6 @@ class CombatMetrics {
     }
 
     public void endEncounter(Encounter e, int totalRounds) {
-
         registry.summary("encounter.rounds",
                 "numCombatants", label(e.getNumCombatants()),
                 "targetSelector", e.getSelector(),
@@ -53,7 +52,6 @@ class CombatMetrics {
     public void endRound(RoundResult result) {
 
         for (Event event : result.getEvents()) {
-
             registry.summary("round.attacks",
                     "attackType", event.getType(),
                     "hitOrMiss", event.hitOrMiss(),

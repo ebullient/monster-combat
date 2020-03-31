@@ -20,24 +20,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.ebullient.dnd.beastiary.Beastiary;
+import dev.ebullient.dnd.bestiary.Bestiary;
 import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.combat.TargetSelector;
 import dev.ebullient.dnd.mechanics.Dice;
 import dev.ebullient.dnd.mechanics.SecureRandomDice;
-import io.micrometer.core.annotation.Timed;
 import reactor.core.publisher.Flux;
 
 @RestController
-@RequestMapping("/combat")
+@RequestMapping(path = "/combat", produces = "application/json")
 public class CombatController {
     static final Logger logger = LoggerFactory.getLogger(CombatController.class);
 
-    final Beastiary beastiary;
+    final Bestiary beastiary;
     final CombatMetrics metrics;
 
-    public CombatController(Beastiary beastiary, CombatMetrics metrics) {
+    public CombatController(Bestiary beastiary, CombatMetrics metrics) {
         this.beastiary = beastiary;
         this.metrics = metrics;
         logger.debug("Controller initialized bestiary={}, metrics={}", this.beastiary, this.metrics);
@@ -46,20 +45,17 @@ public class CombatController {
         Dice.setRandomDice(new SecureRandomDice());
     }
 
-    @Timed
-    @GetMapping(path = "/any", produces = "application/json")
+    @GetMapping(path = "/any")
     Publisher<RoundResult> any() {
         return go(Dice.range(5) + 2);
     }
 
-    @Timed
-    @GetMapping(path = "/faceoff", produces = "application/json")
+    @GetMapping(path = "/faceoff")
     Publisher<RoundResult> faceoff() {
         return go(2);
     }
 
-    @Timed
-    @GetMapping(path = "/melee", produces = "application/json")
+    @GetMapping(path = "/melee")
     Publisher<RoundResult> melee() {
         return go(Dice.range(4) + 3);
     }

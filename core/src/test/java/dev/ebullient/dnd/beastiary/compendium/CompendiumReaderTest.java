@@ -11,20 +11,20 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary.compendium;
+package dev.ebullient.dnd.bestiary.compendium;
 
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
-import dev.ebullient.dnd.beastiary.Beastiary;
+import dev.ebullient.dnd.bestiary.Bestiary;
 
 public class CompendiumReaderTest {
 
     @Test
     public void testReadCompendium() throws IOException {
-        Beastiary beastiary = new Beastiary();
-        CompendiumReader.addToBeastiary(beastiary);
+        Bestiary beastiary = new Bestiary();
+        CompendiumReader.addToBestiary(beastiary);
         System.out.println(beastiary);
     }
 }

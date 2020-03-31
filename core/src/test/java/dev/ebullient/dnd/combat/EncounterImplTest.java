@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import dev.ebullient.dnd.beastiary.MockBeast;
+import dev.ebullient.dnd.bestiary.MockBeast;
 import dev.ebullient.dnd.mechanics.Dice;
 import dev.ebullient.dnd.mechanics.Size;
 import dev.ebullient.dnd.mechanics.Type;

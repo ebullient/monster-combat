@@ -11,7 +11,7 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary;
+package dev.ebullient.dnd.bestiary;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

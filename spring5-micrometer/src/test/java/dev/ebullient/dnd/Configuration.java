@@ -20,18 +20,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
-import dev.ebullient.dnd.beastiary.Beastiary;
-import dev.ebullient.dnd.beastiary.compendium.CompendiumReader;
+import dev.ebullient.dnd.bestiary.Bestiary;
+import dev.ebullient.dnd.bestiary.compendium.CompendiumReader;
 
 @TestConfiguration
 public class Configuration {
     static final Logger logger = LoggerFactory.getLogger(ApplicationConfig.class);
 
     @Bean
-    public Beastiary createBeastiary() {
-        Beastiary beastiary = new Beastiary();
+    public Bestiary createBestiary() {
+        Bestiary beastiary = new Bestiary();
         try {
-            CompendiumReader.addToBeastiary(beastiary);
+            CompendiumReader.addToBestiary(beastiary);
         } catch (IOException e) {
             logger.error("Exception occurred filling the beastiary", e);
         }

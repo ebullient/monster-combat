@@ -11,7 +11,7 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary.compendium;
+package dev.ebullient.dnd.bestiary.compendium;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import dev.ebullient.dnd.beastiary.Beast;
+import dev.ebullient.dnd.bestiary.Beast;
 import dev.ebullient.dnd.combat.Attack;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.ChallengeRating;

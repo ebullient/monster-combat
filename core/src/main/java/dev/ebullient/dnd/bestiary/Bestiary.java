@@ -11,7 +11,7 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary;
+package dev.ebullient.dnd.bestiary;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,15 +25,15 @@ import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.EncounterBuilder;
 import dev.ebullient.dnd.mechanics.Dice;
 
-public class Beastiary {
-    static final Logger logger = LoggerFactory.getLogger(Beastiary.class);
+public class Bestiary {
+    static final Logger logger = LoggerFactory.getLogger(Bestiary.class);
 
     int totalCount;
     List<Beast> allBeasts = new ArrayList<>(500);
     Map<String, List<Beast>> beastsByChallengeRating = new HashMap<>(500);
 
     /**
-     * Add one beast to the Beastiary
+     * Add one beast to the Bestiary
      *
      * @throws IllegalArgumentException if Beast is not valid for combat encounters
      */
@@ -83,7 +83,7 @@ public class Beastiary {
 
     public String toString() {
         return new StringBuilder()
-                .append("Beastiary contains ~")
+                .append("Bestiary contains ~")
                 .append(totalCount)
                 .append(" beasts")
                 .toString();

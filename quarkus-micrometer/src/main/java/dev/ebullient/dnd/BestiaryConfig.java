@@ -20,27 +20,27 @@ import javax.enterprise.context.ApplicationScoped;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dev.ebullient.dnd.beastiary.Beastiary;
-import dev.ebullient.dnd.beastiary.compendium.CompendiumReader;
+import dev.ebullient.dnd.bestiary.Bestiary;
+import dev.ebullient.dnd.bestiary.compendium.CompendiumReader;
 
 @ApplicationScoped
-public class BeastiaryConfig {
-    static final Logger logger = LoggerFactory.getLogger(BeastiaryConfig.class);
+public class BestiaryConfig {
+    static final Logger logger = LoggerFactory.getLogger(BestiaryConfig.class);
 
-    final Beastiary beastiary;
+    final Bestiary beastiary;
 
-    public BeastiaryConfig() {
-        this.beastiary = new Beastiary();
+    public BestiaryConfig() {
+        this.beastiary = new Bestiary();
         try {
-            CompendiumReader.addToBeastiary(beastiary);
+            CompendiumReader.addToBestiary(beastiary);
         } catch (IOException e) {
             logger.error("Exception occurred filling the beastiary", e);
         }
 
-        logger.debug("Created Beastiary: {}", beastiary);
+        logger.debug("Created Bestiary: {}", beastiary);
     }
 
-    public Beastiary getBeastiary() {
+    public Bestiary getBestiary() {
         return this.beastiary;
     }
 }

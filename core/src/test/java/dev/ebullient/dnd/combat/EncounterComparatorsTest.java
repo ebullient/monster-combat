@@ -20,7 +20,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import dev.ebullient.dnd.beastiary.MockBeast;
+import dev.ebullient.dnd.bestiary.MockBeast;
 import dev.ebullient.dnd.mechanics.Ability;
 import dev.ebullient.dnd.mechanics.Size;
 

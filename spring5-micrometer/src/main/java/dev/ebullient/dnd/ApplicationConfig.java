@@ -32,8 +32,8 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import dev.ebullient.dnd.beastiary.Beastiary;
-import dev.ebullient.dnd.beastiary.compendium.CompendiumReader;
+import dev.ebullient.dnd.bestiary.Bestiary;
+import dev.ebullient.dnd.bestiary.compendium.CompendiumReader;
 import io.micrometer.core.instrument.config.MeterFilter;
 
 @Configuration
@@ -44,10 +44,10 @@ public class ApplicationConfig {
     PrometheusScrapeEndpoint prometheusScrapeEndpoint;
 
     @Bean
-    public Beastiary createBeastiary() {
-        Beastiary beastiary = new Beastiary();
+    public Bestiary createBestiary() {
+        Bestiary beastiary = new Bestiary();
         try {
-            CompendiumReader.addToBeastiary(beastiary);
+            CompendiumReader.addToBestiary(beastiary);
         } catch (IOException e) {
             logger.error("Exception occurred filling the beastiary", e);
         }

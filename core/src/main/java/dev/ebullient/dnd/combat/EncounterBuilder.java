@@ -16,20 +16,20 @@ package dev.ebullient.dnd.combat;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.ebullient.dnd.beastiary.Beast;
-import dev.ebullient.dnd.beastiary.Beastiary;
+import dev.ebullient.dnd.bestiary.Beast;
+import dev.ebullient.dnd.bestiary.Bestiary;
 import dev.ebullient.dnd.mechanics.Dice;
 
 public class EncounterBuilder {
 
-    final Beastiary beastiary;
+    final Bestiary beastiary;
 
     int howMany = 2;
     TargetSelector selector = TargetSelector.SelectAtRandom;
     Dice.Method method = Dice.Method.ROLL;
     String challengeRating = null;
 
-    public EncounterBuilder(Beastiary beastiary) {
+    public EncounterBuilder(Bestiary beastiary) {
         this.beastiary = beastiary;
     }
 

@@ -11,7 +11,7 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.beastiary.compendium;
+package dev.ebullient.dnd.bestiary.compendium;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,14 +20,14 @@ import java.util.Map;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import dev.ebullient.dnd.beastiary.Beastiary;
+import dev.ebullient.dnd.bestiary.Bestiary;
 
 public class CompendiumReader {
     static final ObjectMapper mapper = new ObjectMapper();
     static final TypeReference<Map<String, Monster>> typeRef = new TypeReference<Map<String, Monster>>() {
     };
 
-    public static void addToBeastiary(Beastiary beastiary) throws IOException {
+    public static void addToBestiary(Bestiary beastiary) throws IOException {
         try (InputStream jsonInput = CompendiumReader.class.getResourceAsStream("/compendium.json")) {
             Map<String, Monster> compendium = mapper.readValue(jsonInput, typeRef);
             for (Monster m : compendium.values()) {

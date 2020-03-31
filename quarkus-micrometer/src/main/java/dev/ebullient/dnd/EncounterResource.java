@@ -8,40 +8,38 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import dev.ebullient.dnd.beastiary.Beastiary;
+import dev.ebullient.dnd.bestiary.Bestiary;
 import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.combat.TargetSelector;
 import dev.ebullient.dnd.mechanics.Dice;
 
 @Path("/combat")
+@Produces(MediaType.APPLICATION_JSON)
 public class EncounterResource {
 
-    final Beastiary beastiary;
+    final Bestiary beastiary;
     final CombatMetrics metrics;
 
-    EncounterResource(BeastiaryConfig config, CombatMetrics metrics) {
-        this.beastiary = config.getBeastiary();
+    EncounterResource(BestiaryConfig config, CombatMetrics metrics) {
+        this.beastiary = config.getBestiary();
         this.metrics = metrics;
     }
 
     @GET
     @Path("/any")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<RoundResult> any() {
         return go(Dice.range(5) + 2);
     }
 
     @GET
     @Path("/faceoff")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<RoundResult> faceoff() {
         return go(2);
     }
 
     @GET
     @Path("/melee")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<RoundResult> melee() {
         return go(Dice.range(4) + 3);
     }

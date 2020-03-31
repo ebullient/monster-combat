@@ -1,6 +1,7 @@
 package dev.ebullient.dnd;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.containsString;
 
 import java.util.List;
 
@@ -43,5 +44,14 @@ public class EncounterResourceTest {
                 .statusCode(200)
                 .contentType("application/json")
                 .extract().body().as(typeRef);
+    }
+
+    @Test
+    void testPrometheusScrapeEndpoint() {
+        given()
+                .when().get("/prometheus")
+                .then()
+                .statusCode(200)
+                .body(containsString("dice_rolls_total"));
     }
 }
