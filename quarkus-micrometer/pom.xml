@@ -7,18 +7,16 @@
   <!-- Using a parent for dependency versions,
        code formatting, and plugins. -->
   <parent>
-    <groupId>dev.ebullient.dnd</groupId>
+    <groupId>dev.ebullient.monster-combat</groupId>
     <artifactId>mc-quarkus-parent</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
     <relativePath>../build/quarkus/pom.xml</relativePath>
   </parent>
 
-  <groupId>dev.ebullient.dnd</groupId>
+  <groupId>dev.ebullient.monster-combat</groupId>
   <artifactId>mc-quarkus-micrometer</artifactId>
-  <version>1.0-SNAPSHOT</version>
 
-  <name>dnd-mc-quarkus-micrometer</name>
-  <description>DnD 5e monster combat simulator using Quarkus and micrometer</description>
+  <name>Monster Combat - Quarkus and Micrometer</name>
 
   <properties>
     <!-- The following is set by mvnw in the parent (usually), but if you don't use mvnw... -->
@@ -26,14 +24,14 @@
 
     <micrometer.version>1.3.5</micrometer.version>
 
-    <imageName>ebullient/${project.name}</imageName>
+    <imageName>ebullient/${project.artifactId}</imageName>
     <dmp.version>0.33.0</dmp.version>
   </properties>
 
   <dependencies>
 
     <dependency>
-      <groupId>dev.ebullient.dnd</groupId>
+      <groupId>dev.ebullient.monster-combat</groupId>
       <artifactId>mc-core</artifactId>
     </dependency>
 

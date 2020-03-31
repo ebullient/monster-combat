@@ -4,19 +4,17 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>dev.ebullient.dnd</groupId>
+    <groupId>dev.ebullient.monster-combat</groupId>
     <artifactId>mc-spring-parent</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
     <relativePath>../build/spring/pom.xml</relativePath>
   </parent>
 
-  <groupId>dev.ebullient.dnd</groupId>
+  <groupId>dev.ebullient.monster-combat</groupId>
   <artifactId>spring5-micrometer</artifactId>
-  <version>0.1-SNAPSHOT</version>
-
-  <name>dnd-mc-spring5-micrometer</name>
-  <description>DnD 5e monster combat simulator using Spring Boot</description>
   <packaging>jar</packaging>
+
+  <name>Monster Combat - Spring Boot 2 / Spring 5 application</name>
 
   <properties>
     <java.version>1.8</java.version>
@@ -24,14 +22,14 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <imageName>ebullient/${project.name}</imageName>
+    <imageName>ebullient/${project.artifactId}</imageName>
     <jib-maven-plugin.version>1.6.1</jib-maven-plugin.version>
   </properties>
 
   <dependencies>
 
     <dependency>
-      <groupId>dev.ebullient.dnd</groupId>
+      <groupId>dev.ebullient.monster-combat</groupId>
       <artifactId>mc-core</artifactId>
     </dependency>
 

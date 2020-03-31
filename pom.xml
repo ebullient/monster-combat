@@ -3,8 +3,8 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>dev.ebullient.dnd</groupId>
-    <artifactId>monster-combat</artifactId>
+    <groupId>dev.ebullient.monster-combat</groupId>
+    <artifactId>mc-parent</artifactId>
     <version>0.1.0</version>
     <packaging>pom</packaging>
 
@@ -13,8 +13,8 @@
         <module>build/spring</module>
         <module>build/quarkus</module>
         <module>core</module>
-        <module>quarkus-micrometer</module>
         <module>spring5-micrometer</module>
+        <module>quarkus-micrometer</module>
     </modules>
 
 </project>

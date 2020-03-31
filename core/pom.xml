@@ -7,19 +7,17 @@
        code formatting, and git plugins. This library is otherwise
        spring-free. -->
   <parent>
-    <groupId>dev.ebullient.dnd</groupId>
+    <groupId>dev.ebullient.monster-combat</groupId>
     <artifactId>mc-spring-parent</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
     <relativePath>../build/spring/pom.xml</relativePath>
   </parent>
 
-  <groupId>dev.ebullient.dnd</groupId>
+  <groupId>dev.ebullient.monster-combat</groupId>
   <artifactId>mc-core</artifactId>
-  <version>0.1-SNAPSHOT</version>
-
-  <name>dnd-mc-core</name>
-  <description>DnD 5e Beastiary and Dice for Monster Combat</description>
   <packaging>jar</packaging>
+
+  <name>Monster Combat - Core Library</name>
 
   <properties>
     <java.version>1.8</java.version>

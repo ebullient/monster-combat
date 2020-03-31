@@ -2,19 +2,16 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
   <modelVersion>4.0.0</modelVersion>
-  <groupId>dev.ebullient.dnd</groupId>
-  <artifactId>mc-quarkus-parent</artifactId>
-  <version>0.1-SNAPSHOT</version>
 
-  <name>dnd-mc-quarkus-build</name>
-  <description>Parent pom for Quarkus projects</description>
+  <groupId>dev.ebullient.monster-combat</groupId>
+  <artifactId>mc-quarkus-parent</artifactId>
+  <version>0.1.0</version>
   <packaging>pom</packaging>
 
-  <properties>
-    <core.version>0.1-SNAPSHOT</core.version>
+  <name>Monster Combat - Quarkus Builds</name>
 
+  <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
 
     <maven.compiler.parameters>true</maven.compiler.parameters>
@@ -47,9 +44,9 @@
       </dependency>
 
       <dependency>
-        <groupId>dev.ebullient.dnd</groupId>
+        <groupId>dev.ebullient.monster-combat</groupId>
         <artifactId>mc-core</artifactId>
-        <version>${core.version}</version>
+        <version>${project.version}</version>
       </dependency>
 
     </dependencies>

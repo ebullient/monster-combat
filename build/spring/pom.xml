@@ -11,17 +11,14 @@
     <!-- lookup parent from repository -->
   </parent>
 
-  <groupId>dev.ebullient.dnd</groupId>
+  <groupId>dev.ebullient.monster-combat</groupId>
   <artifactId>mc-spring-parent</artifactId>
-  <version>0.1-SNAPSHOT</version>
-
-  <name>dnd-mc-spring-build</name>
-  <description>Parent pom for Spring projects</description>
+  <version>0.1.0</version>
   <packaging>pom</packaging>
 
-  <properties>
-    <core.version>0.1-SNAPSHOT</core.version>
+  <name>Monster Combat - Spring Builds</name>
 
+  <properties>
     <java.version>1.8</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -31,9 +28,9 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>dev.ebullient.dnd</groupId>
+        <groupId>dev.ebullient.monster-combat</groupId>
         <artifactId>mc-core</artifactId>
-        <version>${core.version}</version>
+        <version>${project.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
