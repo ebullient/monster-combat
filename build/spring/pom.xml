@@ -13,7 +13,7 @@
 
   <groupId>dev.ebullient.monster-combat</groupId>
   <artifactId>mc-spring-parent</artifactId>
-  <version>0.1.0</version>
+  <version>${revision}</version>
   <packaging>pom</packaging>
 
   <name>Monster Combat - Spring Builds</name>
@@ -61,6 +61,7 @@
           <verbose>false</verbose>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>net.revelc.code.formatter</groupId>
         <artifactId>formatter-maven-plugin</artifactId>
@@ -77,6 +78,7 @@
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>net.revelc.code</groupId>
         <artifactId>impsort-maven-plugin</artifactId>
@@ -92,6 +94,33 @@
             <id>sort-imports</id>
             <goals>
               <goal>sort</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <version>${flatten-maven-plugin.version}</version>
+        <configuration>
+          <updatePomFile>true</updatePomFile>
+          <flattenMode>resolveCiFriendliesOnly</flattenMode>
+          <embedBuildProfileDependencies>true</embedBuildProfileDependencies>
+        </configuration>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
             </goals>
           </execution>
         </executions>
