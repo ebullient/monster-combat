@@ -9,6 +9,7 @@
   <packaging>pom</packaging>
 
   <properties>
+    <!-- see .mvn/config or cmdline property for revision value -->
     <flatten-maven-plugin.version>1.2.1</flatten-maven-plugin.version>
   </properties>
 

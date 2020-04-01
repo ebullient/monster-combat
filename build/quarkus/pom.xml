@@ -12,6 +12,7 @@
   <name>Monster Combat - Quarkus Builds</name>
 
   <properties>
+    <!-- see .mvn/config or cmdline property for revision value -->
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <quarkus.version>1.2.1.Final</quarkus.version>
 
