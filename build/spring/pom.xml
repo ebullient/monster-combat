@@ -31,16 +31,25 @@
     </dependencies>
   </dependencyManagement>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.jboss.jandex</groupId>
-        <artifactId>jandex-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
-
   <profiles>
+
+    <profile>
+      <id>project-build</id>
+      <activation>
+        <file>
+          <exists>target/classes</exists>
+        </file>
+      </activation>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jboss.jandex</groupId>
+            <artifactId>jandex-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
 
     <profile>
       <id>project-test</id>

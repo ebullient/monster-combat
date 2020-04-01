@@ -23,8 +23,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>dev.ebullient.monster-combat</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mc-core</artifactId>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
