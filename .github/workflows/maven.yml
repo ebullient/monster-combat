@@ -38,10 +38,10 @@ jobs:
     - name: Build with Maven
       run: |
         ./mvnw -B help:evaluate -Dexpression=project.version | grep -v INFO
-        mvn -B clean install -U
+        ./mvnw -B clean install -U
 
     - name: Native Quarkus build with maven
       if: success()
       run: |
         cd quarkus-micrometer
-        mvn -B clean install -Dnative -Dquarkus.native.container-build=true -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-native-image:${{ matrix.graal }}-java${{ matrix.java }}
+        ./mvnw -B clean install -Dnative -Dquarkus.native.container-build=true -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-native-image:${{ matrix.graal }}-java${{ matrix.java }}
