@@ -8,6 +8,8 @@
   <version>${revision}</version>
   <packaging>pom</packaging>
 
+  <name>Monster Combat - All The Things</name>
+
   <properties>
     <!-- see .mvn/config or cmdline property for revision value -->
     <flatten-maven-plugin.version>1.2.1</flatten-maven-plugin.version>
@@ -46,8 +48,7 @@
 
   <!-- submodules -->
   <modules>
-    <module>build/spring</module>
-    <module>build/quarkus</module>
+    <module>build</module>
     <module>core</module>
     <module>spring5-micrometer</module>
     <module>quarkus-micrometer</module>

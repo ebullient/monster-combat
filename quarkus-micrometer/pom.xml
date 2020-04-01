@@ -13,7 +13,6 @@
     <relativePath>../build/quarkus/pom.xml</relativePath>
   </parent>
 
-  <groupId>dev.ebullient.monster-combat</groupId>
   <artifactId>mc-quarkus-micrometer</artifactId>
 
   <name>Monster Combat - Quarkus and Micrometer</name>
@@ -30,7 +29,6 @@
     <maven.multiModuleProjectDirectory>../</maven.multiModuleProjectDirectory>
 
     <quarkus-micrometer-extension.version>1.0.0-SNAPSHOT</quarkus-micrometer-extension.version>
-    <micrometer.version>1.3.5</micrometer.version>
 
     <imageName>ebullient/${project.artifactId}</imageName>
     <dmp.version>0.33.0</dmp.version>
