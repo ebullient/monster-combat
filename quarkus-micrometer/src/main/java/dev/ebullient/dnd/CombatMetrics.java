@@ -22,8 +22,6 @@ import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.combat.RoundResult.Event;
 import dev.ebullient.dnd.mechanics.Dice;
-import io.micrometer.core.instrument.Metrics;
-import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 
 @ApplicationScoped
@@ -32,9 +30,8 @@ class CombatMetrics {
 
     final PrometheusMeterRegistry registry;
 
-    public CombatMetrics() {
-        this.registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
-        Metrics.addRegistry(registry);
+    public CombatMetrics(PrometheusMeterRegistry registry) {
+        this.registry = registry;
 
         Dice.setMonitor((k, v) -> registry.counter("dice.rolls", "die", k, "face", label(v)).increment());
 

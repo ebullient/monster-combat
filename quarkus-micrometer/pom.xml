@@ -18,10 +18,18 @@
 
   <name>Monster Combat - Quarkus and Micrometer</name>
 
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+
   <properties>
     <!-- The following is set by mvnw in the parent (usually), but if you don't use mvnw... -->
     <maven.multiModuleProjectDirectory>../</maven.multiModuleProjectDirectory>
 
+    <quarkus-micrometer-extension.version>1.0.0-SNAPSHOT</quarkus-micrometer-extension.version>
     <micrometer.version>1.3.5</micrometer.version>
 
     <imageName>ebullient/${project.artifactId}</imageName>
@@ -29,6 +37,12 @@
   </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>dev.ebullient.quarkus-micrometer-extension</groupId>
+      <artifactId>quarkus-micrometer</artifactId>
+      <version>${quarkus-micrometer-extension.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>dev.ebullient.monster-combat</groupId>
