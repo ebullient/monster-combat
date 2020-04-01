@@ -52,6 +52,6 @@ public class EncounterResourceTest {
                 .when().get("/prometheus")
                 .then()
                 .statusCode(200)
-                .body(containsString("dice_rolls_total"));
+                .body(containsString("jvm_memory_used_bytes"));
     }
 }
