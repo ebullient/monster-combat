@@ -9,7 +9,7 @@
   <parent>
     <groupId>dev.ebullient.monster-combat</groupId>
     <artifactId>mc-quarkus-parent</artifactId>
-    <version>${revision}</version>
+    <version>0.1.0</version>
     <relativePath>../build/quarkus/pom.xml</relativePath>
   </parent>
 
