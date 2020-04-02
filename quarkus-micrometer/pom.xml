@@ -30,8 +30,9 @@
 
     <quarkus-micrometer-extension.version>1.0.0-SNAPSHOT</quarkus-micrometer-extension.version>
 
-    <imageName>ebullient/${project.artifactId}</imageName>
-    <dmp.version>0.33.0</dmp.version>
+    <quarkus.container-image.build>true</quarkus.container-image.build>
+    <quarkus.container-image.name>${project.artifactId}</quarkus.container-image.name>
+    <quarkus.container-image.group>ebullient</quarkus.container-image.group>
   </properties>
 
   <dependencies>
@@ -62,6 +63,11 @@
 
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-jib</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
     </dependency>
     <dependency>
@@ -81,78 +87,49 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-help-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>show-profiles</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>active-profiles</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
   <profiles>
     <profile>
-      <id>docker-jvm</id>
+      <id>jvm-image</id>
       <activation>
-        <file>
-          <exists>target/lib</exists>
-        </file>
+        <property>
+          <name>!native</name>
+        </property>
       </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.fabric8</groupId>
-            <artifactId>docker-maven-plugin</artifactId>
-            <version>${dmp.version}</version>
-            <configuration>
-              <images>
-                <image>
-                  <name>${imageName}:jvm</name>
-                  <build>
-                    <contextDir>${project.basedir}</contextDir>
-                    <dockerFile>src/main/docker/Dockerfile.jvm</dockerFile>
-                  </build>
-                </image>
-              </images>
-            </configuration>
-            <executions>
-              <execution>
-                <id>docker-build</id>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
+      <properties>
+        <quarkus.container-image.tag>${project.version}-jvm</quarkus.container-image.tag>
+      </properties>
     </profile>
 
     <profile>
-      <id>native</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.fabric8</groupId>
-            <artifactId>docker-maven-plugin</artifactId>
-            <version>${dmp.version}</version>
-            <configuration>
-              <images>
-                <image>
-                  <name>${imageName}:native</name>
-                  <build>
-                    <contextDir>${project.basedir}</contextDir>
-                    <dockerFile>src/main/docker/Dockerfile.native</dockerFile>
-                  </build>
-                </image>
-              </images>
-            </configuration>
-            <executions>
-              <execution>
-                <id>docker-build</id>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
+      <id>native-image</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.container-image.tag>${project.version}-native</quarkus.container-image.tag>
+      </properties>
     </profile>
-
   </profiles>
-
-
 
 </project>

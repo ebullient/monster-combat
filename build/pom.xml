@@ -17,7 +17,7 @@
 
   <properties>
     <!-- see .mvn/config or cmdline property for revision value -->
-    <micrometer.version>1.3.5</micrometer.version>
+    <micrometer.version>1.3.7</micrometer.version>
     <slf4j.version>1.7.30</slf4j.version>
     <jackson.version>2.10.2</jackson.version>
 
