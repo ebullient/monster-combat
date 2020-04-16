@@ -84,12 +84,12 @@
             <labels>
               <org.opencontainers.image.title>${project.artifactId}</org.opencontainers.image.title>
               <org.opencontainers.image.description>${project.name}</org.opencontainers.image.description>
-              <org.opencontainers.image.created>${git.build.time}</org.opencontainers.image.created>
+              <org.opencontainers.image.version>${project.version}</org.opencontainers.image.version>
               <org.opencontainers.image.url>https://github.com/ebullient/monster-combat</org.opencontainers.image.url>
               <org.opencontainers.image.source>https://github.com/ebullient/monster-combat</org.opencontainers.image.source>
-              <org.opencontainers.image.version>${git.build.version}</org.opencontainers.image.version>
-              <org.opencontainers.image.revision>${git.commit.id.describe-short}</org.opencontainers.image.revision>
               <org.opencontainers.image.licenses>	Apache-2.0</org.opencontainers.image.licenses>
+              <org.opencontainers.image.created>${git.build.time}</org.opencontainers.image.created>
+              <org.opencontainers.image.revision>${git.commit.id.describe-short}</org.opencontainers.image.revision>
             </labels>
           </container>
         </configuration>
