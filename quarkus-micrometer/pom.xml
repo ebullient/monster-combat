@@ -144,6 +144,22 @@
       </properties>
     </profile>
 
+    <!-- Do not build container images on mac until the "building using a container" memory issue is sorted -->
+    <profile>
+      <id>mac-native</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.container-image.build>false</quarkus.container-image.build>
+      </properties>
+    </profile>
+
     <profile>
       <id>native-image</id>
       <activation>
@@ -152,10 +168,10 @@
         </property>
       </activation>
       <properties>
-        <quarkus.native.container-build>true</quarkus.native.container-build>
         <quarkus.container-image.tag>${project.version}-native</quarkus.container-image.tag>
       </properties>
     </profile>
+
   </profiles>
 
 </project>
