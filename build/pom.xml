@@ -32,6 +32,7 @@
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
     <failsafe-plugin.version>2.22.1</failsafe-plugin.version>
+    <resources-plugin.version>3.1.0</resources-plugin.version>
 
     <junit-platform.version>5.3.1</junit-platform.version>
     <jacoco.version>0.8.4</jacoco.version>
@@ -70,6 +71,10 @@
         <plugin>
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>${failsafe-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${resources-plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>

@@ -33,6 +33,9 @@
     <quarkus.container-image.build>true</quarkus.container-image.build>
     <quarkus.container-image.name>${project.artifactId}</quarkus.container-image.name>
     <quarkus.container-image.group>ebullient</quarkus.container-image.group>
+
+    <quarkus.docker.dockerfile-jvm-path>${basedir}/target/docker/Dockerfile.jvm</quarkus.docker.dockerfile-jvm-path>
+    <quarkus.docker.dockerfile-native-path>${basedir}/target/docker/Dockerfile.native</quarkus.docker.dockerfile-native-path>
   </properties>
 
   <dependencies>
@@ -63,7 +66,7 @@
 
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-container-image-jib</artifactId>
+      <artifactId>quarkus-container-image-docker</artifactId>
     </dependency>
 
     <dependency>
@@ -103,6 +106,28 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/docker/</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/main/docker/</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -127,6 +152,7 @@
         </property>
       </activation>
       <properties>
+        <quarkus.native.container-build>true</quarkus.native.container-build>
         <quarkus.container-image.tag>${project.version}-native</quarkus.container-image.tag>
       </properties>
     </profile>

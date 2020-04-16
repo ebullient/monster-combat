@@ -15,6 +15,26 @@
     <flatten-maven-plugin.version>1.2.1</flatten-maven-plugin.version>
   </properties>
 
+  <scm>
+    <url>https://github.com/ebullient/monster-combat</url>
+    <connection>scm:git:https://github.com/ebullient/monster-combat.git</connection>
+    <developerConnection>scm:git:git@github.com/ebullient/monster-combat.git</developerConnection>
+    <tag>${project.version}</tag>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/ebullient/monster-combat/issues</url>
+  </issueManagement>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
   <build>
     <plugins>
       <plugin>
