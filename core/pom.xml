@@ -9,7 +9,7 @@
   <parent>
     <groupId>dev.ebullient.monster-combat</groupId>
     <artifactId>mc-build-parent</artifactId>
-    <version>0.1.0</version>
+    <version>${revision}</version>
     <relativePath>../build/pom.xml</relativePath>
   </parent>
 
