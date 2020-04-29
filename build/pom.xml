@@ -7,7 +7,7 @@
   <parent>
     <groupId>dev.ebullient.monster-combat</groupId>
     <artifactId>mc-parent</artifactId>
-    <version>0.1.0</version>
+    <version>${revision}</version>
   </parent>
 
   <artifactId>mc-build-parent</artifactId>
@@ -16,12 +16,12 @@
   <name>Monster Combat - Build</name>
 
   <properties>
-    <!-- see .mvn/config or cmdline property for revision value -->
-    <micrometer.version>1.3.7</micrometer.version>
+    <!-- see .mvn/maven.config or cmdline property for revision value -->
+    <micrometer.version>1.5.0</micrometer.version>
     <slf4j.version>1.7.30</slf4j.version>
     <jackson.version>2.10.2</jackson.version>
 
-    <java.version>1.8</java.version>
+    <java.version>11</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.parameters>true</maven.compiler.parameters>
