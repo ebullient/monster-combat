@@ -132,7 +132,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 15,
         "description" : "Claw. Melee Weapon Attack: +15 to hit, reach 10 ft., one target. Hit: 22 (4d6 + 8) slashing damage.",
@@ -637,7 +637,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 12,
         "description" : "Claw. Melee Weapon Attack: +12 to hit, reach 5 ft., one target. Hit: 17 (2d10 + 6) slashing damage.",
@@ -895,7 +895,7 @@
     "challengeRating" : "1",
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 5,
         "description" : "Claw. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage.",
@@ -951,7 +951,7 @@
     "challengeRating" : "1",
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 5,
         "description" : "Claw. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage.",
@@ -1011,7 +1011,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 8,
         "description" : "Claw. Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 8 (1d8 + 4) slashing damage.",
@@ -1076,7 +1076,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 10,
         "description" : "Claw. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 6) slashing damage.",
@@ -1327,7 +1327,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 14,
         "description" : "Claw. Melee Weapon Attack: +14 to hit, reach 5 ft., one target. Hit: 15 (2d6 + 8) slashing damage.",
@@ -2099,7 +2099,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 17,
         "description" : "Claw. Melee Weapon Attack: +17 to hit, reach 10 ft., one target. Hit: 17 (2d6 + 10) slashing damage.",
@@ -2220,7 +2220,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 12,
         "description" : "Claw. Melee Weapon Attack: +12 to hit, reach 5 ft., one target. Hit: 14 (2d6 + 7) slashing damage.",
@@ -2575,7 +2575,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
         "description" : "Claw (Oni Form Only). Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage.",
@@ -2776,7 +2776,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
         "description" : "Claw (Bear or Hybrid Form Only). Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage.",
@@ -2951,7 +2951,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 9,
         "description" : "Claw. Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage.",
@@ -3087,7 +3087,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 12,
         "description" : "Claw. Melee Weapon Attack: +12 to hit, reach 5 ft., one target. Hit: 14 (2d6 + 7) slashing damage.",
@@ -3176,7 +3176,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 14,
         "description" : "Claw. Melee Weapon Attack: +14 to hit, reach 10 ft., one target. Hit: 17 (2d8 + 8) slashing damage.",
@@ -3387,7 +3387,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 11,
         "description" : "Claw. Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 6) slashing damage.",
@@ -3476,7 +3476,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 15,
         "description" : "Claw. Melee Weapon Attack: +15 to hit, reach 10 ft., one target. Hit: 15 (2d6 + 8) slashing damage.",
@@ -3661,7 +3661,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
         "description" : "Claw. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage.",
@@ -3783,7 +3783,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 14,
         "description" : "Claw. Melee Weapon Attack: +14 to hit, reach 10 ft., one target. Hit: 15 (2d6 + 8) slashing damage.",
@@ -3981,7 +3981,7 @@
         }
       },
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 14,
         "description" : "Claw. Melee Weapon Attack: +14 to hit, reach 5 ft., one target. Hit: 15 (2d6 + 8) slashing damage.",
@@ -4431,7 +4431,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 15,
         "description" : "Claw. Melee Weapon Attack: +15 to hit, reach 10 ft., one target. Hit: 15 (2d6 + 8) slashing damage.",
@@ -4520,7 +4520,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 11,
         "description" : "Claw. Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 6) slashing damage.",
@@ -4596,7 +4596,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 16,
         "description" : "Claw. Melee Weapon Attack: +16 to hit, reach 10 ft., one target. Hit: 16 (2d6 + 9) slashing damage.",
@@ -4853,7 +4853,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
         "description" : "Claw. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage.",
@@ -5077,7 +5077,7 @@
     "challengeRating" : "4",
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 5,
         "description" : "Claw (Tiger or Hybrid Form Only). Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage.",
@@ -5377,7 +5377,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
         "description" : "Claw. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage.",
@@ -5652,7 +5652,7 @@
         }
       },
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 10,
         "description" : "Claw. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 6) slashing damage.",
@@ -5714,7 +5714,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
         "description" : "Claw. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage.",
@@ -5929,7 +5929,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
         "description" : "Claw. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage.",
@@ -6334,7 +6334,7 @@
     "challengeRating" : "2",
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 6,
         "description" : "Claw. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage.",
@@ -6660,7 +6660,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 14,
         "description" : "Claw. Melee Weapon Attack: +14 to hit, reach 10 ft., one target. Hit: 15 (2d6 + 8) slashing damage.",
@@ -6762,7 +6762,7 @@
         }
       },
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 17,
         "description" : "Claw. Melee Weapon Attack: +17 to hit, reach 10 ft., one target. Hit: 17 (2d6 + 10) slashing damage.",
@@ -7556,7 +7556,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 9,
         "description" : "Claw. Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 12 (2d6 + 5) slashing damage.",
@@ -7775,7 +7775,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 5,
         "description" : "Claw. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage.",
@@ -7971,7 +7971,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 8,
         "description" : "Claw. Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 12 (2d6 + 5) slashing damage.",
@@ -8155,7 +8155,7 @@
         }
       },
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 6,
         "description" : "Claw. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage.",
@@ -8268,7 +8268,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 9,
         "description" : "Claw. Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage.",
@@ -8445,7 +8445,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 6,
         "description" : "Claw. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage.",
@@ -8607,7 +8607,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 10,
         "description" : "Claw. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 6) slashing damage.",
@@ -9454,7 +9454,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 11,
         "description" : "Claw. Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 6) slashing damage.",
@@ -9865,7 +9865,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 16,
         "description" : "Claw. Melee Weapon Attack: +16 to hit, reach 10 ft., one target. Hit: 16 (2d6 + 9) slashing damage.",
@@ -10302,7 +10302,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 10,
         "description" : "Claw. Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 15 (3d6 + 5) slashing damage.",
@@ -10472,7 +10472,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 13,
         "description" : "Claw. Melee Weapon Attack: +13 to hit, reach 10 ft., one target. Hit: 16 (2d8 + 7) slashing damage.",
@@ -10836,7 +10836,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 17,
         "description" : "Claw. Melee Weapon Attack: +17 to hit, reach 10 ft., one target. Hit: 17 (2d6 + 10) slashing damage.",
@@ -10984,7 +10984,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 13,
         "description" : "Claw. Melee Weapon Attack: +13 to hit, reach 5 ft., one target. Hit: 15 (2d6 + 8) slashing damage.",
@@ -11425,7 +11425,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 7,
         "description" : "Claw. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 9 (2d6 + 2) slashing damage, and the target is cursed if it is a creature. The magical curse takes effect whenever the target takes a short or long rest, filling the target's thoughts with horrible images and dreams. The cursed target gains no benefit from finishing a short or long rest. The curse lasts until it is lifted by a remove curse spell or similar magic.",
@@ -12340,7 +12340,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 11,
         "description" : "Claw. Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 6) slashing damage.",
@@ -12603,7 +12603,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 11,
         "description" : "Claw. Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 6) slashing damage.",
@@ -12730,7 +12730,7 @@
     },
     "actions" : {
       "claw" : {
-        "name" : "Claw",
+        "name" : "Claws",
         "melee" : true,
         "attackModifier" : 19,
         "description" : "Claw. Melee Weapon Attack: +19 to hit, reach 15 ft., one target. Hit: 28 (4d8 + 10) slashing damage.",

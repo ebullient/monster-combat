@@ -31,13 +31,13 @@ services:
 
   spring:
     container_name: spring-micrometer
-    image: ebullient/dnd-mc-spring5-micrometer
+    image: ebullient/mc-spring5-micrometer
     ports:
       - "8280:8080"
 
   quarkus:
     container_name: quarkus-micrometer
-    image: ebullient/dnd-mc-quarkus-micrometer:jvm
+    image: ebullient/mc-quarkus-micrometer:latest-jvm
     ports:
       - "8281:8080"
 
