@@ -1,8 +1,19 @@
 #!/usr/bin/env bash
 
-URL=$1
+case "$1" in
+  dc-spring)
+    URL=http://localhost:8280/combat/any
+  ;;
+  dc-quarkus)
+    URL=http://localhost:8281/combat/any
+  ;;    
+  k8s-spring)
+    URL=http://monsters.192.168.99.100.nip.io/combat/faceoff
+  ;;
+  *)
+  ;;
+esac
 if [ -z "$URL" ]; then
-  #URL=http://monsters.192.168.99.100.nip.io/combat/faceoff
   URL=http://localhost:8080/combat/any
 fi
 

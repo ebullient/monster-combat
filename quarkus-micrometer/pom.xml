@@ -127,7 +127,7 @@
         </property>
       </activation>
       <properties>
-        <quarkus.container-image.tag>${project.version}-jvm</quarkus.container-image.tag>
+        <quarkus.container-image.tag>latest-jvm</quarkus.container-image.tag>
       </properties>
     </profile>
 
@@ -155,7 +155,7 @@
         </property>
       </activation>
       <properties>
-        <quarkus.container-image.tag>${project.version}-native</quarkus.container-image.tag>
+        <quarkus.container-image.tag>latest-native</quarkus.container-image.tag>
       </properties>
     </profile>
 

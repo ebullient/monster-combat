@@ -36,8 +36,8 @@ export MONSTER_DIR=${PWD}          # for future reference
 This application is all about application metrics. The surrounding environment doesn't matter much. If you're lazy, or on a constrained system, docker-compose will work fine to start all the bits.
 
 ```bash
-build.sh
-# build.sh creates the following output directories to ensure host user ownership:
+./buildme.sh
+# buildme.sh creates the following output directories to ensure host user ownership:
 # mkdir -p deploy/dc/target/prometheus deploy/dc/target/grafana
 
 cd deploy/dc

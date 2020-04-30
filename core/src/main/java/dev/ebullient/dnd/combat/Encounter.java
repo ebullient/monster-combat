@@ -93,6 +93,10 @@ public class Encounter {
         return EncounterTargetSelector.targetSelectorToString(selector, numCombatants);
     }
 
+    public int getNumSurvivors() {
+        return initiativeOrder.size();
+    }
+
     public RoundResult oneRound() {
         logger.debug("oneRound: {} {}", initiativeOrder, id);
 
