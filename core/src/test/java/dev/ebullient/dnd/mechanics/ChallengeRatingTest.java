@@ -13,7 +13,7 @@
  */
 package dev.ebullient.dnd.mechanics;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ChallengeRatingTest {
@@ -34,7 +34,7 @@ public class ChallengeRatingTest {
                 }
             }
         }
-        Assert.assertEquals("Lowest possible value should be -3 (CR 1/8)", -3, lowest);
-        Assert.assertTrue("Highest value should be < 23", highest < 23);
+        Assertions.assertEquals(-3, lowest, "Lowest possible value should be -3 (CR 1/8)");
+        Assertions.assertTrue(highest < 23, "Highest value should be < 23");
     }
 }

@@ -13,28 +13,31 @@
  */
 package dev.ebullient.dnd.mechanics;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class HitPointsTest {
 
     @Test
     public void testStartingHitPointsDescriptionAverage() {
-        Assert.assertEquals("starting hit points should equal explicit value in string",
-                34, HitPoints.startingHitPoints("test", "34", Dice.Method.USE_AVERAGE));
+        Assertions.assertEquals(34,
+                HitPoints.startingHitPoints("test", "34", Dice.Method.USE_AVERAGE),
+                "starting hit points should equal explicit value in string");
 
-        Assert.assertEquals("starting hit points should equal average value in string",
-                59, HitPoints.startingHitPoints("test", "59(7d10+21)", Dice.Method.USE_AVERAGE));
+        Assertions.assertEquals(59,
+                HitPoints.startingHitPoints("test", "59(7d10+21)", Dice.Method.USE_AVERAGE),
+                "starting hit points should equal average value in string");
     }
 
     @Test
     public void testStartingHitPointsDescription() {
-        Assert.assertEquals("starting hit points should equal explicit value in string",
-                34, HitPoints.startingHitPoints("test", "34", Dice.Method.ROLL));
+        Assertions.assertEquals(34,
+                HitPoints.startingHitPoints("test", "34", Dice.Method.ROLL),
+                "starting hit points should equal explicit value in string");
 
         int hp = HitPoints.startingHitPoints("test", "59(1d4+1)", Dice.Method.ROLL);
-        Assert.assertTrue("starting hit points should be in the value range, hp=" + hp,
-                (1 < hp) && (hp < 6));
+        Assertions.assertTrue((1 < hp) && (hp < 6),
+                "starting hit points should be in the value range, hp=" + hp);
     }
 
     @Test
@@ -48,10 +51,9 @@ public class HitPointsTest {
             prev = 0;
             for (int i = -3; i < 23; i++) {
                 hp = HitPoints.startingHitPoints(8, i, size);
-                Assert.assertTrue(
+                Assertions.assertTrue(hp >= prev,
                         "hit points should ascend. weirdness with size="
-                                + size + ", and cr=" + i + "; hp=" + hp + ", and prev=" + prev,
-                        hp >= prev);
+                                + size + ", and cr=" + i + "; hp=" + hp + ", and prev=" + prev);
                 prev = hp;
             }
         }

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import dev.ebullient.dnd.bestiary.MockBeast;
@@ -43,8 +43,8 @@ public class EncounterComparatorsTest {
 
         combatants.sort(EncounterComparators.InitiativeOrder);
 
-        Assert.assertEquals("when initiative & dex are equal (0), combatants should be sorted in name order",
-                "0123", listToString(combatants));
+        Assertions.assertEquals("0123", listToString(combatants),
+                "when initiative & dex are equal (0), combatants should be sorted in name order");
 
         mbs[0].modifiers.set(Ability.DEX, 1);
         mbs[1].modifiers.set(Ability.DEX, 2);
@@ -52,8 +52,8 @@ public class EncounterComparatorsTest {
         mbs[3].modifiers.set(Ability.DEX, 4);
 
         combatants.sort(EncounterComparators.InitiativeOrder);
-        Assert.assertEquals("When initiative is the same, sort by dexterity",
-                "3210", listToString(combatants));
+        Assertions.assertEquals("3210", listToString(combatants),
+                "When initiative is the same, sort by dexterity");
 
         combatants.set(0, new EncounterCombatant(mbs[0], 10, 10));
         combatants.set(1, new EncounterCombatant(mbs[1], 2, 10));
@@ -61,8 +61,8 @@ public class EncounterComparatorsTest {
         combatants.set(3, new EncounterCombatant(mbs[3], 6, 10));
 
         combatants.sort(EncounterComparators.InitiativeOrder);
-        Assert.assertEquals("Combatants should be in unique-initiative order",
-                "2031", listToString(combatants));
+        Assertions.assertEquals("2031", listToString(combatants),
+                "Combatants should be in unique-initiative order");
     }
 
     @Test
@@ -81,14 +81,14 @@ public class EncounterComparatorsTest {
         }
 
         combatants.sort(EncounterComparators.ChallengeRatingOrder);
-        Assert.assertEquals("when cr (0) and max health (10) are equal, combatants should be sorted in name order",
-                "0123", listToString(combatants));
+        Assertions.assertEquals("0123", listToString(combatants),
+                "when cr (0) and max health (10) are equal, combatants should be sorted in name order");
 
         combatants.set(1, new EncounterCombatant(mbs[1], 10, 20));
 
         combatants.sort(EncounterComparators.ChallengeRatingOrder);
-        Assert.assertEquals("when cr (0), combatants should be sorted by max health, then name",
-                "1023", listToString(combatants));
+        Assertions.assertEquals("1023", listToString(combatants),
+                "when cr (0), combatants should be sorted by max health, then name");
 
         mbs[0].cr = 5;
         mbs[1].cr = -3;
@@ -96,8 +96,8 @@ public class EncounterComparatorsTest {
         mbs[3].cr = 5;
 
         combatants.sort(EncounterComparators.ChallengeRatingOrder);
-        Assert.assertEquals("combatants sorted in cr order, then in health order, then in name order",
-                "0312", listToString(combatants));
+        Assertions.assertEquals("0312", listToString(combatants),
+                "combatants sorted in cr order, then in health order, then in name order");
     }
 
     @Test
@@ -117,15 +117,15 @@ public class EncounterComparatorsTest {
 
         List<EncounterCombatant> combatants = new ArrayList<>(Arrays.asList(mcs));
         combatants.sort(EncounterComparators.RelativeHealthOrder);
-        Assert.assertEquals("when health is equal (0), combatants should be sorted in name order",
-                "0123", listToString(combatants));
+        Assertions.assertEquals("0123", listToString(combatants),
+                "when health is equal (0), combatants should be sorted in name order");
 
         mcs[0].takeDamage(3);
         mcs[1].takeDamage(7);
 
         combatants.sort(EncounterComparators.RelativeHealthOrder);
-        Assert.assertEquals("combatants sorted in health order, then in name order",
-                "2301", listToString(combatants));
+        Assertions.assertEquals("2301", listToString(combatants),
+                "combatants sorted in health order, then in name order");
     }
 
     @Test
@@ -145,15 +145,15 @@ public class EncounterComparatorsTest {
 
         List<EncounterCombatant> combatants = new ArrayList<>(Arrays.asList(mcs));
         combatants.sort(EncounterComparators.RelativeHealthOrder);
-        Assert.assertEquals("when all are the same size, combatants should be sorted in name order",
-                "0123", listToString(combatants));
+        Assertions.assertEquals("0123", listToString(combatants),
+                "when all are the same size, combatants should be sorted in name order");
 
         mbs[2].size = Size.GARGANTUAN;
         mbs[3].size = Size.LARGE;
 
         combatants.sort(EncounterComparators.SizeOrder);
-        Assert.assertEquals("combatants sorted in size order, then in name order",
-                "2301", listToString(combatants));
+        Assertions.assertEquals("2301", listToString(combatants),
+                "combatants sorted in size order, then in name order");
     }
 
     String listToString(List<EncounterCombatant> list) {

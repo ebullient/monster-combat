@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import dev.ebullient.dnd.client.RoundResult;
+import dev.ebullient.dnd.combat.client.RoundResult;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.common.mapper.TypeRef;
 

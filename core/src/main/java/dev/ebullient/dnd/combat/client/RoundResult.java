@@ -11,7 +11,7 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd.client;
+package dev.ebullient.dnd.combat.client;
 
 import java.util.List;
 
@@ -21,10 +21,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RoundResult implements dev.ebullient.dnd.combat.RoundResult {
 
-    @JsonDeserialize(contentAs = dev.ebullient.dnd.client.Combatant.class)
+    @JsonDeserialize(contentAs = Combatant.class)
     List<Combatant> survivors;
 
-    @JsonDeserialize(contentAs = dev.ebullient.dnd.client.AttackEvent.class)
+    @JsonDeserialize(contentAs = AttackEvent.class)
     List<Event> events;
 
     int numCombatants;

@@ -11,13 +11,12 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd;
+package dev.ebullient.dnd.combat.client;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.RoundResult;
@@ -25,8 +24,7 @@ import dev.ebullient.dnd.combat.RoundResult.Event;
 import dev.ebullient.dnd.mechanics.Dice;
 import io.micrometer.core.instrument.MeterRegistry;
 
-@Component
-class CombatMetrics {
+public class CombatMetrics {
     static final Logger logger = LoggerFactory.getLogger(CombatMetrics.class);
 
     final MeterRegistry registry;
@@ -38,6 +36,7 @@ class CombatMetrics {
 
         last_felled = registry.gauge("last.felled", new AtomicInteger(0));
         last_roll = registry.gauge("last.roll", new AtomicInteger(0));
+
         Dice.setMonitor((k, v) -> {
             registry.counter("dice.rolls", "die", k, "face", label(v)).increment();
             last_roll.set(v);
@@ -57,19 +56,20 @@ class CombatMetrics {
     public void endRound(RoundResult result) {
         for (Event event : result.getEvents()) {
             registry.summary("round.attacks",
-                    "attackType", event.getType(),
                     "hitOrMiss", event.hitOrMiss(),
+                    "attackType", event.getAttackType(),
+                    "damageType", event.getType(),
                     "targetSelector", result.getSelector())
                     .record((double) event.getDamageAmount());
 
             registry.summary("attacker.damage",
                     "attacker", event.getActor().getName(),
                     "attackName", event.getName(),
-                    "attackType", event.getType(),
                     "hitOrMiss", event.hitOrMiss())
                     .record((double) event.getDamageAmount());
 
             registry.summary("attack.success",
+                    "attackType", event.getAttackType(),
                     "hitOrMiss", event.hitOrMiss())
                     .record((double) event.getDifficultyClass() - event.getAttackModifier());
         }

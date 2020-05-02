@@ -33,6 +33,11 @@ public class MockDamage implements Attack.Damage {
         this.amount = amount;
     }
 
+    public MockDamage setSavingThrow(String s) {
+        this.savingThrow = s;
+        return this;
+    }
+
     @Override
     public String getType() {
         return type;

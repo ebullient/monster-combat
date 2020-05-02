@@ -866,7 +866,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Frequency of hit or miss : rate[15m]",
+      "title": "Frequency of hit or miss : rate[15m] (stacked)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1173,9 +1173,9 @@
           ],
           "targets": [
             {
-              "expr": "sum by (attackType)(round_attacks_count)",
+              "expr": "sum by (damageType)(round_attacks_count)",
               "instant": true,
-              "legendFormat": "{{attackType}}",
+              "legendFormat": "{{damageType}}",
               "refId": "B"
             },
             {
@@ -1240,8 +1240,8 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (attackType)(attacks:round_attacks:rate15m)",
-              "legendFormat": "{{attackType}}",
+              "expr": "sum by (damageType)(attacks:round_attacks:rate15m)",
+              "legendFormat": "{{damageType}}",
               "refId": "B"
             }
           ],
@@ -1249,7 +1249,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Frequency of attack type : rate[15m]",
+          "title": "Frequency of attack damage type : rate[15m] (stacked)",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -1337,8 +1337,8 @@
               "refId": "A"
             },
             {
-              "expr": "sum by (attackType)(damage:round_attacks:rate15m * 15 * 60) / sum by (attackType)(attacks:round_attacks:rate15m * 15 * 60)",
-              "legendFormat": "{{attackType}}",
+              "expr": "sum by (damageType)(damage:round_attacks:rate15m * 15 * 60) / sum by (damageType)(attacks:round_attacks:rate15m * 15 * 60)",
+              "legendFormat": "{{damageType}}",
               "refId": "B"
             }
           ],
@@ -1384,7 +1384,7 @@
           }
         }
       ],
-      "title": "Attacks by type",
+      "title": "Attacks by damage type",
       "type": "row"
     },
     {

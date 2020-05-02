@@ -34,6 +34,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import dev.ebullient.dnd.bestiary.Bestiary;
 import dev.ebullient.dnd.bestiary.compendium.CompendiumReader;
+import dev.ebullient.dnd.combat.client.CombatMetrics;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.config.MeterFilter;
 
 @Configuration
@@ -52,6 +54,11 @@ public class ApplicationConfig {
             logger.error("Exception occurred filling the beastiary", e);
         }
         return beastiary;
+    }
+
+    @Bean
+    public CombatMetrics initCombatMetrics(MeterRegistry registry) {
+        return new CombatMetrics(registry);
     }
 
     @Bean

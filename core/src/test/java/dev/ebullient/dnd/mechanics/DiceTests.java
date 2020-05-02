@@ -13,8 +13,8 @@
  */
 package dev.ebullient.dnd.mechanics;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class DiceTests {
 
@@ -22,53 +22,53 @@ public class DiceTests {
     public void testSingleRollDamage() {
         String roll = "1d20";
         int result = Dice.roll(roll);
-        Assert.assertTrue("result should be greater than 0: " + result,
-                result > 0);
-        Assert.assertTrue("result should be less than 21: " + result,
-                result < 21);
+        Assertions.assertTrue(result > 0,
+                "result should be greater than 0: " + result);
+        Assertions.assertTrue(result < 21,
+                "result should be less than 21: " + result);
     }
 
     @Test
     public void testMultipleRollDamage() {
         String roll = "2d20";
         int result = Dice.roll(roll);
-        Assert.assertTrue("result should be greater than 0: " + result,
-                result > 0);
-        Assert.assertTrue("result should be less than 41: " + result,
-                result < 41);
+        Assertions.assertTrue(result > 0,
+                "result should be greater than 0: " + result);
+        Assertions.assertTrue(result < 41,
+                "result should be less than 41: " + result);
     }
 
     @Test
     public void testSingleRollMath() {
         String roll = "1d20+6";
         int result = Dice.roll(roll);
-        Assert.assertTrue("result should be greater than 6: " + result,
-                result > 6);
-        Assert.assertTrue("result should be less than 27: " + result,
-                result < 27);
+        Assertions.assertTrue(result > 6,
+                "result should be greater than 6: " + result);
+        Assertions.assertTrue(result < 27,
+                "result should be less than 27: " + result);
     }
 
     @Test
     public void testCompoundDamage() {
         String roll = "2d20+2d6";
         int result = Dice.roll(roll);
-        Assert.assertTrue("result should be greater than 4: " + result,
-                result > 4);
-        Assert.assertTrue("result should be less than 53: " + result,
-                result < 53);
+        Assertions.assertTrue(result > 4,
+                "result should be greater than 4: " + result);
+        Assertions.assertTrue(result < 53,
+                "result should be less than 53: " + result);
     }
 
     @Test
     public void testAverageRoll() {
         String roll = "15(2d20+2d6)";
         int result = Dice.roll(roll, Dice.Method.USE_AVERAGE);
-        Assert.assertEquals(roll + " should return average", 15, result);
+        Assertions.assertEquals(15, result, roll + " should return average");
     }
 
     @Test
     public void testOnlyAverageRoll() {
         String roll = "15";
         int result = Dice.roll(roll, Dice.Method.ROLL);
-        Assert.assertEquals(roll + " should return average", 15, result);
+        Assertions.assertEquals(15, result, roll + " should return average");
     }
 }
