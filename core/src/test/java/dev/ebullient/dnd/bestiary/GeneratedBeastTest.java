@@ -13,7 +13,7 @@
  */
 package dev.ebullient.dnd.bestiary;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class GeneratedBeastTest {
@@ -21,10 +21,10 @@ public class GeneratedBeastTest {
     @Test
     public void testCalculateAC() {
         // Fixd formula, but this gives an idea of what is returned
-        Assert.assertEquals(10, GeneratedBeast.calculateAC(8, -3));
-        Assert.assertEquals(11, GeneratedBeast.calculateAC(10, -3));
-        Assert.assertEquals(15, GeneratedBeast.calculateAC(10, 8));
-        Assert.assertEquals(18, GeneratedBeast.calculateAC(8, 20));
+        Assertions.assertEquals(10, GeneratedBeast.calculateAC(8, -3));
+        Assertions.assertEquals(11, GeneratedBeast.calculateAC(10, -3));
+        Assertions.assertEquals(15, GeneratedBeast.calculateAC(10, 8));
+        Assertions.assertEquals(18, GeneratedBeast.calculateAC(8, 20));
     }
 
 }

@@ -1,5 +1,7 @@
 package dev.ebullient.dnd.combat;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 
@@ -23,13 +25,11 @@ class EncounterAttackEvent implements RoundResult.Event {
     boolean hit;
     boolean critical;
     boolean saved;
+    boolean spellAttack = false;
     int damageAmount;
 
     int difficultyClass;
     int attackModifier;
-
-    boolean effectSaved;
-    int effectAmount;
 
     EncounterAttackEvent(EncounterCombatant actor, EncounterCombatant target, Attack attack, Dice.Method method,
             String encounterId) {
@@ -43,6 +43,19 @@ class EncounterAttackEvent implements RoundResult.Event {
         // save what was present for this attack for poking and prodding later.
         this.actorStartingCondition = actor.condition;
         this.targetStartingCondition = target.condition;
+    }
+
+    // Used for additional effects: attack w/ two results
+    EncounterAttackEvent(EncounterAttackEvent that) {
+        this.method = that.method;
+
+        this.actor = that.actor;
+        this.target = that.target;
+        this.attack = that.attack;
+        this.encounterId = that.encounterId;
+
+        this.actorStartingCondition = that.actorStartingCondition;
+        this.targetStartingCondition = that.targetStartingCondition;
     }
 
     public String getName() {
@@ -73,10 +86,8 @@ class EncounterAttackEvent implements RoundResult.Event {
         return saved;
     }
 
-    public String hitOrMiss() {
-        return (critical ? "critical " : "")
-                + (saved ? "saved " : "")
-                + (hit ? "hit" : "miss");
+    public boolean isSpellAttack() {
+        return spellAttack;
     }
 
     public int getDamageAmount() {
@@ -107,24 +118,29 @@ class EncounterAttackEvent implements RoundResult.Event {
         return targetEndingCondition == null ? "" : targetEndingCondition.toString();
     }
 
-    EncounterAttackEvent attack() {
+    List<EncounterAttackEvent> attack() {
+        EncounterAttackEvent additionalEvent = null;
         if (attack.getSavingThrow() != null) {
-            hit = true;
-            makeActionWithSavingThrow(attack.getDamage(), false);
+            makeActionWithSavingThrow(attack.getSavingThrow(), attack.getDamage());
         } else {
             attemptMeleeAttack();
         }
 
         Damage effect = attack.getAdditionalEffect();
-        if (effect != null) {
-            makeActionWithSavingThrow(effect, true);
+        if (hit && effect != null) {
+            additionalEvent = new EncounterAttackEvent(this);
+            additionalEvent.makeActionWithSavingThrow(effect.getSavingThrow(), effect);
         }
 
         // Attacks / Actions can apply conditions.
         // Save what was present at the end of this attack for poking & prodding later.
         this.actorEndingCondition = actor.condition;
         this.targetEndingCondition = target.condition;
-        return this;
+        if (additionalEvent == null) {
+            return Arrays.asList(this);
+        } else {
+            return Arrays.asList(this, additionalEvent);
+        }
     }
 
     /**
@@ -203,11 +219,12 @@ class EncounterAttackEvent implements RoundResult.Event {
      * If the target is Medium or smaller, it must succeed on a DC 10 Strength saving throw
      * or be knocked prone. If the target is killed by this damage, it is absorbed into the mouther
      */
-    void makeActionWithSavingThrow(Damage damage, boolean additionalEffect) {
+    void makeActionWithSavingThrow(String throwStr, Damage damage) {
+        this.hit = true;
+        this.spellAttack = true;
+
         boolean successful = false;
         int amount = 0;
-
-        String throwStr = additionalEffect ? damage.getSavingThrow() : attack.getSavingThrow();
 
         Matcher m = Attack.SAVE.matcher(throwStr);
         if (m.matches()) {
@@ -240,15 +257,10 @@ class EncounterAttackEvent implements RoundResult.Event {
                 target.takeDamage(amount); // ouch
             }
 
-            if (additionalEffect) {
-                this.effectSaved = successful;
-                this.effectAmount = amount;
-            } else {
-                this.saved = successful;
-                this.damageAmount = amount;
-                this.difficultyClass = dc;
-                this.attackModifier = modifier;
-            }
+            this.saved = successful;
+            this.damageAmount = amount;
+            this.difficultyClass = dc;
+            this.attackModifier = modifier;
         }
     }
 

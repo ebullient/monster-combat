@@ -16,7 +16,6 @@ package dev.ebullient.dnd.combat;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -47,28 +46,28 @@ public class EncounterImplTest {
 
         Encounter e = new Encounter(Arrays.asList(mcs), EncounterTargetSelector.SelectAtRandom,
                 Dice.Method.USE_AVERAGE);
-        Assert.assertEquals("Size delta should be 0 when beasts are the same size", 0, e.sizeDelta);
-        Assert.assertEquals("CR delta should be 0 when beasts have the same CR", 0, e.crDelta);
-        Assert.assertEquals("Number of types should be 1 when beasts are the same type", 1, e.numTypes);
-        Assert.assertEquals("Number of combatants should be 2", 2, e.numCombatants);
+        Assertions.assertEquals(0, e.sizeDelta, "Size delta should be 0 when beasts are the same size");
+        Assertions.assertEquals(0, e.crDelta, "CR delta should be 0 when beasts have the same CR");
+        Assertions.assertEquals(1, e.numTypes, "Number of types should be 1 when beasts are the same type");
+        Assertions.assertEquals(2, e.numCombatants, "Number of combatants should be 2");
 
         mbs[1].size = Size.SMALL;
         mbs[1].type = Type.BEAST;
         mbs[1].cr = 1;
 
         e = new Encounter(Arrays.asList(mcs), EncounterTargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
-        Assert.assertEquals("Size delta should be 1 when beasts are 1 size apart", 1, e.sizeDelta);
-        Assert.assertEquals("CR delta should be 1 when cr differs by 1", 1, e.crDelta);
-        Assert.assertEquals("Number of types should be 2", 2, e.numTypes);
+        Assertions.assertEquals(1, e.sizeDelta, "Size delta should be 1 when beasts are 1 size apart");
+        Assertions.assertEquals(1, e.crDelta, "CR delta should be 1 when cr differs by 1");
+        Assertions.assertEquals(2, e.numTypes, "Number of types should be 2");
 
         mbs[0].cr = -3; // CR 0
         mbs[1].size = Size.GARGANTUAN;
         mbs[1].cr = 1;
 
         e = new Encounter(Arrays.asList(mcs), EncounterTargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
-        Assert.assertEquals("Size delta should be 5 (max delta)", Size.GARGANTUAN.ordinal() - Size.TINY.ordinal(),
-                e.sizeDelta);
-        Assert.assertEquals("CR delta should be 4 when cr ( -3 to 1 )", 4, e.crDelta);
+        Assertions.assertEquals(Size.GARGANTUAN.ordinal() - Size.TINY.ordinal(),
+                e.sizeDelta, "Size delta should be 5 (max delta)");
+        Assertions.assertEquals(4, e.crDelta, "CR delta should be 4 when cr ( -3 to 1 )");
     }
 
     @Test
@@ -97,7 +96,7 @@ public class EncounterImplTest {
                 new EncounterCombatant(mbs[1], 10, 30));
 
         Encounter r = new Encounter(combatants, EncounterTargetSelector.SelectAtRandom, Dice.Method.USE_AVERAGE);
-        Assert.assertFalse(r.isFinal());
+        Assertions.assertFalse(r.isFinal());
 
         int i = 0;
 
@@ -107,19 +106,19 @@ public class EncounterImplTest {
             i++;
             RoundResult result = r.oneRound();
             survivors = result.getSurvivors();
-            Assert.assertEquals("Encounter should be final when only one survivor remains", survivors.size() == 1,
-                    r.isFinal());
-            Assert.assertTrue("Should not get to 5 rounds", i <= 5);
+            Assertions.assertEquals(survivors.size() == 1, r.isFinal(),
+                    "Encounter should be final when only one survivor remains");
+            Assertions.assertTrue(i <= 5, "Should not get to 5 rounds");
             testSerializeResult(result);
         }
 
-        Assert.assertEquals("Combatant 0 should survive: " + survivors,
-                "0", survivors.get(0).getName());
+        Assertions.assertEquals("0", survivors.get(0).getName(),
+                "Combatant 0 should survive: " + survivors);
     }
 
     void testSerializeResult(RoundResult result) {
         Assertions.assertDoesNotThrow(() -> {
-            mapper.convertValue((EncounterRoundResult) result, dev.ebullient.dnd.client.RoundResult.class);
+            mapper.convertValue((EncounterRoundResult) result, dev.ebullient.dnd.combat.client.RoundResult.class);
         });
     }
 }

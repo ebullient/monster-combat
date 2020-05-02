@@ -21,7 +21,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import dev.ebullient.dnd.client.RoundResult;
+import dev.ebullient.dnd.combat.client.CombatMetrics;
+import dev.ebullient.dnd.combat.client.RoundResult;
 
 @Import(Configuration.class)
 @WebFluxTest(controllers = CombatController.class)
