@@ -26,6 +26,26 @@ public class MockAttack implements Attack {
         this.name = name;
     }
 
+    public MockAttack setDamage(Damage d) {
+        this.damage = d;
+        return this;
+    }
+
+    public MockAttack setAdditionalEffect(Damage d) {
+        this.additionalEffect = d;
+        return this;
+    }
+
+    public MockAttack setAttackModifier(int m) {
+        this.attackModifier = m;
+        return this;
+    }
+
+    public MockAttack setSavingThrow(String s) {
+        this.savingThrow = s;
+        return this;
+    }
+
     @Override
     public String getName() {
         return name;

@@ -24,6 +24,7 @@ import dev.ebullient.dnd.bestiary.Bestiary;
 import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.combat.TargetSelector;
+import dev.ebullient.dnd.combat.client.CombatMetrics;
 import dev.ebullient.dnd.mechanics.Dice;
 import dev.ebullient.dnd.mechanics.SecureRandomDice;
 import reactor.core.publisher.Flux;

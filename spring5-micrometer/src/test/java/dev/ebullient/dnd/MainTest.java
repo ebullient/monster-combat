@@ -23,6 +23,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import dev.ebullient.dnd.combat.client.CombatMetrics;
+
 @SpringBootTest(classes = Main.class)
 @ExtendWith(SpringExtension.class)
 @AutoConfigureWebTestClient

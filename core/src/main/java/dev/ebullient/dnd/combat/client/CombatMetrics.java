@@ -11,9 +11,9 @@
  * either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package dev.ebullient.dnd;
+package dev.ebullient.dnd.combat.client;
 
-import javax.enterprise.context.ApplicationScoped;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,18 +22,25 @@ import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.combat.RoundResult.Event;
 import dev.ebullient.dnd.mechanics.Dice;
-import io.micrometer.prometheus.PrometheusMeterRegistry;
+import io.micrometer.core.instrument.MeterRegistry;
 
-@ApplicationScoped
-class CombatMetrics {
+public class CombatMetrics {
     static final Logger logger = LoggerFactory.getLogger(CombatMetrics.class);
 
-    final PrometheusMeterRegistry registry;
+    final MeterRegistry registry;
+    final AtomicInteger last_roll;
+    final AtomicInteger last_felled;
 
-    public CombatMetrics(PrometheusMeterRegistry registry) {
+    public CombatMetrics(MeterRegistry registry) {
         this.registry = registry;
 
-        Dice.setMonitor((k, v) -> registry.counter("dice.rolls", "die", k, "face", label(v)).increment());
+        last_felled = registry.gauge("last.felled", new AtomicInteger(0));
+        last_roll = registry.gauge("last.roll", new AtomicInteger(0));
+
+        Dice.setMonitor((k, v) -> {
+            registry.counter("dice.rolls", "die", k, "face", label(v)).increment();
+            last_roll.set(v);
+        });
 
         logger.debug("Created CombatMetrics with MeterRegistry: {}", registry);
     }
@@ -47,32 +54,30 @@ class CombatMetrics {
     }
 
     public void endRound(RoundResult result) {
-
         for (Event event : result.getEvents()) {
             registry.summary("round.attacks",
-                    "attackType", event.getType(),
                     "hitOrMiss", event.hitOrMiss(),
+                    "attackType", event.getAttackType(),
+                    "damageType", event.getType(),
                     "targetSelector", result.getSelector())
                     .record((double) event.getDamageAmount());
 
             registry.summary("attacker.damage",
                     "attacker", event.getActor().getName(),
                     "attackName", event.getName(),
-                    "attackType", event.getType(),
                     "hitOrMiss", event.hitOrMiss())
                     .record((double) event.getDamageAmount());
 
             registry.summary("attack.success",
+                    "attackType", event.getAttackType(),
                     "hitOrMiss", event.hitOrMiss())
                     .record((double) event.getDifficultyClass() - event.getAttackModifier());
         }
+
+        last_felled.set(result.getNumCombatants() - result.getSurvivors().size());
     }
 
     String label(int value) {
         return String.format("%02d", value);
-    }
-
-    public String scrape() {
-        return registry.scrape();
     }
 }

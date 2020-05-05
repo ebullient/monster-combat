@@ -15,13 +15,15 @@ package dev.ebullient.dnd.combat;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
- * @see dev.ebullient.dnd.client.RoundResult for deserialization from JSON
+ * @see dev.ebullient.dnd.combat.client.RoundResult for deserialization from JSON
  */
 public interface RoundResult {
 
     /**
-     * @see dev.ebullient.dnd.client.AttackEvent for deserialization from JSON
+     * @see dev.ebullient.dnd.combat.client.AttackEvent for deserialization from JSON
      */
     public interface Event {
 
@@ -39,7 +41,19 @@ public interface RoundResult {
 
         boolean isSaved();
 
-        String hitOrMiss();
+        boolean isSpellAttack();
+
+        @JsonIgnore
+        default String hitOrMiss() {
+            return (isCritical() ? "critical " : "")
+                    + (isSaved() ? "saved " : "")
+                    + (isHit() ? "hit" : "miss");
+        }
+
+        @JsonIgnore
+        default String getAttackType() {
+            return (isSpellAttack() ? "spell" : "weapon");
+        }
 
         int getDamageAmount();
 

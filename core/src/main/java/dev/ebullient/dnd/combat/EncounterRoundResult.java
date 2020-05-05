@@ -112,12 +112,15 @@ class EncounterRoundResult implements RoundResult {
     }
 
     void makeAttack(EncounterCombatant actor, Attack a, EncounterCombatant target) {
+        // only attack the target if it hasn't already been killed
+        // (e.g. by a previous attack.
         if (target.isAlive()) {
-            EncounterAttackEvent r = new EncounterAttackEvent(actor, target, a, method, encounterId);
-            r.attack();
-            events.add(r);
+            EncounterAttackEvent evt = new EncounterAttackEvent(actor, target, a, method, encounterId);
+            // one event may create more than one result (additional effects)
+            List<EncounterAttackEvent> evts = evt.attack();
+            events.addAll(evts);
 
-            logger.debug("attack: {}", r);
+            logger.debug("attack: {}", evts);
         }
     }
 }
