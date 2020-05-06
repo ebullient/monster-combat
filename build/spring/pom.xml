@@ -15,7 +15,7 @@
   <name>Monster Combat - Spring Build</name>
 
   <properties>
-    <!-- see .mvn/config or cmdline property for revision value -->
+    <!-- see .mvn/maven.config or cmdline property for revision value -->
     <spring.version>2.2.4.RELEASE</spring.version>
   </properties>
 

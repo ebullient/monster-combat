@@ -2,7 +2,7 @@
 
 This application had a few purposes:
 
-1. to teach me, a rookie Dungeon Master, how D&D combat rules work
+1. to teach me, a rookie Dungeon Master, how D&D combat rules work (specifically, [D&D 5e](https://www.dndbeyond.com/sources/basic-rules/combat))
 2. to explore usage and capabilities of metrics libraries, starting with [Micrometer](https://micrometer.io)
 3. to mess with metrics and spring boot applications with Kubernetes, Prometheus, and Grafana.
 
@@ -11,7 +11,9 @@ Additional notes:
 * The Spring application also uses WebFlux (no Tomcat).
 * The Quarkus application uses the micrometer core library
 
-For these applications, metrics are gathered by one injectable class, usually called `CombatMetrics.java`. I wanted metrics collection to be easy to find, and easy to change. This choice means I'm not making extensive use of annotation-based configurations, but for what I'm attempting, I'm ok with that trade-off.
+Application metrics are contained in one injectable class, `CombatMetrics.java` in the core library.
+I wanted metrics definitions to be easy to find, and easy to change. This choice means I'm not making
+extensive use of annotation-based configurations, but for what I'm attempting, I'm ok with that trade-off.
 
 ## Getting started
 
@@ -33,7 +35,8 @@ export MONSTER_DIR=${PWD}          # for future reference
 
 ## Lazy bones: quick and dirty with docker-compose
 
-This application is all about application metrics. The surrounding environment doesn't matter much. If you're lazy, or on a constrained system, docker-compose will work fine to start all the bits.
+This application is all about application metrics. The surrounding environment doesn't matter much.
+If you're lazy, or on a constrained system, docker-compose will work fine to start all the bits.
 
 ```bash
 ./buildme.sh
@@ -200,8 +203,8 @@ Feel free to adjust these if you aren't using minikube/minishift.
 
 `kubectl` needs to be able to talk to a Kuberenetes cluster! You may have one already, in which case, all you need to do is make sure `kubectl` can work with it.
 
-* [Minikube](#minikube) -- local development cluster
-* [Minishift](#minishift) -- local development cluster (OpenShift 3.x)
+* [Minikube](#working-with-minikube) -- local development cluster
+* [CodeReady Containers](#working-with-codeready-containers) -- local development cluster (OpenShift 3.x)
 
 ### Working with minikube
 
@@ -231,6 +234,6 @@ If you already have a configured minikube instance, skip to step 3.
     kubectl config set-context minikube
     ```
 
-### Working with MiniShift
+### Working with CodeReady Containers
 
 Coming soon.
