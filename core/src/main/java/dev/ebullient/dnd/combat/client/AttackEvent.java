@@ -31,7 +31,7 @@ public class AttackEvent implements dev.ebullient.dnd.combat.RoundResult.Event {
     boolean hit;
     boolean critical;
     boolean saved;
-    boolean spellAttack;
+    boolean dcAttack;
     int damageAmount;
 
     int difficultyClass;
@@ -93,12 +93,12 @@ public class AttackEvent implements dev.ebullient.dnd.combat.RoundResult.Event {
         this.saved = saved;
     }
 
-    public boolean isSpellAttack() {
-        return spellAttack;
+    public boolean isDcAttack() {
+        return dcAttack;
     }
 
-    public void setSpellAttack(boolean spellAttack) {
-        this.spellAttack = spellAttack;
+    public void setDcAttack(boolean dcAttack) {
+        this.dcAttack = dcAttack;
     }
 
     public int getDamageAmount() {

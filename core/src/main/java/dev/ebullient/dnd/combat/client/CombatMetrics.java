@@ -71,7 +71,7 @@ public class CombatMetrics {
             registry.summary("attack.success",
                     "attackType", event.getAttackType(),
                     "hitOrMiss", event.hitOrMiss())
-                    .record((double) event.getDifficultyClass() - event.getAttackModifier());
+                    .record((double) event.getDifficultyClass());
         }
 
         last_felled.set(result.getNumCombatants() - result.getSurvivors().size());

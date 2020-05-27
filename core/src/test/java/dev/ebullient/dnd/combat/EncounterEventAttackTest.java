@@ -55,7 +55,7 @@ public class EncounterEventAttackTest {
         Assertions.assertEquals(1, list.size());
         Assertions.assertSame(result, list.get(0));
 
-        Assertions.assertEquals("weapon", result.getAttackType(), "AttackType should be weapon");
+        Assertions.assertEquals("attack-ac", result.getAttackType(), "AttackType should be attack-ac");
 
         Assertions.assertTrue(result.hit, "Attack should hit");
         Assertions.assertFalse(result.saved, "Attack was not saved");
@@ -100,7 +100,7 @@ public class EncounterEventAttackTest {
         Assertions.assertEquals(1, list.size());
         Assertions.assertSame(result, list.get(0));
 
-        Assertions.assertEquals("weapon", result.getAttackType(), "AttackType should be weapon");
+        Assertions.assertEquals("attack-ac", result.getAttackType(), "AttackType should be attack-ac");
 
         Assertions.assertFalse(result.hit, "Attack should not hit");
         Assertions.assertFalse(result.saved, "Attack was not saved");
@@ -139,9 +139,9 @@ public class EncounterEventAttackTest {
         Assertions.assertEquals(1, list.size());
         Assertions.assertSame(result, list.get(0));
 
-        Assertions.assertEquals("spell", result.getAttackType(), "AttackType should be spell");
+        Assertions.assertEquals("attack-dc", result.getAttackType(), "AttackType should be attack-dc");
 
-        Assertions.assertTrue(result.isHit(), "spell attacks always hit");
+        Assertions.assertTrue(result.isHit(), "attacks using saving throws always hit");
         Assertions.assertTrue(result.saved, "Saving throw should be successful (throw of 10+3 against 12 DC)");
         Assertions.assertFalse(result.critical, "Not a critical roll");
 
@@ -174,9 +174,9 @@ public class EncounterEventAttackTest {
         Assertions.assertEquals(1, list.size());
         Assertions.assertSame(result, list.get(0));
 
-        Assertions.assertEquals("spell", result.getAttackType(), "AttackType should be spell");
+        Assertions.assertEquals("attack-dc", result.getAttackType(), "AttackType should be attack-dc");
 
-        Assertions.assertTrue(result.isHit(), "spell attacks always hit");
+        Assertions.assertTrue(result.isHit(), "Attacks with a saving throw always hit");
         Assertions.assertFalse(result.saved, "Saving throw should not be successful for attack");
 
         Assertions.assertEquals(14, result.damageAmount, "Damage amount should be roll average (14)");
@@ -213,7 +213,7 @@ public class EncounterEventAttackTest {
         Assertions.assertEquals(2, list.size());
 
         Assertions.assertSame(result, list.get(0));
-        Assertions.assertEquals("weapon", result.getAttackType(), "AttackType should be weapon");
+        Assertions.assertEquals("attack-ac", result.getAttackType(), "AttackType should be attack-ac");
 
         Assertions.assertTrue(result.hit, "Attack should hit");
         Assertions.assertFalse(result.saved, "Attack was not saved");
@@ -226,8 +226,8 @@ public class EncounterEventAttackTest {
         // Additional effect / damage
 
         result = list.get(1);
-        Assertions.assertEquals("spell", result.getAttackType(), "AttackType for extra effect should be spell");
-        Assertions.assertTrue(result.hit, "Spell attacks always hit");
+        Assertions.assertEquals("attack-dc", result.getAttackType(), "AttackType for extra effect should be attack-dc");
+        Assertions.assertTrue(result.hit, "Attacks with a DC always hit");
         Assertions.assertTrue(result.saved, "A roll of 10 will beat a DC of 8");
 
         Assertions.assertEquals(7, result.damageAmount, "Damage amount should be half the roll average");
