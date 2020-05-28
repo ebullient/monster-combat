@@ -69,7 +69,7 @@ curl http://127.0.0.1:8281/combat/any      # 2-6 monsters
 
  ```
 
-Check out the prometheus endpoint (http://127.0.0.1:9090) to see emitted metrics. You can import pre-created dashboards (see below) to visualize collected metrics in grafana (http://127.0.0.1:3000, admin|admin is default username/password).
+Check out the prometheus endpoint (http://127.0.0.1:9090) to see emitted metrics. You can import pre-created dashboards (see below) to visualize collected metrics in grafana (http://127.0.0.1:3000, admin|admin is default username/password). When configuring the Prometheus datasource in Graphana, use the docker-compose service name as the hostname: `http://prometheus:9090`.
 
 The `runme.sh` script will keep a steady stream of requests hitting an endpoint of your choosing.
 
