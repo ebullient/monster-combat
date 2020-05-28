@@ -277,7 +277,7 @@
             "h": 14,
             "w": 4,
             "x": 0,
-            "y": 9
+            "y": 2
           },
           "id": 50,
           "links": [],
@@ -364,7 +364,7 @@
             "h": 6,
             "w": 19,
             "x": 4,
-            "y": 9
+            "y": 2
           },
           "hiddenSeries": false,
           "id": 26,
@@ -458,7 +458,7 @@
             "h": 8,
             "w": 19,
             "x": 4,
-            "y": 15
+            "y": 8
           },
           "hiddenSeries": false,
           "id": 10,
@@ -508,7 +508,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Average rounds/encounter by sizeDelta : increase[15m]",
+          "title": "Average rounds/encounter by targetSelector : increase[15m]",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1054,7 +1054,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -1074,5 +1074,5 @@
   "timezone": "",
   "title": "4-creature Encounters",
   "uid": "VgQPKTwWk",
-  "version": 3
+  "version": 4
 }

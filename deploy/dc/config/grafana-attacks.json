@@ -78,7 +78,7 @@
             "h": 8,
             "w": 4,
             "x": 0,
-            "y": 2
+            "y": 1
           },
           "id": 12,
           "options": {},
@@ -164,7 +164,7 @@
             "h": 4,
             "w": 8,
             "x": 4,
-            "y": 2
+            "y": 1
           },
           "hiddenSeries": false,
           "id": 18,
@@ -257,7 +257,7 @@
             "h": 4,
             "w": 6,
             "x": 12,
-            "y": 2
+            "y": 1
           },
           "hiddenSeries": false,
           "id": 14,
@@ -350,7 +350,7 @@
             "h": 4,
             "w": 4,
             "x": 18,
-            "y": 2
+            "y": 1
           },
           "hiddenSeries": false,
           "id": 16,
@@ -443,7 +443,7 @@
             "h": 4,
             "w": 8,
             "x": 4,
-            "y": 6
+            "y": 5
           },
           "hiddenSeries": false,
           "id": 17,
@@ -534,7 +534,7 @@
             "h": 4,
             "w": 6,
             "x": 12,
-            "y": 6
+            "y": 5
           },
           "hiddenSeries": false,
           "id": 15,
@@ -627,7 +627,7 @@
             "h": 4,
             "w": 4,
             "x": 18,
-            "y": 6
+            "y": 5
           },
           "hiddenSeries": false,
           "id": 13,
@@ -711,7 +711,7 @@
       "type": "row"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
@@ -720,381 +720,382 @@
         "y": 1
       },
       "id": 2,
-      "panels": [],
+      "panels": [
+        {
+          "columns": [
+            {
+              "text": "Total",
+              "value": "total"
+            }
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "fontSize": "80%",
+          "gridPos": {
+            "h": 18,
+            "w": 4,
+            "x": 0,
+            "y": 2
+          },
+          "id": 4,
+          "options": {},
+          "pageSize": null,
+          "showHeader": true,
+          "sort": {
+            "col": 1,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Time",
+              "align": "auto",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Time",
+              "type": "date"
+            },
+            {
+              "alias": "",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Metric",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "right",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "expr": "sum(round_attacks_count)",
+              "instant": true,
+              "legendFormat": "Overall",
+              "refId": "A"
+            },
+            {
+              "expr": "sum by (hitOrMiss)(round_attacks_count)",
+              "instant": true,
+              "legendFormat": "{{hitOrMiss}}",
+              "refId": "B"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Attacks : instant",
+          "transform": "timeseries_aggregations",
+          "type": "table"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 18,
+            "x": 4,
+            "y": 2
+          },
+          "hiddenSeries": false,
+          "id": 31,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "avg",
+            "sortDesc": false,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pluginVersion": "6.6.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum (rate(attack_success_count[15m])) by (hitOrMiss)",
+              "format": "time_series",
+              "instant": false,
+              "intervalFactor": 1,
+              "legendFormat": "{{hitOrMiss}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Frequency of hit or miss : rate[15m]",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 18,
+            "x": 4,
+            "y": 8
+          },
+          "hiddenSeries": false,
+          "id": 43,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": null,
+            "sortDesc": null,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pluginVersion": "6.6.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum (increase(attack_success_sum[15m])) / sum (increase(attack_success_count[15m]))",
+              "format": "time_series",
+              "instant": false,
+              "intervalFactor": 1,
+              "legendFormat": "Overall",
+              "refId": "A"
+            },
+            {
+              "expr": "sum (increase(attack_success_sum[15m])) by (hitOrMiss) / sum (increase(attack_success_count[15m])) by (hitOrMiss)",
+              "legendFormat": "{{hitOrMiss}}",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Average difficulty class by hit or miss : increase[15m]",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "cacheTimeout": null,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 18,
+            "x": 4,
+            "y": 14
+          },
+          "hiddenSeries": false,
+          "id": 9,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pluginVersion": "6.6.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum by (hitOrMiss)(damage:round_attacks:rate15m * 15 * 60) / sum by (hitOrMiss)(attacks:round_attacks:rate15m * 15 * 60)",
+              "legendFormat": "{{hitOrMiss}}",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Average damage by hit or miss : increase[15m]",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
       "title": "Attacks by Hit or Miss",
       "type": "row"
-    },
-    {
-      "columns": [
-        {
-          "text": "Total",
-          "value": "total"
-        }
-      ],
-      "datasource": "${DS_PROMETHEUS}",
-      "fontSize": "80%",
-      "gridPos": {
-        "h": 18,
-        "w": 4,
-        "x": 0,
-        "y": 2
-      },
-      "id": 4,
-      "options": {},
-      "pageSize": null,
-      "showHeader": true,
-      "sort": {
-        "col": 1,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Metric",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "expr": "sum(round_attacks_count)",
-          "instant": true,
-          "legendFormat": "Overall",
-          "refId": "A"
-        },
-        {
-          "expr": "sum by (hitOrMiss)(round_attacks_count)",
-          "instant": true,
-          "legendFormat": "{{hitOrMiss}}",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Attacks : instant",
-      "transform": "timeseries_aggregations",
-      "type": "table"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 18,
-        "x": 4,
-        "y": 2
-      },
-      "hiddenSeries": false,
-      "id": 31,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pluginVersion": "6.6.0",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum by (hitOrMiss)(attacks:round_attacks:rate15m)",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
-          "legendFormat": "{{hitOrMiss}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Frequency of hit or miss : rate[15m] (stacked)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 18,
-        "x": 4,
-        "y": 8
-      },
-      "hiddenSeries": false,
-      "id": 43,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sort": null,
-        "sortDesc": null,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pluginVersion": "6.6.0",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum (rate(attack_success_sum[15m])) / sum (rate(attack_success_count[15m]))",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
-          "legendFormat": "Overall",
-          "refId": "A"
-        },
-        {
-          "expr": "sum (rate(attack_success_sum[15m])) by (hitOrMiss) / sum (rate(attack_success_count[15m])) by (hitOrMiss)",
-          "legendFormat": "{{hitOrMiss}}",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Average difficulty class by hit or miss : rate[15m]",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "cacheTimeout": null,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 18,
-        "x": 4,
-        "y": 14
-      },
-      "hiddenSeries": false,
-      "id": 9,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "hideZero": true,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pluginVersion": "6.6.0",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum by (hitOrMiss)(damage:round_attacks:rate15m * 15 * 60) / sum by (hitOrMiss)(attacks:round_attacks:rate15m * 15 * 60)",
-          "legendFormat": "{{hitOrMiss}}",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Average damage by hit or miss : increase[15m]",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
     },
     {
       "collapsed": true,
@@ -1103,7 +1104,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 2
       },
       "id": 6,
       "panels": [
@@ -1173,9 +1174,9 @@
           ],
           "targets": [
             {
-              "expr": "sum by (damageType)(round_attacks_count)",
+              "expr": "sum by (attackType)(round_attacks_count)",
               "instant": true,
-              "legendFormat": "{{damageType}}",
+              "legendFormat": "{{attackType}}",
               "refId": "B"
             },
             {
@@ -1240,8 +1241,8 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (damageType)(attacks:round_attacks:rate15m)",
-              "legendFormat": "{{damageType}}",
+              "expr": "sum by (attackType)(attacks:round_attacks:rate15m)",
+              "legendFormat": "{{attackType}}",
               "refId": "B"
             }
           ],
@@ -1249,7 +1250,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Frequency of attack damage type : rate[15m] (stacked)",
+          "title": "Frequency of attack type : rate[15m]",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -1337,8 +1338,8 @@
               "refId": "A"
             },
             {
-              "expr": "sum by (damageType)(damage:round_attacks:rate15m * 15 * 60) / sum by (damageType)(attacks:round_attacks:rate15m * 15 * 60)",
-              "legendFormat": "{{damageType}}",
+              "expr": "sum by (attackType)(damage:round_attacks:rate15m * 15 * 60) / sum by (attackType)(attacks:round_attacks:rate15m * 15 * 60)",
+              "legendFormat": "{{attackType}}",
               "refId": "B"
             }
           ],
@@ -1384,7 +1385,7 @@
           }
         }
       ],
-      "title": "Attacks by damage type",
+      "title": "Attacks by type",
       "type": "row"
     },
     {
@@ -1394,7 +1395,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 3
       },
       "id": 23,
       "panels": [
@@ -2087,5 +2088,5 @@
   "timezone": "",
   "title": "Attacks",
   "uid": "LnJicdQZz",
-  "version": 7
+  "version": 10
 }

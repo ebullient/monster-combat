@@ -25,7 +25,7 @@ class EncounterAttackEvent implements RoundResult.Event {
     boolean hit;
     boolean critical;
     boolean saved;
-    boolean spellAttack = false;
+    boolean dcAttack = false;
     int damageAmount;
 
     int difficultyClass;
@@ -86,8 +86,8 @@ class EncounterAttackEvent implements RoundResult.Event {
         return saved;
     }
 
-    public boolean isSpellAttack() {
-        return spellAttack;
+    public boolean isDcAttack() {
+        return dcAttack;
     }
 
     public int getDamageAmount() {
@@ -221,7 +221,7 @@ class EncounterAttackEvent implements RoundResult.Event {
      */
     void makeActionWithSavingThrow(String throwStr, Damage damage) {
         this.hit = true;
-        this.spellAttack = true;
+        this.dcAttack = true;
 
         boolean successful = false;
         int amount = 0;

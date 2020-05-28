@@ -41,7 +41,7 @@ public interface RoundResult {
 
         boolean isSaved();
 
-        boolean isSpellAttack();
+        boolean isDcAttack();
 
         @JsonIgnore
         default String hitOrMiss() {
@@ -52,7 +52,7 @@ public interface RoundResult {
 
         @JsonIgnore
         default String getAttackType() {
-            return (isSpellAttack() ? "spell" : "weapon");
+            return (isDcAttack() ? "attack-dc" : "attack-ac");
         }
 
         int getDamageAmount();
