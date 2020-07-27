@@ -72,6 +72,7 @@
     <module>core</module>
     <module>spring5-micrometer</module>
     <module>quarkus-micrometer</module>
+    <module>quarkus-mpmetrics</module>
   </modules>
 
 </project>

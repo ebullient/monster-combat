@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Using a parent for dependency versions,
+       code formatting, and plugins. -->
+  <parent>
+    <groupId>dev.ebullient.monster-combat</groupId>
+    <artifactId>mc-quarkus-parent</artifactId>
+    <version>${revision}</version>
+    <relativePath>../build/quarkus/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>mc-quarkus-mpmetrics</artifactId>
+
+  <name>Monster Combat - Quarkus and MP Metrics</name>
+
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+
+  <properties>
+    <!-- The following is set by mvnw in the parent (usually), but if you don't use mvnw... -->
+    <maven.multiModuleProjectDirectory>../</maven.multiModuleProjectDirectory>
+
+    <quarkus.container-image.build>true</quarkus.container-image.build>
+    <quarkus.container-image.name>${project.artifactId}</quarkus.container-image.name>
+    <quarkus.container-image.group>ebullient</quarkus.container-image.group>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mc-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-jib</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-metrics</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-junit5</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-help-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>show-profiles</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>active-profiles</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <resources>
+            <resource>
+              <directory>${basedir}/src/main/resources</directory>
+              <filtering>true</filtering>
+            </resource>
+          </resources>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>jvm-image</id>
+      <activation>
+        <property>
+          <name>!native</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.container-image.tag>latest-jvm</quarkus.container-image.tag>
+      </properties>
+    </profile>
+
+    <!-- Do not build container images on mac until the "building using a container" memory issue is sorted -->
+    <profile>
+      <id>mac-native</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.container-image.build>false</quarkus.container-image.build>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>native-image</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.container-image.tag>latest-native</quarkus.container-image.tag>
+      </properties>
+    </profile>
+
+  </profiles>
+
+</project>
