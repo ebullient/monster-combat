@@ -36,21 +36,19 @@
   <dependencies>
 
     <dependency>
-      <groupId>dev.ebullient.quarkus-micrometer-extension</groupId>
-      <artifactId>quarkus-micrometer</artifactId>
-      <version>${quarkus-micrometer-extension.version}</version>
-    </dependency>
-
-    <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mc-core</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-micrometer</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>io.micrometer</groupId>
       <artifactId>micrometer-registry-prometheus</artifactId>
-      <version>${micrometer.version}</version>
     </dependency>
 
     <dependency>
