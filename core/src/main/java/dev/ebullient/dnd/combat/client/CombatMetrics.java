@@ -58,8 +58,7 @@ public class CombatMetrics {
             registry.summary("round.attacks",
                     "hitOrMiss", event.hitOrMiss(),
                     "attackType", event.getAttackType(),
-                    "damageType", event.getType(),
-                    "targetSelector", result.getSelector())
+                    "damageType", event.getType())
                     .record((double) event.getDamageAmount());
 
             registry.summary("attacker.damage",
