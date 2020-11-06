@@ -62,14 +62,26 @@ curl http://127.0.0.1:8280/combat/any      # 2-6 monsters
 # Quarkus
 
 curl http://127.0.0.1:8281/
-curl http://127.0.0.1:8281/prometheus      # micrometer library
+curl http://127.0.0.1:8281/metrics         # micrometer metrics endpoint
 curl http://127.0.0.1:8281/combat/faceoff  # 2 monsters
 curl http://127.0.0.1:8281/combat/melee    # 3-6 monsters
 curl http://127.0.0.1:8281/combat/any      # 2-6 monsters
 
+# Quarkus with MP Metrics
+
+curl http://127.0.0.1:8282/
+curl http://127.0.0.1:8282/metrics         # MP metrics endpoint
+curl http://127.0.0.1:8282/combat/faceoff  # 2 monsters
+curl http://127.0.0.1:8282/combat/melee    # 3-6 monsters
+curl http://127.0.0.1:8282/combat/any      # 2-6 monsters
+
  ```
 
-Check out the prometheus endpoint (http://127.0.0.1:9090) to see emitted metrics. You can import pre-created dashboards (see below) to visualize collected metrics in grafana (http://127.0.0.1:3000, admin|admin is default username/password). When configuring the Prometheus datasource in Graphana, use the docker-compose service name as the hostname: `http://prometheus:9090`.
+Check out the prometheus dashboard (http://127.0.0.1:9090) to see emitted metrics.
+You can import pre-created dashboards (see below) to visualize collected metrics
+in grafana (http://127.0.0.1:3000, admin|admin is default username/password). When
+configuring the Prometheus datasource in Graphana, use the docker-compose service
+name as the hostname: `http://prometheus:9090`.
 
 The `runme.sh` script will keep a steady stream of requests hitting an endpoint of your choosing.
 

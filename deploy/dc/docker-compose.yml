@@ -41,3 +41,9 @@ services:
     ports:
       - "8281:8080"
 
+  quarkus-mp-metrics:
+    container_name: quarkus-mp-metrics
+    image: ebullient/mc-quarkus-mpmetrics:latest-jvm
+    ports:
+      - "8282:8080"
+

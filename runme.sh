@@ -6,7 +6,10 @@ case "$1" in
   ;;
   dc-quarkus)
     URL=http://localhost:8281/combat/any
-  ;;    
+  ;;
+  dc-mpmetrics)
+    URL=http://localhost:8282/combat/any
+  ;;
   k8s-spring)
     URL=http://monsters.192.168.99.100.nip.io/combat/faceoff
   ;;
