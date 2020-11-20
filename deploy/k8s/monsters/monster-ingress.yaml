@@ -1,17 +1,38 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dnd-ingress
   namespace: ebullientworks
+  name: ingress-resource-backend
   annotations: {}
 spec:
   rules:
-  - host: monsters.192.168.99.100.nip.io
+  - host: spring.192.168.49.2.nip.io
     http:
       paths:
-      - path: /
+      - pathType: Prefix
+        path: /
         backend:
-          serviceName: combat
-          servicePort: 8080
-
-
+          service:
+            name: mc-spring-micrometer
+            port:
+              number: 8080
+  - host: quarkus.192.168.49.2.nip.io
+    http:
+      paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: mc-quarkus-micrometer
+              port:
+                number: 8080
+  - host: mpmetrics.192.168.49.2.nip.io
+    http:
+      paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: mc-quarkus-mpmetrics
+              port:
+                number: 8080
