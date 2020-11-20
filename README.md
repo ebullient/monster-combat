@@ -1,19 +1,23 @@
 # Monster Combat
 
-This application had a few purposes:
+TLDR; This application had a few purposes:
 
 1. to teach me, a rookie Dungeon Master, how D&D combat rules work (specifically, [D&D 5e](https://www.dndbeyond.com/sources/basic-rules/combat))
 2. to explore usage and capabilities of metrics libraries, starting with [Micrometer](https://micrometer.io)
 3. to mess with metrics and spring boot applications with Kubernetes, Prometheus, and Grafana.
 
-Additional notes:
+You can read more here [Monsters in combat: exploring application metrics with D&D](https://jaxenter.com/metrics-dnd-173311.html)
+
+Additional Notes:
 
 * The Spring application also uses WebFlux (no Tomcat).
 * The Quarkus application uses the micrometer core library
 
-Application metrics are contained in one injectable class, `CombatMetrics.java` in the core library.
-I wanted metrics definitions to be easy to find, and easy to change. This choice means I'm not making
-extensive use of annotation-based configurations, but for what I'm attempting, I'm ok with that trade-off.
+One injectable class, `CombatMetrics.java` in the core library, defines metrics gathered
+using micrometer. This class is used by both the Spring and Quarkus-micrometer applications
+to collect custom metrics. I wanted metrics definitions to be easy to find, and easy to change.
+This choice means I'm not making extensive use of annotation-based configurations, but I
+think the result is clear and concise, and much less invasive than annotations would have been.
 
 ## Getting started
 
@@ -37,6 +41,7 @@ export MONSTER_DIR=${PWD}          # for future reference
 
 This application is all about application metrics. The surrounding environment doesn't matter much.
 If you're lazy, or on a constrained system, docker-compose will work fine to start all the bits.
+Note: I'm lazy, so this is the method I use the most often.
 
 ```bash
 ./buildme.sh
@@ -85,11 +90,14 @@ name as the hostname: `http://prometheus:9090`.
 
 The `runme.sh` script will keep a steady stream of requests hitting an endpoint of your choosing.
 
-Hopefully, that all worked fine. If it didn't, come find me in the [gameontext slack](https://gameontext.org/slackin) and let me know. Or open an issue. That works, too.
+Hopefully, that all worked fine. If it didn't, come find me in the [gameontext slack](https://gameontext.org/slackin) and let me know.
+Or open an issue. That works, too.
 
 ### Prometheus and Grafana with docker-compose
 
-The `${MONSTER_DIR}/deploy/dc/config` directory contains configuration for Prometheus and Grafana when run with docker-compose. The config directory is bind-mounted into both containers. The docker-compose configuration also creates a bind mount to service-specific subdirectories under `target/data` for output.
+The `${MONSTER_DIR}/deploy/dc/config` directory contains configuration for Prometheus and Grafana when run with docker-compose.
+The config directory is bind-mounted into both containers. The docker-compose configuration also creates a bind mount to
+service-specific subdirectories under `target/data` for output.
 
 The config directory conains the following files:
 
@@ -107,7 +115,10 @@ rm -rf ${MONSTER_DIR}/deploy/dc/target/data/prometheus/*  ${MONSTER_DIR}/deploy/
 docker-compose up -d prom grafana
 ```
 
-Note: `${MONSTER_DIR}/deploy/dc/target/data/prometheus/` and `${MONSTER_DIR}/deploy/dc/target/data/grafana/` must be owned by the host user. If you delete the directories by accident, recreate them manually before using docker-compose to start the services again (as it will create the missing directories for you, and those will be owned by root, which will cause permission issues for services running as the host user).
+Note: `${MONSTER_DIR}/deploy/dc/target/data/prometheus/` and `${MONSTER_DIR}/deploy/dc/target/data/grafana/` must be owned
+by the host user. If you delete the directories by accident, recreate them manually before using docker-compose to start
+the services again (as it will create the missing directories for you, and those will be owned by root, which will cause
+permission issues for services running as the host user).
 
 ## General bring-up instructions for Kubernetes
 
@@ -137,27 +148,26 @@ Note: `${MONSTER_DIR}/deploy/dc/target/data/prometheus/` and `${MONSTER_DIR}/dep
     1. We reduce prometheus and alertmanager to single replicas. This is definitely a "fit on a tinier system" move that goes away from resilience.
     2. We instruct prometheus to monitor three additional namespaces: `gameon-system`, `ebullientworks` and `default`. The first is for services from https://gameontext.org, the second is used by this project, and the third is for your own experiments.
 
-4. Once the kube-prometheus manifests have applied cleanly, set up a Prometheus `ServiceMonitor` for Spring applications:
+4. Once the kube-prometheus manifests have applied cleanly, set up a Prometheus `ServiceMonitor` for our applications:
 
     ```bash
-    kubectl apply -f deploy/k8s/spring-prometheus/
+    kubectl apply -f deploy/k8s/service-monitor/
     ```
 
-    If you delete/re-apply kube-prometheus metadata, you'll need to reapply this, too, as it is deployed into the `monitoring` namespace. For best results, ensure this is applied, and spring-prometheus is included in the list of Prometheus targets before moving on to the next step.
+    If you delete/re-apply kube-prometheus metadata, you'll need to reapply this, too, as it is deployed into
+    the `monitoring` namespace. For best results, ensure this is applied, and both `mc-quarkus-prometheus` and
+    `mc-spring-prometheus` are included in the list of Prometheus targets before moving on to the next step.
 
 4. Finally (!!), build and install the application:
 
     ```bash
-    # Choices choices. For minikube and minishift, you may want to share the VM registry
+    # Choices choices. For minikube, you may want to share the VM registry
     eval $(minikube docker-env)
-    # OR
-    eval $(minishift docker-env)
 
     # Run through all of the sub-projects and build them
-    The Spring project uses dockerBuild from the jib plugin to create an image
     # in the local docker registry. Feel free to change that up.
 
-    ./buildme.sh
+    ./mvnw install
 
     # Depending on your choices, you may have to do a docker push
     # to put fresh images wherever they need to go.
@@ -193,27 +203,10 @@ Hopefully, that all worked fine. If it didn't, come find me in the [gameontext s
 
 ---
 
-### Working with Prometheus and Grafana in Kubernetes
-
-I am lazy. I dislike the behavior of port forwarding. I defined an ingress for kubernetes-dashboard, prometheus, and grafana:
-
-```bash
-kubectl apply -f deploy/lazy/
-```
-
-Now you can visit the following in your browser:
-
-* [http://dashboard.192.168.99.100.nip.io](http://dashboard.192.168.99.100.nip.io)
-* [http://grafana.192.168.99.100.nip.io](http://grafana.192.168.99.100.nip.io)
-* [http://prometheus.192.168.99.100.nip.io](http://prometheus.192.168.99.100.nip.io)
-
-Feel free to adjust these if you aren't using minikube/minishift.
-
----
-
 ### Set up a Kubernetes cluster
 
-`kubectl` needs to be able to talk to a Kuberenetes cluster! You may have one already, in which case, all you need to do is make sure `kubectl` can work with it.
+`kubectl` needs to be able to talk to a Kuberenetes cluster! You may have one already, in which case, all you need to do
+is make sure `kubectl` can work with it.
 
 * [Minikube](#working-with-minikube) -- local development cluster
 * [CodeReady Containers](#working-with-codeready-containers) -- local development cluster (OpenShift 3.x)
@@ -228,16 +221,15 @@ If you already have a configured minikube instance, skip to step 3.
 
     ```bash
     minikube delete
-    minikube start --kubernetes-version=v1.14.7 \
+    minikube addons disable metrics-server
+    minikube addons enable ingress
+    minikube start --kubernetes-version=v1.19.4 \
     --cpus 4 --disk-size 40g \
     --memory 16384 --bootstrapper=kubeadm \
     --extra-config=kubelet.authentication-token-webhook=true \
     --extra-config=kubelet.authorization-mode=Webhook \
     --extra-config=scheduler.address=0.0.0.0 \
     --extra-config=controller-manager.address=0.0.0.0
-
-    # just in case, but should only have to check once
-    minikube addons disable metrics-server
     ```
 
 3. Ensure the `minikube` context is current context for `kubectl`

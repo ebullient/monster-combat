@@ -1,19 +1,19 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: spring-prometheus
+  name: mc-quarkus-prometheus
   namespace: monitoring
 spec:
   selector:
     matchLabels:
       prometheus: 'true'
-      type: spring-actuator
+      type: mc-quarkus
   namespaceSelector:
     matchNames:
     - ebullientworks
     - default
     - gameon-system
   endpoints:
-  - port: spring-web
+  - port: http
     interval: 15s
-    path: '/actuator/prometheus'
+    path: '/metrics'

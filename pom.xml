@@ -11,7 +11,7 @@
   <name>Monster Combat - All The Things</name>
 
   <properties>
-    <!-- see .mvn/maven.config or cmdline property for revision value -->
+    <revision>0.4.0</revision>
     <flatten-maven-plugin.version>1.2.1</flatten-maven-plugin.version>
   </properties>
 
