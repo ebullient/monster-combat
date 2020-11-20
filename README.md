@@ -151,6 +151,15 @@ permission issues for services running as the host user).
        The first is for services from https://gameontext.org, the second is used by this project, and the third is for
        your own experiments.
 
+4. Create an ingress for prometheus and grafana
+
+    ```bash
+    kubectl apply -f deploy/k8s/ingress/monitoring-ingress.yaml
+    echo "Use the following urls for
+Prometheus: http://prometheus.`minikube ip`.nip.io
+Grafana dashboard: http://grafana.`minikube ip`.nip.io"
+    ```
+
 4. Once the kube-prometheus manifests have applied cleanly, set up a Prometheus `ServiceMonitor` for our applications:
 
     ```bash
@@ -158,8 +167,14 @@ permission issues for services running as the host user).
     ```
 
     If you delete/re-apply kube-prometheus metadata, you'll need to reapply this, too, as it is deployed into
-    the `monitoring` namespace. For best results, ensure this is applied, and both `mc-quarkus-prometheus` and
-    `mc-spring-prometheus` are included in the list of Prometheus targets before moving on to the next step.
+    the `monitoring` namespace.
+
+    For best results, ensure this is applied, and both `mc-quarkus-prometheus` and `mc-spring-prometheus` are
+    included in the list of Prometheus targets before moving on to the next step.
+
+    ```bash
+    echo Visit http://prometheus.`minikube ip`.nip.io/targets
+    ```
 
 4. Finally (!!), build and install the application:
 
@@ -179,6 +194,11 @@ permission issues for services running as the host user).
     # Verify that the ingress definition will work for your kubernetes cluster
 
     kubectl apply -f deploy/k8s/monsters/
+    kubectl apply -f deploy/k8s/ingress/monster-ingress.yaml
+    echo "
+ Spring with Micrometer: http://spring.`minikube ip`.nip.io
+ Quarkus with Micrometer: http://quarkus.`minikube ip`.nip.io
+ Quarkus with MP Metrics: http://mpmetrics.`minikube ip`.nip.io"
     ```
 
 So, after all of that, you should be able to do the following and get something interesting in return:
@@ -239,6 +259,9 @@ If you already have a configured minikube instance, skip to step 3.
 
     ```bash
     kubectl config set-context minikube
+
+    # ensure ingress is working
+    curl -v --raw http://$(minikube ip)/healthz
     ```
 
 4. Update the ingress for your cluster to match the IP

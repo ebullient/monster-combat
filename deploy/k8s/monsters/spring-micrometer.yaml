@@ -53,6 +53,6 @@ spec:
           initialDelaySeconds: 10
         livenessProbe:
           httpGet:
-            path: /liveness
+            path: /actuator/liveness
             port: http
           initialDelaySeconds: 40
