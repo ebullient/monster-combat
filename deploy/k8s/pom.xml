@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>dev.ebullient.monster-combat</groupId>
+    <artifactId>mc-build-parent</artifactId>
+    <version>${revision}</version>
+    <relativePath>../../build/pom.xml</relativePath>
+  </parent>
+
+  <groupId>dev.ebullient.monster-combat</groupId>
+  <artifactId>mc-k8s-deploy</artifactId>
+  <packaging>pom</packaging>
+
+  <name>Monster Combat - K8s Deploy Ingress</name>
+
+  <build>
+    <directory>ingress</directory>
+    <outputDirectory>ingress</outputDirectory>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-help-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>show-profiles</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>active-profiles</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>minikube</id>
+      <activation>
+        <property>
+          <name>minikube</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>src</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>resources</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

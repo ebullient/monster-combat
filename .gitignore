@@ -43,4 +43,6 @@ nb-configuration.xml
 # Maven
 target/
 .flattened*
+deploy/k8s/ingress/monitoring-ingress.yaml
+deploy/k8s/ingress/monster-ingress.yaml
 

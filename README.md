@@ -145,8 +145,11 @@ permission issues for services running as the host user).
 
     Note there are customizations happening (in `./deploy/k8s/kube-prometheus/monsters.jsonnet`):
 
-    1. We reduce prometheus and alertmanager to single replicas. This is definitely a "fit on a tinier system" move that goes away from resilience.
-    2. We instruct prometheus to monitor three additional namespaces: `gameon-system`, `ebullientworks` and `default`. The first is for services from https://gameontext.org, the second is used by this project, and the third is for your own experiments.
+    1. We reduce prometheus and alertmanager to single replicas. This is definitely a "fit on a tinier system" move that
+       goes away from resilience.
+    2. We instruct prometheus to monitor three additional namespaces: `gameon-system`, `ebullientworks` and `default`.
+       The first is for services from https://gameontext.org, the second is used by this project, and the third is for
+       your own experiments.
 
 4. Once the kube-prometheus manifests have applied cleanly, set up a Prometheus `ServiceMonitor` for our applications:
 
@@ -221,8 +224,6 @@ If you already have a configured minikube instance, skip to step 3.
 
     ```bash
     minikube delete
-    minikube addons disable metrics-server
-    minikube addons enable ingress
     minikube start --kubernetes-version=v1.19.4 \
     --cpus 4 --disk-size 40g \
     --memory 16384 --bootstrapper=kubeadm \
@@ -230,12 +231,20 @@ If you already have a configured minikube instance, skip to step 3.
     --extra-config=kubelet.authorization-mode=Webhook \
     --extra-config=scheduler.address=0.0.0.0 \
     --extra-config=controller-manager.address=0.0.0.0
+    minikube addons disable metrics-server
+    minikube addons enable ingress
     ```
 
 3. Ensure the `minikube` context is current context for `kubectl`
 
     ```bash
     kubectl config set-context minikube
+    ```
+
+4. Update the ingress for your cluster to match the IP
+
+    ```bash
+    ./mvnw -Dcluster.ip=$(minikube ip) -Dminikube install -pl deploy/k8s
     ```
 
 ### Working with CodeReady Containers
