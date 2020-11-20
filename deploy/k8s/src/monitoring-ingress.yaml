@@ -6,7 +6,7 @@ metadata:
   annotations: {}
 spec:
   rules:
-  - host: grafana.192.168.49.2.nip.io
+  - host: grafana.${cluster.ip}.nip.io
     http:
       paths:
       - pathType: Prefix
@@ -16,7 +16,7 @@ spec:
             name: grafana
             port:
               number: 3000
-  - host: prometheus.192.168.49.2.nip.io
+  - host: prometheus.${cluster.ip}.nip.io
     http:
       paths:
       - pathType: Prefix

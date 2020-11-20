@@ -6,7 +6,7 @@ metadata:
   annotations: {}
 spec:
   rules:
-  - host: spring.192.168.49.2.nip.io
+  - host: spring.CLUSTER_IP.nip.io
     http:
       paths:
       - pathType: Prefix
@@ -16,7 +16,7 @@ spec:
             name: mc-spring-micrometer
             port:
               number: 8080
-  - host: quarkus.192.168.49.2.nip.io
+  - host: quarkus.CLUSTER_IP.nip.io
     http:
       paths:
         - pathType: Prefix
@@ -26,7 +26,7 @@ spec:
               name: mc-quarkus-micrometer
               port:
                 number: 8080
-  - host: mpmetrics.192.168.49.2.nip.io
+  - host: mpmetrics.CLUSTER_IP.nip.io
     http:
       paths:
         - pathType: Prefix
