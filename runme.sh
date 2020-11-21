@@ -14,6 +14,7 @@ case "$1" in
     URL=http://monsters.192.168.99.100.nip.io/combat/faceoff
   ;;
   *)
+    URL=$1
   ;;
 esac
 if [ -z "$URL" ]; then
