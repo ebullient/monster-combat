@@ -19,6 +19,11 @@ to collect custom metrics. I wanted metrics definitions to be easy to find, and 
 This choice means I'm not making extensive use of annotation-based configurations, but I
 think the result is clear and concise, and much less invasive than annotations would have been.
 
+## Prerequisites
+
+* [Docker](https://docs.docker.com/install/)
+* Java 11
+
 ## Getting started
 
 Obtain the source for this repository:
@@ -33,9 +38,16 @@ cd monster-combat                  # cd into the project directory
 export MONSTER_DIR=${PWD}          # for future reference
 ```
 
-### Prerequisites
+Get your system up and running using either
 
-* [Docker](https://docs.docker.com/install/)
+* [Docker compose](#lazy-bones-quick-and-dirty-with-docker-compose) or
+* [Kubernetes](#general-bring-up-instructions-for-kubernetes)
+
+Once you have your system configured and running, the `runme.sh` script will keep a steady stream of requests hitting an
+endpoint of your choosing.
+
+Hopefully, it will all work fine. If it doesn't, come find me in the [gameontext slack](https://gameontext.org/slackin)
+and let me know. Or open an issue. That works, too.
 
 ## Lazy bones: quick and dirty with docker-compose
 
@@ -88,11 +100,6 @@ in grafana (http://127.0.0.1:3000, admin|admin is default username/password). Wh
 configuring the Prometheus datasource in Graphana, use the docker-compose service
 name as the hostname: `http://prometheus:9090`.
 
-The `runme.sh` script will keep a steady stream of requests hitting an endpoint of your choosing.
-
-Hopefully, that all worked fine. If it didn't, come find me in the [gameontext slack](https://gameontext.org/slackin) and let me know.
-Or open an issue. That works, too.
-
 ### Prometheus and Grafana with docker-compose
 
 The `${MONSTER_DIR}/deploy/dc/config` directory contains configuration for Prometheus and Grafana when run with docker-compose.
@@ -119,6 +126,23 @@ Note: `${MONSTER_DIR}/deploy/dc/target/data/prometheus/` and `${MONSTER_DIR}/dep
 by the host user. If you delete the directories by accident, recreate them manually before using docker-compose to start
 the services again (as it will create the missing directories for you, and those will be owned by root, which will cause
 permission issues for services running as the host user).
+
+### Overlaying runtime container configuration
+
+1. Copy a configuration file, e.g. copy `quarkus-micrometer/src/main/resources/application.properties` to
+`deploy/dc/target/mc-quarkus-micrometer.properties`
+
+2. Create an override file, `deploy/dc/docker-compose.override.yml`, that mounts this file as a volume, replacing
+   the configuration file in the image:
+
+    ```yaml
+    version: '3.7'
+    services:
+
+      quarkus:
+        volumes:
+        - './target/mc-quarkus-micrometer.properties:/app/resources/application.properties'
+    ```
 
 ## General bring-up instructions for Kubernetes
 
@@ -220,9 +244,49 @@ curl http://monsters.192.168.99.100.nip.io/combat/any
 
 Check out the prometheus endpoint to see what metrics are being emitted.
 
-The `runme.sh` script will keep a steady stream of requests hitting an endpoint of your choosing.
+### Messing around with application configuration using ConfigMaps
 
-Hopefully, that all worked fine. If it didn't, come find me in the [gameontext slack](https://gameontext.org/slackin) and let me know. Or open an issue. That works, too.
+We'll use Quarkus Micrometer for this example.
+
+1. Let's start by creating a new ConfigMap for application.properties that specifies
+   runtime configuration attributes, e.g. `deploy/k8s/config/mc-quarkus-micrometer-config.yaml`
+
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: mc-quarkus-micrometer-config
+      namespace: ebullientworks
+    data:
+      application.properties: |+
+        quarkus.http.port=8080
+    ```
+
+2. Update the appropriate deployment definition to reference the volume, e.g. `deploy/k8s/monsters/quarkus-micrometer.yaml`:
+
+    ```yaml
+       spec:
+         volumes:
+           - name: properties-volume
+             configMap:
+               name: mc-quarkus-micrometer-config
+         containers:
+         - image: ebullient/mc-quarkus-micrometer:latest-jvm
+           imagePullPolicy: IfNotPresent
+           name: mc-quarkus-micrometer
+           volumeMounts:
+           - name: properties-volume
+             mountPath: /app/resources/mc-quarkus-micrometer.properties
+      ...
+    ```
+
+3. Create the ConfigMap and update your deployment
+
+    ```bash
+    kubectl apply -f deploy/k8s/config/mc-quarkus-micrometer-config.yaml
+    kubectl apply -f deploy/k8s/monsters/quarkus-micrometer.yml
+    ```
+
 
 ---
 
