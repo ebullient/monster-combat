@@ -19,10 +19,10 @@ To set git project attributes and run in Quarkus dev mode, invoke the git plugin
 
 The application is packageable using `../mvnw package`.
 
-It produces the executable `quarkus-micrometer-nnn-SNAPSHOT-runner.jar` file in `/target` directory.
+It produces the executable `quarkus-mpmetrics-nnn-SNAPSHOT-runner.jar` file in `/target` directory.
 Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/lib` directory.
 
-The application is now runnable using `java -jar target/quarkus-micrometer-nnn-SNAPSHOT-runner.jar`.
+The application is now runnable using `java -jar target/quarkus-mpmetrics-nnn-SNAPSHOT-runner.jar`.
 
 ## Creating a native executable
 

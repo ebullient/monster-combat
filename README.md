@@ -19,6 +19,17 @@ to collect custom metrics. I wanted metrics definitions to be easy to find, and 
 This choice means I'm not making extensive use of annotation-based configurations, but I
 think the result is clear and concise, and much less invasive than annotations would have been.
 
+### A quick note about `quarkus:dev`
+
+Both Quarkus projects use variables derived from git to populate image attributes.
+Quarkus dev mode will complain if these attributes aren't set.
+
+To set git project attributes, invoke the git plugin along with the dev mode plugin:
+
+```bash
+mvn pl.project13.maven:git-commit-id-plugin:revision quarkus:dev
+```
+
 ## Prerequisites
 
 * [Docker](https://docs.docker.com/install/)
