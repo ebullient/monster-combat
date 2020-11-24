@@ -37,6 +37,19 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.micrometer.registry</groupId>
+      <artifactId>quarkus-micrometer-registry-stackdriver</artifactId>
+      <version>${quarkus-micrometer-registry.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.jboss.slf4j</groupId>
+        <artifactId>slf4j-jboss-logmanager</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.jboss.logmanager</groupId>
+        <artifactId>log4j2-jboss-logmanager</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -51,7 +64,6 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-reactive</artifactId>
