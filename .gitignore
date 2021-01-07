@@ -46,3 +46,4 @@ target/
 deploy/k8s/ingress
 deploy/k8s/config
 deploy/dc/docker-compose.override.yml
+.env
