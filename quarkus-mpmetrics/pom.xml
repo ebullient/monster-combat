@@ -17,13 +17,6 @@
 
   <name>Monster Combat - Quarkus and MP Metrics</name>
 
-  <repositories>
-    <repository>
-      <id>jitpack.io</id>
-      <url>https://jitpack.io</url>
-    </repository>
-  </repositories>
-
   <properties>
     <!-- The following is set by mvnw in the parent (usually), but if you don't use mvnw... -->
     <maven.multiModuleProjectDirectory>../</maven.multiModuleProjectDirectory>
