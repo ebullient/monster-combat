@@ -21,7 +21,6 @@
     <!-- The following is set by mvnw in the parent (usually), but if you don't use mvnw... -->
     <maven.multiModuleProjectDirectory>../</maven.multiModuleProjectDirectory>
 
-    <quarkus.container-image.build>true</quarkus.container-image.build>
     <quarkus.container-image.name>${project.artifactId}</quarkus.container-image.name>
     <quarkus.container-image.group>ebullient</quarkus.container-image.group>
   </properties>
@@ -42,6 +41,10 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-container-image-jib</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-kubernetes</artifactId>
     </dependency>
 
     <dependency>
@@ -100,48 +103,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>jvm-image</id>
-      <activation>
-        <property>
-          <name>!native</name>
-        </property>
-      </activation>
-      <properties>
-        <quarkus.container-image.tag>latest-jvm</quarkus.container-image.tag>
-      </properties>
-    </profile>
-
-    <!-- Do not build container images on mac until the "building using a container" memory issue is sorted -->
-    <profile>
-      <id>mac-native</id>
-      <activation>
-        <os>
-          <family>mac</family>
-        </os>
-        <property>
-          <name>native</name>
-        </property>
-      </activation>
-      <properties>
-        <quarkus.container-image.build>false</quarkus.container-image.build>
-      </properties>
-    </profile>
-
-    <profile>
-      <id>native-image</id>
-      <activation>
-        <property>
-          <name>native</name>
-        </property>
-      </activation>
-      <properties>
-        <quarkus.container-image.tag>latest-native</quarkus.container-image.tag>
-      </properties>
-    </profile>
-
-  </profiles>
 
 </project>

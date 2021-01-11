@@ -19,16 +19,16 @@ to collect custom metrics. I wanted metrics definitions to be easy to find, and 
 This choice means I'm not making extensive use of annotation-based configurations, but I
 think the result is clear and concise, and much less invasive than annotations would have been.
 
-### A quick note about `quarkus:dev`
-
-Both Quarkus projects use variables derived from git to populate image attributes.
-Quarkus dev mode will complain if these attributes aren't set.
-
-To set git project attributes, invoke the git plugin along with the dev mode plugin:
-
-```bash
-mvn pl.project13.maven:git-commit-id-plugin:revision quarkus:dev
-```
+> A quick note about `quarkus:dev`
+>
+> Both Quarkus projects use variables derived from git to populate image attributes. Quarkus dev mode will complain if these attributes aren't set.
+>
+> To set git project attributes, invoke the git plugin along with the dev mode plugin:
+>
+> ```bash
+> mvn pl.project13.maven:git-commit-id-plugin:revision quarkus:dev
+> ```
+>
 
 ## Prerequisites
 
@@ -45,8 +45,8 @@ Obtain the source for this repository:
 Start with:
 
 ```bash
-cd monster-combat                  # cd into the project directory
-export MONSTER_DIR=${PWD}          # for future reference
+cd monster-combat           # cd into the project directory
+export MONSTER_DIR=${PWD}   # for future reference
 ```
 
 Get your system up and running using either
@@ -66,16 +66,35 @@ This application is all about application metrics. The surrounding environment d
 If you're lazy, or on a constrained system, docker-compose will work fine to start all the bits.
 Note: I'm lazy, so this is the method I use the most often.
 
-```bash
-./buildme.sh
-# buildme.sh creates the following output directories to ensure host user ownership:
-# mkdir -p deploy/dc/target/prometheus deploy/dc/target/grafana
+See below for notes on adding native images to the mix:
 
+```bash
+# build images
+./mvnw install
+
+# go to docker-compose directory
 cd deploy/dc
+
+# start all services (prom, grafana, spring, quarkus, quarkus-mp-metrics)
 docker-compose up -d
 ```
 
-You should be able to do the following and get something interesting in return:
+Alternately, use `mc.sh` to manage some of these operations for you:
+
+```bash
+# build & package submodules
+./mc.sh
+
+# start services using docker compose
+./mc.sh dc up -d
+```
+
+The `mc.sh` script looks for some flags (like `native` or `format`) to add options to maven commands,
+but otherwise hands all remaining command line arguments to invoked commands.
+In the case of `dc`, `mc.sh` will execute the docker-compose command with explicitly specified
+docker-compose files, which can save a lot of typing once you add native images to the mix.
+
+You should then be able to do the following and get something interesting in return:
 
 ```bash
 # Spring:
@@ -90,7 +109,7 @@ curl http://127.0.0.1:8280/combat/any      # 2-6 monsters
 # Quarkus
 
 curl http://127.0.0.1:8281/
-curl http://127.0.0.1:8281/metrics         # micrometer metrics endpoint
+curl http://127.0.0.1:8281/metrics         # micrometer & prometheus
 curl http://127.0.0.1:8281/combat/faceoff  # 2 monsters
 curl http://127.0.0.1:8281/combat/melee    # 3-6 monsters
 curl http://127.0.0.1:8281/combat/any      # 2-6 monsters
@@ -103,7 +122,7 @@ curl http://127.0.0.1:8282/combat/faceoff  # 2 monsters
 curl http://127.0.0.1:8282/combat/melee    # 3-6 monsters
 curl http://127.0.0.1:8282/combat/any      # 2-6 monsters
 
- ```
+```
 
 Check out the prometheus dashboard (http://127.0.0.1:9090) to see emitted metrics.
 You can import pre-created dashboards (see below) to visualize collected metrics
@@ -111,11 +130,49 @@ in grafana (http://127.0.0.1:3000, admin|admin is default username/password). Wh
 configuring the Prometheus datasource in Graphana, use the docker-compose service
 name as the hostname: `http://prometheus:9090`.
 
+### Including native images
+
+If you are using linux, building and testing native images is straightforward,
+but if you are using windows or mac, we need to separate the steps a bit, as the
+native image needs to be built with a container, and that will overwrite the
+OS-native image used for tests.
+
+```bash
+# build and test native quarkus images (with GraalVM or Mandrel)
+# this produces an OS-specific binary used for unit tests
+./mvnw install -Dnative -pl quarkus-micrometer,quarkus-mpmetrics
+
+# On Windows and Mac, perform the following step to create the native
+# images using a container and skipping tests
+./mvnw clean package -Dnative \
+  -Dquarkus.container-image.build=true -DskipTests \
+  -Dquarkus.native.container-build=true \
+  -pl quarkus-micrometer,quarkus-mpmetrics
+```
+
+Use an additional docker compose file to start native images.
+Append docker-compose.override.yml to the list of files if necessary.
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose-native.yml up -d
+```
+
+Alternately, use `mc.sh` to manage some of these operations for you:
+
+```bash
+# build/test quarkus in native mode
+./mc.sh native
+# create native quarkus images
+./mc.sh native pkg-image
+# start all services (including non-native) using docker compose
+./mc.sh native dc up -d
+```
+
 ### Prometheus and Grafana with docker-compose
 
 The `${MONSTER_DIR}/deploy/dc/config` directory contains configuration for Prometheus and Grafana when run with docker-compose.
 The config directory is bind-mounted into both containers. The docker-compose configuration also creates a bind mount to
-service-specific subdirectories under `target/data` for output.
+service-specific subdirectories under `${MONSTER_DIR}/deploy/dc/target/data` for output.
 
 The config directory conains the following files:
 
@@ -127,13 +184,16 @@ The config directory conains the following files:
 To reset prometheus and grafana (tossing all data):
 
 ```bash
+# From ${MONSTER_DIR}/deploy/dc directory:
 docker-compose stop prom grafana
 docker-compose rm prom grafana
-rm -rf ${MONSTER_DIR}/deploy/dc/target/data/prometheus/*  ${MONSTER_DIR}/deploy/dc/target/data/grafana/*
+# Remove data for prometheus and grafana
+rm -rf ./target/data/prometheus/*  ./target/data/grafana/*
+# restart
 docker-compose up -d prom grafana
 ```
 
-Note: `${MONSTER_DIR}/deploy/dc/target/data/prometheus/` and `${MONSTER_DIR}/deploy/dc/target/data/grafana/` must be owned
+Note: the prometheus and grafana data directories must be owned
 by the host user. If you delete the directories by accident, recreate them manually before using docker-compose to start
 the services again (as it will create the missing directories for you, and those will be owned by root, which will cause
 permission issues for services running as the host user).
@@ -141,9 +201,9 @@ permission issues for services running as the host user).
 ### Overlaying runtime container configuration
 
 1. Copy a configuration file, e.g. copy `quarkus-micrometer/src/main/resources/application.properties` to
-`deploy/dc/target/mc-quarkus-micrometer.properties`
+`${MONSTER_DIR}/deploy/dc/target/mc-quarkus-micrometer.properties`
 
-2. Create an override file, `deploy/dc/docker-compose.override.yml`, that mounts this file as a volume, replacing
+2. Create an override file, `${MONSTER_DIR}/deploy/dc/docker-compose.override.yml`, that mounts this file as a volume, replacing
    the configuration file in the image:
 
     ```yaml

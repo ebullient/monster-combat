@@ -11,14 +11,12 @@
   </parent>
 
   <groupId>dev.ebullient.monster-combat</groupId>
-  <artifactId>mc-k8s-deploy</artifactId>
+  <artifactId>mc-dc-deploy</artifactId>
   <packaging>pom</packaging>
 
-  <name>Monster Combat - K8s Deploy Ingress</name>
+  <name>Monster Combat - Docker Compose deploy</name>
 
   <build>
-    <directory>ingress</directory>
-    <outputDirectory>ingress</outputDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -29,7 +27,8 @@
             <phase>generate-sources</phase>
             <configuration>
               <tasks>
-                <mkdir dir="${project.build.directory}/config"/>
+                <mkdir dir="${project.build.directory}/data/prometheus"/>
+                <mkdir dir="${project.build.directory}/data/grafana"/>
               </tasks>
             </configuration>
             <goals>
@@ -40,39 +39,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>minikube</id>
-      <activation>
-        <property>
-          <name>minikube</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-resources-plugin</artifactId>
-            <configuration>
-              <resources>
-                <resource>
-                  <directory>src</directory>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>
-            </configuration>
-            <executions>
-              <execution>
-                <phase>package</phase>
-                <goals>
-                  <goal>resources</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 
 </project>

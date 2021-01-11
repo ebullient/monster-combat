@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+
+  quarkus-native:
+    container_name: quarkus-micrometer-native
+    image: ebullient/mc-quarkus-micrometer:latest-native
+    ports:
+      - "8283:8080"
+
+  quarkus-mpmetrics-native:
+    container_name: quarkus-mpmetrics-native
+    image: ebullient/mc-quarkus-mpmetrics:latest-native
+    ports:
+      - "8284:8080"

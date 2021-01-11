@@ -71,6 +71,61 @@
       </build>
     </profile>
 
+    <profile>
+      <id>jvm-image</id>
+      <activation>
+        <property>
+          <name>!native</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.container-image.tag>latest-jvm</quarkus.container-image.tag>
+      </properties>
+    </profile>
+
+    <!-- Do not build the native container image on windows or mac, it will fail the subsequent test phase -->
+    <profile>
+      <id>unix-native</id>
+      <activation>
+        <os>
+          <family>unix</family>
+        </os>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.container-image.build>true</quarkus.container-image.build>
+      </properties>
+    </profile>
+    <profile>
+      <id>mac-native</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.container-image.build>false</quarkus.container-image.build>
+      </properties>
+    </profile>
+    <profile>
+      <id>windows-native</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <quarkus.container-image.build>false</quarkus.container-image.build>
+      </properties>
+    </profile>
 
     <profile>
       <id>native</id>
@@ -81,6 +136,7 @@
       </activation>
       <properties>
         <quarkus.package.type>native</quarkus.package.type>
+        <quarkus.container-image.tag>latest-native</quarkus.container-image.tag>
       </properties>
       <build>
         <plugins>
