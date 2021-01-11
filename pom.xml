@@ -70,10 +70,11 @@
   <modules>
     <module>build</module>
     <module>core</module>
-    <module>deploy/k8s</module>
     <module>spring5-micrometer</module>
     <module>quarkus-micrometer</module>
     <module>quarkus-mpmetrics</module>
+    <module>deploy/dc</module>
+    <module>deploy/k8s</module>
   </modules>
 
 </project>

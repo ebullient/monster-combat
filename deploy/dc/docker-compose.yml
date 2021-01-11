@@ -46,4 +46,3 @@ services:
     image: ebullient/mc-quarkus-mpmetrics:latest-jvm
     ports:
       - "8282:8080"
-
