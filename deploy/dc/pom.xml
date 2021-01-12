@@ -14,7 +14,7 @@
   <artifactId>mc-dc-deploy</artifactId>
   <packaging>pom</packaging>
 
-  <name>Monster Combat - Docker Compose deploy</name>
+  <name>Monster Combat - Docker Compose prepare</name>
 
   <build>
     <plugins>
