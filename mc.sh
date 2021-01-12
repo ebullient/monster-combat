@@ -9,7 +9,7 @@ wrap() {
 
 usage() {
       echo "
-mc.sh [format|native] [pkg-image|dc]
+mc.sh [--format|--native] [pkg-image|dc|help]
 
   format
     Flag that triggers formatting of source code.
@@ -34,16 +34,16 @@ Example invocations:
   ./mc.sh
       Invokes ./mvnw clean install
 
-  ./mc.sh format
+  ./mc.sh --format
       Invokes ./mvnw clean install process-sources
 
-  ./mc.sh native
+  ./mc.sh --native
       Invokes ./mvnw clean install -Dnative
 
   ./mc.sh pkg-image
       Invokes ./mvnw clean package -DskipTests
 
-  ./mc.sh native pkg-image
+  ./mc.sh --native pkg-image
       Creates native Quarkus container images using a container for build.
       These options are necessary to build native container images on
       Windows and MacOS.
@@ -53,20 +53,15 @@ Example invocations:
           -Dnative -Dquarkus.native.container-build=true \\
           -pl quarkus-micrometer,quarkus-mpmetrics
 
-  ./mc.sh dc <docker-compose command line>
-      Constructs command-line for docker-compose that specifically includes
-      configuration files. All parameters provided after dc are passed to
-      docker-compose as arguments.
+  ./mc.sh dc up -d
+      If no override file exists:
+        docker-compose -f ./deploy/dc/docker-compose.yml up -d
+      otherwise:
+        docker-compose -f ./deploy/dc/docker-compose.yml \\
+                      -f ./deploy/dc/docker-compose.override.yml \\
+                      up -d
 
-      ./mc.sh dc up -d
-        If no override file exists:
-          docker-compose -f ./deploy/dc/docker-compose.yml up -d
-        otherwise:
-          docker-compose -f ./deploy/dc/docker-compose.yml \\
-                        -f ./deploy/dc/docker-compose.override.yml \\
-                        up -d
-
-      ./mc.sh native dc up -d
+  ./mc.sh --native dc up -d
         If no override file exists:
           docker-compose -f ./deploy/dc/docker-compose.yml \\
                         -f ./deploy/dc/docker-compose-native.yml \\
@@ -88,11 +83,11 @@ ARGS=()
 
 for x in "$@"; do
   case "$x" in
-    format)
+    --format)
       echo "Format source"
       format="process-sources"
     ;;
-    native)
+    --native)
       echo "Build and use native images"
       native=-Dnative
     ;;
@@ -117,7 +112,7 @@ case "$ACTION" in
     else
       wrap ./mvnw clean package \
         -Dquarkus.container-image.build=true -DskipTests \
-        -Dnative -Dquarkus.native.container-build=true \
+        ${native} -Dquarkus.native.container-build=true \
         -pl quarkus-micrometer,quarkus-mpmetrics ${ARGS[@]}
     fi
   ;;
