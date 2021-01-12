@@ -1,11 +1,82 @@
 #!/bin/bash
 BASEDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-DC_DIR="$BASEDIR/deploy/dc"
 
 wrap() {
   echo "
 > $@"
   $@
+}
+
+usage() {
+      echo "
+mc.sh [format|native] [pkg-image|dc]
+
+  format
+    Flag that triggers formatting of source code.
+
+  native
+    Flag that triggers use/inclusion of native image
+
+  pkg-image
+    Action that invokes './mvnw clean package' with
+    properties set to build container images and skip tests.
+    If the native flag has been specified, additional properties
+    are set to use a container to build native images.
+
+  dc
+    Invoke docker-compose using files in the deploy/dc directory.
+    Additional command line arguments are passed to docker-compose.
+    If the native flag has been specified, native images will be included
+    in docker-compose operations.
+
+Example invocations:
+
+  ./mc.sh
+      Invokes ./mvnw clean install
+
+  ./mc.sh format
+      Invokes ./mvnw clean install process-sources
+
+  ./mc.sh native
+      Invokes ./mvnw clean install -Dnative
+
+  ./mc.sh pkg-image
+      Invokes ./mvnw clean package -DskipTests
+
+  ./mc.sh native pkg-image
+      Creates native Quarkus container images using a container for build.
+      These options are necessary to build native container images on
+      Windows and MacOS.
+
+      Invokes ./mvnw clean package \\
+          -Dquarkus.container-image.build=true -DskipTests \\
+          -Dnative -Dquarkus.native.container-build=true \\
+          -pl quarkus-micrometer,quarkus-mpmetrics
+
+  ./mc.sh dc <docker-compose command line>
+      Constructs command-line for docker-compose that specifically includes
+      configuration files. All parameters provided after dc are passed to
+      docker-compose as arguments.
+
+      ./mc.sh dc up -d
+        If no override file exists:
+          docker-compose -f ./deploy/dc/docker-compose.yml up -d
+        otherwise:
+          docker-compose -f ./deploy/dc/docker-compose.yml \\
+                        -f ./deploy/dc/docker-compose.override.yml \\
+                        up -d
+
+      ./mc.sh native dc up -d
+        If no override file exists:
+          docker-compose -f ./deploy/dc/docker-compose.yml \\
+                        -f ./deploy/dc/docker-compose-native.yml \\
+                        up -d
+        otherwise:
+          docker-compose -f ./deploy/dc/docker-compose.yml \\
+                        -f ./deploy/dc/docker-compose-native.yml \\
+                        -f ./deploy/dc/docker-compose.override.yml \\
+                        up -d
+"
 }
 
 
@@ -32,7 +103,7 @@ for x in "$@"; do
 done
 
 if [ ${#ARGS[@]} -eq 0 ]; then
-  wrap ${BASEDIR}/mvnw clean install ${format} ${native}
+  wrap ./mvnw clean install ${format} ${native}
   exit
 fi
 
@@ -42,11 +113,9 @@ unset ARGS[0]
 case "$ACTION" in
   pkg-image)
     if [ -z "$native" ]; then
-      wrap ${BASEDIR}/mvnw clean package \
-        -Dquarkus.container-image.build=true -DskipTests \
-        -pl quarkus-micrometer,quarkus-mpmetrics ${ARGS[@]}
+      wrap ./mvnw clean package -DskipTests ${ARGS[@]}
     else
-      wrap ${BASEDIR}/mvnw clean package \
+      wrap ./mvnw clean package \
         -Dquarkus.container-image.build=true -DskipTests \
         -Dnative -Dquarkus.native.container-build=true \
         -pl quarkus-micrometer,quarkus-mpmetrics ${ARGS[@]}
@@ -54,20 +123,24 @@ case "$ACTION" in
   ;;
   dc)
     override_dc=
-    if [ -e $DC_DIR/docker-compose.override.yml ]
-    then
-      override_dc="-f $DC_DIR/docker-compose.override.yml"
-    fi
     native_dc=
+    if [ -e ./deploy/dc/docker-compose.override.yml ]
+    then
+      override_dc="-f ./deploy/dc/docker-compose.override.yml"
+    fi
     if [ -n "$native" ]
     then
-      native_dc="-f $DC_DIR/docker-compose-native.yml"
+      native_dc="-f ./deploy/dc/docker-compose-native.yml"
     fi
-    options="-f $DC_DIR/docker-compose.yml ${native_dc} ${override_dc}"
+    options="-f ./deploy/dc/docker-compose.yml ${native_dc} ${override_dc}"
     wrap docker-compose $options ${ARGS[@]}
+  ;;
+  help)
+    usage
   ;;
   *)
     echo "Unknown: $ACTION ${ARGS[@]}"
+    usage
   ;;
 esac
 
