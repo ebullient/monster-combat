@@ -110,6 +110,7 @@
       </activation>
       <properties>
         <quarkus.container-image.build>false</quarkus.container-image.build>
+        <quarkus.native.container-build>true</quarkus.native.container-build>
       </properties>
     </profile>
     <profile>
@@ -124,6 +125,7 @@
       </activation>
       <properties>
         <quarkus.container-image.build>false</quarkus.container-image.build>
+        <quarkus.native.container-build>true</quarkus.native.container-build>
       </properties>
     </profile>
 

@@ -1,10 +1,10 @@
 #!/bin/bash
 BASEDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-wrap() {
+wrap_exec() {
   echo "
 > $@"
-  $@
+  exec $@
 }
 
 usage() {
@@ -49,8 +49,7 @@ Example invocations:
       Windows and MacOS.
 
       Invokes ./mvnw clean package \\
-          -Dquarkus.container-image.build=true -DskipTests \\
-          -Dnative -Dquarkus.native.container-build=true \\
+          -Dquarkus.container-image.build=true -DskipTests -Dnative \\
           -pl quarkus-micrometer,quarkus-mpmetrics
 
   ./mc.sh dc up -d
@@ -98,8 +97,7 @@ for x in "$@"; do
 done
 
 if [ ${#ARGS[@]} -eq 0 ]; then
-  wrap ./mvnw clean install ${format} ${native}
-  exit
+  wrap_exec ./mvnw clean install ${format} ${native}
 fi
 
 ACTION="${ARGS[0]}"
@@ -108,9 +106,9 @@ unset ARGS[0]
 case "$ACTION" in
   pkg-image)
     if [ -z "$native" ]; then
-      wrap ./mvnw clean package -DskipTests ${ARGS[@]}
+      wrap_exec ./mvnw clean package -DskipTests ${ARGS[@]}
     else
-      wrap ./mvnw clean package \
+      wrap_exec ./mvnw clean package \
         -Dquarkus.container-image.build=true -DskipTests \
         ${native} -Dquarkus.native.container-build=true \
         -pl quarkus-micrometer,quarkus-mpmetrics ${ARGS[@]}
@@ -128,7 +126,7 @@ case "$ACTION" in
       native_dc="-f ./deploy/dc/docker-compose-native.yml"
     fi
     options="-f ./deploy/dc/docker-compose.yml ${native_dc} ${override_dc}"
-    wrap docker-compose $options ${ARGS[@]}
+    wrap_exec docker-compose $options ${ARGS[@]}
   ;;
   help)
     usage
