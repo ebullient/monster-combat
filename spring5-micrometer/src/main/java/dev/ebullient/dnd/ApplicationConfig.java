@@ -20,9 +20,7 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.actuate.metrics.export.prometheus.PrometheusScrapeEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -41,9 +39,6 @@ import io.micrometer.core.instrument.config.MeterFilter;
 @Configuration
 public class ApplicationConfig {
     static final Logger logger = LoggerFactory.getLogger(ApplicationConfig.class);
-
-    @Autowired
-    PrometheusScrapeEndpoint prometheusScrapeEndpoint;
 
     @Bean
     public Bestiary createBestiary() {
@@ -97,18 +92,5 @@ public class ApplicationConfig {
     @Bean
     public RouterFunction<ServerResponse> staticRouter() {
         return RouterFunctions.resources("/**", new ClassPathResource("public/"));
-    }
-
-    /**
-     * Make a regular /metrics endpoint for prometheus, too.
-     */
-    @Bean
-    public RouterFunction<ServerResponse> metricsHack() {
-        //
-        return RouterFunctions.route(
-                GET("/metrics"),
-                request -> ok()
-                        .contentType(MediaType.TEXT_PLAIN)
-                        .bodyValue(prometheusScrapeEndpoint.scrape()));
     }
 }
