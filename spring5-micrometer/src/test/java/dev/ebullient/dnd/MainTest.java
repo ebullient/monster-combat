@@ -16,6 +16,7 @@ package dev.ebullient.dnd;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.actuate.metrics.AutoConfigureMetrics;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,6 +27,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import dev.ebullient.dnd.combat.client.CombatMetrics;
 
 @SpringBootTest(classes = Main.class)
+@AutoConfigureMetrics
 @ExtendWith(SpringExtension.class)
 @AutoConfigureWebTestClient
 public class MainTest {
