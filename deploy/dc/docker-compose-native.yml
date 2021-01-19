@@ -1,7 +1,7 @@
 version: '3.7'
 services:
 
-  quarkus-native:
+  quarkus-micrometer-native:
     container_name: quarkus-micrometer-native
     image: ebullient/mc-quarkus-micrometer:latest-native
     ports:

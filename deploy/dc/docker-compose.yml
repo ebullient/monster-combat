@@ -29,19 +29,19 @@ services:
       - './target/data/grafana:/var/lib/grafana'
       - './target/logs/grafana:/var/log/grafana'
 
-  spring:
+  spring-micrometer:
     container_name: spring-micrometer
     image: ebullient/mc-spring5-micrometer
     ports:
       - "8280:8080"
 
-  quarkus:
+  quarkus-micrometer:
     container_name: quarkus-micrometer
     image: ebullient/mc-quarkus-micrometer:latest-jvm
     ports:
       - "8281:8080"
 
-  quarkus-mp-metrics:
+  quarkus-mpmetrics:
     container_name: quarkus-mp-metrics
     image: ebullient/mc-quarkus-mpmetrics:latest-jvm
     ports:

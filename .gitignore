@@ -1,6 +1,6 @@
 logs
-nohup.out
 tmp
+*.out
 
 ### STS ###
 .apt_generated

@@ -10,6 +10,12 @@ case "$1" in
   dc-mpmetrics)
     URL=http://localhost:8282/combat/any
   ;;
+  dc-quarkus-native)
+    URL=http://localhost:8283/combat/any
+  ;;
+  dc-mpmetrics-native)
+    URL=http://localhost:8284/combat/any
+  ;;
   k8s-spring)
     URL=http://monsters.192.168.99.100.nip.io/combat/faceoff
   ;;
@@ -17,6 +23,7 @@ case "$1" in
     URL=$1
   ;;
 esac
+
 if [ -z "$URL" ]; then
   URL=http://localhost:8080/combat/any
 fi

@@ -30,12 +30,32 @@ scrape_configs:
   scrape_interval: 5s
   static_configs:
     - targets:
-      - spring:8080
+      - spring-micrometer:8080
 
 - job_name: quarkus_micrometer
   metrics_path: /metrics
   scrape_interval: 5s
   static_configs:
     - targets:
-      - quarkus:8080
+      - quarkus-micrometer:8080
 
+- job_name: quarkus_micrometer_native
+  metrics_path: /metrics
+  scrape_interval: 5s
+  static_configs:
+    - targets:
+      - quarkus-micrometer-native:8080
+
+- job_name: quarkus_mpmetrics
+  metrics_path: /metrics
+  scrape_interval: 5s
+  static_configs:
+    - targets:
+      - quarkus-mpmetrics:8080
+
+- job_name: quarkus_mpmetrics_native
+  metrics_path: /metrics
+  scrape_interval: 5s
+  static_configs:
+    - targets:
+      - quarkus-mpmetrics-native:8080
