@@ -21,16 +21,15 @@
     <outputDirectory>ingress</outputDirectory>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
           <execution>
             <id>createDataDirectory</id>
             <phase>generate-sources</phase>
             <configuration>
-              <tasks>
+              <target>
                 <mkdir dir="${project.build.directory}/config"/>
-              </tasks>
+              </target>
             </configuration>
             <goals>
               <goal>run</goal>
