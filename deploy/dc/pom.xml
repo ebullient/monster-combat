@@ -19,23 +19,28 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
           <execution>
             <id>createDataDirectory</id>
             <phase>generate-sources</phase>
             <configuration>
-              <tasks>
+              <target>
                 <mkdir dir="${project.build.directory}/data/prometheus"/>
                 <mkdir dir="${project.build.directory}/data/grafana"/>
-              </tasks>
+              </target>
             </configuration>
             <goals>
               <goal>run</goal>
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <configuration>
+            <skip>true</skip>
+        </configuration>
       </plugin>
     </plugins>
   </build>
