@@ -37,6 +37,30 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.micrometer.registry</groupId>
+      <artifactId>quarkus-micrometer-registry-datadog</artifactId>
+      <version>${quarkus-micrometer-registry.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.micrometer.registry</groupId>
+      <artifactId>quarkus-micrometer-registry-jmx</artifactId>
+      <version>${quarkus-micrometer-registry.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.micrometer.registry</groupId>
+      <artifactId>quarkus-micrometer-registry-statsd</artifactId>
+      <version>${quarkus-micrometer-registry.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.micrometer.registry</groupId>
+      <artifactId>quarkus-micrometer-registry-signalfx</artifactId>
+      <version>${quarkus-micrometer-registry.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.logmanager</groupId>
+      <artifactId>log4j2-jboss-logmanager</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>io.quarkus</groupId>
