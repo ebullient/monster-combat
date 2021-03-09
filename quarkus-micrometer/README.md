@@ -12,6 +12,8 @@ Quarkus dev mode will complain if these attributes aren't set.
 To set git project attributes and run in Quarkus dev mode, invoke the git plugin along with the dev mode plugin:
 
 ```bash
+../mvnw compile quarkus:dev
+# OR
 ../mvnw pl.project13.maven:git-commit-id-plugin:revision quarkus:dev
 ```
 
