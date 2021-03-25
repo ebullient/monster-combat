@@ -251,8 +251,8 @@ permission issues for services running as the host user).
     ```bash
     kubectl apply -f deploy/k8s/ingress/monitoring-ingress.yaml
     echo "Use the following urls for
-Prometheus: http://prometheus.`minikube ip`.nip.io
-Grafana dashboard: http://grafana.`minikube ip`.nip.io"
+Prometheus: http://prometheus.$(minikube ip).nip.io
+Grafana dashboard: http://grafana.$(minikube ip).nip.io"
     ```
 
 4. Once the kube-prometheus manifests have applied cleanly, set up a Prometheus `ServiceMonitor` for our applications:
@@ -268,7 +268,7 @@ Grafana dashboard: http://grafana.`minikube ip`.nip.io"
     included in the list of Prometheus targets before moving on to the next step.
 
     ```bash
-    echo Visit http://prometheus.`minikube ip`.nip.io/targets
+    echo Visit http://prometheus.$(minikube ip).nip.io/targets
     ```
 
 4. Finally (!!), build and install the application:
@@ -291,9 +291,9 @@ Grafana dashboard: http://grafana.`minikube ip`.nip.io"
     kubectl apply -f deploy/k8s/monsters/
     kubectl apply -f deploy/k8s/ingress/monster-ingress.yaml
     echo "
- Spring with Micrometer: http://spring.`minikube ip`.nip.io
- Quarkus with Micrometer: http://quarkus.`minikube ip`.nip.io
- Quarkus with MP Metrics: http://mpmetrics.`minikube ip`.nip.io"
+ Spring with Micrometer: http://spring.$(minikube ip).nip.io
+ Quarkus with Micrometer: http://quarkus.$(minikube ip).nip.io
+ Quarkus with MP Metrics: http://mpmetrics.$(minikube ip).nip.io"
     ```
 
 So, after all of that, you should be able to do the following and get something interesting in return:
