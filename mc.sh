@@ -106,7 +106,7 @@ unset ARGS[0]
 case "$ACTION" in
   pkg-image)
     if [ -z "$native" ]; then
-      wrap_exec ./mvnw clean package -DskipTests ${ARGS[@]}
+      wrap_exec ./mvnw clean package -Dquarkus.container-image.build=true -DskipTests ${ARGS[@]}
     else
       wrap_exec ./mvnw clean package \
         -Dquarkus.container-image.build=true -DskipTests \
