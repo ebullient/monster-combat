@@ -9,7 +9,7 @@ wrap_exec() {
 
 usage() {
       echo "
-mc.sh [--format|--native] [pkg-image|dc|help]
+mc.sh [--format|--native] [images|dc|help]
 
   format
     Flag that triggers formatting of source code.
@@ -17,7 +17,7 @@ mc.sh [--format|--native] [pkg-image|dc|help]
   native
     Flag that triggers use/inclusion of native image
 
-  pkg-image
+  images
     Action that invokes './mvnw clean package' with
     properties set to build container images and skip tests.
     If the native flag has been specified, additional properties
@@ -40,10 +40,10 @@ Example invocations:
   ./mc.sh --native
       Invokes ./mvnw clean install -Dnative
 
-  ./mc.sh pkg-image
+  ./mc.sh images
       Invokes ./mvnw clean package -DskipTests
 
-  ./mc.sh --native pkg-image
+  ./mc.sh --native images
       Creates native Quarkus container images using a container for build.
       These options are necessary to build native container images on
       Windows and MacOS.
@@ -104,7 +104,7 @@ ACTION="${ARGS[0]}"
 unset ARGS[0]
 
 case "$ACTION" in
-  pkg-image)
+  images)
     if [ -z "$native" ]; then
       wrap_exec ./mvnw clean package -Dquarkus.container-image.build=true -DskipTests ${ARGS[@]}
     else

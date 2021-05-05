@@ -18,8 +18,6 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import dev.ebullient.dnd.bestiary.Bestiary;
 import dev.ebullient.dnd.combat.Encounter;
@@ -29,7 +27,6 @@ import dev.ebullient.dnd.combat.client.CombatMetrics;
 import dev.ebullient.dnd.mechanics.Dice;
 
 @Path("/combat")
-@Produces(MediaType.APPLICATION_JSON)
 public class EncounterResource {
 
     final Bestiary beastiary;
