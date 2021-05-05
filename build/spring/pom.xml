@@ -31,6 +31,18 @@
     </dependencies>
   </dependencyManagement>
 
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
   <profiles>
 
     <profile>
@@ -40,7 +52,6 @@
           <exists>target/classes</exists>
         </file>
       </activation>
-
       <build>
         <plugins>
           <plugin>
@@ -58,7 +69,6 @@
           <exists>src/test</exists>
         </file>
       </activation>
-
       <build>
         <plugins>
           <plugin>

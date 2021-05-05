@@ -128,6 +128,25 @@ case "$ACTION" in
     options="-f ./deploy/dc/docker-compose.yml ${native_dc} ${override_dc}"
     wrap_exec docker-compose $options ${ARGS[@]}
   ;;
+  jars)
+    ./mvnw clean package
+    ./mvnw spring-boot:repackage  -pl spring5-micrometer
+    if [ -n "$native" ]; then
+      ./mvnw package -Dnative -pl quarkus-micrometer,quarkus-mpmetrics
+    fi
+  ;;
+  start)
+    java -Dmonster-combat -jar spring5-micrometer/target/mc-spring5-micrometer-0.4.0.jar --server.port=8280   > out.server.spring &
+    java -Dmonster-combat -Dquarkus.http.port=8281 -jar quarkus-micrometer/target/quarkus-app/quarkus-run.jar > out.server.quarkus &
+    java -Dmonster-combat -Dquarkus.http.port=8282 -jar quarkus-mpmetrics/target/quarkus-app/quarkus-run.jar  > out.server.mpmetrics &
+    if [ -n "$native" ]; then
+      ./quarkus-micrometer/target/mc-quarkus-micrometer-0.4.0-runner -Dmonster-combat -Dquarkus.http.port=8283 > out.server.quarkus-native &
+      ./quarkus-mpmetrics/target/mc-quarkus-mpmetrics-0.4.0-runner -Dmonster-combat -Dquarkus.http.port=8284  > out.server.mpmetrics-native &
+    fi
+  ;;
+  showmem)
+    ps -m -o pid,vsz,rss,%mem,command|egrep "MEM|monster-combat"|grep -v grep
+  ;;
   help)
     usage
   ;;

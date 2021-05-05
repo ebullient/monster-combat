@@ -5,30 +5,30 @@ BASEDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd $BASEDIR
 
 case "$1" in
-  all-dc-micrometer)
-    nohup ./runme.sh dc-spring > spring.out &!
-    nohup ./runme.sh dc-quarkus > quarkus.out &!
-    nohup ./runme.sh dc-quarkus-native > quarkus-native.out &!
+  all-micrometer)
+    nohup ./mc-client.sh spring > out.client.spring &!
+    nohup ./mc-client.sh quarkus > out.client.quarkus &!
+    nohup ./mc-client.sh quarkus-native > out.client.quarkus.native &!
     exit
   ;;
-  all-dc-mpmetrics)
-    nohup ./runme.sh dc-mpmetrics > mppetrics.out &!
-    nohup ./runme.sh dc-mpmetrics-native > mppetrics-native.out &!
+  all-mpmetrics)
+    nohup ./mc-client.sh mpmetrics > out.client.mpmetrics &!
+    nohup ./mc-client.sh mpmetrics-native > out.client.mpmetrics.native &!
     exit
   ;;
-  dc-spring)
+  spring)
     URL=http://localhost:8280/combat/any
   ;;
-  dc-quarkus)
+  quarkus)
     URL=http://localhost:8281/combat/any
   ;;
-  dc-quarkus-native)
+  quarkus-native)
     URL=http://localhost:8283/combat/any
   ;;
-  dc-mpmetrics)
+  mpmetrics)
     URL=http://localhost:8282/combat/any
   ;;
-  dc-mpmetrics-native)
+  mpmetrics-native)
     URL=http://localhost:8284/combat/any
   ;;
   k8s-spring)

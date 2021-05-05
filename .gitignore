@@ -1,6 +1,7 @@
 logs
 tmp
 *.out
+out.*
 
 ### STS ###
 .apt_generated
