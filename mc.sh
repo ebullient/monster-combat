@@ -11,11 +11,13 @@ usage() {
       echo "
 mc.sh [--format|--native] [images|dc|help]
 
-  format
+  --format
     Flag that triggers formatting of source code.
 
-  native
+  --native
     Flag that triggers use/inclusion of native image
+
+Containers:
 
   images
     Action that invokes './mvnw clean package' with
@@ -28,6 +30,29 @@ mc.sh [--format|--native] [images|dc|help]
     Additional command line arguments are passed to docker-compose.
     If the native flag has been specified, native images will be included
     in docker-compose operations.
+
+Jars:
+
+  jars
+    Build and package appropriate jars for all runtimes. If the
+    native flag has been specified, also build native images.
+
+  start
+    Run jars directly (java -jar ... ). If the native flag has been
+    specified, also start native binaries. Ports are adjusted to
+    match localhost expectations in mc-client.sh
+
+  list
+    List running monster-combat processes (started with start)
+
+  mem
+    Show memory used by running monster-combat processes (once, using ps)
+
+  memwatch
+    Monitor memory used by running monster-combat processes (using top)
+
+  stop
+    Stop monster-combat processes (kill)
 
 Example invocations:
 
@@ -144,8 +169,27 @@ case "$ACTION" in
       ./quarkus-mpmetrics/target/mc-quarkus-mpmetrics-0.4.0-runner -Dmonster-combat -Dquarkus.http.port=8284  > out.server.mpmetrics-native &
     fi
   ;;
-  showmem)
-    ps -m -o pid,vsz,rss,%mem,command|egrep "MEM|monster-combat"|grep -v grep
+  list)
+    ps -m -o pid,command | grep monster-combat | grep -v grep
+  ;;
+  mem)
+    if top -version 2>/dev/null; then
+      echo "linux"
+    else
+      exec ps -m -o pid -stats pid,%cpu,vsz,rss,%mem,command|egrep "MEM|monster-combat"|grep -v grep
+    fi
+  ;;
+  memwatch)
+    pids=$(ps -m -o pid,command | grep monster-combat | grep -v grep | cut -d ' ' -f2)
+    if top -version 2>/dev/null; then
+      echo "linux"
+    else
+      exec top -o pid -r -stats pid,cpu,vsize,mem,command $(printf -- '-pid %s ' ${pids})
+    fi
+  ;;
+  stop)
+    pids=$(ps -m -o pid,command | grep monster-combat | grep -v grep | cut -d ' ' -f2)
+    for x in $pids; do kill $x; done
   ;;
   help)
     usage

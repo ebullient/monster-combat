@@ -6,14 +6,14 @@ cd $BASEDIR
 
 case "$1" in
   all-micrometer)
-    nohup ./mc-client.sh spring > out.client.spring &!
-    nohup ./mc-client.sh quarkus > out.client.quarkus &!
-    nohup ./mc-client.sh quarkus-native > out.client.quarkus.native &!
+    nohup ./mc-client.sh spring > out.client.spring &
+    nohup ./mc-client.sh quarkus > out.client.quarkus &
+    nohup ./mc-client.sh quarkus-native > out.client.quarkus.native &
     exit
   ;;
   all-mpmetrics)
-    nohup ./mc-client.sh mpmetrics > out.client.mpmetrics &!
-    nohup ./mc-client.sh mpmetrics-native > out.client.mpmetrics.native &!
+    nohup ./mc-client.sh mpmetrics > out.client.mpmetrics &
+    nohup ./mc-client.sh mpmetrics-native > out.client.mpmetrics.native &
     exit
   ;;
   spring)
@@ -33,6 +33,15 @@ case "$1" in
   ;;
   k8s-spring)
     URL=http://monsters.192.168.99.100.nip.io/combat/faceoff
+  ;;
+  list)
+    ps -m -o pid,command | grep mc-client | grep -v list | grep -v grep
+    exit
+  ;;
+  stop)
+    pids=$(ps -m -o pid,command | grep mc-client | grep -v stop | grep -v grep | cut -d ' ' -f2)
+    for x in $pids; do kill $x; done
+    exit
   ;;
   *)
     URL=$1
