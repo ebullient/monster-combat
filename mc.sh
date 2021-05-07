@@ -7,6 +7,20 @@ wrap_exec() {
   exec $@
 }
 
+wrap_launch() {
+  out=$1
+  shift
+  echo "
+> $@ > $out 2>&1 &"
+  $@ > $out 2>&1 &
+}
+
+wrap_mvnw() {
+  echo "
+> $@"
+  ./mvnw $@
+}
+
 usage() {
       echo "
 mc.sh [--format|--native] [images|dc|help]
@@ -154,42 +168,42 @@ case "$ACTION" in
     wrap_exec docker-compose $options ${ARGS[@]}
   ;;
   jars)
-    ./mvnw clean package
-    ./mvnw spring-boot:repackage  -pl spring5-micrometer
+    wrap_mvnw clean package
+    wrap_mvnw package spring-boot:repackage  -pl spring5-micrometer
     if [ -n "$native" ]; then
-      ./mvnw package -Dnative -pl quarkus-micrometer,quarkus-mpmetrics
+      wrap_mvnw package -Dnative -pl quarkus-micrometer,quarkus-mpmetrics
     fi
   ;;
   start)
-    java -Dmonster-combat -jar spring5-micrometer/target/mc-spring5-micrometer-0.4.0.jar --server.port=8280   > out.server.spring &
-    java -Dmonster-combat -Dquarkus.http.port=8281 -jar quarkus-micrometer/target/quarkus-app/quarkus-run.jar > out.server.quarkus &
-    java -Dmonster-combat -Dquarkus.http.port=8282 -jar quarkus-mpmetrics/target/quarkus-app/quarkus-run.jar  > out.server.mpmetrics &
+    wrap_launch out.server.spring    java -Dmonster-combat -jar spring5-micrometer/target/mc-spring5-micrometer-0.4.0.jar --server.port=8280
+    wrap_launch out.server.quarkus   java -Dmonster-combat -Dquarkus.http.port=8281 -jar quarkus-micrometer/target/quarkus-app/quarkus-run.jar
+    wrap_launch out.server.mpmetrics java -Dmonster-combat -Dquarkus.http.port=8282 -jar quarkus-mpmetrics/target/quarkus-app/quarkus-run.jar
     if [ -n "$native" ]; then
-      ./quarkus-micrometer/target/mc-quarkus-micrometer-0.4.0-runner -Dmonster-combat -Dquarkus.http.port=8283 > out.server.quarkus-native &
-      ./quarkus-mpmetrics/target/mc-quarkus-mpmetrics-0.4.0-runner -Dmonster-combat -Dquarkus.http.port=8284  > out.server.mpmetrics-native &
+      wrap_launch out.server.quarkus-native   ./quarkus-micrometer/target/mc-quarkus-micrometer-0.4.0-runner -Dmonster-combat -Dquarkus.http.port=8283
+      wrap_launch out.server.mpmetrics-native ./quarkus-mpmetrics/target/mc-quarkus-mpmetrics-0.4.0-runner -Dmonster-combat -Dquarkus.http.port=8284
     fi
   ;;
   list)
-    ps -m -o pid,command | grep monster-combat | grep -v grep
+    wrap_exec ps -A -o pid,command | grep monster-combat | grep -v grep
   ;;
   mem)
     if top -version 2>/dev/null; then
       echo "linux"
     else
-      exec ps -m -o pid -stats pid,%cpu,vsz,rss,%mem,command|egrep "MEM|monster-combat"|grep -v grep
+      wrap_exec ps -A -o pid,%cpu,vsz,rss,%mem,command|egrep "MEM|monster-combat"|grep -v grep
     fi
   ;;
   memwatch)
-    pids=$(ps -m -o pid,command | grep monster-combat | grep -v grep | cut -d ' ' -f2)
+    pids=$(ps -m -o pid,command | awk '{$1=$1};1'| grep monster-combat | grep -v grep | cut -d ' ' -f1)
     if top -version 2>/dev/null; then
       echo "linux"
     else
-      exec top -o pid -r -stats pid,cpu,vsize,mem,command $(printf -- '-pid %s ' ${pids})
+      wrap_exec top -o pid -r -stats pid,cpu,vsize,mem,command $(printf -- '-pid %s ' ${pids})
     fi
   ;;
   stop)
-    pids=$(ps -m -o pid,command | grep monster-combat | grep -v grep | cut -d ' ' -f2)
-    for x in $pids; do kill $x; done
+    pids=$(ps -A -o pid,command | awk '{$1=$1};1' | grep monster-combat | grep -v grep | cut -d ' ' -f1)
+    for x in $pids; do echo "stopping $x"; kill $x; done
   ;;
   help)
     usage

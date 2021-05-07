@@ -34,13 +34,21 @@ case "$1" in
   k8s-spring)
     URL=http://monsters.192.168.99.100.nip.io/combat/faceoff
   ;;
+  start)
+    nohup ./mc-client.sh spring > out.client.spring &
+    nohup ./mc-client.sh quarkus > out.client.quarkus &
+    nohup ./mc-client.sh quarkus-native > out.client.quarkus.native &
+    nohup ./mc-client.sh mpmetrics > out.client.mpmetrics &
+    nohup ./mc-client.sh mpmetrics-native > out.client.mpmetrics.native &
+    exec ./mc-client.sh list
+  ;;
   list)
-    ps -m -o pid,command | grep mc-client | grep -v list | grep -v grep
+    ps -A -o pid,command | grep mc-client | grep -v list | grep -v grep
     exit
   ;;
   stop)
-    pids=$(ps -m -o pid,command | grep mc-client | grep -v stop | grep -v grep | cut -d ' ' -f2)
-    for x in $pids; do kill $x; done
+    pids=$(ps -A -o pid,command | awk '{$1=$1};1' | grep mc-client | grep -v stop | grep -v grep | cut -d ' ' -f1)
+    for x in $pids; do echo "stopping $x"; kill $x; done
     exit
   ;;
   *)
