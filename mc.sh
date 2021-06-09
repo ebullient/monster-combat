@@ -23,7 +23,7 @@ wrap_mvnw() {
 
 usage() {
       echo "
-mc.sh [--format|--native] [images|dc|help]
+mc.sh [--format|--native] [images|dc|jars|help]
 
   --format
     Flag that triggers formatting of source code.
@@ -45,7 +45,7 @@ Containers:
     If the native flag has been specified, native images will be included
     in docker-compose operations.
 
-Jars:
+Using jars directly:
 
   jars
     Build and package appropriate jars for all runtimes. If the
