@@ -49,7 +49,7 @@ public class EncounterResourceTest {
     @Test
     void testPrometheusScrapeEndpoint() {
         given()
-                .when().get("/metrics")
+                .when().get("/q/metrics")
                 .then()
                 .statusCode(200)
                 .body(containsString("# HELP"));
