@@ -7,6 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.metrics.Gauge;
 import org.eclipse.microprofile.metrics.MetricRegistry;
 import org.eclipse.microprofile.metrics.Tag;
+import org.eclipse.microprofile.metrics.annotation.RegistryType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ public class CombatMetrics {
     final AtomicInteger last_roll = new AtomicInteger(0);
     final AtomicInteger last_felled = new AtomicInteger(0);
 
-    public CombatMetrics(MetricRegistry registry) {
+    public CombatMetrics(@RegistryType(type = MetricRegistry.Type.APPLICATION) MetricRegistry registry) {
         this.registry = registry;
 
         registry.register("last.felled", (Gauge<AtomicInteger>) () -> last_felled);
