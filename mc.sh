@@ -175,7 +175,7 @@ case "$ACTION" in
     fi
   ;;
   start)
-    wrap_launch out.server.spring    java -Dmonster-combat -jar spring5-micrometer/target/mc-spring5-micrometer-0.4.0.jar --server.port=8280
+    wrap_launch out.server.spring    java -Dmonster-combat -jar spring5-micrometer/target/mc-spring5-micrometer-0.4.0-exec.jar --server.port=8280
     wrap_launch out.server.quarkus   java -Dmonster-combat -Dquarkus.http.port=8281 -jar quarkus-micrometer/target/quarkus-app/quarkus-run.jar
     wrap_launch out.server.mpmetrics java -Dmonster-combat -Dquarkus.http.port=8282 -jar quarkus-mpmetrics/target/quarkus-app/quarkus-run.jar
     if [ -n "$native" ]; then
@@ -183,7 +183,7 @@ case "$ACTION" in
       wrap_launch out.server.mpmetrics-native ./quarkus-mpmetrics/target/mc-quarkus-mpmetrics-0.4.0-runner -Dmonster-combat -Dquarkus.http.port=8284
     fi
   ;;
-  list)
+  status|list)
     wrap_exec ps -A -o pid,command | grep monster-combat | grep -v grep
   ;;
   mem)
