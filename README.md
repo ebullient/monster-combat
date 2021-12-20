@@ -75,7 +75,7 @@ See below for notes on adding native images to the mix:
 # go to docker-compose directory
 cd deploy/dc
 
-# start all services (prom, grafana, spring, quarkus, quarkus-mp-metrics)
+# start all services (prom, grafana, spring, quarkus, quarkus-mpmetrics)
 docker-compose up -d
 ```
 
