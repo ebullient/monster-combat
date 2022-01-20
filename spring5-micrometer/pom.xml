@@ -18,7 +18,7 @@
   <properties>
     <imageName>ebullient/${project.artifactId}</imageName>
 
-    <jib-maven-plugin.version>3.1.4</jib-maven-plugin.version>
+    <jib-maven-plugin.version>3.2.0</jib-maven-plugin.version>
   </properties>
 
   <dependencies>
