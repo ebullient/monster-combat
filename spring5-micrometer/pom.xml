@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -17,7 +17,7 @@
 
   <properties>
     <imageName>ebullient/${project.artifactId}</imageName>
-
+    <spring-boot.build-image.imageName>${imageName}</spring-boot.build-image.imageName>
     <jib-maven-plugin.version>3.2.0</jib-maven-plugin.version>
   </properties>
 
@@ -63,43 +63,68 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>com.google.cloud.tools</groupId>
-        <artifactId>jib-maven-plugin</artifactId>
-        <version>${jib-maven-plugin.version}</version>
         <configuration>
-          <to>
-            <image>${imageName}</image>
-          </to>
-          <container>
-            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
-            <user>1001:1001</user>
-            <jvmFlags>
-              <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
-            </jvmFlags>
-            <labels>
-              <org.opencontainers.image.title>${project.artifactId}</org.opencontainers.image.title>
-              <org.opencontainers.image.description>${project.name}</org.opencontainers.image.description>
-              <org.opencontainers.image.version>${project.version}</org.opencontainers.image.version>
-              <org.opencontainers.image.url>https://github.com/ebullient/monster-combat</org.opencontainers.image.url>
-              <org.opencontainers.image.source>https://github.com/ebullient/monster-combat</org.opencontainers.image.source>
-              <org.opencontainers.image.licenses>	Apache-2.0</org.opencontainers.image.licenses>
-              <org.opencontainers.image.created>${git.build.time}</org.opencontainers.image.created>
-              <org.opencontainers.image.revision>${git.commit.id.describe-short}</org.opencontainers.image.revision>
-            </labels>
-          </container>
+          <image>
+            <name>${imageName}</name>
+            <env>
+                <BP_OCI_TITLE>${project.artifactId}</BP_OCI_TITLE>
+                <BP_OCI_DESCRIPTION>${project.name}</BP_OCI_DESCRIPTION>
+                <BP_OCI_VERSION>${project.version}</BP_OCI_VERSION>
+                <BP_OCI_URL>https://github.com/ebullient/monster-combat</BP_OCI_URL>
+                <BP_OCI_SOURCE>https://github.com/ebullient/monster-combat</BP_OCI_SOURCE>
+                <BP_OCI_LICENSES>	Apache-2.0</BP_OCI_LICENSES>
+                <!--suppress UnresolvedMavenProperty -->
+                <BP_OCI_CREATED>${git.build.time}</BP_OCI_CREATED>
+                <!--suppress UnresolvedMavenProperty -->
+                <BP_OCI_REVISION>${git.commit.id.describe-short}</BP_OCI_REVISION>
+            </env>
+          </image>
         </configuration>
         <executions>
           <execution>
             <phase>package</phase>
             <goals>
-              <goal>dockerBuild</goal>
+              <goal>build-image</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
+
+<!--      <plugin>-->
+<!--        <groupId>com.google.cloud.tools</groupId>-->
+<!--        <artifactId>jib-maven-plugin</artifactId>-->
+<!--        <version>${jib-maven-plugin.version}</version>-->
+<!--        <configuration>-->
+<!--          <to>-->
+<!--            <image>${imageName}</image>-->
+<!--          </to>-->
+<!--          <container>-->
+<!--            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>-->
+<!--            <user>1001:1001</user>-->
+<!--            <jvmFlags>-->
+<!--              <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>-->
+<!--            </jvmFlags>-->
+<!--            <labels>-->
+<!--              <org.opencontainers.image.title>${project.artifactId}</org.opencontainers.image.title>-->
+<!--              <org.opencontainers.image.description>${project.name}</org.opencontainers.image.description>-->
+<!--              <org.opencontainers.image.version>${project.version}</org.opencontainers.image.version>-->
+<!--              <org.opencontainers.image.url>https://github.com/ebullient/monster-combat</org.opencontainers.image.url>-->
+<!--              <org.opencontainers.image.source>https://github.com/ebullient/monster-combat</org.opencontainers.image.source>-->
+<!--              <org.opencontainers.image.licenses>	Apache-2.0</org.opencontainers.image.licenses>-->
+<!--              <org.opencontainers.image.created>${git.build.time}</org.opencontainers.image.created>-->
+<!--              <org.opencontainers.image.revision>${git.commit.id.describe-short}</org.opencontainers.image.revision>-->
+<!--            </labels>-->
+<!--          </container>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <phase>package</phase>-->
+<!--            <goals>-->
+<!--              <goal>dockerBuild</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
     </plugins>
   </build>
 
