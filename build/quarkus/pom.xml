@@ -47,7 +47,6 @@
 
 
   <profiles>
-
     <profile>
       <id>project-test</id>
       <activation>
@@ -72,18 +71,6 @@
     </profile>
 
     <profile>
-      <id>jvm-image</id>
-      <activation>
-        <property>
-          <name>!native</name>
-        </property>
-      </activation>
-      <properties>
-        <quarkus.container-image.tag>latest-jvm</quarkus.container-image.tag>
-      </properties>
-    </profile>
-
-    <profile>
       <id>native</id>
       <activation>
         <property>
@@ -92,7 +79,6 @@
       </activation>
       <properties>
         <quarkus.package.type>native</quarkus.package.type>
-        <quarkus.container-image.tag>latest-native</quarkus.container-image.tag>
       </properties>
       <build>
         <plugins>
@@ -116,6 +102,5 @@
         </plugins>
       </build>
     </profile>
-
   </profiles>
 </project>

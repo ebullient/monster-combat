@@ -158,6 +158,33 @@
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>jvm-image</id>
+      <activation>
+        <property>
+          <name>!native</name>
+        </property>
+      </activation>
+      <properties>
+        <container-image.tag>latest-jvm</container-image.tag>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <container-image.tag>latest-native</container-image.tag>
+      </properties>
+    </profile>
+
+  </profiles>
+
   <modules>
     <module>quarkus</module>
     <module>spring</module>
