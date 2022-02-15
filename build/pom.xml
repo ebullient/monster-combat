@@ -32,7 +32,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <compiler-plugin.version>3.9.0</compiler-plugin.version>
+    <compiler-plugin.version>3.10.0</compiler-plugin.version>
     <surefire-plugin.version>2.22.2</surefire-plugin.version>
     <failsafe-plugin.version>2.22.2</failsafe-plugin.version>
     <resources-plugin.version>3.2.0</resources-plugin.version>
