@@ -94,6 +94,7 @@
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <configuration>
+          <encoding>UTF-8</encoding>
           <resources>
             <resource>
               <directory>${basedir}/src/main/resources</directory>
