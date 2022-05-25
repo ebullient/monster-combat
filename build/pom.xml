@@ -44,7 +44,7 @@
 
     <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
     <formatter-plugin.version>2.18.0</formatter-plugin.version>
-    <impsort-plugin.version>1.6.2</impsort-plugin.version>
+    <impsort-plugin.version>1.7.0</impsort-plugin.version>
     <jandex-plugin.version>1.2.2</jandex-plugin.version>
   </properties>
 
