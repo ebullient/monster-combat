@@ -23,6 +23,7 @@
 
     <slf4j.version>2.0.0</slf4j.version>
     <jackson.version>2.13.3</jackson.version>
+    <bouncy-castle.version>1.69</bouncy-castle.version>
 
     <java.version>11</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -41,7 +42,6 @@
 
     <junit-platform.version>5.9.0</junit-platform.version>
     <jacoco.version>0.8.4</jacoco.version>
-
     <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
     <formatter-plugin.version>2.20.0</formatter-plugin.version>
     <impsort-plugin.version>1.7.0</impsort-plugin.version>
