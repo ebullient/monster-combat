@@ -40,7 +40,7 @@
     <clean.plugin.version>3.2.0</clean.plugin.version>
     <antrun.plugin.version>3.1.0</antrun.plugin.version>
 
-    <junit-platform.version>5.9.0</junit-platform.version>
+    <junit-platform.version>5.9.1</junit-platform.version>
     <jacoco.version>0.8.4</jacoco.version>
     <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
     <formatter-plugin.version>2.20.0</formatter-plugin.version>
