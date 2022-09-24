@@ -80,16 +80,14 @@ Example invocations:
       Invokes ./mvnw clean install -Dnative
 
   ./mc.sh images
-      Invokes ./mvnw clean package -DskipTests
+      Invokes ./mvnw clean package -DskipTests -Dimages
 
   ./mc.sh --native images
       Creates native Quarkus container images using a container for build.
       These options are necessary to build native container images on
       Windows and MacOS.
 
-      Invokes ./mvnw clean package \\
-          -Dquarkus.container-image.build=true -DskipTests -Dnative \\
-          -pl quarkus-micrometer,quarkus-mpmetrics
+      Invokes ./mvnw clean package -DskipTests -Dnative -Dimages
 
   ./mc.sh dc up -d
       If no override file exists:
@@ -136,7 +134,7 @@ for x in "$@"; do
 done
 
 if [ ${#ARGS[@]} -eq 0 ]; then
-  wrap_exec ./mvnw clean install ${format} ${native}
+  wrap_mvnw clean install ${format} ${native}
 fi
 
 ACTION="${ARGS[0]}"
@@ -144,24 +142,18 @@ unset ARGS[0]
 
 case "$ACTION" in
   images)
-    if [ -z "$native" ]; then
-      wrap_exec ./mvnw clean package -Dquarkus.container-image.build=true -DskipTests ${ARGS[@]}
-    else
-      wrap_exec ./mvnw clean package \
-        -Dquarkus.container-image.build=true -DskipTests \
-        ${native} -Dquarkus.native.container-build=true \
-        -pl quarkus-micrometer,quarkus-mpmetrics ${ARGS[@]}
+    wrap_mvnw clean package -Dimages -DskipTests ${ARGS[@]}
+    if [ -n "$native" ]; then
+      wrap_mvnw clean package -Dimages -DskipTests -Dnative ${ARGS[@]}
     fi
   ;;
   dc)
     override_dc=
     native_dc=
-    if [ -e ./deploy/dc/docker-compose.override.yml ]
-    then
+    if [ -e ./deploy/dc/docker-compose.override.yml ]; then
       override_dc="-f ./deploy/dc/docker-compose.override.yml"
     fi
-    if [ -n "$native" ]
-    then
+    if [ -n "$native" ]; then
       native_dc="-f ./deploy/dc/docker-compose-native.yml"
     fi
     options="-f ./deploy/dc/docker-compose.yml ${native_dc} ${override_dc}"
@@ -169,9 +161,8 @@ case "$ACTION" in
   ;;
   jars)
     wrap_mvnw clean package
-    wrap_mvnw package spring-boot:repackage  -pl spring5-micrometer
     if [ -n "$native" ]; then
-      wrap_mvnw package -Dnative -pl quarkus-micrometer,quarkus-mpmetrics
+      wrap_mvnw package -Dnative
     fi
   ;;
   start)

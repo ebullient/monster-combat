@@ -49,13 +49,49 @@ cd monster-combat           # cd into the project directory
 export MONSTER_DIR=${PWD}   # for future reference
 ```
 
+## Just the jar files
+
+It is possible to run (and measure) this app using jars or native binaries alone.
+
+```bash
+# Use the mc.sh script to build jars and platform native binaries (--native, optional)
+./mc.sh jars --native
+
+# OR:
+# 1. Build images (clean is optional)
+./mvnw clean package
+
+# 2. build platform-native images (with GraalVM) .. not containerized (windows-specific, mac-specific, etc)
+./mvnw install -Dnative
+```
+
+## Container images
+
+JVM-mode and Native mode containers need to be
+
+```bash
+# Use the mc.sh script to build jars and platform native binaries (--native, optional)
+./mc.sh images --native
+
+# OR:
+# 1. Create jvm-mode containers (skipping tests)
+./mvnw clean package -Dimages -DskipTests
+
+# 2. Create native container images (skipping tests)
+./mvnw clean package -Dimages -DskipTests -Dnative
+```
+
+NB: There may be issues on windows, and there is some known weirdness on Mac M1
+
+## Measuring all the things!
+
 Get your system up and running using either
 
 * [Docker compose](#lazy-bones-quick-and-dirty-with-docker-compose) or
 * [Kubernetes](#general-bring-up-instructions-for-kubernetes)
 
-Once you have your system configured and running, the `runme.sh` script will keep a steady stream of requests hitting an
-endpoint of your choosing.
+Once you have your system configured and running, you can use `client.sh` script to keep a steady stream of
+requests hitting an endpoint of your choosing.
 
 Hopefully, it will all work fine. If it doesn't, come find me in the [gameontext slack](https://gameontext.org/slackin)
 and let me know. Or open an issue. That works, too.
@@ -63,15 +99,13 @@ and let me know. Or open an issue. That works, too.
 ## Lazy bones: quick and dirty with docker-compose
 
 This application is all about application metrics. The surrounding environment doesn't matter much.
+
 If you're lazy, or on a constrained system, docker-compose will work fine to start all the bits.
 Note: I'm lazy, so this is the method I use the most often.
 
 See below for notes on adding native images to the mix:
 
 ```bash
-# build images
-./mvnw install
-
 # go to docker-compose directory
 cd deploy/dc
 
@@ -82,14 +116,11 @@ docker-compose up -d
 Alternately, use `mc.sh` to manage some of these operations for you:
 
 ```bash
-# build & package submodules
-./mc.sh
-
 # start services using docker compose
 ./mc.sh dc up -d
 ```
 
-The `mc.sh` script looks for some flags (like `native` or `format`) to add options to maven commands,
+The `mc.sh` script looks for some flags (like `--native` or `--format`) to add options to maven commands,
 but otherwise hands all remaining command line arguments to invoked commands.
 In the case of `dc`, `mc.sh` will execute the docker-compose command with explicitly specified
 docker-compose files, which can save a lot of typing once you add native images to the mix.
@@ -97,6 +128,13 @@ docker-compose files, which can save a lot of typing once you add native images 
 You should then be able to do the following and get something interesting in return:
 
 ```bash
+# Start traffic to the /any endpoint for all of the running servers:
+./client.sh start
+# Stop all of the clients:
+./client.sh stop
+# List active clients:
+./client.sh list
+
 # Spring:
 
 curl http://127.0.0.1:8280/
@@ -106,6 +144,9 @@ curl http://127.0.0.1:8280/combat/faceoff  # 2 monsters
 curl http://127.0.0.1:8280/combat/melee    # 3-6 monsters
 curl http://127.0.0.1:8280/combat/any      # 2-6 monsters
 
+# start stream of requests to the /any endpoint of the spring server
+./client.sh spring
+
 # Quarkus
 
 curl http://127.0.0.1:8281/
@@ -113,6 +154,9 @@ curl http://127.0.0.1:8281/metrics         # micrometer & prometheus
 curl http://127.0.0.1:8281/combat/faceoff  # 2 monsters
 curl http://127.0.0.1:8281/combat/melee    # 3-6 monsters
 curl http://127.0.0.1:8281/combat/any      # 2-6 monsters
+
+# start stream of requests to the /any endpoint of the quarkus (micrometer) server
+./client.sh quarkus
 
 # Quarkus with MP Metrics
 
@@ -122,6 +166,8 @@ curl http://127.0.0.1:8282/combat/faceoff  # 2 monsters
 curl http://127.0.0.1:8282/combat/melee    # 3-6 monsters
 curl http://127.0.0.1:8282/combat/any      # 2-6 monsters
 
+# start stream of requests to the /any endpoint of the quarkus (mpmetrics) server
+./client.sh mpmetrics
 ```
 
 Check out the prometheus dashboard (http://127.0.0.1:9090) to see emitted metrics.
@@ -137,19 +183,6 @@ but if you are using windows or mac, we need to separate the steps a bit, as the
 native image needs to be built with a container, and that will overwrite the
 OS-native image used for tests.
 
-```bash
-# build and test native quarkus images (with GraalVM or Mandrel)
-# this produces an OS-specific binary used for unit tests
-./mvnw install -Dnative -pl quarkus-micrometer,quarkus-mpmetrics
-
-# On Windows and Mac, perform the following step to create the native
-# images using a container and skipping tests
-./mvnw clean package -Dnative \
-  -Dquarkus.container-image.build=true -DskipTests \
-  -Dquarkus.native.container-build=true \
-  -pl quarkus-micrometer,quarkus-mpmetrics
-```
-
 Use an additional docker compose file to start native images.
 Append docker-compose.override.yml to the list of files if necessary.
 
@@ -160,12 +193,32 @@ docker-compose -f docker-compose.yml -f docker-compose-native.yml up -d
 Alternately, use `mc.sh` to manage some of these operations for you:
 
 ```bash
-# build/test quarkus in native mode
-./mc.sh native
-# create native quarkus images
-./mc.sh native pkg-image
 # start all services (including non-native) using docker compose
-./mc.sh native dc up -d
+./mc.sh --native dc up -d
+```
+
+```bash
+# Quarkus Native
+
+curl http://127.0.0.1:8283/
+curl http://127.0.0.1:8283/metrics         # micrometer & prometheus
+curl http://127.0.0.1:8283/combat/faceoff  # 2 monsters
+curl http://127.0.0.1:8283/combat/melee    # 3-6 monsters
+curl http://127.0.0.1:8283/combat/any      # 2-6 monsters
+
+# start stream of requests to the /any endpoint of the quarkus (micrometer) server
+./client.sh quarkus-native
+
+# Quarkus with MP Metrics Native
+
+curl http://127.0.0.1:8284/
+curl http://127.0.0.1:8284/metrics         # MP metrics endpoint
+curl http://127.0.0.1:8284/combat/faceoff  # 2 monsters
+curl http://127.0.0.1:8284/combat/melee    # 3-6 monsters
+curl http://127.0.0.1:8284/combat/any      # 2-6 monsters
+
+# start stream of requests to the /any endpoint of the quarkus (mpmetrics) server
+./client.sh mpmetrics-native
 ```
 
 ### Prometheus and Grafana with docker-compose
