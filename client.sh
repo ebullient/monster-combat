@@ -51,7 +51,7 @@ fi
 
 while :
 do
-  curl $URL
+  curl --no-progress-meter $URL
   echo "---"
   sleep $[ ( $RANDOM % 10 ) + 1 ]s
 done

@@ -46,6 +46,9 @@
     <formatter-plugin.version>2.20.0</formatter-plugin.version>
     <impsort-plugin.version>1.7.0</impsort-plugin.version>
     <jandex-plugin.version>1.2.3</jandex-plugin.version>
+
+    <!-- Container defaults -->
+    <container-image.tag>latest-jvm</container-image.tag>
   </properties>
 
   <build>
@@ -160,18 +163,6 @@
 
   <profiles>
     <profile>
-      <id>jvm-image</id>
-      <activation>
-        <property>
-          <name>!native</name>
-        </property>
-      </activation>
-      <properties>
-        <container-image.tag>latest-jvm</container-image.tag>
-      </properties>
-    </profile>
-
-    <profile>
       <id>native</id>
       <activation>
         <property>
@@ -179,10 +170,10 @@
         </property>
       </activation>
       <properties>
+        <spring-boot.build-image.skip>true</spring-boot.build-image.skip>
         <container-image.tag>latest-native</container-image.tag>
       </properties>
     </profile>
-
   </profiles>
 
   <modules>

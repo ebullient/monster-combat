@@ -59,40 +59,50 @@
 
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <classifier>${repackage.classifier}</classifier>
-          <image>
-            <name>${imageName}:${container-image.tag}</name>
-            <builder>paketobuildpacks/builder:tiny</builder>
-            <env>
-                <BP_OCI_TITLE>${project.artifactId}</BP_OCI_TITLE>
-                <BP_OCI_DESCRIPTION>${project.name}</BP_OCI_DESCRIPTION>
-                <BP_OCI_VERSION>${project.version}</BP_OCI_VERSION>
-                <BP_OCI_URL>https://github.com/ebullient/monster-combat</BP_OCI_URL>
-                <BP_OCI_SOURCE>https://github.com/ebullient/monster-combat</BP_OCI_SOURCE>
-                <BP_OCI_LICENSES>	Apache-2.0</BP_OCI_LICENSES>
-                <!--suppress UnresolvedMavenProperty -->
-                <BP_OCI_CREATED>${git.build.time}</BP_OCI_CREATED>
-                <!--suppress UnresolvedMavenProperty -->
-                <BP_OCI_REVISION>${git.commit.id.describe-short}</BP_OCI_REVISION>
-            </env>
-          </image>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>build-image</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+  <profiles>
+    <profile>
+      <id>spring-image</id>
+      <activation>
+        <property>
+          <name>images</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+              <classifier>${repackage.classifier}</classifier>
+              <image>
+                <name>${imageName}:${container-image.tag}</name>
+                <builder>paketobuildpacks/builder:tiny</builder>
+                <env>
+                    <BP_OCI_TITLE>${project.artifactId}</BP_OCI_TITLE>
+                    <BP_OCI_DESCRIPTION>${project.name}</BP_OCI_DESCRIPTION>
+                    <BP_OCI_VERSION>${project.version}</BP_OCI_VERSION>
+                    <BP_OCI_URL>https://github.com/ebullient/monster-combat</BP_OCI_URL>
+                    <BP_OCI_SOURCE>https://github.com/ebullient/monster-combat</BP_OCI_SOURCE>
+                    <BP_OCI_LICENSES>	Apache-2.0</BP_OCI_LICENSES>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <BP_OCI_CREATED>${git.build.time}</BP_OCI_CREATED>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <BP_OCI_REVISION>${git.commit.id.describe-short}</BP_OCI_REVISION>
+                </env>
+              </image>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>build-image</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

@@ -31,7 +31,7 @@ services:
 
   spring-micrometer:
     container_name: spring-micrometer
-    image: ebullient/mc-spring5-micrometer
+    image: ebullient/mc-spring5-micrometer:latest-jvm
     ports:
       - "8280:8080"
 
