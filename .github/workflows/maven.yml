@@ -6,12 +6,23 @@ name: Java CI with Maven
 on:
   push:
     branches: [ main ]
+    paths:
+      - .github/**
+      - '**.xml'
+      - 'src/**'
+      - 'ide-config'
   pull_request:
-    branches: [ main ]
+    paths:
+      - '**.xml'
+      - 'src/**'
+      - 'ide-config'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      current: ${{ steps.metadata.outputs.current }}
+      next: ${{ steps.metadata.outputs.next }}
     strategy:
       fail-fast: false
       matrix:
@@ -20,34 +31,95 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
-    - name: Get Date
-      id: get-date
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          project:
+            - '.github/project.yml'
+
+    # Fetches all tags for the repo
+    - name: Fetch tags
+      run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+    - name: Project metadata
+      id: metadata
       run: |
-        echo "::set-output name=date::$(/bin/date -u "+%Y-%m")"
-      shell: bash
+        CURRENT=$(yq '.release.current-version' .github/project.yml )
+        NEXT=$(yq '.release.next-version' .github/project.yml)
 
-    - uses: actions/cache@v2
-      with:
-        path: ~/.m2/repository
-        key: mc-pr-jdk-${{ matrix.java }}-${{ steps.get-date.outputs.date }}
+        if git rev-parse "refs/tags/$NEXT" 2>&1; then
+          echo "Next tag exists"
+        else
+          echo "Tag does not exist yet"
+        fi
 
-    - name: Install JDK ${{ matrix.java }}
-      uses: actions/setup-java@v1
+        echo "::set-output name=current::${CURRENT}"
+        echo "::set-output name=next::${NEXT}"
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
       with:
-        java-version: ${{ matrix.java }}
+        java-version: 11
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Maven release
+      if: ${{ github.ref == 'refs/heads/main' && steps.filter.outputs.project == 'true' }}
+      id: mvn-build-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CURRENT: ${{ steps.metadata.outputs.current }}
+        NEXT: ${{ steps.metadata.outputs.next }}
+      run: |
+        if git rev-parse "refs/tags/$NEXT" >/dev/null 2>&1; then
+          echo "🔹 Tagged release alreay exists"
+          mvn -B formatter:validate install --file pom.xml
+          echo "::set-output name=release::false"
+        else
+          echo "🔹 Creating new release"
+
+          # Messy and not maven-y, but whatever.
+          sed -i -r "s/$CURRENT/$NEXT/g" mc.sh
+          sed -i -r "s/$CURRENT/$NEXT/g" README.md
+          sed -i -r "s|<revision>.*</revision>|<revision>$NEXT</revision>|" pom.xml
+
+          mvn -B --no-transfer-progress clean package
+
+          # If everything worked so far... yes. we should cut release
+          echo "::set-output name=release::true"
+        fi
+
+    - name: Commit file changes, create tag
+      if: ${{ success() && steps.mvn-build-release.outputs.release == 'true' }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+
+        git add README.md pom.xml
+        git commit -m "🔖 $NEXT"
+        git push
+
+        git tag $NEXT
+        git push --tags
 
     - name: Build with Maven
+      if: ${{ github.ref != 'refs/heads/main' || steps.filter.outputs.project == 'false' }}
       run: |
-        ./mvnw -B --no-transfer-progress help:evaluate -Dexpression=project.version | grep -v INFO
         ./mvnw -B --no-transfer-progress clean install
 
     - name: Pull Quarkus Native Builder Image ${{ matrix.graal }}-java${{ matrix.java }}
-      if: success()
+      if: ${{ success() && steps.mvn-build-release.outputs.release != 'true' }}
       run: docker pull quay.io/quarkus/ubi-quarkus-native-image:${{ matrix.graal }}-java${{ matrix.java }}
 
     - name: Native Quarkus build with maven
-      if: success()
+      if: ${{ success() && steps.mvn-build-release.outputs.release != 'true' }}
       run: |
-        cd quarkus-micrometer
-        ../mvnw -B --no-transfer-progress clean install -Dnative -Dquarkus.native.container-build=true -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-native-image:${{ matrix.graal }}-java${{ matrix.java }}
+        ./mvnw -B --no-transfer-progress clean install -Dnative -Dimages \
+            -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-native-image:${{ matrix.graal }}-java${{ matrix.java }}
+
