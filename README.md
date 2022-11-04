@@ -54,11 +54,11 @@ export MONSTER_DIR=${PWD}   # for future reference
 It is possible to run (and measure) this app using jars or native binaries alone.
 
 ```bash
-# Use the mc.sh script to build jars and platform native binaries (--native, optional)
+# Use the mc.sh script to build jars (--native is optional)
 ./mc.sh jars --native
 
 # OR:
-# 1. Build images (clean is optional)
+# 1. Build jars (clean is optional)
 ./mvnw clean package
 
 # 2. build platform-native images (with GraalVM) .. not containerized (windows-specific, mac-specific, etc)
@@ -70,7 +70,7 @@ It is possible to run (and measure) this app using jars or native binaries alone
 JVM-mode and Native mode containers need to be
 
 ```bash
-# Use the mc.sh script to build jars and platform native binaries (--native, optional)
+# Use the mc.sh script to build images (--native is optional)
 ./mc.sh images --native
 
 # OR:

@@ -15,6 +15,8 @@
 
   <properties>
     <skipITs>true</skipITs>
+    <quarkus.container-image.build>false</quarkus.container-image.build>
+    <quarkus.native.container-build>false</quarkus.native.container-build>
   </properties>
 
   <dependencyManagement>
@@ -138,10 +140,13 @@
     <profile>
       <id>quarkus-images</id>
       <activation>
-        <property><name>images</name></property>
+        <property>
+          <name>images</name>
+        </property>
       </activation>
       <properties>
         <quarkus.container-image.build>true</quarkus.container-image.build>
+        <quarkus.native.container-build>true</quarkus.native.container-build>
       </properties>
     </profile>
 
@@ -153,7 +158,6 @@
       <properties>
         <skipITs>false</skipITs>
         <quarkus.package.type>native</quarkus.package.type>
-        <quarkus.native.container-build>true</quarkus.native.container-build>
       </properties>
     </profile>
 

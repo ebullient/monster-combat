@@ -23,18 +23,21 @@ wrap_mvnw() {
 
 usage() {
       echo "
-mc.sh [--format|--native] [images|dc|jars|help]
+mc.sh [--clean|--format|--native] [images|dc|jars|help]
+
+  --clean
+    Clean projects.
 
   --format
     Flag that triggers formatting of source code.
 
   --native
-    Flag that triggers use/inclusion of native image
+    Flag that triggers use/inclusion of native image.
 
 Containers:
 
   images
-    Action that invokes './mvnw clean package' with
+    Action that invokes './mvnw package' with
     properties set to build container images and skip tests.
     If the native flag has been specified, additional properties
     are set to use a container to build native images.
@@ -71,23 +74,23 @@ Using jars directly:
 Example invocations:
 
   ./mc.sh
-      Invokes ./mvnw clean install
+      Invokes ./mvnw install
 
   ./mc.sh --format
-      Invokes ./mvnw clean install process-sources
+      Invokes ./mvnw install process-sources
 
   ./mc.sh --native
-      Invokes ./mvnw clean install -Dnative
+      Invokes ./mvnw install -Dnative
 
   ./mc.sh images
-      Invokes ./mvnw clean package -DskipTests -Dimages
+      Invokes ./mvnw package -DskipTests -Dimages
 
   ./mc.sh --native images
       Creates native Quarkus container images using a container for build.
       These options are necessary to build native container images on
       Windows and MacOS.
 
-      Invokes ./mvnw clean package -DskipTests -Dnative -Dimages
+      Invokes ./mvnw package -DskipTests -Dnative -Dimages
 
   ./mc.sh dc up -d
       If no override file exists:
@@ -115,17 +118,22 @@ Example invocations:
 cd "${BASEDIR}"
 format=
 native=
+clean=
 ARGS=()
 
 for x in "$@"; do
   case "$x" in
     --format)
       echo "Format source"
-      format="process-sources"
+      format="process-sources "
     ;;
     --native)
       echo "Build and use native images"
-      native=-Dnative
+      native="-Dnative "
+    ;;
+    --clean)
+      echo "Clean before compiling"
+      clean="clean "
     ;;
     *)
       ARGS+=("$x")
@@ -134,7 +142,7 @@ for x in "$@"; do
 done
 
 if [ ${#ARGS[@]} -eq 0 ]; then
-  wrap_mvnw clean install ${format} ${native}
+  wrap_mvnw ${clean}install ${format}${native}
 fi
 
 ACTION="${ARGS[0]}"
@@ -142,9 +150,9 @@ unset ARGS[0]
 
 case "$ACTION" in
   images)
-    wrap_mvnw clean package -Dimages -DskipTests ${ARGS[@]}
+    wrap_mvnw ${clean}package -Dimages -DskipTests ${ARGS[@]}
     if [ -n "$native" ]; then
-      wrap_mvnw clean package -Dimages -DskipTests -Dnative ${ARGS[@]}
+      wrap_mvnw ${clean}package -Dimages -DskipTests ${native}${ARGS[@]}
     fi
   ;;
   dc)
@@ -160,9 +168,9 @@ case "$ACTION" in
     wrap_exec docker-compose $options ${ARGS[@]}
   ;;
   jars)
-    wrap_mvnw clean package
+    wrap_mvnw ${clean}package
     if [ -n "$native" ]; then
-      wrap_mvnw package -Dnative
+      wrap_mvnw package ${native}
     fi
   ;;
   start)
