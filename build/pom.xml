@@ -92,6 +92,21 @@
           <artifactId>maven-antrun-plugin</artifactId>
           <version>${antrun.plugin.version}</version>
         </plugin>
+        <plugin>
+          <groupId>pl.project13.maven</groupId>
+          <artifactId>git-commit-id-plugin</artifactId>
+          <version>${git-commit-id-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>net.revelc.code.formatter</groupId>
+          <artifactId>formatter-maven-plugin</artifactId>
+          <version>${formatter-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>net.revelc.code</groupId>
+          <artifactId>impsort-maven-plugin</artifactId>
+          <version>${impsort-plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -100,7 +115,6 @@
       <plugin>
         <groupId>pl.project13.maven</groupId>
         <artifactId>git-commit-id-plugin</artifactId>
-        <version>${git-commit-id-plugin.version}</version>
         <executions>
           <execution>
             <id>get-the-git-infos</id>
@@ -125,7 +139,6 @@
       <plugin>
         <groupId>net.revelc.code.formatter</groupId>
         <artifactId>formatter-maven-plugin</artifactId>
-        <version>${formatter-plugin.version}</version>
         <configuration>
           <configFile>${maven.multiModuleProjectDirectory}/ide-config/eclipse-format.xml</configFile>
           <skip>${format.skip}</skip>
@@ -142,7 +155,6 @@
       <plugin>
         <groupId>net.revelc.code</groupId>
         <artifactId>impsort-maven-plugin</artifactId>
-        <version>${impsort-plugin.version}</version>
         <configuration>
           <groups>java.,javax.,org.,com.</groups>
           <staticGroups>*</staticGroups>
