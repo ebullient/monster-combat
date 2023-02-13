@@ -43,7 +43,7 @@
     <junit-platform.version>5.9.2</junit-platform.version>
     <jacoco.version>0.8.4</jacoco.version>
     <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
-    <formatter-plugin.version>2.21.0</formatter-plugin.version>
+    <formatter-plugin.version>2.22.0</formatter-plugin.version>
     <impsort-plugin.version>1.8.0</impsort-plugin.version>
     <jandex-plugin.version>1.2.3</jandex-plugin.version>
 
