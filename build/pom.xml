@@ -17,7 +17,7 @@
 
   <properties>
     <!-- see .mvn/maven.config or cmdline property for revision value -->
-    <micrometer.version>1.10.4</micrometer.version>
+    <micrometer.version>1.10.5</micrometer.version>
     <quarkus.version>2.16.4.Final</quarkus.version>
     <quarkus-micrometer-registry.version>0.3.0</quarkus-micrometer-registry.version>
 
