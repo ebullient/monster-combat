@@ -16,7 +16,7 @@
 
   <properties>
     <!-- see .mvn/maven.config or cmdline property for revision value -->
-    <spring.version>2.7.5</spring.version>
+    <spring.version>3.0.5</spring.version>
     <spring-native.version>0.11.2</spring-native.version>
     <org.graalvm.nativeimage.version>21.3.0</org.graalvm.nativeimage.version>
   </properties>
