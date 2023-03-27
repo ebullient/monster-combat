@@ -34,7 +34,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
-    <surefire-plugin.version>2.22.2</surefire-plugin.version>
+    <surefire-plugin.version>3.0.0</surefire-plugin.version>
     <failsafe-plugin.version>2.22.2</failsafe-plugin.version>
     <resources-plugin.version>3.3.0</resources-plugin.version>
     <clean.plugin.version>3.2.0</clean.plugin.version>
