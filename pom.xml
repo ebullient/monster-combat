@@ -12,7 +12,7 @@
 
   <properties>
     <revision>199-SNAPSHOT</revision>
-    <flatten-maven-plugin.version>1.4.0</flatten-maven-plugin.version>
+    <flatten-maven-plugin.version>1.4.1</flatten-maven-plugin.version>
   </properties>
 
   <scm>
