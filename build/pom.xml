@@ -21,7 +21,7 @@
     <quarkus.version>2.16.6.Final</quarkus.version>
     <quarkus-micrometer-registry.version>0.3.0</quarkus-micrometer-registry.version>
 
-    <slf4j.version>2.0.6</slf4j.version>
+    <slf4j.version>2.0.7</slf4j.version>
     <jackson.version>2.14.2</jackson.version>
     <bouncy-castle.version>1.70</bouncy-castle.version>
 
