@@ -16,15 +16,14 @@ package dev.ebullient.dnd;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-
 import dev.ebullient.dnd.bestiary.Bestiary;
 import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.combat.TargetSelector;
 import dev.ebullient.dnd.combat.client.CombatMetrics;
 import dev.ebullient.dnd.mechanics.Dice;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
 
 @Path("/combat")
 public class EncounterResource {

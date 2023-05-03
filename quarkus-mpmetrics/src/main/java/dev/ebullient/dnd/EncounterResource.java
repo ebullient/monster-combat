@@ -16,11 +16,6 @@ package dev.ebullient.dnd;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import dev.ebullient.dnd.bestiary.Bestiary;
@@ -28,6 +23,10 @@ import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.combat.TargetSelector;
 import dev.ebullient.dnd.mechanics.Dice;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 @Path("/combat")
 @Produces(MediaType.APPLICATION_JSON)

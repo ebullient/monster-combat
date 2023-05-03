@@ -15,13 +15,12 @@ package dev.ebullient.dnd;
 
 import java.io.IOException;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import dev.ebullient.dnd.bestiary.Bestiary;
 import dev.ebullient.dnd.bestiary.compendium.CompendiumReader;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class BestiaryConfig {

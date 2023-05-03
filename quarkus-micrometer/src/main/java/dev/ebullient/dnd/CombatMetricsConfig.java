@@ -1,9 +1,8 @@
 package dev.ebullient.dnd;
 
-import javax.enterprise.inject.Produces;
-
 import dev.ebullient.dnd.combat.client.CombatMetrics;
 import io.micrometer.core.instrument.MeterRegistry;
+import jakarta.enterprise.inject.Produces;
 
 public class CombatMetricsConfig {
 

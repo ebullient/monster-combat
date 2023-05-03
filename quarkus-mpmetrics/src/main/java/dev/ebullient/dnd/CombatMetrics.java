@@ -2,8 +2,6 @@ package dev.ebullient.dnd;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.eclipse.microprofile.metrics.Gauge;
 import org.eclipse.microprofile.metrics.MetricRegistry;
 import org.eclipse.microprofile.metrics.Tag;
@@ -14,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import dev.ebullient.dnd.combat.Encounter;
 import dev.ebullient.dnd.combat.RoundResult;
 import dev.ebullient.dnd.mechanics.Dice;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class CombatMetrics {
