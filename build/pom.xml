@@ -21,7 +21,7 @@
     <quarkus.version>3.1.0.Final</quarkus.version>
 
     <slf4j.version>2.0.7</slf4j.version>
-    <jackson.version>2.15.0</jackson.version>
+    <jackson.version>2.15.2</jackson.version>
     <bouncy-castle.version>1.70</bouncy-castle.version>
 
     <java.version>11</java.version>
