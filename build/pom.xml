@@ -18,7 +18,7 @@
   <properties>
     <!-- see .mvn/maven.config or cmdline property for revision value -->
     <micrometer.version>1.11.3</micrometer.version>
-    <quarkus.version>3.3.0</quarkus.version>
+    <quarkus.version>3.3.1</quarkus.version>
 
     <slf4j.version>2.0.7</slf4j.version>
     <jackson.version>2.15.2</jackson.version>
