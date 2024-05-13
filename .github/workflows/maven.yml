@@ -50,7 +50,7 @@ jobs:
       run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
     - name: yq - portable yaml processor
-      uses: mikefarah/yq@v4.43.1
+      uses: mikefarah/yq@v4.44.1
 
     - name: Project metadata
       id: metadata
